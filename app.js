@@ -1,0 +1,12743 @@
+// ==========================================
+// 1. პროდუქტების მონაცემთა ბაზა
+// ==========================================
+const products = [
+{
+        "id": 1,
+        "title": {
+            "ka": "საბეჭდი ქაღალდი A4 (500 ფურცლიანი) Double A",
+            "en": "A4 Copy Paper (500 sheets) Double A",
+            "ru": "Бумага для печати А4 (500 листов) Double A"
+        },
+        "category": "paper",
+        "subcategory": "print_paper",
+        "price": 12.50,
+        "inStock": true,
+        "images": ["images/images.jpg"],
+        "brands": ["Double A"]
+    },
+{
+        "id": 2,
+        "title": {
+            "ka": "საბეჭდი ქაღალდი A4 (500 ფურცლიანი) Ballet",
+            "en": "A4 Copy Paper (500 sheets) Ballet",
+            "ru": "Бумага для печати А4 (500 листов) Ballet"
+        },
+        "category": "paper",
+        "subcategory": "print_paper",
+        "price": 7.45,
+        "inStock": true,
+        "images": ["images/furceli2.jpg"],
+        "brands": ["Ballet"]
+    },
+{
+        "id": 3,
+        "title": {
+            "ka": "საბეჭდი ქაღალდი A4 (500 ფურცლიანი) PROJECTA",
+            "en": "A4 Copy Paper (500 sheets) PROJECTA",
+            "ru": "Бумага для печати А4 (500 листов) PROJECTA"
+        },
+        "category": "paper",
+        "subcategory": "print_paper",
+        "price": 7.45,
+        "inStock": true, 
+        "images": ["images/furceli 3.jpg"],
+        "brands": ["PROJECTA"]
+    },
+{
+        "id": 4,
+        "title": {
+            "ka": "ბაინდერი A4",
+            "en": "Ring Binder A4",
+            "ru": "Папка-регистратор А4"
+        },
+        "category": "office",
+        "subcategory": "binder",
+        "price": 3.50,
+        "inStock": true,
+        "images": ["images/saqagalde7.jpg"],
+        "sizes": [{ "ka": "განიერი", "en": "Wide", "ru": "Широкий" }],
+        "colors": [{ "ka": "ლურჯი", "en": "Blue", "ru": "Синий" }]
+    },
+{
+        "id": 5,
+        "title": {
+            "ka": "ბაინდერი A4",
+            "en": "Ring Binder A4",
+            "ru": "Папка-регистратор А4"
+        },
+        "category": "office",
+        "subcategory": "binder",
+        "price": 3.50,
+        "inStock": true,
+        "images": ["images/saqagalde12.jpg"],
+        "sizes": [{ "ka": "განიერი", "en": "Wide", "ru": "Широкий" }],
+        "colors": [{ "ka": "შავი", "en": "Black", "ru": "Черный" }]
+    },
+{
+        "id": 6,
+        "title": {
+            "ka": "ბაინდერი A4",
+            "en": "Ring Binder A4",
+            "ru": "Папка-регистратор А4"
+        },
+        "category": "office",
+        "subcategory": "binder",
+        "price": 4.00,
+        "inStock": true, 
+        "images": ["images/saqagalde8.jpg"],
+        "sizes": [{ "ka": "განიერი", "en": "Wide", "ru": "Широкий" }],
+        "colors": [{ "ka": "მწვანე", "en": "Green", "ru": "Зеленый" }]
+    },
+{
+        "id": 7,
+        "title": {
+            "ka": "ბაინდერი A4",
+            "en": "Ring Binder A4",
+            "ru": "Папка-регистратор А4"
+        },
+        "category": "office",
+        "subcategory": "binder",
+        "price": 3.00,
+        "inStock": true,
+        "images": ["images/saqagalde13.jpg"],
+        "sizes": [{ "ka": "ვიწრო", "en": "Narrow", "ru": "Узкий" }],
+        "colors": [{ "ka": "ლურჯი", "en": "Blue", "ru": "Синий" }]
+    },
+{
+        "id": 8,
+        "title": {
+            "ka": "ბაინდერი A4",
+            "en": "Ring Binder A4",
+            "ru": "Папка-регистратор А4"
+        },
+        "category": "office",
+        "subcategory": "binder",
+        "price": 3.00,
+        "inStock": true,
+        "images": ["images/saqagalde9.jpg"],
+        "sizes": [{ "ka": "ვიწრო", "en": "Narrow", "ru": "Узкий" }],
+        "colors": [{ "ka": "შავი", "en": "Black", "ru": "Черный" }]
+    },
+{
+        "id": 9,
+        "title": {
+            "ka": "ბაინდერი A4",
+            "en": "Ring Binder A4",
+            "ru": "Папка-регистратор А4"
+        },
+        "category": "office",
+        "subcategory": "binder",
+        "price": 4.00,
+        "inStock": true,
+        "images": ["images/saqagalde14.jpg"],
+        "sizes": [{ "ka": "ვიწრო", "en": "Narrow", "ru": "Узкий" }],
+        "colors": [{ "ka": "მწვანე", "en": "Green", "ru": "Зеленый" }]
+    },
+{
+        "id": 10,
+        "title": {
+            "ka": "ბაინდერი A5",
+            "en": "Ring Binder A5",
+            "ru": "Папка-регистратор А5"
+        },
+        "category": "office",
+        "subcategory": "binder",
+        "price": 4.00,
+        "inStock": true, 
+        "images": ["images/saqagalde a5.jpg"]
+    },
+{
+        "id": 11,
+        "title": {
+            "ka": "ქაღალდი ქსეროქსის A3 80გრ. 500 ფურცელი PROJECTA",
+            "en": "A3 Copy Paper 80g 500 sheets PROJECTA",
+            "ru": "Бумага ксероксная А3 80г 500 листов PROJECTA"
+        },
+        "category": "paper",
+        "subcategory": "print_paper",
+        "price": 16.50,
+        "inStock": true,
+        "images": ["images/furceli1.jpg"],
+        "brands": [{ "name": "Projecta", "price": 16.50 }]
+    },
+{
+        "id": 12,
+        "title": {
+            "ka": "ქაღალდი ქსეროქსის A3 80გრ. 500 ფურცელი Double A",
+            "en": "A3 Copy Paper 80g 500 sheets Double A",
+            "ru": "Бумага ксероксная А3 80г 500 листов Double A"
+        },
+        "category": "paper",
+        "subcategory": "print_paper",
+        "price": 28.50,
+        "inStock": true,
+        "images": ["images/images.jpg"],
+        "brands": [{ "name": "Double A", "price": 28.50 }]
+    },
+{
+        "id": 13,
+        "title": {
+            "ka": "ბლოკნოტი A5 40 ფურცელი",
+            "en": "Notebook A5 40 sheets",
+            "ru": "Блокнот А5 40 листов"
+        },
+        "category": "paper",
+        "subcategory": "notebook",
+        "price": 1.30,
+        "inStock": true,
+        "images": ["images/bloknoti 1.jpg"],
+        "sizes": [{ "name": "40ფ A5", "price": 1.30 }]
+    },
+{
+        "id": 14,
+        "title": {
+            "ka": "ბლოკნოტი A5 40 ფურცელი ზამბარით",
+            "en": "Spiral Notebook A5 40 sheets",
+            "ru": "Блокнот на спирали А5 40 листов"
+        },
+        "price": 1.30,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti2.jpg"]
+    },
+{
+        "id": 15,
+        "title": {
+            "ka": "ბლოკნოტი A5 40 ფურცელი ზედა ზამბარით",
+            "en": "Top Spiral Notebook A5 40 sheets",
+            "ru": "Блокнот А5 40 листов на верхней спирали"
+        },
+        "price": 1.30,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti3.jpg"]
+    },
+{
+        "id": 16,
+        "title": {
+            "ka": "ბლოკნოტი A5 40 ფურცელი ზედა ზამბარით",
+            "en": "Top Spiral Notebook A5 40 sheets",
+            "ru": "Блокнот А5 40 листов на верхней спирали"
+        },
+        "price": 1.30,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti4.jpg"]
+    },
+{
+        "id": 17,
+        "title": {
+            "ka": "ბლოკნოტი A6 70 სუფთა ფურცელი Deli",
+            "en": "Notebook A6 70 blank sheets Deli",
+            "ru": "Блокнот А6 70 чистых листов Deli"
+        },
+        "price": 1.50,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti5.jpg"]
+    },
+{
+        "id": 18,
+        "title": {
+            "ka": "ბლოკნოტი A6 60 ფურცელი ზედა ზამბარით Comix",
+            "en": "Top Spiral Notebook A6 60 sheets Comix",
+            "ru": "Блокнот А6 60 листов на верхней спирали Comix"
+        },
+        "price": 2.00,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true, 
+        "images": ["images/saqagalde6.jpg"]
+    },
+{
+        "id": 19,
+        "title": {
+            "ka": "ბლოკნოტი A6 50 ფურცელი Deli Lexicon",
+            "en": "Notebook A6 50 sheets Deli Lexicon",
+            "ru": "Блокнот А6 50 листов Deli Lexicon"
+        },
+        "price": 2.30,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti7.jpg"]
+    },
+{
+        "id": 20,
+        "title": {
+            "ka": "ბლოკნოტი A6 80 ფურცელი Deli Lexicon",
+            "en": "Notebook A6 80 sheets Deli Lexicon",
+            "ru": "Блокнот А6 80 листов Deli Lexicon"
+        },
+        "price": 2.50,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti7.jpg"]
+    },
+{
+        "id": 21,
+        "title": {
+            "ka": "საკანცელარიო ჟურნალი A5 60 ფურცელი გვერდითა ზამბარით Anhudi Notebook",
+            "en": "Stationery Journal A5 60 sheets Side Spiral Anhudi Notebook",
+            "ru": "Канцелярский журнал А5 60 листов на боковой спирали Anhudi Notebook"
+        },
+        "price": 2.00,
+        "category": "stationary",
+        "subcategory": "journals",
+        "inStock": true,
+        "images": ["images/sakancelariojur1.jpg"]
+    },
+{
+        "id": 22,
+        "title": {
+            "ka": "ბლოკნოტი A5 70 ფურცელი ზედა ზამბარით Deli Report pad",
+            "en": "Top Spiral Notebook A5 70 sheets Deli Report pad",
+            "ru": "Блокнот А5 70 листов на верхней спирали Deli Report pad"
+        },
+        "price": 2.60,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti8.jpg"]
+    },
+{
+        "id": 23,
+        "title": {
+            "ka": "ბლოკნოტი A5 96 ფურცელი ზედა ზამბარით Deli Basic+note",
+            "en": "Top Spiral Notebook A5 96 sheets Deli Basic+note",
+            "ru": "Блокнот А5 96 листов на верхней спирали Deli Basic+note"
+        },
+        "price": 3.70,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti9.jpg"]
+    },
+{
+        "id": 24,
+        "title": {
+            "ka": "ბლოკნოტი A6 80 ფურცელი ზედა ზამბარით Deli შავი",
+            "en": "Top Spiral Notebook A6 80 sheets Deli Black",
+            "ru": "Блокнот А6 80 листов на верхней спирали Deli Черный"
+        },
+        "price": 3.90,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti10.jpg"]
+    },
+{
+        "id": 25,
+        "title": {
+            "ka": "ბლოკნოტი A6 96 ფურცელი რეზინით Deli ლურჯი",
+            "en": "Notebook A6 96 sheets with Elastic Band Deli Blue",
+            "ru": "Блокнот А6 96 листов с резинкой Deli Синий"
+        },
+        "price": 4.20,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti11.jpg"]
+    },
+{
+        "id": 26,
+        "title": {
+            "ka": "ბლოკნოტი A5 80 ფურცელი ტყავის ყდა Deli",
+            "en": "Notebook A5 80 sheets Leather Cover Deli",
+            "ru": "Блокнот А5 80 листов Кожаный переплет Deli"
+        },
+        "price": 4.70,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti12.jpg"]
+    },
+{
+        "id": 27,
+        "title": {
+            "ka": "ბლოკნოტი 32K 100 ფურცელი Deli",
+            "en": "Notebook 32K 100 sheets Deli",
+            "ru": "Блокнот 32К 100 листов Deli"
+        },
+        "price": 26.00,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti13.jpg"]
+    },
+{
+        "id": 28,
+        "title": {
+            "ka": "ბლოკნოტი A5 80 ფურცელი ტყავის ყდა Deli",
+            "en": "Notebook A5 80 sheets Leather Cover Deli",
+            "ru": "Блокнот А5 80 листов Кожаный переплет Deli"
+        },
+        "price": 8.10,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti14.jpg"]
+    },
+{
+        "id": 29,
+        "title": {
+            "ka": "ბლოკნოტი ყოველდღიური IVORY",
+            "en": "Daily Planner IVORY",
+            "ru": "Ежедневник IVORY"
+        },
+        "price": 2.60,
+        "category": "stationary",
+        "subcategory": "planners",
+        "inStock": true,
+        "images": ["images/bloknoti15.jpg"],
+        "colors": [
+            { "ka": "შავი", "en": "Black", "ru": "Черный" },
+            { "ka": "წითელი", "en": "Red", "ru": "Красный" },
+            { "ka": "ყვითელი", "en": "Yellow", "ru": "Желтый" },
+            { "ka": "მწვანე", "en": "Green", "ru": "Зеленый" },
+            { "ka": "ლურჯი", "en": "Blue", "ru": "Синий" }
+        ]
+    },
+{
+        "id": 30,
+        "title": {
+            "ka": "ბლოკნოტი B5 120 ფურცელი",
+            "en": "Notebook B5 120 sheets",
+            "ru": "Блокнот B5 120 листов"
+        },
+        "price": 8.10,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "images": ["images/bloknoti16.jpg"]
+    },
+{
+        "id": 31,
+        "title": {
+            "ka": "ბლოკნოტი A5 120 ფურცელი ჩამკეტით Deli",
+            "en": "Notebook A5 120 sheets with Lock Deli",
+            "ru": "Блокнот А5 120 листов с защелкой Deli"
+        },
+        "price": 12.00,
+        "category": "paper",
+        "subcategory": "notebook",
+        "inStock": true,
+        "description": {
+            "ka": "ყუთში რაოდენობა - 40, შეფუთვაში რაოდენობა - 12",
+            "en": "Quantity per box - 40, quantity per pack - 12",
+            "ru": "Количество в коробке - 40, количество в упаковке - 12"
+        },
+        "images": ["images/bloknoti17.jpg"]
+    },
+{
+        "id": 32,
+        "title": {
+            "ka": "ფანქარი 10 ცალი HB Deli",
+            "en": "Pencil 10 pcs HB Deli",
+            "ru": "Карандаш 10 шт HB Deli"
+        },
+        "price": 4.90,
+        "category": "writing",
+        "subcategory": "pencil",
+        "inStock": true,
+        "images": ["images/kalami1.jpg"]
+    },
+{
+        "id": 33,
+        "title": {
+            "ka": "ფანქარი 12ც Deli",
+            "en": "Pencil 12 pcs Deli",
+            "ru": "Карандаш 12 шт Deli"
+        },
+        "price": 3.20,
+        "category": "writing",
+        "subcategory": "pencil",
+        "inStock": true,
+        "images": ["images/kalami2.jpg"]
+    },
+{
+        "id": 34,
+        "title": {
+            "ka": "ფანქარი 2B (12 ცალი) HB Deli",
+            "en": "Pencil 2B (12 pcs) HB Deli",
+            "ru": "Карандаш 2B (12 шт) HB Deli"
+        },
+        "price": 2.50,
+        "category": "writing",
+        "subcategory": "pencil",
+        "inStock": true,
+        "images": ["images/fanqari3.png"]
+    },
+{
+        "id": 35,
+        "title": {
+            "ka": "ფანქარი HB (48 ცალიანი შეკვრა) Deli",
+            "en": "Pencil HB (48 pcs pack) Deli",
+            "ru": "Карандаш HB (упаковка 48 шт) Deli"
+        },
+        "price": 15.00,
+        "category": "writing",
+        "subcategory": "pencil",
+        "inStock": true,
+        "images": ["images/fanqari4.jpg"]
+    },
+{
+        "id": 36,
+        "title": {
+            "ka": "ფანქარი 12 ცალი HB Deli",
+            "en": "Pencil 12 pcs HB Deli",
+            "ru": "Карандаш 12 шт HB Deli"
+        },
+        "price": 3.30,
+        "category": "writing",
+        "subcategory": "pencil",
+        "inStock": true,
+        "images": ["images/fanqari5.jpg"]
+    },
+{
+        "id": 37,
+        "title": {
+            "ka": "ფანქარი SKETCHING PENCIL Deli",
+            "en": "Sketching Pencil Deli",
+            "ru": "Карандаш для эскизов Deli"
+        },
+        "price": 480.00,
+        "category": "writing",
+        "subcategory": "pencil",
+        "inStock": true,
+        "images": ["images/fanqari6.jpg"]
+    },
+{
+        "id": 38,
+        "title": {
+            "ka": "ფანქარი SKETCHING PENCIL (27ცალი) Deli",
+            "en": "Sketching Pencil Set (27 pcs) Deli",
+            "ru": "Набор карандашей для эскизов (27 шт) Deli"
+        },
+        "price": 26.00,
+        "category": "writing",
+        "subcategory": "pencil",
+        "inStock": true,
+        "images": ["images/fanqari7.jpg"]
+    },
+{
+        "id": 39,
+        "title": {
+            "ka": "ფანქარი HB 12ც შეკვრაში Deli",
+            "en": "Pencil HB 12 pcs per pack Deli",
+            "ru": "Карандаш HB 12 шт в упаковке Deli"
+        },
+        "price": 2.70,
+        "category": "writing",
+        "subcategory": "pencil",
+        "inStock": true,
+        "images": ["images/fanqari8.jpg"]
+    },
+{
+        "id": 40,
+        "title": {
+            "ka": "ფანქარი 2B (12 ცალი) HB Deli",
+            "en": "Pencil 2B (12 pcs) HB Deli",
+            "ru": "Карандаш 2B (12 шт) HB Deli"
+        },
+        "price": 4.50,
+        "category": "writing",
+        "subcategory": "pencil",
+        "inStock": true,
+        "images": ["images/fanqari9.jpg"]
+    },
+{
+        "id": 41,
+        "title": {
+            "ka": "კალამი ბურთულიანი 0.7MM შავი DELI",
+            "en": "Ballpoint Pen 0.7mm Black DELI",
+            "ru": "Шариковая ручка 0.7мм Черная DELI"
+        },
+        "price": 0.30,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami3.jpg"]
+    },
+{
+        "id": 42,
+        "title": {
+            "ka": "კალამი ბურთულიანი 0.7MM შავი DELI",
+            "en": "Ballpoint Pen 0.7mm Black DELI",
+            "ru": "Шариковая ручка 0.7мм Черная DELI"
+        },
+        "price": 0.40,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami4.jpg"]
+    },
+{
+        "id": 43,
+        "title": {
+            "ka": "კალამი ბურთულიანი BULLET TIP 0.7MM BLUE DELI",
+            "en": "Ballpoint Pen Bullet Tip 0.7mm Blue DELI",
+            "ru": "Шариковая ручка Bullet Tip 0.7мм Синяя DELI"
+        },
+        "price": 0.20,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami5.jpg"]
+    },
+{
+        "id": 44,
+        "title": {
+            "ka": "კალამი ბურთულიანი 1MM BLUE DELI",
+            "en": "Ballpoint Pen 1mm Blue DELI",
+            "ru": "Шариковая ручка 1мм Синяя DELI"
+        },
+        "price": 0.30,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami6.jpg"]
+    },
+{
+        "id": 45,
+        "title": {
+            "ka": "კალამი ბურთულიანი 0.7MM RED DELI",
+            "en": "Ballpoint Pen 0.7mm Red DELI",
+            "ru": "Шариковая ручка 0.7мм Красная DELI"
+        },
+        "price": 0.20,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami7.jpg"]
+    },
+{
+        "id": 46,
+        "title": {
+            "ka": "კალამი ბურთულიანი 0.7MM RED DELI",
+            "en": "Ballpoint Pen 0.7mm Red DELI",
+            "ru": "Шариковая ручка 0.7мм Красная DELI"
+        },
+        "price": 0.30,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami8.jpg"]
+    },
+{
+        "id": 47,
+        "title": {
+            "ka": "კალამი ბურთულიანი 0.7MM Q25BL DELI",
+            "en": "Ballpoint Pen 0.7mm Q25BL DELI",
+            "ru": "Шариковая ручка 0.7мм Q25BL DELI"
+        },
+        "price": 0.40,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami9.jpg"]
+    },
+{
+        "id": 48,
+        "title": {
+            "ka": "კალამი ბურთულიანი 0.7MM წვერით PIANO",
+            "en": "Ballpoint Pen 0.7mm Tip PIANO",
+            "ru": "Шариковая ручка 0.7мм PIANO"
+        },
+        "price": 0.70,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami10.jpg"]
+    },
+{
+        "id": 49,
+        "title": {
+            "ka": "კალამი 555",
+            "en": "Pen 555",
+            "ru": "Ручка 555"
+        },
+        "price": 0.15,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami11.jpg"]
+    },
+{
+        "id": 50,
+        "title": {
+            "ka": "ბურთულიანი კალმისტარი MONTEX TRICON (50)",
+            "en": "Ballpoint Pen MONTEX TRICON (50)",
+            "ru": "Шариковая ручка MONTEX TRICON (50)"
+        },
+        "price": 0.40,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami12.jpg"]
+    },
+{
+        "id": 51,
+        "title": {
+            "ka": "ბურთულიანი კალამი MONTEX STYLISH",
+            "en": "Ballpoint Pen MONTEX STYLISH",
+            "ru": "Шариковая ручка MONTEX STYLISH"
+        },
+        "price": 0.80,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami13.jpg"]
+    },
+{
+        "id": 52,
+        "title": {
+            "ka": "კალამი ბურთულიანი BULLET TIP 0.7MM BLACK Q50-BK DELI",
+            "en": "Ballpoint Pen Bullet Tip 0.7mm Black Q50-BK DELI",
+            "ru": "Шариковая ручка Bullet Tip 0.7мм Черная Q50-BK DELI"
+        },
+        "price": 1.20,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami14.jpg"]
+    },
+{
+        "id": 53,
+        "title": {
+            "ka": "კალამი ბურთულიანი BULLET TIP 0.7MM BLACK Q57-BK DELI",
+            "en": "Ballpoint Pen Bullet Tip 0.7mm Black Q57-BK DELI",
+            "ru": "Шариковая ручка Bullet Tip 0.7мм Черная Q57-BK DELI"
+        },
+        "price": 1.30,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami15.jpg"]
+    },
+{
+        "id": 54,
+        "title": {
+            "ka": "კალამი მელნიანი GEL PEN 0.7MM G11-BK DELI",
+            "en": "Gel Pen 0.7mm G11-BK DELI",
+            "ru": "Гелевая ручка 0.7мм G11-BK DELI"
+        },
+        "price": 1.10,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami16.jpg"]
+    },
+{
+        "id": 55,
+        "title": {
+            "ka": "კალამი მელნიანი GEL PEN 0.7MM G11-BL DELI",
+            "en": "Gel Pen 0.7mm G11-BL DELI",
+            "ru": "Гелевая ручка 0.7мм G11-BL DELI"
+        },
+        "price": 1.10,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami17.jpg"]
+    },
+{
+        "id": 56,
+        "title": {
+            "ka": "კალამი სამაგრით GEL PEN 0.5MM წვერით DELI STATIONARY შავი",
+            "en": "Gel Pen with Clip 0.5mm Tip DELI Black",
+            "ru": "Гелевая ручка с зажимом 0.5мм DELI Черная"
+        },
+        "price": 3.50,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami18.jpg"]
+    },
+{
+        "id": 57,
+        "title": {
+            "ka": "გელიანი კალამი 0.5MM წვერით ლურჯი DELI STATIONARY",
+            "en": "Gel Pen 0.5mm Tip Blue DELI",
+            "ru": "Гелевая ручка 0.5мм Синяя DELI"
+        },
+        "price": 0.70,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami19.jpg"]
+    },
+{
+        "id": 58,
+        "title": {
+            "ka": "გელიანი კალამი 0.5MM წვერით შავი DELI STATIONARY",
+            "en": "Gel Pen 0.5mm Tip Black DELI",
+            "ru": "Гелевая ручка 0.5мм Черная DELI"
+        },
+        "price": 10.00,
+        "category": "writing",
+        "subcategory": "pen",
+        "inStock": true,
+        "images": ["images/kalami20.jpg"]
+    },
+{
+        "id": 60,
+        "title": {
+            "ka": "პერმანენტ მარკერი ორმხრივი წვერით DELI STATIONARY",
+            "en": "Double-ended Permanent Marker DELI",
+            "ru": "Двусторонний перманентный маркер DELI"
+        },
+        "price": 0.80,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri1.png"]
+    },
+{
+        "id": 61,
+        "title": {
+            "ka": "პერმანენტ მარკერი ორმხრივი წვერით DELI STATIONARY",
+            "en": "Double-ended Permanent Marker DELI",
+            "ru": "Двусторонний перманентный маркер DELI"
+        },
+        "price": 0.80,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri2.jpg"]
+    },
+{
+        "id": 63,
+        "title": {
+            "ka": "პერმანენტ მარკერი ორმხრივი წვერით DELI U72-BK",
+            "en": "Double-ended Permanent Marker DELI U72-BK",
+            "ru": "Двусторонний перманентный маркер DELI U72-BK"
+        },
+        "price": 1.00,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri3.jpg"]
+    },
+{
+        "id": 64,
+        "title": {
+            "ka": "პერმანენტ მარკერი ორმხრივი წვერით DELI U72-BL",
+            "en": "Double-ended Permanent Marker DELI U72-BL",
+            "ru": "Двусторонний перманентный маркер DELI U72-BL"
+        },
+        "price": 1.00,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri4.jpg"]
+    },
+{
+        "id": 65,
+        "title": {
+            "ka": "პერმანენტ მარკერი ორმხრივი წვერით DELI U72-RD",
+            "en": "Double-ended Permanent Marker DELI U72-RD",
+            "ru": "Двусторонний перманентный маркер DELI U72-RD"
+        },
+        "price": 1.00,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri5.jpg"]
+    },
+{
+        "id": 66,
+        "title": {
+            "ka": "პერმანენტ მარკერი DELI U216-BK",
+            "en": "Permanent Marker DELI U216-BK",
+            "ru": "Перманентный маркер DELI U216-BK"
+        },
+        "price": 0.50,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri6.jpg"]
+    },
+{
+        "id": 67,
+        "title": {
+            "ka": "ტექსტ მარკერი DELI U366-OR ORANGE",
+            "en": "Highlighter DELI U366-OR Orange",
+            "ru": "Текстовыделитель DELI U366-OR Оранжевый"
+        },
+        "price": 0.80,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri7.jpg"]
+    },
+{
+        "id": 68,
+        "title": {
+            "ka": "ტექსტ მარკერი DELI U366-GN GREEN",
+            "en": "Highlighter DELI U366-GN Green",
+            "ru": "Текстовыделитель DELI U366-GN Зеленый"
+        },
+        "price": 0.80,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri8.jpg"]
+    },
+{
+        "id": 69,
+        "title": {
+            "ka": "ტექსტ მარკერი DELI EU356-OR ORANGE",
+            "en": "Highlighter DELI EU356-OR Orange",
+            "ru": "Текстовыделитель DELI EU356-OR Оранжевый"
+        },
+        "price": 0.90,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri9.jpg"]
+    },
+{
+        "id": 70,
+        "title": {
+            "ka": "ტექსტ მარკერი DELI U35460 ORANGE",
+            "en": "Highlighter DELI U35460 Orange",
+            "ru": "Текстовыделитель DELI U35460 Оранжевый"
+        },
+        "price": 0.90,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri10.jpg"]
+    },
+{
+        "id": 71,
+        "title": {
+            "ka": "დაფის მარკერი DELI STATIONARY ლურჯი",
+            "en": "Whiteboard Marker DELI Blue",
+            "ru": "Маркер для доски DELI Синий"
+        },
+        "price": 0.80,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri11.jpg"]
+    },
+{
+        "id": 72,
+        "title": {
+            "ka": "დაფის მარკერი DELI ლურჯი U00630",
+            "en": "Whiteboard Marker DELI Blue U00630",
+            "ru": "Маркер для доски DELI Синий U00630"
+        },
+        "price": 0.70,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri12.jpg"]
+    },
+{
+        "id": 73,
+        "title": {
+            "ka": "პერმანენტული მარკერი DELI STATIONARY ლურჯი",
+            "en": "Permanent Marker DELI Blue",
+            "ru": "Перманентный маркер DELI Синий"
+        },
+        "price": 0.60,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri13.jpg"]
+    },
+{
+        "id": 74,
+        "title": {
+            "ka": "ტექსტ მარკერი DELI S621/P",
+            "en": "Highlighter DELI S621/P",
+            "ru": "Текстовыделитель DELI S621/P"
+        },
+        "price": 0.70,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri14.jpg"]
+    },
+{
+        "id": 75,
+        "title": {
+            "ka": "ტექსტმარკერის ნაკრები 4 ფერიანი DELI STATIONARY",
+            "en": "Highlighter Set 4 Colors DELI",
+            "ru": "Набор текстовыделителей 4 цвета DELI"
+        },
+        "price": 4.00,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri15.png"]
+    },
+{
+        "id": 76,
+        "title": {
+            "ka": "დაფის მარკერი წითელი U00640 DELI",
+            "en": "Whiteboard Marker Red U00640 DELI",
+            "ru": "Маркер для доски Красный U00640 DELI"
+        },
+        "price": 0.70,
+        "category": "writing",
+        "subcategory": "markers",
+        "inStock": true,
+        "images": ["images/markeri16.jpg"]
+    },
+{
+        "id": 77,
+        "title": {
+            "ka": "სახაზავი დრეკადი 20სმ DELI STATIONARY",
+            "en": "Flexible Ruler 20cm DELI",
+            "ru": "Линейка гибкая 20см DELI"
+        },
+        "price": 1.30,
+        "category": "stationery",
+        "subcategory": "ruler",
+        "inStock": true,
+        "images": ["images/saxazavi1.jpg"]
+    },
+{
+        "id": 78,
+        "title": {
+            "ka": "ხის სახაზავი 20სმ Можга",
+            "en": "Wooden Ruler 20cm Mozhga",
+            "ru": "Линейка деревянная 20см Можга"
+        },
+        "price": 0.50,
+        "category": "stationery",
+        "subcategory": "ruler",
+        "inStock": true,
+        "images": ["images/saxazavi2.jpg"]
+    },
+{
+        "id": 79,
+        "title": {
+            "ka": "სახაზავი ლითონის 50სმ Deli Stationery",
+            "en": "Metal Ruler 50cm Deli",
+            "ru": "Линейка металлическая 50см Deli"
+        },
+        "price": 5.50,
+        "category": "stationery",
+        "subcategory": "ruler",
+        "inStock": true,
+        "images": ["images/saxazavi3.jpg"]
+    },
+{
+        "id": 80,
+        "title": {
+            "ka": "სახაზავი 30სმ H11 DELI",
+            "en": "Ruler 30cm H11 DELI",
+            "ru": "Линейка 30см H11 DELI"
+        },
+        "price": 0.80,
+        "category": "stationery",
+        "subcategory": "ruler",
+        "inStock": true,
+        "images": ["images/saxazavi4.jpg"]
+    },
+{
+        id: 81,
+        title: {
+            ka: "სახაზავების ნაკრები Deli Stationery",
+            en: "Ruler Set Deli",
+            ru: "Набор линеек Deli"
+        },
+        price: 5.00,
+        category: "stationery",
+        subcategory: "ruler",
+        inStock: true,
+        images: ["images/saxazavi5.png"]
+    },
+{
+        id: 82,
+        title: {
+            ka: "ლითონის სახაზავი 20სმ Deli Stationery",
+            en: "Metal Ruler 20cm Deli",
+            ru: "Линейка металлическая 20см Deli"
+        },
+        price: 2.00,
+        category: "stationery",
+        subcategory: "ruler",
+        inStock: true,
+        images: ["images/saxazavi6.jpg"]
+    },
+{
+        id: 83,
+        title: {
+            ka: "მექანიკური სათლელი Deli Stationery",
+            en: "Mechanical Pencil Sharpener Deli",
+            ru: "Механическая точилка Deli"
+        },
+        price: 11.20,
+        category: "stationery",
+        subcategory: "sharpener",
+        inStock: true,
+        images: ["images/satleli1.png"]
+    },
+{
+        id: 84,
+        title: {
+            ka: "სათლელი 0526 Deli Stationery",
+            en: "Pencil Sharpener 0526 Deli",
+            ru: "Точилка 0526 Deli"
+        },
+        price: 1.80,
+        category: "stationery",
+        subcategory: "sharpener",
+        inStock: true,
+        images: ["images/satleli2.png"]
+    },
+{
+        id: 85,
+        title: {
+            ka: "სათლელი Deli Stationery",
+            en: "Pencil Sharpener Deli",
+            ru: "Точилка Deli"
+        },
+        price: 0.80,
+        category: "stationery",
+        subcategory: "sharpener",
+        inStock: true,
+        images: ["images/satleli3.png", "images/satleli.png"]
+    },
+{
+        id: 86,
+        title: {
+            ka: "სათლელი 0594",
+            en: "Pencil Sharpener 0594",
+            ru: "Точилка 0594"
+        },
+        price: 0.60,
+        category: "stationery",
+        subcategory: "sharpener",
+        inStock: true,
+        images: ["images/satleli4.jpg"]
+    },
+{
+    id: 87,
+    title: {
+        ka: "სათლელი ლითონის ორმაგი Deli Stationery",
+        en: "Double Metal Pencil Sharpener Deli",
+        ru: "Двойная металлическая точилка Deli"
+    },
+    price: 0.80,
+    category: "stationery",
+    subcategory: "sharpener",
+    inStock: true,
+    images: ["images/satleli5.png"]
+},
+{
+    id: 88,
+    title: {
+        ka: "სათლელი სამაგიდე 71160 DELI",
+        en: "Desktop Pencil Sharpener 71160 DELI",
+        ru: "Настольная точилка 71160 DELI"
+    },
+    price: 15.20,
+    category: "stationery",
+    subcategory: "sharpener",
+    inStock: true,
+    images: ["images/satleli6.jpg"]
+},
+{
+    id: 89,
+    title: {
+        ka: "სათლელი სამაგიდე 71160 DELI",
+        en: "Desktop Pencil Sharpener 71160 DELI",
+        ru: "Настольная точилка 71160 DELI"
+    },
+    price: 15.20,
+    category: "stationery",
+    subcategory: "sharpener",
+    inStock: true,
+    images: ["images/satleli7.jpg"]
+},
+{
+    id: 90,
+    title: {
+        ka: "ფანქრის სათლელი XL-379",
+        en: "Pencil Sharpener XL-379",
+        ru: "Точилка для карандашей XL-379"
+    },
+    price: 0.90,
+    category: "stationery",
+    subcategory: "sharpener",
+    inStock: true,
+    images: ["images/satleli8.jpg"]
+},
+{
+    id: 91,
+    title: {
+        ka: "სათლელი კონტეინერით Deli Stationery",
+        en: "Pencil Sharpener with Container Deli",
+        ru: "Точилка с контейнером Deli"
+    },
+    price: 0.80,
+    category: "stationery",
+    subcategory: "sharpener",
+    inStock: true,
+    images: ["images/satleli9.png"]
+},
+{
+    id: 92,
+    title: {
+        ka: "სათლელი H558 DELI",
+        en: "Pencil Sharpener H558 DELI",
+        ru: "Точилка H558 DELI"
+    },
+    price: 1.70,
+    category: "stationery",
+    subcategory: "sharpener",
+    inStock: true,
+    images: ["images/satleli10.jpg"]
+},
+{
+    id: 93,
+    title: {
+        ka: "სათლელი Deli Stationery",
+        en: "Pencil Sharpener Deli",
+        ru: "Точилка Deli"
+    },
+    price: 0.60,
+    category: "stationery",
+    subcategory: "sharpener",
+    inStock: true,
+    images: ["images/satleli11.png"]
+},
+{
+    id: 94,
+    title: {
+        ka: "საშლელი H315 DELI",
+        en: "Eraser H315 DELI",
+        ru: "Ластик H315 DELI"
+    },
+    price: 1.30,
+    category: "stationery",
+    subcategory: "eraser",
+    inStock: true,
+    images: ["images/sashleli1.jpg"]
+},
+{
+    id: 95,
+    title: {
+        ka: "საშლელი H316 DELI",
+        en: "Eraser H316 DELI",
+        ru: "Ластик H316 DELI"
+    },
+    price: 0.50,
+    category: "stationery",
+    subcategory: "eraser",
+    inStock: true,
+    images: ["images/sashleli2.jpg"]
+},
+{
+    id: 96,
+    title: {
+        ka: "საშლელი Deli Stationery",
+        en: "Eraser Deli",
+        ru: "Ластик Deli"
+    },
+    price: 0.70,
+    category: "stationery",
+    subcategory: "eraser",
+    inStock: true,
+    images: ["images/sashleli3.png"]
+},
+{
+    id: 961,
+    title: {
+        ka: "საშლელი Deli Stationery",
+        en: "Eraser Deli",
+        ru: "Ластик Deli"
+    },
+    price: 0.65,
+    category: "stationery",
+    subcategory: "eraser",
+    inStock: true,
+    images: ["images/sashleli4.png"]
+},
+{
+    id: 97,
+    title: {
+        ka: "ფანქრის საშლელი Scribe Infinite Deli Stationery",
+        en: "Pencil Eraser Scribe Infinite Deli",
+        ru: "Ластик для карандашей Scribe Infinite Deli"
+    },
+    price: 0.70,
+    category: "stationery",
+    subcategory: "eraser",
+    inStock: true,
+    images: ["images/sashleli5.jpg"]
+},
+{
+        id: 98,
+        title: {
+            ka: "ფარგალი 8601 DELI",
+            en: "Compass 8601 DELI",
+            ru: "Циркуль 8601 DELI"
+        },
+        price: 3.50,
+        category: "stationery",
+        subcategory: "ruler",
+        inStock: true,
+        images: ["images/fargali1.jpg"]
+    },
+{
+        id: 99,
+        title: {
+            ka: "ფარგალი Deli Stationery",
+            en: "Compass Deli",
+            ru: "Циркуль Deli"
+        },
+        price: 13.00,
+        category: "stationery",
+        subcategory: "ruler",
+        inStock: true,
+        images: ["images/fargali2.jpeg"]
+    },
+{
+        id: 100,
+        title: {
+            ka: "ფარგალი Deli Stationery",
+            en: "Compass Deli",
+            ru: "Циркуль Deli"
+        },
+        price: 8.00,
+        category: "stationery",
+        subcategory: "ruler",
+        inStock: true,
+        images: ["images/fargali3.png"]
+    },
+{
+        id: 101,
+        title: {
+            ka: "ფარგალი Deli Stationery",
+            en: "Compass Deli",
+            ru: "Циркуль Deli"
+        },
+        price: 5.50,
+        category: "stationery",
+        subcategory: "ruler",
+        inStock: true,
+        images: ["images/fargali4.png"]
+    },
+{
+        id: 102,
+        title: {
+            ka: "ფარგალი G20502 DELI",
+            en: "Compass G20502 DELI",
+            ru: "Циркуль G20502 DELI"
+        },
+        price: 3.90,
+        category: "stationery",
+        subcategory: "ruler",
+        inStock: true,
+        images: ["images/fargali5.jpg"]
+    },
+{
+        id: 103,
+        title: {
+            ka: "მექანიკური ფანქარი 0.7მმ წვერით Deli Stationery",
+            en: "Mechanical Pencil 0.7mm Tip Deli",
+            ru: "Механический карандаш 0.7мм Deli"
+        },
+        price: 3.00,
+        category: "writing",
+        subcategory: "pencil",
+        inStock: true,
+        images: ["images/fanqari10.jpg"]
+    },
+{
+        id: 104,
+        title: {
+            ka: "მექანიკური ფანქარი 0.5მმ წვერით Deli Stationery",
+            en: "Mechanical Pencil 0.5mm Tip Deli",
+            ru: "Механический карандаш 0.5мм Deli"
+        },
+        price: 3.00,
+        category: "writing",
+        subcategory: "pencil",
+        inStock: true,
+        images: ["images/fanqari11.jpg"]
+    },
+{
+        id: 105,
+        title: {
+            ka: "დივაიდერი A4-12 pages E5725 DELI",
+            en: "Divider A4-12 pages E5725 DELI",
+            ru: "Разделитель А4-12 страниц E5725 DELI"
+        },
+        price: 2.50,
+        category: "office",
+        subcategory: "divider",
+        inStock: true,
+        images: ["images/divaideri1.png"]
+    },
+{
+        id: 106,
+        title: {
+            ka: "დივაიდერი A4-20 pages 38157 DELI",
+            en: "Divider A4-20 pages 38157 DELI",
+            ru: "Разделитель А4-20 страниц 38157 DELI"
+        },
+        price: 4.00,
+        category: "office",
+        subcategory: "divider",
+        inStock: true,
+        images: ["images/divaideri1.png"]
+    },
+{
+        id: 107,
+        title: {
+            ka: "დივაიდერი პლასტიკური 1-31 ციფრი Deli",
+            en: "Plastic Index Divider 1-31 Deli",
+            ru: "Пластиковый разделитель 1-31 Deli"
+        },
+        price: 6.00,
+        category: "office",
+        subcategory: "divider",
+        inStock: true,
+        images: ["images/divaideri1.png"]
+    },
+{
+        id: 108,
+        title: {
+            ka: "დივაიდერი A4-10 pages E5724 DELI",
+            en: "Divider A4-10 pages E5724 DELI",
+            ru: "Разделитель А4-10 страниц E5724 DELI"
+        },
+        price: 2.20,
+        category: "office",
+        subcategory: "divider",
+        inStock: true,
+        images: ["images/divaideri1.png"]
+    },
+{
+        id: 109,
+        title: {
+            ka: "დივაიდერი A4-10 pages E5724 DELI",
+            en: "Divider A4-10 pages E5724 DELI",
+            ru: "Разделитель А4-10 страниц E5724 DELI"
+        },
+        price: 2.20,
+        category: "office",
+        subcategory: "divider",
+        inStock: true,
+        images: ["images/divaideri1.png"]
+    },
+{
+        id: 110,
+        title: {
+            ka: "დივაიდერი KS-12A",
+            en: "Divider KS-12A",
+            ru: "Разделитель KS-12A"
+        },
+        price: 2.00,
+        category: "office",
+        subcategory: "divider",
+        inStock: true,
+        images: ["images/divaideri2.jpg"]
+    },
+{
+        id: 111,
+        title: {
+            ka: "ასაკინძი ყდა A3 PC3005-02 (Beige C02) 100 ფურცელი",
+            en: "Binding Cover A3 PC3005-02 (Beige C02) 100 sheets",
+            ru: "Переплетная обложка А3 PC3005-02 (Beige C02) 100 листов"
+        },
+        price: 25.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda1.jpg"]
+    },
+{
+        id: 112,
+        title: {
+            ka: "ასაკინძი ყდა A3 შავი 100 ფურცელი",
+            en: "Binding Cover A3 Black 100 sheets",
+            ru: "Переплетная обложка А3 Черная 100 листов"
+        },
+        price: 28.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda2.jpg"]
+    },
+{
+        id: 113,
+        title: {
+            ka: "ასაკინძი ყდა A4 (Saffron C09) 100 ფურცელი 230 გრამი",
+            en: "Binding Cover A4 (Saffron C09) 100 sheets 230g",
+            ru: "Переплетная обложка А4 (Saffron C09) 100 листов 230г"
+        },
+        price: 14.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda3.jpg"]
+    },
+{
+        id: 114,
+        title: {
+            ka: "ასაკინძი ყდა A4 PC3004-06 (Grey C06) 100 ფურცელი 230 გრამი",
+            en: "Binding Cover A4 PC3004-06 (Grey C06) 100 sheets 230g",
+            ru: "Переплетная обложка А4 PC3004-06 (Grey C06) 100 листов 230г"
+        },
+        price: 14.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda4.jpg"]
+    },
+{
+        id: 115,
+        title: {
+            ka: "ასაკინძი ყდა A4 PC3004-12 (Green C12) 100 ფურცელი",
+            en: "Binding Cover A4 PC3004-12 (Green C12) 100 sheets",
+            ru: "Переплетная обложка А4 PC3004-12 (Green C12) 100 листов"
+        },
+        price: 14.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda5.jpg"]
+    },
+{
+        id: 116,
+        title: {
+            ka: "ასაკინძი ყდა A4 ოქროსფერი 100 ფურცელი 230 გრამი",
+            en: "Binding Cover A4 Gold 100 sheets 230g",
+            ru: "Переплетная обложка А4 Золотая 100 листов 230г"
+        },
+        price: 14.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda6.jpg"]
+    },
+{
+        id: 117,
+        title: {
+            ka: "ასაკინძი ყდა A4 მუქი ლურჯი 100 ფურცელი 230 გრამი",
+            en: "Binding Cover A4 Dark Blue 100 sheets 230g",
+            ru: "Переплетная обложка А4 Темно-синяя 100 листов 230г"
+        },
+        price: 14.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda7.jpg"]
+    },
+{
+        id: 118,
+        title: {
+            ka: "ასაკინძი ყდა გამჭვირვალე A4 100 ფურცელი 150 მიკრონი",
+            en: "Binding Cover Transparent A4 100 sheets 150 micron",
+            ru: "Переплетная обложка прозрачная А4 100 листов 150 микрон"
+        },
+        price: 18.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda8.jpg"]
+    },
+{
+        id: 119,
+        title: {
+            ka: "ასაკინძი ყდა A4 PC3004-12 (Green C12) 100 ფურცელი",
+            en: "Binding Cover A4 PC3004-12 (Green C12) 100 sheets",
+            ru: "Переплетная обложка А4 PC3004-12 (Green C12) 100 листов"
+        },
+        price: 14.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda9.jpg"]
+    },
+{
+        id: 120,
+        title: {
+            ka: "ასაკინძი ყდა გამჭვირვალე A3 100 ფურცელი 180 მიკრონი",
+            en: "Binding Cover Transparent A3 100 sheets 180 micron",
+            ru: "Переплетная обложка прозрачная А3 100 листов 180 микрон"
+        },
+        price: 40.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda9.jpg"]
+    },
+{
+        id: 121,
+        title: {
+            ka: "ასაკინძი ყდა გამჭვირვალე A3 100 ფურცელი 150 მიკრონი",
+            en: "Binding Cover Transparent A3 100 sheets 150 micron",
+            ru: "Переплетная обложка прозрачная А3 100 листов 150 микрон"
+        },
+        price: 35.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda9.jpg"]
+    },
+{
+        id: 122,
+        title: {
+            ka: "ასაკინძი ყდა გამჭვირვალე A4 100 ფურცელი 150 მიკრონი",
+            en: "Binding Cover Transparent A4 100 sheets 150 micron",
+            ru: "Переплетная обложка прозрачная А4 100 листов 150 микрон"
+        },
+        price: 20.00,
+        category: "office",
+        subcategory: "binding_cover",
+        inStock: true,
+        images: ["images/askyda9.jpg"]
+    },
+{
+        id: 123,
+        title: {
+            ka: "თერმოქაღალდი 0.57 - 18 მეტრი",
+            en: "Thermal Paper Roll 0.57 - 18m",
+            ru: "Термобумага 0.57 - 18 м"
+        },
+        price: 0.50,
+        category: "paper",
+        subcategory: "termo_paper",
+        inStock: true,
+        images: ["images/terqagaldi1.jpg"]
+    },
+{
+        id: 124,
+        title: {
+            ka: "თერმოქაღალდი 55-80/25 - 300 მეტრი",
+            en: "Thermal Paper Roll 55-80/25 - 300m",
+            ru: "Термобумага 55-80/25 - 300 м"
+        },
+        price: 14.00,
+        category: "paper",
+        subcategory: "termo_paper",
+        inStock: true,
+        images: ["images/terqagaldi2.jpg"]
+    },
+{
+        id: 125,
+        title: {
+            ka: "სასწორის ეტიკეტი 58*30მმ",
+            en: "Scale Label Sticker 58*30mm",
+            ru: "Этикетка для весов 58*30мм"
+        },
+        price: 3.00,
+        category: "paper",
+        subcategory: "etiket",
+        inStock: true,
+        images: ["images/sasetiketi1.jpg"]
+    },
+{
+        id: 126,
+        title: {
+            ka: "სასწორის ეტიკეტი 58*40მმ",
+            en: "Scale Label Sticker 58*40mm",
+            ru: "Этикетка для весов 58*40мм"
+        },
+        price: 3.00,
+        category: "paper",
+        subcategory: "etiket",
+        inStock: true,
+        images: ["images/sasetiketi2.jpg"]
+    },
+{
+        id: 127,
+        title: {
+            ka: "კონვერტი A3 320*420 110გრ",
+            en: "Envelope A3 320*420 110g",
+            ru: "Конверт А3 320*420 110г"
+        },
+        price: 0.35,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti.jpg"]
+    },
+{
+        id: 128,
+        title: {
+            ka: "კონვერტი A3+ 330*450მმ 110გრ",
+            en: "Envelope A3+ 330*450mm 110g",
+            ru: "Конверт А3+ 330*450мм 110г"
+        },
+        price: 0.40,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti2.jpg"]
+    },
+{
+        id: 129,
+        title: {
+            ka: "კონვერტი A4 240*320 110გრ",
+            en: "Envelope A4 240*320 110g",
+            ru: "Конверт А4 240*320 110г"
+        },
+        price: 0.25,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti3.jpg"]
+    },
+{
+        id: 130,
+        title: {
+            ka: "კონვერტი A5 160*230მმ 110გრ",
+            en: "Envelope A5 160*230mm 110g",
+            ru: "Конверт А5 160*230мм 110г"
+        },
+        price: 0.20,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti4.jpg"]
+    },
+{
+        id: 131,
+        title: {
+            ka: "კონვერტი A5+ 176*250 110გრ",
+            en: "Envelope A5+ 176*250 110g",
+            ru: "Конверт А5+ 176*250 110г"
+        },
+        price: 0.20,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti5.png"]
+    },
+{
+        id: 132,
+        title: {
+            ka: "კონვერტი A6 114*162მმ 110გრ",
+            en: "Envelope A6 114*162mm 110g",
+            ru: "Конверт А6 114*162мм 110г"
+        },
+        price: 0.10,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti6.jpg"]
+    },
+{
+        id: 133,
+        title: {
+            ka: "კონვერტი C6 114*162 110გრ",
+            en: "Envelope C6 114*162 110g",
+            ru: "Конверт C6 114*162 110г"
+        },
+        price: 0.10,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti7.jpg"]
+    },
+{
+        id: 134,
+        title: {
+            ka: "კონვერტი დიპლომატი ფანჯრით 105*240მმ 110გრ",
+            en: "Envelope DL with Window 105*240mm 110g",
+            ru: "Конверт DL с окном 105*240мм 110г"
+        },
+        price: 0.10,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti8.jpg"]
+    },
+{
+        id: 135,
+        title: {
+            ka: "კონვერტი დიპლომატი ფანჯრით 105*240მმ 110გრ",
+            en: "Envelope DL with Window 105*240mm 110g",
+            ru: "Конверт DL с окном 105*240мм 110г"
+        },
+        price: 0.10,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti8.jpg"]
+    },
+{
+        id: 136,
+        title: {
+            ka: "კონვერტი დიპლომატი 105*240მმ 110გრ",
+            en: "Envelope DL 105*240mm 110g",
+            ru: "Конверт DL 105*240мм 110г"
+        },
+        price: 0.10,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti8.jpg"]
+    },
+{
+        id: 137,
+        title: {
+            ka: "კონვერტი ბუკლეტი 110*220მმ 110გრ",
+            en: "Envelope Booklet 110*220mm 110g",
+            ru: "Конверт для буклетов 110*220мм 110г"
+        },
+        price: 0.10,
+        category: "paper",
+        subcategory: "envelope",
+        inStock: true,
+        images: ["images/konverti11.jpg"]
+    },
+{
+        id: 138,
+        title: {
+            ka: "ფაილი A4 0.30 (100ც) HL-253-30",
+            en: "Sheet Protector A4 0.30 (100 pcs) HL-253-30",
+            ru: "Файл A4 0.30 (100 шт) HL-253-30"
+        },
+        price: 3.50,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili1.jpg"]
+    },
+{
+        id: 139,
+        title: {
+            ka: "ფაილი A4 0.30 (100ც) HL-30330",
+            en: "Sheet Protector A4 0.30 (100 pcs) HL-30330",
+            ru: "Файл A4 0.30 (100 шт) HL-30330"
+        },
+        price: 4.20,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili1.jpg"]
+    },
+{
+        id: 140,
+        title: {
+            ka: "ფაილი A4 0.35 (100ც) HL-30335",
+            en: "Sheet Protector A4 0.35 (100 pcs) HL-30335",
+            ru: "Файл A4 0.35 (100 шт) HL-30335"
+        },
+        price: 4.00,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili1.jpg"]
+    },
+{
+        id: 141,
+        title: {
+            ka: "ფაილი A4 0.40 (100ც) 30340",
+            en: "Sheet Protector A4 0.40 (100 pcs) 30340",
+            ru: "Файл A4 0.40 (100 шт) 30340"
+        },
+        price: 5.00,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili1.jpg"]
+    },
+{
+        id: 142,
+        title: {
+            ka: "ფაილი A5 0.35 (100ც) HL-30535",
+            en: "Sheet Protector A5 0.35 (100 pcs) HL-30535",
+            ru: "Файл A5 0.35 (100 шт) HL-30535"
+        },
+        price: 3.00,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili1.jpg"]
+    },
+{
+        id: 143,
+        title: {
+            ka: "ფაილი A4 40 მიკრონი (100ც) Deli",
+            en: "Sheet Protector A4 40 Micron (100 pcs) Deli",
+            ru: "Файл A4 40 микрон (100 шт) Deli"
+        },
+        price: 7.00,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili2.jpg"]
+    },
+{
+        id: 144,
+        title: {
+            ka: "ფაილი A4 (100ც) 0.80 F20302 DELI",
+            en: "Sheet Protector A4 (100 pcs) 0.80 F20302 DELI",
+            ru: "Файл A4 (100 шт) 0.80 F20302 DELI"
+        },
+        price: 15.00,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili3.jpg"]
+    },
+{
+        id: 145,
+        title: {
+            ka: "ფაილი A4 40 მიკრონი (100ც) Deli",
+            en: "Sheet Protector A4 40 Micron (100 pcs) Deli",
+            ru: "Файл A4 40 микрон (100 шт) Deli"
+        },
+        price: 7.00,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili3.jpg"]
+    },
+{
+        id: 146,
+        title: {
+            ka: "პლასტიკური საქაღალდე (კუთხე ფაილი) Deli",
+            en: "Plastic Corner Folder A4 Deli",
+            ru: "Пластиковая папка-уголок A4 Deli"
+        },
+        price: 0.40,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili4.jpg"]
+    },
+{
+        id: 147,
+        title: {
+            ka: "ფაილი A4 40 მიკრონი (100ც) Deli",
+            en: "Sheet Protector A4 40 Micron (100 pcs) Deli",
+            ru: "Файл A4 40 микрон (100 шт) Deli"
+        },
+        price: 7.00,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili2.jpg"]
+    },
+{
+        id: 148,
+        title: {
+            ka: "ფაილი A4 0.70 (100ც) 30370",
+            en: "Sheet Protector A4 0.70 (100 pcs) 30370",
+            ru: "Файл A4 0.70 (100 шт) 30370"
+        },
+        price: 9.00,
+        category: "stationary",
+        subcategory: "file_folder",
+        inStock: true,
+        images: ["images/faili1.jpg"]
+    },
+{
+        id: 149,
+        title: {
+            ka: "აკვარელის ქაღალდი A1 (610X860მმ) 200გრ 300ფურცელი",
+            en: "Watercolor Paper A1 (610X860mm) 200g 300 sheets",
+            ru: "Акварельная бумага А1 (610х860мм) 200г 300 листов"
+        },
+        price: 380.00,
+        category: "paper",
+        subcategory: "watercolor",
+        inStock: true,
+        images: ["images/vatmani1.jpg"]
+    },
+{
+        id: 150,
+        title: {
+            ka: "აკვარელის ქაღალდი 16ფურცელი A3 C270-A3 DELI",
+            en: "Watercolor Paper Pad 16 sheets A3 C270-A3 DELI",
+            ru: "Бумага для акварели 16 листов A3 C270-A3 DELI"
+        },
+        price: 15.00,
+        category: "paper",
+        subcategory: "watercolor",
+        inStock: true,
+        images: ["images/vatmani2.jpg"]
+    },
+{
+        id: 151,
+        title: {
+            ka: "ვატმანი სახაზავი A3 300ფურცელი",
+            en: "Drawing Paper A3 300 sheets",
+            ru: "Ватман A3 300 листов"
+        },
+        price: 80.00,
+        category: "paper",
+        subcategory: "watercolor",
+        inStock: true,
+        images: ["images/vatmani3.jpg"]
+    },
+{
+        id: 152,
+        title: {
+            ka: "ქაღალდი A1 ზომის (ვატმანი)",
+            en: "Drawing Paper Sheet A1 (Whatman)",
+            ru: "Бумага формата А1 (Ватман)"
+        },
+        price: 1.50,
+        category: "paper",
+        subcategory: "watercolor",
+        inStock: true,
+        images: ["images/vatmani4.jpg"]
+    },
+{
+        id: 153,
+        title: {
+            ka: "აკვარელის ქაღალდი 16ფურცელი A3 C270-A3 DELI",
+            en: "Watercolor Paper Pad 16 sheets A3 C270-A3 DELI",
+            ru: "Бумага для акварели 16 листов A3 C270-A3 DELI"
+        },
+        price: 15.00,
+        category: "paper",
+        subcategory: "watercolor",
+        inStock: true,
+        images: ["images/vatmani2.jpg"]
+    },
+{
+        id: 154,
+        title: {
+            ka: "მუყაოს სწრაფჩამკერი",
+            en: "Cardboard Fastener Folder",
+            ru: "Картонная папка-скоросшиватель"
+        },
+        price: 0.40,
+        category: "stationary",
+        subcategory: "binder_folder",
+        inStock: true,
+        images: ["images/chamkeri1.jpg"]
+    },
+{
+        id: 155,
+        title: {
+            ka: "სწრაფჩამკერი პლასტიკური 2058",
+            en: "Plastic Fastener Folder 2058",
+            ru: "Пластиковая папка-скоросшиватель 2058"
+        },
+        price: 0.40,
+        category: "stationary",
+        subcategory: "binder_folder",
+        inStock: true,
+        images: ["images/chamkeri2.jpg"]
+    },
+{
+        id: 156,
+        title: {
+            ka: "სწრაფჩამკერი პლასტიკური Deli",
+            en: "Plastic Fastener Folder Deli",
+            ru: "Пластиковая папка-скоросшиватель Deli"
+        },
+        price: 0.70,
+        category: "stationary",
+        subcategory: "binder_folder",
+        inStock: true,
+        images: ["images/chamkeri3.jpg"]
+    },
+{
+        id: 157,
+        title: {
+            ka: "სწრაფჩამკერი პლასტიკური EF320 DELI",
+            en: "Plastic Fastener Folder EF320 DELI",
+            ru: "Пластиковая папка-скоросшиватель EF320 DELI"
+        },
+        price: 0.55,
+        category: "stationary",
+        subcategory: "binder_folder",
+        inStock: true,
+        images: ["images/chamkeri4.jpg"]
+    },
+
+    {
+        "id": 158,
+        "title": {
+            "ka": "ლეიბლი A4 1*1 100ფურცელი (210x297) - 1 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*1 100 sheets (210x297) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*1 100 листов (210x297) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli1.jpg"]
+    },
+    {
+        "id": 159,
+        "title": {
+            "ka": "ლეიბლი A4 1*1 100ფურცელი (199.6x289.1) - 1 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*1 100 sheets (199.6x289.1) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*1 100 листов (199.6x289.1) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli2.jpg"]
+    },
+    {
+        "id": 160,
+        "title": {
+            "ka": "ლეიბლი A4 1*12 100ფურცელი (105x48) - 12 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*12 100 sheets (105x48) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*12 100 листов (105x48) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli3.jpg"]
+    },
+    {
+        "id": 161,
+        "title": {
+            "ka": "ლეიბლი A4 1*10 100ფურცელი (99.06x57) - 10 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*10 100 sheets (99.06x57) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*10 100 листов (99.06x57) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli4.jpg"]
+    },
+    {
+        "id": 162,
+        "title": {
+            "ka": "ლეიბლი A4 1*15 100ფურცელი (70x56) - 15 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*15 100 sheets (70x56) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*15 100 листов (70x56) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli5.jpg"]
+    },
+    {
+        "id": 163,
+        "title": {
+            "ka": "ლეიბლი A4 1*12 100ფურცელი (105 x 46) 2512",
+            "en": "Self-Adhesive Labels A4 1*12 100 sheets (105x46) 2512",
+            "ru": "Этикетки самоклеящиеся A4 1*12 100 листов (105x46) 2512"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli6.jpg"]
+    },
+    {
+        "id": 164,
+        "title": {
+            "ka": "ლეიბლი A4 1*14 100ფურცელი (105.1*42.69) - 14 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*14 100 sheets (105.1x42.69) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*14 100 листов (105.1x42.69) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli7.jpg"]
+    },
+    {
+        "id": 165,
+        "title": {
+            "ka": "ლეიბლი A4 1*4 100ფურცელი (105x148.5) 2204",
+            "en": "Self-Adhesive Labels A4 1*4 100 sheets (105x148.5) 2204",
+            "ru": "Этикетки самоклеящиеся A4 1*4 100 листов (105x148.5) 2204"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli8.jpg"]
+    },
+    {
+        "id": 166,
+        "title": {
+            "ka": "ლეიბლი A4 1*16 100ფურცელი (99.1x34) - 16 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*16 100 sheets (99.1x34) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*16 100 листов (99.1x34) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli9.jpg"]
+    },
+    {
+        "id": 167,
+        "title": {
+            "ka": "ლეიბლი A4 1*180 100ფურცელი (30x9) 180 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*180 100 sheets (30x9)",
+            "ru": "Этикетки самоклеящиеся A4 1*180 100 листов (30x9)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli10.jpg"]
+    },
+    {
+        "id": 168,
+        "title": {
+            "ka": "ლეიბლი A4 1*24 100ფურცელი (64x34) - 24 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*24 100 sheets (64x34) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*24 100 листов (64x34) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli11.jpg"]
+    },
+    {
+        "id": 169,
+        "title": {
+            "ka": "ლეიბლი A4 1*2 100ფურცელი (210x148.5) - 2 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*2 100 sheets (210x148.5) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*2 100 листов (210x148.5) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli12.jpg"]
+    },
+    {
+        "id": 170,
+        "title": {
+            "ka": "ლეიბლი A4 1*2 (199.6*143.5) 100ფურცელი - 2 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*2 100 sheets (199.6x143.5)",
+            "ru": "Этикетки самоклеящиеся A4 1*2 100 листов (199.6x143.5)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli13.jpg"]
+    },
+    {
+        "id": 171,
+        "title": {
+            "ka": "ლეიბლი A4 1*16 100ფურცელი (105x37.125) 2105",
+            "en": "Self-Adhesive Labels A4 1*16 100 sheets (105x37.125) 2105",
+            "ru": "Этикетки самоклеящиеся A4 1*16 100 листов (105x37.125) 2105"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli14.jpg"]
+    },
+    {
+        "id": 172,
+        "title": {
+            "ka": "ლეიბლი A4 1*10 100ფურცელი (105x57) 2610",
+            "en": "Self-Adhesive Labels A4 1*10 100 sheets (105x57) 2610",
+            "ru": "Этикетки самоклеящиеся A4 1*10 100 листов (105x57) 2610"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli15.jpg"]
+    },
+    {
+        "id": 173,
+        "title": {
+            "ka": "ლეიბლი A4 1*64 100ფურცელი (48.5*16.9) - 64 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*64 100 sheets (48.5x16.9)",
+            "ru": "Этикетки самоклеящиеся A4 1*64 100 листов (48.5x16.9)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli16.jpg"]
+    },
+    {
+        "id": 174,
+        "title": {
+            "ka": "ლეიბლი A4 1*21 100ფურცელი (63.5*38.1) 21 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*21 100 sheets (63.5x38.1) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*21 100 листов (63.5x38.1) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli17.jpg"]
+    },
+    {
+        "id": 175,
+        "title": {
+            "ka": "ლეიბლი A4 1*4 100ფურცელი (99.1*139) 4 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*4 100 sheets (99.1x139)",
+            "ru": "Этикетки самоклеящиеся A4 1*4 100 листов (99.1x139)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli18.jpg"]
+    },
+    {
+        "id": 176,
+        "title": {
+            "ka": "ლეიბლი A4 1*65 100ფურცელი (38.1x21.2) - 65 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*65 100 sheets (38.1x21.2) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*65 100 листов (38.1x21.2) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli19.jpg"]
+    },
+    {
+        "id": 177,
+        "title": {
+            "ka": "ლეიბლი A4 1*8 100ფურცელი (99.1x67.7) - 8 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*8 100 sheets (99.1x67.7)",
+            "ru": "Этикетки самоклеящиеся A4 1*8 100 листов (99.1x67.7)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli20.jpg"]
+    },
+    {
+        "id": 178,
+        "title": {
+            "ka": "ლეიბლი A4 1*70 100ფურცელი (40x20) - 70 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*70 100 sheets (40x20) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*70 100 листов (40x20) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli21.jpg"]
+    },
+    {
+        "id": 179,
+        "title": {
+            "ka": "ლეიბლი A4 1*8 100ფურცელი (105x72) - 8 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*8 100 sheets (105x72) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*8 100 листов (105x72) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli22.jpg"]
+    },
+    {
+        "id": 180,
+        "title": {
+            "ka": "ლეიბლი A4 1*21 100ფურცელი (70x42.43) 21 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*21 100 sheets (70x42.43)",
+            "ru": "Этикетки самоклеящиеся A4 1*21 100 листов (70x42.43)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli23.jpg"]
+    },
+    {
+        "id": 181,
+        "title": {
+            "ka": "ლეიბლი A4 1*65 100ფურცელი (38.1x21.2) - 65 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*65 100 sheets (38.1x21.2) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*65 100 листов (38.1x21.2) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli24.jpg"]
+    },
+    {
+        "id": 182,
+        "title": {
+            "ka": "ლეიბლი A4 1*40 100ფურცელი (52.5x29.7) - 40 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*40 100 sheets (52.5x29.7) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*40 100 листов (52.5x29.7) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli25.jpg"]
+    },
+    {
+        "id": 183,
+        "title": {
+            "ka": "ლეიბლი A4 1*16 100ფურცელი (105x35) 2216",
+            "en": "Self-Adhesive Labels A4 1*16 100 sheets (105x35) 2216",
+            "ru": "Этикетки самоклеящиеся A4 1*16 100 листов (105x35) 2216"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli26.jpg"]
+    },
+    {
+        "id": 184,
+        "title": {
+            "ka": "ლეიბლი A4 1*4 100ფურცელი (210x74.25) - 4 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*4 100 sheets (210x74.25)",
+            "ru": "Этикетки самоклеящиеся A4 1*4 100 листов (210x74.25)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli27.jpg"]
+    },
+    {
+        "id": 185,
+        "title": {
+            "ka": "ლეიბლი A4 1*80 100ფურცელი (26.2x29.7) 80 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*80 100 sheets (26.2x29.7)",
+            "ru": "Этикетки самоклеящиеся A4 1*80 100 листов (26.2x29.7)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli28.jpg"]
+    },
+    {
+        "id": 186,
+        "title": {
+            "ka": "ლეიბლი A4 1*22 100ფურცელი (50*22) - 22 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*22 100 sheets (50x22) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*22 100 листов (50x22) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli29.jpg"]
+    },
+    {
+        "id": 187,
+        "title": {
+            "ka": "ლეიბლი A4 1*6 100ფურცელი (210x47.81) - 6 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*6 100 sheets (210x47.81) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*6 100 листов (210x47.81) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli30.jpg"]
+    },
+    {
+        "id": 188,
+        "title": {
+            "ka": "ლეიბლი A4 1*24 100ფურცელი (70*37.125) 2037",
+            "en": "Self-Adhesive Labels A4 1*24 100 sheets (70x37.125) 2037",
+            "ru": "Этикетки самоклеящиеся A4 1*24 100 листов (70x37.125) 2037"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli31.jpg"]
+    },
+    {
+        "id": 189,
+        "title": {
+            "ka": "ლეიბლი A4 1*72 100ფურცელი (35x23) 72 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*72 100 sheets (35x23)",
+            "ru": "Этикетки самоклеящиеся A4 1*72 100 листов (35x23)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli271.jpg"]
+    },
+    {
+        "id": 190,
+        "title": {
+            "ka": "ლეიბლი A4 1*30 100ფურცელი (70X29.7) - 30 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*30 100 sheets (70x29.7) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*30 100 листов (70x29.7) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli33.jpg"]
+    },
+    {
+        "id": 191,
+        "title": {
+            "ka": "ლეიბლი A4 1*6 100ფურცელი (99.1x93.1) - 6 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*6 100 sheets (99.1x93.1) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*6 100 листов (99.1x93.1) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli34.jpg"]
+    },
+    {
+        "id": 192,
+        "title": {
+            "ka": "ლეიბლი A4 1*36 100ფურცელი (45*30) - 36 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*36 100 sheets (45x30) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*36 100 листов (45x30) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli35.jpg"]
+    },
+    {
+        "id": 193,
+        "title": {
+            "ka": "ლეიბლი A4 1*44 100ფურცელი (48.5x25.4) - 44 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*44 100 sheets (48.5x25.4)",
+            "ru": "Этикетки самоклеящиеся A4 1*44 100 листов (48.5x25.4)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli36.jpg"]
+    },
+    {
+        "id": 194,
+        "title": {
+            "ka": "ლეიბლი A4 1*48 100ფურცელი (52.5x23) - 48 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*48 100 sheets (52.5x23) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*48 100 листов (52.5x23) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli37.jpg"]
+    },
+    {
+        "id": 195,
+        "title": {
+            "ka": "ლეიბლი A4 40მმ წრე 100ფურცელი 2140",
+            "en": "Self-Adhesive Labels A4 40mm Round 100 sheets 2140",
+            "ru": "Этикетки самоклеящиеся A4 40мм Круг 100 листов 2140"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli38.jpg"]
+    },
+    {
+        "id": 196,
+        "title": {
+            "ka": "ლეიბლი A4 1*33 100ფურცელი (70x23) 33 ნაჭრიანი",
+            "en": "Self-Adhesive Labels A4 1*33 100 sheets (70x23)",
+            "ru": "Этикетки самоклеящиеся A4 1*33 100 листов (70x23)"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli39.jpg"]
+    },
+    {
+        "id": 197,
+        "title": {
+            "ka": "ლეიბლი A4 1*33 100ფურცელი (63.5x25.4) - 33 ნაჭრიანი Tanex",
+            "en": "Self-Adhesive Labels A4 1*33 100 sheets (63.5x25.4) Tanex",
+            "ru": "Этикетки самоклеящиеся A4 1*33 100 листов (63.5x25.4) Tanex"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli40.jpeg"]
+    },
+    {
+        "id": 198,
+        "title": {
+            "ka": "ლეიბლი A4 1*95 100ფურცელი (30x12) 2095",
+            "en": "Self-Adhesive Labels A4 1*95 100 sheets (30x12) 2095",
+            "ru": "Этикетки самоклеящиеся A4 1*95 100 листов (30x12) 2095"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli41.jpg"]
+    },
+    {
+        "id": 199,
+        "title": {
+            "ka": "ლეიბლი A4 1*32 100ფურცელი (52.5*35) 2032",
+            "en": "Self-Adhesive Labels A4 1*32 100 sheets (52.5x35) 2032",
+            "ru": "Этикетки самоклеящиеся A4 1*32 100 листов (52.5x35) 2032"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli42.jpg"]
+    },
+    {
+        "id": 200,
+        "title": {
+            "ka": "ლეიბლი A4 1*18 100ფურცელი (58.4x42.3) 2118",
+            "en": "Self-Adhesive Labels A4 1*18 100 sheets (58.4x42.3) 2118",
+            "ru": "Этикетки самоклеящиеся A4 1*18 100 листов (58.4x42.3) 2118"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli43.jpg"]
+    },
+    {
+        "id": 201,
+        "title": {
+            "ka": "ლეიბლი A4 40.6x25.4 მმ ოვალი 2148",
+            "en": "Self-Adhesive Labels A4 40.6x25.4 mm Oval 2148",
+            "ru": "Этикетки самоклеящиеся A4 40.6x25.4 мм Овал 2148"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli44.jpg"]
+    },
+    {
+        "id": 202,
+        "title": {
+            "ka": "ლეიბლი A4 1*90 100ფურცელი (33x19) 2319",
+            "en": "Self-Adhesive Labels A4 1*90 100 sheets (33x19) 2319",
+            "ru": "Этикетки самоклеящиеся A4 1*90 100 листов (33x19) 2319"
+        },
+        "price": 20.00,
+        "category": "paper",
+        "subcategory": "label",
+        "inStock": true,
+        "images": ["images/leibli45.jpg"]
+    },
+
+{
+    "id": 203,
+    "title": {
+      "ka": "18 საგნიანი სამაგიდე ორგანიზატორი Deli",
+      "en": "18-Piece Desk Organizer Deli",
+      "ru": "Настольный органайзер 18 предметов Deli"
+    },
+    "price": 24.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri1.jpg"]
+  },
+{
+    "id": 204,
+    "title": {
+      "ka": "15 საგნიანი სამაგიდე ორგანიზატორი Deli",
+      "en": "15-Piece Desk Organizer Deli",
+      "ru": "Настольный органайзер 15 предметов Deli"
+    },
+    "price": 18.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri2.png"]
+  },
+{
+    "id": 205,
+    "title": {
+      "ka": "17 საგნიანი სამაგიდე ორგანიზატორი Deli",
+      "en": "17-Piece Desk Organizer Deli",
+      "ru": "Настольный органайзер 17 предметов Deli"
+    },
+    "price": 22.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri3.png"]
+  },
+{
+    "id": 206,
+    "title": {
+      "ka": "მოლბერტი \"ეტუდიანი-ორგანიზატორი\" 3 თაროიანი, 2308199",
+      "en": "Easel Box Organizer 3 Shelves, 2308199",
+      "ru": "Мольберт-этюдник-органайзер 3-полочный, 2308199"
+    },
+    "price": 150.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri4.jpg"]
+  },
+{
+    "id": 207,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Deli",
+      "en": "Desk Organizer Deli",
+      "ru": "Настольный органайзер Deli"
+    },
+    "price": 11.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri5.jpg"]
+  },
+{
+    "id": 208,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Deli",
+      "en": "Desk Organizer Deli",
+      "ru": "Настольный органайзер Deli"
+    },
+    "price": 8.50,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri6.jpg"]
+  },
+{
+    "id": 209,
+    "title": {
+      "ka": "ორგანიზატორი სამაგიდე ნაკრები 16 საგნიანი 38254 DELI",
+      "en": "Desk Organizer Set 16-Piece 38254 DELI",
+      "ru": "Настольный набор-органайзер 16 предметов 38254 DELI"
+    },
+    "price": 20.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri7.png"]
+  },
+{
+    "id": 210,
+    "title": {
+      "ka": "ორგანიზატორი სამაგიდე ნაკრები 12 საგნიანი 38253 DELI",
+      "en": "Desk Organizer Set 12-Piece 38253 DELI",
+      "ru": "Настольный набор-органайзер 12 предметов 38253 DELI"
+    },
+    "price": 14.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri8.png"]
+  },
+{
+    "id": 211,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი 9147 DELI",
+      "en": "Desk Organizer 9147 DELI",
+      "ru": "Настольный органайзер 9147 DELI"
+    },
+    "price": 5.20,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri9.jpg"]
+  },
+{
+    "id": 212,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Z25140 DELI",
+      "en": "Desk Organizer Z25140 DELI",
+      "ru": "Настольный органайзер Z25140 DELI"
+    },
+    "price": 10.50,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri10.jpg"]
+  },
+{
+    "id": 213,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Z25150 DELI",
+      "en": "Desk Organizer Z25150 DELI",
+      "ru": "Настольный органайзер Z25150 DELI"
+    },
+    "price": 10.50,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri11.jpg"]
+  },
+{
+    "id": 214,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Z25130 DELI",
+      "en": "Desk Organizer Z25130 DELI",
+      "ru": "Настольный органайзер Z25130 DELI"
+    },
+    "price": 10.50,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri12.jpg"]
+  },
+{
+    "id": 215,
+    "title": {
+      "ka": "ორგანიზატორი სამაგიდე 9110 DELI",
+      "en": "Desk Organizer 9110 DELI",
+      "ru": "Настольный органайзер 9110 DELI"
+    },
+    "price": 16.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri13.jpg"]
+  },
+{
+    "id": 216,
+    "title": {
+      "ka": "კალმების ჩასადები ჭიქა ბადე LY 9109",
+      "en": "Mesh Metal Pen Cup Holder LY 9109",
+      "ru": "Сетчатый стаканчик для ручек LY 9109"
+    },
+    "price": 16.00,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi.jpg"]
+  },
+{
+    "id": 217,
+    "title": {
+      "ka": "კალმის და ჩასანიშნის  ჩასადები ჭიქა ბადე Deli Stationery",
+      "en": "metal pen and stationery holder, Deli Stationery",
+      "ru": "металлическая подставка для ручек и канцелярских принадлежностей Deli Stationery"
+    },
+    "price": 8.00,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi2.jpg"]
+  },
+  {
+    "id": 218,
+    "title": {
+      "ka": "კალმის პლასტიკური ჩასადები Deli Stationery",
+      "en": "Plastic Pen Holder Deli Stationery",
+      "ru": "Пластиковый держатель для ручек Deli Stationery"
+    },
+    "price": 7.00,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi3.jpg"]
+  },
+  {
+    "id": 219,
+    "title": {
+      "ka": "კალმის ჩასადები პლასტიკური 120*155*96mm NS950 ,DELI",
+      "en": "Plastic Pen Holder 120×155×96mm NS950, DELI",
+      "ru": "Пластиковый держатель для ручек 120×155×96 мм NS950, DELI"
+    },
+    "price": 9.80,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi4.jpg"]
+  },
+  {
+    "id": 220,
+    "title": {
+      "ka": "კალმის ჩასადები პლასტიკური 120*91*205mm 8939 ,DELI",
+      "en": "Plastic Pen Holder 120×91×205mm 8939, DELI",
+      "ru": "Пластиковый держатель для ручек 120×91×205 мм 8939, DELI"
+    },
+    "price": 6.20,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi5.jpg"]
+  },
+  {
+    "id": 221,
+    "title": {
+      "ka": "კალმის ჩასადები პლასტიკური 84×84×86mm NS011 ,DELI",
+      "en": "Plastic Pen Holder 84×84×86mm NS011, DELI",
+      "ru": "Пластиковый держатель для ручек 84×84×86 мм NS011, DELI"
+    },
+    "price": 9.50,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi6.jpg"]
+  },
+  {
+    "id": 222,
+    "title": {
+      "ka": "ლითონის საკანცელარიო ჭიქა Deli Stationery",
+      "en": "Metal Stationery Cup, Deli Stationery",
+      "ru": "Металлический стакан для канцелярских принадлежностей, Deli Stationery"
+    },
+    "price": 3.00,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi7.jpg"]
+  },
+  {
+    "id": 223,
+    "title": {
+      "ka": "ლითონის საკანცელარიო ჭიქა Deli Stationery",
+      "en": "Metal Stationery Cup, Deli Stationery",
+      "ru": "Металлический стакан для канцелярских принадлежностей, Deli Stationery"
+    },
+    "price": 3.00,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi8.png"]
+  },
+  {
+    "id": 224,
+    "title": {
+      "ka": "ვერტიკალური საქაღალდე 5 განყოფილებით 9838",
+      "en": "Vertical File Organizer with 5 Compartments 9838",
+      "ru": "Вертикальный органайзер для документов с 5 отделениями 9838"
+    },
+    "price": 14.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro1.jpg"]
+  },
+  {
+    "id": 225,
+    "title": {
+      "ka": "საკანცელარიო თარო ლითონის - 2 ცალიანი Deli Stationery",
+      "en": "Metal Stationery Shelf – 2-Piece Set, Deli Stationery",
+      "ru": "Металлическая канцелярская полка — набор из 2 штук, Deli Stationery"
+    },
+    "price": 25.00,
+    "category": "stationery",
+    "subcategory": "desk_shelf",
+    "inStock": true,
+    "images": ["images/taro2.jpg"]
+  },
+  {
+    "id": 226,
+    "title": {
+      "ka": "საკანცელარიო თარო ლითონის - 3 ცალიანი Deli Stationery",
+      "en": "Metal Stationery Shelf – 3-Piece Set, Deli Stationery",
+      "ru": "Металлическая канцелярская полка — набор из 3 штук, Deli Stationery"
+    },
+    "price": 28.00,
+    "category": "stationery",
+    "subcategory": "desk_shelf",
+    "inStock": true,
+    "images": ["images/taro3.png"]
+  },
+  {
+    "id": 227,
+    "title": {
+      "ka": "საკანცელარიო თაროები (2 სართული) Deli Stationery",
+      "en": "2-Tier Stationery Shelf, Deli Stationery",
+      "ru": "Канцелярская полка (2 яруса), Deli Stationery"
+    },
+    "price": 15.00,
+    "category": "stationery",
+    "subcategory": "desk_shelf",
+    "inStock": true,
+    "images": ["images/taro4.png"]
+  },
+  {
+    "id": 228,
+    "title": {
+      "ka": "საკანცელარიო თაროები (3 სართული) Deli Stationery",
+      "en": "3-Tier Stationery Shelf, Deli Stationery",
+      "ru": "Канцелярская полка (3 яруса), Deli Stationery"
+    },
+    "price": 22.00,
+    "category": "stationery",
+    "subcategory": "desk_shelf",
+    "inStock": true,
+    "images": ["images/taro5.png"]
+  },
+  {
+    "id": 229,
+    "title": {
+      "ka": "საკანცელარიო ჯამი ვერტიკალური 2050",
+      "en": "Vertical Stationery Organizer 2050",
+      "ru": "Вертикальный канцелярский органайзер 2050"
+    },
+    "price": 5.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro6.jpg"]
+  },
+  {
+    "id": 230,
+    "title": {
+      "ka": "საქაღალდე ვერტიკალური 4 განყოფილებიანი Deli Stationery",
+      "en": "Vertical File Organizer with 4 Compartments, Deli Stationery",
+      "ru": "Вертикальный органайзер для документов с 4 отделениями, Deli Stationery"
+    },
+    "price": 13.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro7.png"]
+  },
+  {
+    "id": 231,
+    "title": {
+      "ka": "საქაღალდე ვერტიკალური EB41102 , DELI",
+      "en": "Vertical File Organizer EB41102, DELI",
+      "ru": "Вертикальный органайзер для документов EB41102, DELI"
+    },
+    "price": 12.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro8.jpg"]
+  },
+  {
+    "id": 232,
+    "title": {
+      "ka": "ჯამი საკანცელარიო 2სართ. LY 9207",
+      "en": "2-Tier Stationery Organizer LY 9207",
+      "ru": "2-ярусный канцелярский органайзер LY 9207"
+    },
+    "price": 15.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro9.png"]
+  },
+  {
+    "id": 233,
+    "title": {
+      "ka": "ჯამი საკანცელარიო 370",
+      "en": "Stationery Organizer 370",
+      "ru": "Канцелярский органайзер 370"
+    },
+    "price": 5.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro10.jpg"]
+  },
+  {
+    "id": 234,
+    "title": {
+      "ka": "ჯამი საკანცელარიო 3სართ.",
+      "en": "3-Tier Stationery Organizer",
+      "ru": "3-ярусный канцелярский органайзер"
+    },
+    "price": 18.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro11.jpg"]
+  },
+  {
+    "id": 235,
+    "title": {
+      "ka": "ჯამი საკანცელარიო 4 სართ.",
+      "en": "4-Tier Stationery Organizer",
+      "ru": "4-ярусный канцелярский органайзер"
+    },
+    "price": 20.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro12.png"]
+  },
+  {
+    "id": 236,
+    "title": {
+      "ka": "ფირნიში სამაგიდე 168*75*220mm TF301, DELI",
+      "en": "Desktop Nameplate 168×75×220mm TF301, DELI",
+      "ru": "Настольная табличка 168×75×220 мм TF301, DELI"
+    },
+    "price": 7.50,
+    "category": "office",
+    "subcategory": "signboard",
+    "inStock": true,
+    "images": ["images/firnish1.jpg"]
+  },
+  {
+    "id": 237,
+    "title": {
+      "ka": "ფირნიში სამაგიდე 180*100mm TF108, DELI",
+      "en": "Desktop Nameplate 180×100mm TF108, DELI",
+      "ru": "Настольная табличка 180×100 мм TF108, DELI"
+    },
+    "price": 3.30,
+    "category": "office",
+    "subcategory": "signboard",
+    "inStock": true,
+    "images": ["images/firnishi2.jpg"]
+  },
+  {
+    "id": 238,
+    "title": {
+      "ka": "ფირნიში სამაგიდე 209*72*105mm TF109, DELI",
+      "en": "Desktop Nameplate 209×72×105mm TF109, DELI",
+      "ru": "Настольная табличка 209×72×105 мм TF109, DELI"
+    },
+    "price": 3.30,
+    "category": "office",
+    "subcategory": "signboard",
+    "inStock": true,
+    "images": ["images/firnishi3.jpg"]
+  },
+  {
+    "id": 239,
+    "title": {
+      "ka": "ფირნიში სამაგიდე 150*60mm Deli Stationery",
+      "en": "Desktop Nameplate 150×60mm, Deli Stationery",
+      "ru": "Настольная табличка 150×60 мм, Deli Stationery"
+    },
+    "price": 4.90,
+    "category": "office",
+    "subcategory": "signboard",
+    "inStock": true,
+    "images": ["images/firnishi4.jpg"]
+  },
+  {
+    "id": 240,
+    "title": {
+      "ka": "სავიზიტე ბარათების ჩასადები (ბადე) LY 9132",
+      "en": "Business Card Holder (Mesh) LY 9132",
+      "ru": "Подставка для визитных карточек (сетка) LY 9132"
+    },
+    "price": 2.40,
+    "category": "office",
+    "subcategory": "business_card_holder",
+    "inStock": true,
+    "images": ["images/savizite1.png"]
+  },
+  {
+    "id": 2411,
+    "title": {
+      "ka": "სავიზიტე ბარათების ჩასადები Deli Stationery",
+      "en": "Business Card Holder, Deli Stationery",
+      "ru": "Подставка для визитных карточек, Deli Stationery"
+    },
+    "price": 7.80,
+    "category": "office",
+    "subcategory": "business_card_holder",
+    "inStock": true,
+    "images": ["images/savizite2.jpg"]
+  },
+  {
+    "id": 2421,
+    "title": {
+      "ka": "სავიზიტე ბარათების ჩასადები პლასტიკური Deli Stationery",
+      "en": "Plastic Business Card Holder, Deli Stationery",
+      "ru": "Пластиковая подставка для визитных карточек, Deli Stationery"
+    },
+    "price": 2.60,
+    "category": "office",
+    "subcategory": "business_card_holder",
+    "inStock": true,
+    "images": ["images/savizite4.jpg"]
+  },
+
+      
+  {
+    "id": 161,
+    "title": {
+      "ka": "ლეიბლი A4 1*10 100ფურცელი (99.06x57) - 10 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*10 100 sheets (99.06x57) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*10 100 листов (99.06x57) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli4.jpg"]
+  },
+  {
+    "id": 162,
+    "title": {
+      "ka": "ლეიბლი A4 1*15 100ფურცელი (70x56) - 15 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*15 100 sheets (70x56) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*15 100 листов (70x56) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli5.jpg"]
+  },
+  {
+    "id": 163,
+    "title": {
+      "ka": "ლეიბლი A4 1*12 100ფურცელი (105 x 46) 2512",
+      "en": "Self-Adhesive Labels A4 1*12 100 sheets (105x46) 2512",
+      "ru": "Этикетки самоклеящиеся A4 1*12 100 листов (105x46) 2512"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli6.jpg"]
+  },
+  {
+    "id": 164,
+    "title": {
+      "ka": "ლეიბლი A4 1*14 100ფურცელი (105.1*42.69) - 14 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*14 100 sheets (105.1x42.69) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*14 100 листов (105.1x42.69) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli7.jpg"]
+  },
+  {
+    "id": 165,
+    "title": {
+      "ka": "ლეიბლი A4 1*4 100ფურცელი (105x148.5) 2204",
+      "en": "Self-Adhesive Labels A4 1*4 100 sheets (105x148.5) 2204",
+      "ru": "Этикетки самоклеящиеся A4 1*4 100 листов (105x148.5) 2204"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli8.jpg"]
+  },
+  {
+    "id": 166,
+    "title": {
+      "ka": "ლეიბლი A4 1*16 100ფურცელი (99.1x34) - 16 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*16 100 sheets (99.1x34) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*16 100 листов (99.1x34) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli9.jpg"]
+  },
+  {
+    "id": 167,
+    "title": {
+      "ka": "ლეიბლი A4 1*180 100ფურცელი (30x9) 180 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*180 100 sheets (30x9)",
+      "ru": "Этикетки самоклеящиеся A4 1*180 100 листов (30x9)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli10.jpg"]
+  },
+  {
+    "id": 168,
+    "title": {
+      "ka": "ლეიბლი A4 1*24 100ფურცელი (64x34) - 24 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*24 100 sheets (64x34) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*24 100 листов (64x34) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli11.jpg"]
+  },
+  {
+    "id": 169,
+    "title": {
+      "ka": "ლეიბლი A4 1*2 100ფურცელი (210x148.5) - 2 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*2 100 sheets (210x148.5) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*2 100 листов (210x148.5) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli12.jpg"]
+  },
+  {
+    "id": 170,
+    "title": {
+      "ka": "ლეიბლი A4 1*2 (199.6*143.5) 100ფურცელი - 2 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*2 100 sheets (199.6x143.5)",
+      "ru": "Этикетки самоклеящиеся A4 1*2 100 листов (199.6x143.5)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli13.jpg"]
+  },
+  {
+    "id": 171,
+    "title": {
+      "ka": "ლეიბლი A4 1*16 100ფურცელი (105x37.125) 2105",
+      "en": "Self-Adhesive Labels A4 1*16 100 sheets (105x37.125) 2105",
+      "ru": "Этикетки самоклеящиеся A4 1*16 100 листов (105x37.125) 2105"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli14.jpg"]
+  },
+  {
+    "id": 172,
+    "title": {
+      "ka": "ლეიბლი A4 1*10 100ფურცელი (105x57) 2610",
+      "en": "Self-Adhesive Labels A4 1*10 100 sheets (105x57) 2610",
+      "ru": "Этикетки самоклеящиеся A4 1*10 100 листов (105x57) 2610"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli15.jpg"]
+  },
+  {
+    "id": 173,
+    "title": {
+      "ka": "ლეიბლი A4 1*64 100ფურცელი (48.5*16.9) - 64 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*64 100 sheets (48.5x16.9)",
+      "ru": "Этикетки самоклеящиеся A4 1*64 100 листов (48.5x16.9)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli16.jpg"]
+  },
+  {
+    "id": 174,
+    "title": {
+      "ka": "ლეიბლი A4 1*21 100ფურცელი (63.5*38.1) 21 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*21 100 sheets (63.5x38.1) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*21 100 листов (63.5x38.1) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli17.jpg"]
+  },
+  {
+    "id": 175,
+    "title": {
+      "ka": "ლეიბლი A4 1*4 100ფურცელი (99.1*139) 4 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*4 100 sheets (99.1x139)",
+      "ru": "Этикетки самоклеящиеся A4 1*4 100 листов (99.1x139)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli18.jpg"]
+  },
+  {
+    "id": 176,
+    "title": {
+      "ka": "ლეიბლი A4 1*65 100ფურცელი (38.1x21.2) - 65 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*65 100 sheets (38.1x21.2) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*65 100 листов (38.1x21.2) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli19.jpg"]
+  },
+  {
+    "id": 177,
+    "title": {
+      "ka": "ლეიბლი A4 1*8 100ფურცელი (99.1x67.7) - 8 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*8 100 sheets (99.1x67.7)",
+      "ru": "Этикетки самоклеящиеся A4 1*8 100 листов (99.1x67.7)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli20.jpg"]
+  },
+  {
+    "id": 178,
+    "title": {
+      "ka": "ლეიბლი A4 1*70 100ფურცელი (40x20) - 70 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*70 100 sheets (40x20) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*70 100 листов (40x20) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli21.jpg"]
+  },
+  {
+    "id": 179,
+    "title": {
+      "ka": "ლეიბლი A4 1*8 100ფურცელი (105x72) - 8 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*8 100 sheets (105x72) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*8 100 листов (105x72) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli22.jpg"]
+  },
+  {
+    "id": 180,
+    "title": {
+      "ka": "ლეიბლი A4 1*21 100ფურცელი (70x42.43) 21 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*21 100 sheets (70x42.43)",
+      "ru": "Этикетки самоклеящиеся A4 1*21 100 листов (70x42.43)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli23.jpg"]
+  },
+  {
+    "id": 181,
+    "title": {
+      "ka": "ლეიბლი A4 1*65 100ფურცელი (38.1x21.2) - 65 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*65 100 sheets (38.1x21.2) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*65 100 листов (38.1x21.2) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli24.jpg"]
+  },
+  {
+    "id": 182,
+    "title": {
+      "ka": "ლეიბლი A4 1*40 100ფურცელი (52.5x29.7) - 40 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*40 100 sheets (52.5x29.7) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*40 100 листов (52.5x29.7) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli25.jpg"]
+  },
+  {
+    "id": 183,
+    "title": {
+      "ka": "ლეიბლი A4 1*16 100ფურცელი (105x35) 2216",
+      "en": "Self-Adhesive Labels A4 1*16 100 sheets (105x35) 2216",
+      "ru": "Этикетки самоклеящиеся A4 1*16 100 листов (105x35) 2216"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli26.jpg"]
+  },
+  {
+    "id": 184,
+    "title": {
+      "ka": "ლეიბლი A4 1*4 100ფურცელი (210x74.25) - 4 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*4 100 sheets (210x74.25)",
+      "ru": "Этикетки самоклеящиеся A4 1*4 100 листов (210x74.25)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli27.jpg"]
+  },
+  {
+    "id": 185,
+    "title": {
+      "ka": "ლეიბლი A4 1*80 100ფურცელი (26.2x29.7) 80 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*80 100 sheets (26.2x29.7)",
+      "ru": "Этикетки самоклеящиеся A4 1*80 100 листов (26.2x29.7)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli28.jpg"]
+  },
+  {
+    "id": 186,
+    "title": {
+      "ka": "ლეიბლი A4 1*22 100ფურცელი (50*22) - 22 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*22 100 sheets (50x22) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*22 100 листов (50x22) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli29.jpg"]
+  },
+  {
+    "id": 187,
+    "title": {
+      "ka": "ლეიბლი A4 1*6 100ფურცელი (210x47.81) - 6 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*6 100 sheets (210x47.81) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*6 100 листов (210x47.81) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli30.jpg"]
+  },
+  {
+    "id": 188,
+    "title": {
+      "ka": "ლეიბლი A4 1*24 100ფურცელი (70*37.125) 2037",
+      "en": "Self-Adhesive Labels A4 1*24 100 sheets (70x37.125) 2037",
+      "ru": "Этикетки самоклеящиеся A4 1*24 100 листов (70x37.125) 2037"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli31.jpg"]
+  },
+  {
+    "id": 189,
+    "title": {
+      "ka": "ლეიბლი A4 1*72 100ფურცელი (35x23) 72 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*72 100 sheets (35x23)",
+      "ru": "Этикетки самоклеящиеся A4 1*72 100 листов (35x23)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli271.jpg"]
+  },
+  {
+    "id": 190,
+    "title": {
+      "ka": "ლეიბლი A4 1*30 100ფურცელი (70X29.7) - 30 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*30 100 sheets (70x29.7) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*30 100 листов (70x29.7) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli33.jpg"]
+  },
+  {
+    "id": 191,
+    "title": {
+      "ka": "ლეიბლი A4 1*6 100ფურცელი (99.1x93.1) - 6 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*6 100 sheets (99.1x93.1) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*6 100 листов (99.1x93.1) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli34.jpg"]
+  },
+  {
+    "id": 192,
+    "title": {
+      "ka": "ლეიბლი A4 1*36 100ფურცელი (45*30) - 36 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*36 100 sheets (45x30) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*36 100 листов (45x30) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli35.jpg"]
+  },
+  {
+    "id": 193,
+    "title": {
+      "ka": "ლეიბლი A4 1*44 100ფურცელი (48.5x25.4) - 44 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*44 100 sheets (48.5x25.4)",
+      "ru": "Этикетки самоклеящиеся A4 1*44 100 листов (48.5x25.4)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli36.jpg"]
+  },
+  {
+    "id": 194,
+    "title": {
+      "ka": "ლეიბლი A4 1*48 100ფურცელი (52.5x23) - 48 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*48 100 sheets (52.5x23) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*48 100 листов (52.5x23) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli37.jpg"]
+  },
+  {
+    "id": 195,
+    "title": {
+      "ka": "ლეიბლი A4 40მმ წრე 100ფურცელი 2140",
+      "en": "Self-Adhesive Labels A4 40mm Round 100 sheets 2140",
+      "ru": "Этикетки самоклеящиеся A4 40мм Круг 100 листов 2140"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli38.jpg"]
+  },
+  {
+    "id": 196,
+    "title": {
+      "ka": "ლეიბლი A4 1*33 100ფურცელი (70x23) 33 ნაჭრიანი",
+      "en": "Self-Adhesive Labels A4 1*33 100 sheets (70x23)",
+      "ru": "Этикетки самоклеящиеся A4 1*33 100 листов (70x23)"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli39.jpg"]
+  },
+  {
+    "id": 197,
+    "title": {
+      "ka": "ლეიბლი A4 1*33 100ფურცელი (63.5x25.4) - 33 ნაჭრიანი Tanex",
+      "en": "Self-Adhesive Labels A4 1*33 100 sheets (63.5x25.4) Tanex",
+      "ru": "Этикетки самоклеящиеся A4 1*33 100 листов (63.5x25.4) Tanex"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli40.jpeg"]
+  },
+  {
+    "id": 198,
+    "title": {
+      "ka": "ლეიბლი A4 1*95 100ფურცელი (30x12) 2095",
+      "en": "Self-Adhesive Labels A4 1*95 100 sheets (30x12) 2095",
+      "ru": "Этикетки самоклеящиеся A4 1*95 100 листов (30x12) 2095"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli41.jpg"]
+  },
+  {
+    "id": 199,
+    "title": {
+      "ka": "ლეიბლი A4 1*32 100ფურცელი (52.5*35) 2032",
+      "en": "Self-Adhesive Labels A4 1*32 100 sheets (52.5x35) 2032",
+      "ru": "Этикетки самоклеящиеся A4 1*32 100 листов (52.5x35) 2032"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli42.jpg"]
+  },
+  {
+    "id": 200,
+    "title": {
+      "ka": "ლეიბლი A4 1*18 100ფურცელი (58.4x42.3) 2118",
+      "en": "Self-Adhesive Labels A4 1*18 100 sheets (58.4x42.3) 2118",
+      "ru": "Этикетки самоклеящиеся A4 1*18 100 листов (58.4x42.3) 2118"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli43.jpg"]
+  },
+  {
+    "id": 201,
+    "title": {
+      "ka": "ლეიბლი A4 40.6x25.4 მმ ოვალი 2148",
+      "en": "Self-Adhesive Labels A4 40.6x25.4 mm Oval 2148",
+      "ru": "Этикетки самоклеящиеся A4 40.6x25.4 мм Овал 2148"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli44.jpg"]
+  },
+  {
+    "id": 202,
+    "title": {
+      "ka": "ლეიბლი A4 1*90 100ფურცელი (33x19) 2319",
+      "en": "Self-Adhesive Labels A4 1*90 100 sheets (33x19) 2319",
+      "ru": "Этикетки самоклеящиеся A4 1*90 100 листов (33x19) 2319"
+    },
+    "price": 22.00,
+    "category": "paper",
+    "subcategory": "label",
+    "inStock": true,
+    "images": ["images/leibli45.jpg"]
+  },
+  {
+    "id": 203,
+    "title": {
+      "ka": "18 საგნიანი სამაგიდე ორგანიზატორი Deli",
+      "en": "18-Piece Desk Organizer Deli",
+      "ru": "Настольный органайзер 18 предметов Deli"
+    },
+    "price": 24.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri1.jpg"]
+  },
+  {
+    "id": 204,
+    "title": {
+      "ka": "15 საგნიანი სამაგიდე ორგანიზატორი Deli",
+      "en": "15-Piece Desk Organizer Deli",
+      "ru": "Настольный органайзер 15 предметов Deli"
+    },
+    "price": 18.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri2.png"]
+  },
+  {
+    "id": 205,
+    "title": {
+      "ka": "17 საგნიანი სამაგიდე ორგანიზატორი Deli",
+      "en": "17-Piece Desk Organizer Deli",
+      "ru": "Настольный органайзер 17 предметов Deli"
+    },
+    "price": 22.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri3.png"]
+  },
+  {
+    "id": 206,
+    "title": {
+      "ka": "მოლბერტი \"ეტუდიანი-ორგანიზატორი\" 3 თაროიანი, 2308199",
+      "en": "Easel Box Organizer 3 Shelves, 2308199",
+      "ru": "Мольберт-этюдник-органайзер 3-полочный, 2308199"
+    },
+    "price": 150.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri4.jpg"]
+  },
+  {
+    "id": 207,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Deli",
+      "en": "Desk Organizer Deli",
+      "ru": "Настольный органайзер Deli"
+    },
+    "price": 11.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri5.jpg"]
+  },
+  {
+    "id": 208,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Deli",
+      "en": "Desk Organizer Deli",
+      "ru": "Настольный органайзер Deli"
+    },
+    "price": 8.50,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri6.jpg"]
+  },
+  {
+    "id": 209,
+    "title": {
+      "ka": "ორგანიზატორი სამაგიდე ნაკრები 16 საგნიანი 38254 DELI",
+      "en": "Desk Organizer Set 16-Piece 38254 DELI",
+      "ru": "Настольный набор-органайзер 16 предметов 38254 DELI"
+    },
+    "price": 20.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri7.png"]
+  },
+  {
+    "id": 210,
+    "title": {
+      "ka": "ორგანიზატორი სამაგიდე ნაკრები 12 საგნიანი 38253 DELI",
+      "en": "Desk Organizer Set 12-Piece 38253 DELI",
+      "ru": "Настольный набор-органайзер 12 предметов 38253 DELI"
+    },
+    "price": 14.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri8.png"]
+  },
+  {
+    "id": 211,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი 9147 DELI",
+      "en": "Desk Organizer 9147 DELI",
+      "ru": "Настольный органайзер 9147 DELI"
+    },
+    "price": 5.20,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri9.jpg"]
+  },
+  {
+    "id": 212,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Z25140 DELI",
+      "en": "Desk Organizer Z25140 DELI",
+      "ru": "Настольный органайзер Z25140 DELI"
+    },
+    "price": 10.50,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri10.jpg"]
+  },
+  {
+    "id": 213,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Z25150 DELI",
+      "en": "Desk Organizer Z25150 DELI",
+      "ru": "Настольный органайзер Z25150 DELI"
+    },
+    "price": 10.50,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri11.jpg"]
+  },
+  {
+    "id": 214,
+    "title": {
+      "ka": "სამაგიდე ორგანიზატორი Z25130 DELI",
+      "en": "Desk Organizer Z25130 DELI",
+      "ru": "Настольный органайзер Z25130 DELI"
+    },
+    "price": 10.50,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri12.jpg"]
+  },
+  {
+    "id": 215,
+    "title": {
+      "ka": "ორგანიზატორი სამაგიდე 9110 DELI",
+      "en": "Desk Organizer 9110 DELI",
+      "ru": "Настольный органайзер 9110 DELI"
+    },
+    "price": 16.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/organaizeri13.jpg"]
+  },
+  {
+    "id": 216,
+    "title": {
+      "ka": "კალმების ჩასადები ჭიქა ბადე LY 9109",
+      "en": "Mesh Metal Pen Cup Holder LY 9109",
+      "ru": "Сетчатый стаканчик для ручек LY 9109"
+    },
+    "price": 16.00,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi.jpg"]
+  },
+  {
+    "id": 217,
+    "title": {
+      "ka": "კალმის და ჩასანიშნის  ჩასადები ჭიქა ბადე Deli Stationery",
+      "en": "metal pen and stationery holder, Deli Stationery",
+      "ru": "металлическая подставка для ручек и канцелярских принадлежностей Deli Stationery"
+    },
+    "price": 8.00,
+    "category": "paper",
+    "subcategory": "sticky_notes",
+    "inStock": true,
+    "images": ["images/kalchasadebi2.jpg"]
+  },
+  {
+    "id": 218,
+    "title": {
+      "ka": "კალმის პლასტიკური ჩასადები Deli Stationery",
+      "en": "Plastic Pen Holder Deli Stationery",
+      "ru": "Пластиковый держатель для ручек Deli Stationery"
+    },
+    "price": 7.00,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi3.jpg"]
+  },
+  {
+    "id": 219,
+    "title": {
+      "ka": "კალმის ჩასადები პლასტიკური 120*155*96mm NS950 ,DELI",
+      "en": "Plastic Pen Holder 120×155×96mm NS950, DELI",
+      "ru": "Пластиковый держатель для ручек 120×155×96 мм NS950, DELI"
+    },
+    "price": 9.80,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi4.jpg"]
+  },
+  {
+    "id": 220,
+    "title": {
+      "ka": "კალმის ჩასადები პლასტიკური 120*91*205mm 8939 ,DELI",
+      "en": "Plastic Pen Holder 120×91×205mm 8939, DELI",
+      "ru": "Пластиковый держатель для ручек 120×91×205 мм 8939, DELI"
+    },
+    "price": 6.20,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi5.jpg"]
+  },
+  {
+    "id": 221,
+    "title": {
+      "ka": "კალმის ჩასადები პლასტიკური 84×84×86mm NS011 ,DELI",
+      "en": "Plastic Pen Holder 84×84×86mm NS011, DELI",
+      "ru": "Пластиковый держатель для ручек 84×84×86 мм NS011, DELI"
+    },
+    "price": 9.50,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi6.jpg"]
+  },
+  {
+    "id": 222,
+    "title": {
+      "ka": "ლითონის საკანცელარიო ჭიქა Deli Stationery",
+      "en": "Metal Stationery Cup, Deli Stationery",
+      "ru": "Металлический стакан для канцелярских принадлежностей, Deli Stationery"
+    },
+    "price": 3.00,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi7.jpg"]
+  },
+  {
+    "id": 223,
+    "title": {
+      "ka": "ლითონის საკანცელარიო ჭიქა Deli Stationery",
+      "en": "Metal Stationery Cup, Deli Stationery",
+      "ru": "Металлический стакан для канцелярских принадлежностей, Deli Stationery"
+    },
+    "price": 3.00,
+    "category": "stationery",
+    "subcategory": "pen_holder",
+    "inStock": true,
+    "images": ["images/kalchasadebi8.png"]
+  },
+  {
+    "id": 224,
+    "title": {
+      "ka": "ვერტიკალური საქაღალდე 5 განყოფილებით 9838",
+      "en": "Vertical File Organizer with 5 Compartments 9838",
+      "ru": "Вертикальный органайзер для документов с 5 отделениями 9838"
+    },
+    "price": 14.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro1.jpg"]
+  },
+  {
+    "id": 225,
+    "title": {
+      "ka": "საკანცელარიო თარო ლითონის - 2 ცალიანი Deli Stationery",
+      "en": "Metal Stationery Shelf – 2-Piece Set, Deli Stationery",
+      "ru": "Металлическая канцелярская полка — набор из 2 штук, Deli Stationery"
+    },
+    "price": 25.00,
+    "category": "stationery",
+    "subcategory": "desk_shelf",
+    "inStock": true,
+    "images": ["images/taro2.jpg"]
+  },
+  {
+    "id": 226,
+    "title": {
+      "ka": "საკანცელარიო თარო ლითონის - 3 ცალიანი Deli Stationery",
+      "en": "Metal Stationery Shelf – 3-Piece Set, Deli Stationery",
+      "ru": "Металлическая канцелярская полка — набор из 3 штук, Deli Stationery"
+    },
+    "price": 28.00,
+    "category": "stationery",
+    "subcategory": "desk_shelf",
+    "inStock": true,
+    "images": ["images/taro3.png"]
+  },
+  {
+    "id": 227,
+    "title": {
+      "ka": "საკანცელარიო თაროები (2 სართული) Deli Stationery",
+      "en": "2-Tier Stationery Shelf, Deli Stationery",
+      "ru": "Канцелярская полка (2 яруса), Deli Stationery"
+    },
+    "price": 15.00,
+    "category": "stationery",
+    "subcategory": "desk_shelf",
+    "inStock": true,
+    "images": ["images/taro4.png"]
+  },
+  {
+    "id": 228,
+    "title": {
+      "ka": "საკანცელარიო თაროები (3 სართული) Deli Stationery",
+      "en": "3-Tier Stationery Shelf, Deli Stationery",
+      "ru": "Канцелярская полка (3 яруса), Deli Stationery"
+    },
+    "price": 22.00,
+    "category": "stationery",
+    "subcategory": "desk_shelf",
+    "inStock": true,
+    "images": ["images/taro5.png"]
+  },
+  {
+    "id": 229,
+    "title": {
+      "ka": "საკანცელარიო ჯამი ვერტიკალური 2050",
+      "en": "Vertical Stationery Organizer 2050",
+      "ru": "Вертикальный канцелярский органайзер 2050"
+    },
+    "price": 5.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro6.jpg"]
+  },
+  {
+    "id": 230,
+    "title": {
+      "ka": "საქაღალდე ვერტიკალური 4 განყოფილებიანი Deli Stationery",
+      "en": "Vertical File Organizer with 4 Compartments, Deli Stationery",
+      "ru": "Вертикальный органайзер для документов с 4 отделениями, Deli Stationery"
+    },
+    "price": 13.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro7.png"]
+  },
+  {
+    "id": 231,
+    "title": {
+      "ka": "საქაღალდე ვერტიკალური EB41102 , DELI",
+      "en": "Vertical File Organizer EB41102, DELI",
+      "ru": "Вертикальный органайзер для документов EB41102, DELI"
+    },
+    "price": 12.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro8.jpg"]
+  },
+  {
+    "id": 232,
+    "title": {
+      "ka": "ჯამი საკანცელარიო 2სართ. LY 9207",
+      "en": "2-Tier Stationery Organizer LY 9207",
+      "ru": "2-ярусный канцелярский органайзер LY 9207"
+    },
+    "price": 15.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro9.png"]
+  },
+  {
+    "id": 233,
+    "title": {
+      "ka": "ჯამი საკანცელარიო 370",
+      "en": "Stationery Organizer 370",
+      "ru": "Канцелярский органайзер 370"
+    },
+    "price": 5.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro10.jpg"]
+  },
+  {
+    "id": 234,
+    "title": {
+      "ka": "ჯამი საკანცელარიო 3სართ.",
+      "en": "3-Tier Stationery Organizer",
+      "ru": "3-ярусный канцелярский органайзер"
+    },
+    "price": 18.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro11.jpg"]
+  },
+  {
+    "id": 235,
+    "title": {
+      "ka": "ჯამი საკანცელარიო 4 სართ.",
+      "en": "4-Tier Stationery Organizer",
+      "ru": "4-ярусный канцелярский органайзер"
+    },
+    "price": 20.00,
+    "category": "office",
+    "subcategory": "organizer",
+    "inStock": true,
+    "images": ["images/taro12.png"]
+  },
+  {
+    "id": 236,
+    "title": {
+      "ka": "ფირნიში სამაგიდე 168*75*220mm TF301, DELI",
+      "en": "Desktop Nameplate 168×75×220mm TF301, DELI",
+      "ru": "Настольная табличка 168×75×220 мм TF301, DELI"
+    },
+    "price": 7.50,
+    "category": "office",
+    "subcategory": "signboard",
+    "inStock": true,
+    "images": ["images/firnish1.jpg"]
+  },
+  {
+    "id": 237,
+    "title": {
+      "ka": "ფირნიში სამაგიდე 180*100mm TF108, DELI",
+      "en": "Desktop Nameplate 180×100mm TF108, DELI",
+      "ru": "Настольная табличка 180×100 мм TF108, DELI"
+    },
+    "price": 3.30,
+    "category": "office",
+    "subcategory": "signboard",
+    "inStock": true,
+    "images": ["images/firnishi2.jpg"]
+  },
+  {
+    "id": 238,
+    "title": {
+      "ka": "ფირნიში სამაგიდე 209*72*105mm TF109, DELI",
+      "en": "Desktop Nameplate 209×72×105mm TF109, DELI",
+      "ru": "Настольная табличка 209×72×105 мм TF109, DELI"
+    },
+    "price": 3.30,
+    "category": "office",
+    "subcategory": "signboard",
+    "inStock": true,
+    "images": ["images/firnishi3.jpg"]
+  },
+  {
+    "id": 239,
+    "title": {
+      "ka": "ფირნიში სამაგიდე 150*60mm Deli Stationery",
+      "en": "Desktop Nameplate 150×60mm, Deli Stationery",
+      "ru": "Настольная табличка 150×60 мм, Deli Stationery"
+    },
+    "price": 4.90,
+    "category": "office",
+    "subcategory": "signboard",
+    "inStock": true,
+    "images": ["images/firnishi4.jpg"]
+  },
+  {
+    "id": 240,
+    "title": {
+      "ka": "სავიზიტე ბარათების ჩასადები (ბადე) LY 9132",
+      "en": "Business Card Holder (Mesh) LY 9132",
+      "ru": "Подставка для визитных карточек (сетка) LY 9132"
+    },
+    "price": 2.40,
+    "category": "office",
+    "subcategory": "business_card_holder",
+    "inStock": true,
+    "images": ["images/savizite1.png"]
+  },
+  {
+    "id": 241,
+    "title": {
+      "ka": "სავიზიტე ბარათების ჩასადები Deli Stationery",
+      "en": "Business Card Holder, Deli Stationery",
+      "ru": "Подставка для визитных карточек, Deli Stationery"
+    },
+    "price": 7.80,
+    "category": "office",
+    "subcategory": "business_card_holder",
+    "inStock": true,
+    "images": ["images/savizite2.jpg"]
+  },
+  {
+    "id": 242,
+    "title": {
+      "ka": "სავიზიტე ბარათების ჩასადები პლასტიკური Deli Stationery",
+      "en": "Plastic Business Card Holder, Deli Stationery",
+      "ru": "Пластиковая подставка для визитных карточек, Deli Stationery"
+    },
+    "price": 2.60,
+    "category": "office",
+    "subcategory": "business_card_holder",
+    "inStock": true,
+    "images": ["images/savizite4.jpg"]
+  },
+  {
+        "id": 243,
+        "title": {
+            "ka": "დანა 2045 , DELI",
+            "en": "Utility Knife 2045, DELI",
+            "ru": "Канцелярский нож 2045, DELI"
+        },
+        "price": 7.50,
+        "category": "stationery",
+        "subcategory": "utility_knife",
+        "inStock": true,
+        "images": ["images/dana1.jpg"]
+    },
+    {
+        "id": 244,
+        "title": {
+            "ka": "დანა 2053 ,DELI",
+            "en": "Utility Knife 2053, DELI",
+            "ru": "Канцелярский нож 2053, DELI"
+        },
+        "price": 1.30,
+        "category": "stationery",
+        "subcategory": "utility_knife",
+        "inStock": true,
+        "images": ["images/dana2.jpg"]
+    },
+    {
+        "id": 245,
+        "title": {
+            "ka": "დანა Trapezoidal blade 3 blades SK5 DL006Z , DELI",
+            "en": "Trapezoidal Blade Utility Knife, 3 SK5 Blades DL006Z, DELI",
+            "ru": "Канцелярский нож с трапециевидным лезвием, 3 лезвия SK5 DL006Z, DELI"
+        },
+        "price": 14.00,
+        "category": "stationery",
+        "subcategory": "utility_knife",
+        "inStock": true,
+        "images": ["images/dana3.jpg"]
+    },
+    {
+        "id": 246,
+        "title": {
+            "ka": "დანა საკანცელარიო 2040, DELI",
+            "en": "Utility Knife 2040, DELI",
+            "ru": "Канцелярский нож 2040, DELI"
+        },
+        "price": 3.60,
+        "category": "stationery",
+        "subcategory": "utility_knife",
+        "inStock": true,
+        "images": ["images/dana4.jpeg"]
+    },
+    {
+        "id": 247,
+        "title": {
+            "ka": "დანა საკანცელარიო Deli Stationery",
+            "en": "Utility Knife, Deli Stationery",
+            "ru": "Канцелярский нож, Deli Stationery"
+        },
+        "price": 1.00,
+        "category": "stationery",
+        "subcategory": "utility_knife",
+        "inStock": true,
+        "images": ["images/dana5.jpg"]
+    },
+    {
+        "id": 248,
+        "title": {
+            "ka": "დანა საკანცელარიო საშუალო FX-122/678279",
+            "en": "Medium Utility Knife FX-122/678279",
+            "ru": "Канцелярский нож средний FX-122/678279"
+        },
+        "price": 0.30,
+        "category": "stationery",
+        "subcategory": "utility_knife",
+        "inStock": true,
+        "images": ["images/dana6.jpg"]
+    },
+    {
+        "id": 249,
+        "title": {
+            "ka": "დანა საკანცელარიო დიდი რეზინის სახელურით M580 DELI",
+            "en": "Large Utility Knife with Rubber Handle M580, DELI",
+            "ru": "Большой канцелярский нож с резиновой ручкой M580, DELI"
+        },
+        "price": 3.50,
+        "category": "stationery",
+        "subcategory": "utility_knife",
+        "inStock": true,
+        "images": ["images/dana7.jpg"]
+    },
+    {
+        "id": 250,
+        "title": {
+            "ka": "დანა საკანცელარიო Deli Stationery",
+            "en": "Utility Knife, Deli Stationery",
+            "ru": "Канцелярский нож, Deli Stationery"
+        },
+        "price": 1.20,
+        "category": "stationery",
+        "subcategory": "utility_knife",
+        "inStock": true,
+        "images": ["images/dana8.png"]
+    },
+    {
+        "id": 251,
+        "title": {
+            "ka": "ავეჯის სტეპლერი 53/8 Deli Stationery",
+            "en": "Furniture Stapler 53/8 Deli Stationery",
+            "ru": "Мебельный степлер 53/8 Deli Stationery"
+        },
+        "price": 30.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri251.png"]
+    },
+    {
+        "id": 252,
+        "title": {
+            "ka": "ავეჯის სტეპლერი 53/8 T35011, DELI",
+            "en": "Furniture Stapler 53/8 T35011, DELI",
+            "ru": "Мебельный степлер 53/8 T35011, DELI"
+        },
+        "price": 25.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri252.jpg"]
+    },
+    {
+        "id": 253,
+        "title": {
+            "ka": "ავეჯის სტეპლერი DL1313B, DELI",
+            "en": "Furniture Stapler DL1313B, DELI",
+            "ru": "Мебельный степлер DL1313B, DELI"
+        },
+        "price": 14.50,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri253.jpg"]
+    },
+    {
+        "id": 254,
+        "title": {
+            "ka": "ანტისტიპლერი Deli Stationery",
+            "en": "Staple Remover Deli Stationery",
+            "ru": "Антистеплер Deli Stationery"
+        },
+        "price": 1.60,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri254.png"]
+    },
+    {
+        "id": 255,
+        "title": {
+            "ka": "სტეპლერი 23/25 210 ფურცლისთვის Deli Stationery",
+            "en": "Stapler 23/25 210 Sheets Deli Stationery",
+            "ru": "Степлер 23/25 на 210 листов Deli Stationery"
+        },
+        "price": 65.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri255.png"]
+    },
+    {
+        "id": 256,
+        "title": {
+            "ka": "სტეპლერი #10 Deli Stationery",
+            "en": "Stapler #10 Deli Stationery",
+            "ru": "Степлер #10 Deli Stationery"
+        },
+        "price": 6.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri256.jpg"]
+    },
+    {
+        "id": 257,
+        "title": {
+            "ka": "სტეპლერი 0416 Deli Stationery",
+            "en": "Stapler 0416 Deli Stationery",
+            "ru": "Степлер 0416 Deli Stationery"
+        },
+        "price": 13.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri257.jpg"]
+    },
+    {
+        "id": 258,
+        "title": {
+            "ka": "სტეპლერი 12sheets, 24/6 & 26/6 NS083F, DELI",
+            "en": "Stapler 12sheets, 24/6 & 26/6 NS083F, DELI",
+            "ru": "Степлер 12 листов, 24/6 & 26/6 NS083F, DELI"
+        },
+        "price": 4.90,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri258.jpg"]
+    },
+    {
+        "id": 259,
+        "title": {
+            "ka": "სტეპლერი 12sheets, 24/6 & 26/6 TA302, DELI",
+            "en": "Stapler 12sheets, 24/6 & 26/6 TA302, DELI",
+            "ru": "Степлер 12 листов, 24/6 & 26/6 TA302, DELI"
+        },
+        "price": 5.50,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri259.jpg"]
+    },
+    {
+        "id": 260,
+        "title": {
+            "ka": "სტეპლერი 15 sheets, 24/6 & 26/6 EM212, Deli",
+            "en": "Stapler 15 sheets, 24/6 & 26/6 EM212, Deli",
+            "ru": "Степлер 15 листов, 24/6 & 26/6 EM212, Deli"
+        },
+        "price": 3.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri260.jpg"]
+    },
+    {
+        "id": 261,
+        "title": {
+            "ka": "სტეპლერი 15 sheets, 24/6 & 26/6 EM413, Deli",
+            "en": "Stapler 15 sheets, 24/6 & 26/6 EM413, Deli",
+            "ru": "Степлер 15 листов, 24/6 & 26/6 EM413, Deli"
+        },
+        "price": 2.90,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri261.jpg"]
+    },
+    {
+        "id": 262,
+        "title": {
+            "ka": "სტეპლერი 20sheets, 24/6 & 26/6 NS084, DELI",
+            "en": "Stapler 20sheets, 24/6 & 26/6 NS084, DELI",
+            "ru": "Степлер 20 листов, 24/6 & 26/6 NS084, DELI"
+        },
+        "price": 7.50,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri262.jpg"]
+    },
+    {
+        "id": 263,
+        "title": {
+            "ka": "სტეპლერი 23/10 100 ფურცლისთვის Deli Stationery",
+            "en": "Stapler 23/10 100 Sheets Deli Stationery",
+            "ru": "Степлер 23/10 на 100 листов Deli Stationery"
+        },
+        "price": 35.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri263.png"]
+    },
+    {
+        "id": 264,
+        "title": {
+            "ka": "სტეპლერი 23/10 50ფ 0392, DELI",
+            "en": "Stapler 23/10 50 Sheets 0392, DELI",
+            "ru": "Степлер 23/10 50 листов 0392, DELI"
+        },
+        "price": 25.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri264.png"]
+    },
+    {
+        "id": 265,
+        "title": {
+            "ka": "სტეპლერი 23/10 60 ფურცლის აკინძვის საშუალებით Deli",
+            "en": "Stapler 23/10 60 Sheets Binding Capacity Deli",
+            "ru": "Степлер 23/10 с сшиванием до 60 листов Deli"
+        },
+        "price": 33.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri265.png"]
+    },
+    {
+        "id": 266,
+        "title": {
+            "ka": "სტეპლერი 23/10 60ფურცლისთვის Deli Stationery",
+            "en": "Stapler 23/10 60 Sheets Deli Stationery",
+            "ru": "Степлер 23/10 на 60 листов Deli Stationery"
+        },
+        "price": 22.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri266.png"]
+    },
+    {
+        "id": 267,
+        "title": {
+            "ka": "სტეპლერი 23/13 80 ფურცლის აკინძვის საშუალებით Deli",
+            "en": "Stapler 23/13 80 Sheets Binding Capacity Deli",
+            "ru": "Степлер 23/13 с сшиванием до 80 листов Deli"
+        },
+        "price": 50.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri267.png"]
+    },
+    {
+        "id": 268,
+        "title": {
+            "ka": "სტეპლერი 23/17 120 ფურცლის აკინძვის საშუალებით Deli",
+            "en": "Stapler 23/17 120 Sheets Binding Capacity Deli",
+            "ru": "Степлер 23/17 с сшиванием до 120 листов Deli"
+        },
+        "price": 65.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri268.jpg"]
+    },
+    {
+        "id": 269,
+        "title": {
+            "ka": "სტეპლერი 23/25 210 ფურცლიანი Deli Stationery",
+            "en": "Stapler 23/25 210 Sheets Capacity Deli Stationery",
+            "ru": "Степлер 23/25 на 210 листов Deli Stationery"
+        },
+        "price": 60.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri269.png"]
+    },
+    {
+        "id": 270,
+        "title": {
+            "ka": "სტეპლერი 24/6 0346 Deli Stationery",
+            "en": "Stapler 24/6 0346 Deli Stationery",
+            "ru": "Степлер 24/6 0346 Deli Stationery"
+        },
+        "price": 10.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri270.jpg"]
+    },
+    {
+        "id": 271,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery",
+            "en": "Stapler 24/6 Deli Stationery",
+            "ru": "Степлер 24/6 Deli Stationery"
+        },
+        "price": 12.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri271.jpg"]
+    },
+    {
+        "id": 272,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery (გრძელი)",
+            "en": "Long Arm Stapler 24/6 Deli Stationery",
+            "ru": "Длинноплечий степлер 24/6 Deli Stationery"
+        },
+        "price": 15.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri272.png"]
+    },
+    {
+        "id": 273,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery (ფერადი)",
+            "en": "Stapler 24/6 Deli Stationery (Colored)",
+            "ru": "Степлер 24/6 Deli Stationery (Цветной)"
+        },
+        "price": 6.30,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri273.jpg"]
+    },
+    {
+        "id": 274,
+        "title": {
+            "ka": "სტეპლერი 24/6 0319, DELI",
+            "en": "Stapler 24/6 0319, DELI",
+            "ru": "Степлер 24/6 0319, DELI"
+        },
+        "price": 5.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri274.png"]
+    },
+    {
+        "id": 275,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery (მინი)",
+            "en": "Mini Stapler 24/6 Deli Stationery",
+            "ru": "Мини-степлер 24/6 Deli Stationery"
+        },
+        "price": 4.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri275.jpg"]
+    },
+    {
+        "id": 276,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery (ფორმირებული)",
+            "en": "Ergonomic Stapler 24/6 Deli Stationery",
+            "ru": "Эргономичный степлер 24/6 Deli Stationery"
+        },
+        "price": 5.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri276.png"]
+    },
+    {
+        "id": 277,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery (შავი)",
+            "en": "Black Stapler 24/6 Deli Stationery",
+            "ru": "Черный степлер 24/6 Deli Stationery"
+        },
+        "price": 9.60,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri277.png"]
+    },
+    {
+        "id": 278,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery (კომპლექტი)",
+            "en": "Stapler Set 24/6 Deli Stationery",
+            "ru": "Набор степлеров 24/6 Deli Stationery"
+        },
+        "price": 5.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri278.jpg"]
+    },
+    {
+        "id": 279,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery (კლასიკი)",
+            "en": "Classic Stapler 24/6 Deli Stationery",
+            "ru": "Классический степлер 24/6 Deli Stationery"
+        },
+        "price": 5.50,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri279.png"]
+    },
+    {
+        "id": 280,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery (თეთრი/ნაცრისფერი)",
+            "en": "White/Grey Stapler 24/6 Deli Stationery",
+            "ru": "Бело-серый степлер 24/6 Deli Stationery"
+        },
+        "price": 12.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri280.png"]
+    },
+    {
+        "id": 281,
+        "title": {
+            "ka": "სტეპლერი 24/6 Deli Stationery",
+            "en": "Stapler 24/6 Deli Stationery",
+            "ru": "Степлер 24/6 Deli Stationery"
+        },
+        "price": 5.50,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri281.jpg"]
+    },
+    {
+        "id": 282,
+        "title": {
+            "ka": "სტეპლერი 24/6 E0402F, DELI",
+            "en": "Stapler 24/6 E0402F, DELI",
+            "ru": "Степлер 24/6 E0402F, DELI"
+        },
+        "price": 5.70,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri282.jpg"]
+    },
+    {
+        "id": 283,
+        "title": {
+            "ka": "სტეპლერი 24/6 E0425, Deli",
+            "en": "Stapler 24/6 E0425, Deli",
+            "ru": "Степлер 24/6 E0425, Deli"
+        },
+        "price": 3.90,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri283.png"]
+    },
+    {
+        "id": 284,
+        "title": {
+            "ka": "სტეპლერი 24/6 E0426, Deli",
+            "en": "Stapler 24/6 E0426, Deli",
+            "ru": "Степлер 24/6 E0426, Deli"
+        },
+        "price": 6.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri284.jpg"]
+    },
+    {
+        "id": 285,
+        "title": {
+            "ka": "სტეპლერი 24/6 E0464, DELI",
+            "en": "Stapler 24/6 E0464, DELI",
+            "ru": "Степлер 24/6 E0464, DELI"
+        },
+        "price": 8.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri285.jpg"]
+    },
+    {
+        "id": 286,
+        "title": {
+            "ka": "სტეპლერი 24/6&26/6 25ფ. E0350",
+            "en": "Stapler 24/6&26/6 25 Sheets E0350",
+            "ru": "Степлер 24/6&26/6 25 листов E0350"
+        },
+        "price": 5.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri286.jpg"]
+    },
+    {
+        "id": 287,
+        "title": {
+            "ka": "სტეპლერი 24/6,26/6 25ფ E0300, DELI",
+            "en": "Stapler 24/6,26/6 25 Sheets E0300, DELI",
+            "ru": "Степлер 24/6,26/6 25 листов E0300, DELI"
+        },
+        "price": 5.50,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri287.jpg"]
+    },
+    {
+        "id": 288,
+        "title": {
+            "ka": "სტეპლერი 24/6,26/6 25ფ E0463, DELI",
+            "en": "Stapler 24/6,26/6 25 Sheets E0463, DELI",
+            "ru": "Степлер 24/6,26/6 25 листов E0463, DELI"
+        },
+        "price": 11.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri288.png"]
+    },
+    {
+        "id": 289,
+        "title": {
+            "ka": "სტეპლერი 25 sheets, 24/6 & 26/6 EM390, DELI",
+            "en": "Stapler 25 sheets, 24/6 & 26/6 EM390, DELI",
+            "ru": "Степлер 25 листов, 24/6 & 26/6 EM390, DELI"
+        },
+        "price": 8.40,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri289.jpg"]
+    },
+    {
+        "id": 290,
+        "title": {
+            "ka": "სტეპლერი 25 ფურცლის აკინძვის საშუალებით Deli Stationery",
+            "en": "Stapler 25 Sheets Binding Capacity Deli Stationery",
+            "ru": "Степлер с сшиванием до 25 листов Deli Stationery"
+        },
+        "price": 18.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri290.png"]
+    },
+    {
+        "id": 291,
+        "title": {
+            "ka": "სტეპლერი 25ფ. 24/6 & 26/6 E0434, DELI",
+            "en": "Stapler 25 Sheets 24/6 & 26/6 E0434, DELI",
+            "ru": "Степлер 25 листов 24/6 & 26/6 E0434, DELI"
+        },
+        "price": 7.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri291.png"]
+    },
+    {
+        "id": 292,
+        "title": {
+            "ka": "სტეპლერი Mini Stapler 24/6 K203, DELI",
+            "en": "Mini Stapler 24/6 K203, DELI",
+            "ru": "Мини-степлер 24/6 K203, DELI"
+        },
+        "price": 3.50,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri292.jpg"]
+    },
+    {
+        "id": 293,
+        "title": {
+            "ka": "სტეპლერი №10 0281, DELI",
+            "en": "Stapler №10 0281, DELI",
+            "ru": "Степлер №10 0281, DELI"
+        },
+        "price": 3.10,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri293.jpg"]
+    },
+    {
+        "id": 294,
+        "title": {
+            "ka": "სტეპლერი №10 ტყვიით 0282, DELI",
+            "en": "Stapler №10 with Staples 0282, DELI",
+            "ru": "Степлер №10 со скобами 0282, DELI"
+        },
+        "price": 3.10,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri294.jpg"]
+    },
+    {
+        "id": 295,
+        "title": {
+            "ka": "სტეპლერი №10, სტეპლერის ტყვიებით კომპლექტში Deli",
+            "en": "Stapler №10 with Staples Set Deli",
+            "ru": "Степлер №10 со скобами в комплекте Deli"
+        },
+        "price": 3.60,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri295.png"]
+    },
+    {
+        "id": 296,
+        "title": {
+            "ka": "სტეპლერი №12 Deli Stationery",
+            "en": "Stapler №12 Deli Stationery",
+            "ru": "Степлер №12 Deli Stationery"
+        },
+        "price": 13.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri296.png"]
+    },
+    {
+        "id": 297,
+        "title": {
+            "ka": "სტეპლერი Stapler 24/6 M331, DELI",
+            "en": "Stapler 24/6 M331, DELI",
+            "ru": "Степлер 24/6 M331, DELI"
+        },
+        "price": 4.20,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri297.jpg"]
+    },
+    {
+        "id": 298,
+        "title": {
+            "ka": "სტეპლერი №10 0224",
+            "en": "Stapler №10 0224",
+            "ru": "Степлер №10 0224"
+        },
+        "price": 2.50,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri298.png"]
+    },
+    {
+        "id": 299,
+        "title": {
+            "ka": "სტეპლერი №10 0238 deli",
+            "en": "Stapler №10 0238 deli",
+            "ru": "Степлер №10 0238 deli"
+        },
+        "price": 3.00,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri299.jpg"]
+    },
+    {
+        "id": 300,
+        "title": {
+            "ka": "სტეპლერი №10 0260",
+            "en": "Stapler №10 0260",
+            "ru": "Степлер №10 0260"
+        },
+        "price": 2.70,
+        "category": "office",
+        "subcategory": "binder",
+        "inStock": true,
+        "images": ["images/stepleri300.png"]
+    },
+    {
+        "id": 301,
+        "title": {
+            "ka": "ბეიჯი ვერტიკალური, დამჭერით 5743 ,DELI",
+            "en": "Vertical Badge Holder with Clip 5743, DELI",
+            "ru": "Vertical Badge Holder with Clip 5743, DELI"
+        },
+        "price": 0.45,
+        "category": "office",
+        "subcategory": "badge",
+        "inStock": true,
+        "images": ["images/beiji1.jpg"]
+    },
+    {
+        "id": 302,
+        "title": {
+            "ka": "ბეიჯი ვერტიკალური, თასმით Deli Stationery",
+            "en": "Vertical Badge Holder with Lanyard, Deli Stationery",
+            "ru": "Вертикальный держатель для бейджа с лентой, Deli Stationery"
+        },
+        "price": 1.00,
+        "category": "office",
+        "subcategory": "badge",
+        "inStock": true,
+        "images": ["images/beiji2.png"]
+    },
+    {
+        "id": 303,
+        "title": {
+            "ka": "ბეიჯი ვერტიკალური, თასმით Deli Stationery",
+            "en": "Horizontal Badge Holder with Lanyard, Deli Stationery",
+            "ru": "Горизонтальный держатель для бейджа с лентой, Deli Stationery"
+        },
+        "price": 1.10,
+        "category": "office",
+        "subcategory": "badge",
+        "inStock": true,
+        "images": ["images/beiji3.png"]
+    },
+    {
+        "id": 304,
+        "title": {
+            "ka": "ბეიჯი ვერტიკალური, თასმით Deli Stationery",
+            "en": "Horizontal Badge Holder with Clip, Deli Stationery",
+            "ru": "Горизонтальный держатель для бейджа с клипсой, Deli Stationery"
+        },
+        "price": 0.50,
+        "category": "office",
+        "subcategory": "badge",
+        "inStock": true,
+        "images": ["images/beiji4.png"]
+    },
+    {
+        "id": 305,
+        "title": {
+            "ka": "ბეიჯის ზონარი Deli Stationery",
+            "en": "Badge Lanyard, Deli Stationery",
+            "ru": "Шнурок для бейджа, Deli Stationery"
+        },
+        "price": 0.70,
+        "category": "office",
+        "subcategory": "badge",
+        "inStock": true,
+        "images": ["images/beiji5.png"]
+    },
+    {
+        "id": 306,
+        "title": {
+            "ka": "კლიპსი მეტალის 76მმ Deli Stationery",
+            "en": "Retractable Badge Lanyard 8309, DELI",
+            "ru": "Выдвижной шнурок для бейджа 8309, DELI"
+        },
+        "price": 2.00,
+        "category": "office",
+        "subcategory": "badge",
+        "inStock": true,
+        "images": ["images/beiji6.jpg"]
+    },
+    {
+        "id": 307,
+        "title": {
+            "ka": "ბეიჯის გაჭიმვადი ზონარი 8309 , DELI",
+            "en": "Metal Paper Clip 76mm, Deli Stationery",
+            "ru": "Металлический зажим для бумаг 76 мм, Deli Stationery"
+        },
+        "price": 1.40,
+        "category": "office",
+        "subcategory": "badge",
+        "inStock": true,
+        "images": ["images/klipsi1.jpg"]
+    },
+    {
+        "id": 308,
+        "title": {
+            "ka": "კლიპსი მეტალის ფერადი 15მმ (შეკვრაში 60ცალი) Deli Stationery",
+            "en": "Colored Metal Paper Clips 15mm (Pack of 60), Deli Stationery",
+            "ru": "Цветные металлические зажимы для бумаг 15 мм (60 шт. в упаковке), Deli Stationery"
+        },
+        "price": 5.00,
+        "category": "stationery",
+        "subcategory": "clips",
+        "inStock": true,
+        "images": ["images/klipsi2.jpg"]
+    },
+    {
+        "id": 309,
+        "title": {
+            "ka": "კლიპსი მეტალის ფერადი 19მმ (შეკვრაში 40ცალი) Deli Stationery",
+            "en": "Colored Metal Paper Clips 19mm (Pack of 40), Deli Stationery",
+            "ru": "Цветные металлические зажимы для бумаг 19 мм (40 шт. в упаковке), Deli Stationery"
+        },
+        "price": 4.00,
+        "category": "stationery",
+        "subcategory": "clips",
+        "inStock": true,
+        "images": ["images/klipsi3.jpeg"]
+    },
+    {
+        "id": 310,
+        "title": {
+            "ka": "კლიპსი მეტალის ფერადი 25მმ (შეკვრაში 48ცალი) Deli Stationery",
+            "en": "Colored Metal Paper Clips 25mm (Pack of 48), Deli Stationery",
+            "ru": "Цветные металлические зажимы для бумаг 25 мм (48 шт. в упаковке), Deli Stationery"
+        },
+        "price": 7.00,
+        "category": "stationery",
+        "subcategory": "clips",
+        "inStock": true,
+        "images": ["images/klipsi4.jpg"]
+    },
+    {
+        "id": 311,
+        "title": {
+            "ka": "ნაკრები:საკანცელარიო კლიფსი(ლითონის),სკრეპი, 78552 , DELI",
+            "en": "Set: Metal Paper Clips and Staples 78552, DELI",
+            "ru": "Набор: металлические скрепки и канцелярские скобы 78552, DELI"
+        },
+        "price": 10.00,
+        "category": "stationery",
+        "subcategory": "clips",
+        "inStock": true,
+        "images": ["images/skrepi1.jpg"]
+    },
+    {
+        "id": 312,
+        "title": {
+            "ka": "ნაკრები: კლიპსი(ლითონის), სკრეპი, ჭიკარტი Deli Stationery",
+            "en": "Set: Metal Paper Clips, Staples and Push Pins, Deli Stationery",
+            "ru": "Набор: металлические скрепки, канцелярские скобы и кнопки, Deli Stationery"
+        },
+        "price": 7.50,
+        "category": "stationery",
+        "subcategory": "clips",
+        "inStock": true,
+        "images": ["images/skrepi2.jpg"]
+    },
+    {
+        "id": 313,
+        "title": {
+            "ka": "სკრეპი 50მმ 100 ცალი Deli Stationery",
+            "en": "Paper Clips 50mm, 100 pcs, Deli Stationery",
+            "ru": "Скрепки 50 мм, 100 шт., Deli Stationery"
+        },
+        "price": 2.00,
+        "category": "stationery",
+        "subcategory": "clips",
+        "inStock": true,
+        "images": ["images/skrepi3.png"]
+    },
+    {
+        "id": 314,
+        "title": {
+            "ka": "სკრეპი N3 200 ცალი Deli Stationery",
+            "en": "Paper Clips No. 3, 200 pcs, Deli Stationery",
+            "ru": "Скрепки №3, 200 шт., Deli Stationery"
+        },
+        "price": 2.80,
+        "category": "stationery",
+        "subcategory": "clips",
+        "inStock": true,
+        "images": ["images/skrepi4.jpg"]
+    },
+    {
+        "id": 315,
+        "title": {
+            "ka": "სკრეპი ფერადი N3 200 ცალი Deli Stationery",
+            "en": "Colored Paper Clips No. 3, 200 pcs, Deli Stationery",
+            "ru": "Цветные скрепки №3, 200 шт., Deli Stationery"
+        },
+        "price": 3.00,
+        "category": "stationery",
+        "subcategory": "clips",
+        "inStock": true,
+        "images": ["images/skrepi5.jpg"]
+    },
+    {
+        "id": 316,
+        "title": {
+            "ka": "სკრეპი ფერადი N3 ფერადი Deli Stationery",
+            "en": "Colored Paper Clips No. 3, Deli Stationery",
+            "ru": "Цветные скрепки №3, Deli Stationery"
+        },
+        "price": 1.50,
+        "category": "stationery",
+        "subcategory": "clips",
+        "inStock": true,
+        "images": ["images/skrepi6.png"]
+    },
+    {
+        "id": 317,
+        "title": {
+            "ka": "თითის დასასველებელი Deli Stationery",
+            "en": "Finger Moistener, Deli Stationery",
+            "ru": "Увлажнитель для пальцев, Deli Stationery"
+        },
+        "price": 3.00,
+        "category": "office",
+        "subcategory": "organizer",
+        "inStock": true,
+        "images": ["images/titi1.png"]
+    },
+    {
+        "id": 318,
+        "title": {
+            "ka": "გასაღებების ყუთი 120 გასაღებისათვის 50803 , 398*63*782mm DELI",
+            "en": "Key Cabinet for 120 Keys 50803, 398×63×782mm, DELI",
+            "ru": "Ключница на 120 ключей 50803, 398×63×782 мм, DELI"
+        },
+        "price": 170.00,
+        "category": "office",
+        "subcategory": "key_box",
+        "inStock": true,
+        "images": ["images/gagsagebi1.jpg"]
+    },
+    {
+        "id": 319,
+        "title": {
+            "ka": "გასაღებების ყუთი 120 გასაღებისათვის Deli Stationery",
+            "en": " Key Cabinet for 120 Keys, Deli Stationery",
+            "ru": "Ключница на 120 ключей, Deli Stationery"
+        },
+        "price": 220.00,
+        "category": "office",
+        "subcategory": "key_box",
+        "inStock": true,
+        "images": ["images/gasagebi2.jpg"]
+    },
+    {
+        "id": 320,
+        "title": {
+            "ka": "გასაღებების ყუთი 24 გასაღებისათვის 50800 , DELI",
+            "en": "Key Cabinet for 24 Keys 50800, DELI",
+            "ru": "Ключница на 24 ключа 50800, DELI"
+        },
+        "price": 65.00,
+        "category": "office",
+        "subcategory": "key_box",
+        "inStock": true,
+        "images": ["images/gasagebi3.jpg"]
+    },
+    {
+        "id": 321,
+        "title": {
+            "ka": "გასაღებების ყუთი 72 გასაღებისათვის Deli Stationery",
+            "en": "Key Cabinet for 72 Keys, Deli Stationery",
+            "ru": "Ключница на 72 ключа, Deli Stationery"
+        },
+        "price": 200.00,
+        "category": "office",
+        "subcategory": "key_box",
+        "inStock": true,
+        "images": ["images/gasagebi4.jpg"]
+    },
+
+
+    {
+    "id": 322,
+    "title": {
+      "ka": "გასაღებების ყუთი 96 გასაღებისათვის Deli Stationery",
+      "en": "Key Cabinet for 96 Keys, Deli Stationery",
+      "ru": "Ключница на 96 ключей, Deli Stationery"
+    },
+    "price": 200.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "key_box",
+    "images": ["images/gasagebi6.jpg"]
+  },
+  {
+    "id": 323,
+    "title": {
+      "ka": "გასაღების ბრელოკი 40×28სმ Deli Stationery",
+      "en": "Key Tag 40×28cm, Deli Stationery",
+      "ru": "Брелок для ключей 40×28 см, Deli Stationery"
+    },
+    "price": 0.50,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "key_box",
+    "images": ["images/gasagebi7.jpg"]
+  },
+  {
+    "id": 324,
+    "title": {
+      "ka": "გასაღების ბრელოკი პლასტმასის (24ც) 40×28სმ Deli Stationery",
+      "en": "Plastic Key Tags (24 pcs) 40×28cm, Deli Stationery",
+      "ru": "Пластиковые брелоки для ключей (24 шт.) 40×28 см, Deli Stationery"
+    },
+    "price": 11.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "key_box",
+    "images": ["images/gasagebi3.jpg"]
+  },
+  {
+    "id": 325,
+    "title": {
+      "ka": "ურნა მეტალის ბადე LY9102",
+      "en": "Metal Mesh Wastebasket LY9102",
+      "ru": "Металлическая сетчатая корзина для мусора LY9102"
+    },
+    "price": 7.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "cleaning_set",
+    "images": ["images/urna1.jpg"]
+  },
+  {
+    "id": 326,
+    "title": {
+      "ka": "ურნა მეტალის ბადე LY9103",
+      "en": "Metal Mesh Wastebasket LY9103",
+      "ru": "Металлическая сетчатая корзина для мусора LY9103"
+    },
+    "price": 6.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "cleaning_set",
+    "images": ["images/urna2.jpg"]
+  },
+  {
+    "id": 327,
+    "title": {
+      "ka": "საფერფლე ურნა, მეტალის საშუალო FS-M",
+      "en": "Medium Metal Ashtray Bin FS-M",
+      "ru": "Металлическая урна-пепельница, средняя FS-M"
+    },
+    "price": 35.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "cleaning_set",
+    "images": ["images/urna3.jpg"]
+  },
+  {
+    "id": 328,
+    "title": {
+      "ka": "ცოცხი/აქანდაზი 32sm*87.5sm LQ580 . DELI",
+      "en": "Broom and Dustpan 32×87.5cm LQ580, DELI",
+      "ru": "Набор: веник и совок 32×87,5 см LQ580, DELI"
+    },
+    "price": 17.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "cleaning_set",
+    "images": ["images/urna4.jpg"]
+  },
+  {
+    "id": 329,
+    "title": {
+      "ka": "პაპკა პლანშეტი სამდივნო ორმაგი Deli Stationery",
+      "en": "Clipboard Folder Double Deli Stationery",
+      "ru": "Папка-планшет двойная Deli Stationery"
+    },
+    "price": 9.50,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno1.jpg"]
+  },
+  {
+    "id": 330,
+    "title": {
+      "ka": "პლანშეტი ერთმაგი A4 38153A BLUE, DELI",
+      "en": "Single Clipboard A4 38153A BLUE, DELI",
+      "ru": "Планшет одинарный A4 38153A BLUE, DELI"
+    },
+    "price": 2.60,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno2.jpg"]
+  },
+  {
+    "id": 331,
+    "title": {
+      "ka": "პლანშეტი ერთმაგი A4 38153B BLACK, DELI",
+      "en": "Single Clipboard A4 38153B BLACK, DELI",
+      "ru": "Планшет одинарный A4 38153B BLACK, DELI"
+    },
+    "price": 2.60,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno3.png"]
+  },
+  {
+    "id": 332,
+    "title": {
+      "ka": "პლანშეტი ორმაგი A4 38154A BLUE, DELI",
+      "en": "Double Clipboard A4 38154A BLUE, DELI",
+      "ru": "Планшет двойной A4 38154A BLUE, DELI"
+    },
+    "price": 4.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno4.jpg"]
+  },
+  {
+    "id": 333,
+    "title": {
+      "ka": "პლანშეტი ორმაგი A4 38154B BLACK, DELI",
+      "en": "Double Clipboard A4 38154B BLACK, DELI",
+      "ru": "Планшет двойной A4 38154B BLACK, DELI"
+    },
+    "price": 4.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno5.jpg"]
+  },
+  {
+    "id": 334,
+    "title": {
+      "ka": "პლანშეტი პლასტიკური F403, DELI",
+      "en": "Plastic Clipboard F403, DELI",
+      "ru": "Планшет пластиковый F403, DELI"
+    },
+    "price": 3.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno6.jpg"]
+  },
+  {
+    "id": 335,
+    "title": {
+      "ka": "პლანშეტი პლასტიკური F404, DELI",
+      "en": "Plastic Clipboard F404, DELI",
+      "ru": "Планшет пластиковый F404, DELI"
+    },
+    "price": 3.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno7.jpg"]
+  },
+  {
+    "id": 336,
+    "title": {
+      "ka": "პლანშეტი პლასტიკური F75422, DELI",
+      "en": "Plastic Clipboard F75422, DELI",
+      "ru": "Планшет пластиковый F75422, DELI"
+    },
+    "price": 4.50,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno8.jpg"]
+  },
+  {
+    "id": 337,
+    "title": {
+      "ka": "პლანშეტი პლასტიკური F75432, DELI",
+      "en": "Plastic Clipboard F75432, DELI",
+      "ru": "Планшет пластиковый F75432, DELI"
+    },
+    "price": 4.50,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno9.jpg"]
+  },
+  {
+    "id": 338,
+    "title": {
+      "ka": "პლანშეტი პლასტიკური F75632, DELI",
+      "en": "Plastic Clipboard F75632, DELI",
+      "ru": "Планшет пластиковый F75632, DELI"
+    },
+    "price": 3.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno10.jpg"]
+  },
+  {
+    "id": 339,
+    "title": {
+      "ka": "პლანშეტი პლასტიკური P64, DELI",
+      "en": "Plastic Clipboard P64, DELI",
+      "ru": "Планшет пластиковый P64, DELI"
+    },
+    "price": 4.90,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno11.jpg"]
+  },
+  {
+    "id": 340,
+    "title": {
+      "ka": "პლანშეტი პლასტიკური PE107, DELI",
+      "en": "Plastic Clipboard PE107, DELI",
+      "ru": "Планшет пластиковый PE107, DELI"
+    },
+    "price": 4.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno12.jpg"]
+  },
+  {
+    "id": 341,
+    "title": {
+      "ka": "პლანშეტი პლასტიკური TB403, DELI",
+      "en": "Plastic Clipboard TB403, DELI",
+      "ru": "Планшет пластиковый TB403, DELI"
+    },
+    "price": 7.80,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno13.jpg"]
+  },
+  {
+    "id": 342,
+    "title": {
+      "ka": "პლანშეტი სამდივნო 64506, DELI",
+      "en": "Clipboard Folder 64506, DELI",
+      "ru": "Планшет планшетный 64506, DELI"
+    },
+    "price": 10.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno14.jpg"]
+  },
+  {
+    "id": 343,
+    "title": {
+      "ka": "პლანშეტი სამდივნო A5 64507, DELI",
+      "en": "Clipboard Folder A5 64507, DELI",
+      "ru": "Планшет планшетный A5 64507, DELI"
+    },
+    "price": 9.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno15.jpg"]
+  },
+  {
+    "id": 344,
+    "title": {
+      "ka": "პლანშეტი სამდივნო ორმაგი 64513, DELI",
+      "en": "Double Clipboard Folder 64513, DELI",
+      "ru": "Папка-планшет двойная 64513, DELI"
+    },
+    "price": 6.60,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno16.jpg"]
+  },
+  {
+    "id": 345,
+    "title": {
+      "ka": "სამდივნო დაფა A4 9226 Deli Stationery",
+      "en": "Wooden Clipboard A4 9226 Deli Stationery",
+      "ru": "Деревянный планшет A4 9226 Deli Stationery"
+    },
+    "price": 4.50,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno17.png"]
+  },
+  {
+    "id": 346,
+    "title": {
+      "ka": "სამდივნო დაფა A4 Deli Stationery",
+      "en": "Clipboard A4 Deli Stationery",
+      "ru": "Планшет A4 Deli Stationery"
+    },
+    "price": 4.50,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno18.jpg"]
+  },
+  {
+    "id": 347,
+    "title": {
+      "ka": "სამდივნო დაფა Deli Stationery",
+      "en": "Clipboard Deli Stationery",
+      "ru": "Планшет Deli Stationery"
+    },
+    "price": 4.20,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno19.jpg"]
+  },
+  {
+    "id": 348,
+    "title": {
+      "ka": "სამდივნო დაფა კალკულატორით Deli Stationery",
+      "en": "Clipboard with Calculator Deli Stationery",
+      "ru": "Планшет с калькулятором Deli Stationery"
+    },
+    "price": 16.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno20.png"]
+  },
+  {
+    "id": 349,
+    "title": {
+      "ka": "სამდივნო დაფა პლასტიკური Deli Stationery",
+      "en": "Plastic Clipboard Deli Stationery",
+      "ru": "Пластиковый планшет Deli Stationery"
+    },
+    "price": 6.90,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno21.png"]
+  },
+  {
+    "id": 350,
+    "title": {
+      "ka": "სამდივნო დაფა პლასტიკური Deli Stationery",
+      "en": "Plastic Clipboard Deli Stationery",
+      "ru": "Пластиковый планшет Deli Stationery"
+    },
+    "price": 5.50,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno22.png"]
+  },
+  {
+    "id": 351,
+    "title": {
+      "ka": "სამდივნო დაფა სადგამით Deli Stationery",
+      "en": "Clipboard with Stand Deli Stationery",
+      "ru": "Планшет с подставкой Deli Stationery"
+    },
+    "price": 10.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno23.jpg"]
+  },
+  {
+    "id": 352,
+    "title": {
+      "ka": "სამდივნო დაფა, ორმხრივი 64504, DELI",
+      "en": "Double-Sided Clipboard 64504, DELI",
+      "ru": "Двусторонний планшет 64504, DELI"
+    },
+    "price": 8.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/samdivno24.jpg"]
+  },
+  {
+    "id": 353,
+    "title": {
+      "ka": "საქაღალდე პლასტიკური A4 NS501, DELI",
+      "en": "Plastic Folder A4 NS501, DELI",
+      "ru": "Пластиковая папка A4 NS501, DELI"
+    },
+    "price": 6.00,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "file_folder",
+    "images": ["images/samdivno25.jpg"]
+  },
+  {
+    "id": 354,
+    "title": {
+      "ka": "საქაღალდე პლასტიკური A4 PE102, DELI",
+      "en": "Plastic Folder A4 PE102, DELI",
+      "ru": "Пластиковая папка A4 PE102, DELI"
+    },
+    "price": 7.90,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "file_folder",
+    "images": ["images/samdivno26.png"]
+  },
+  {
+    "id": 355,
+    "title": {
+      "ka": "ჩასანიშნი ქაღალდი 85*85 300 ფურცელი",
+      "en": "Memo Pad 85×85mm, 300 Sheets",
+      "ru": "Блок для заметок 85×85 мм, 300 листов"
+    },
+    "price": 3.30,
+    "inStock": true,
+    "category": "paper",
+    "subcategory": "sticky_notes",
+    "images": ["images/chasanishni1.jpg"]
+  },
+  {
+    "id": 356,
+    "title": {
+      "ka": "ჩასანიშნი ქაღალდი 85*85 500 ფურცელი",
+      "en": "Memo Pad 85×85mm, 500 Sheets",
+      "ru": "Блок для заметок 85×85 мм, 500 листов"
+    },
+    "price": 4.00,
+    "inStock": true,
+    "category": "paper",
+    "subcategory": "sticky_notes",
+    "images": ["images/chasanishni1.jpg"]
+  },
+  {
+    "id": 357,
+    "title": {
+      "ka": "ჩასანიშნი ქაღალდი 85*85 500 ფურცელი",
+      "en": "Sticky Notes 76×76mm, 100 Sheets, A03Y",
+      "ru": "Клейкие заметки 76×76 мм, 100 листов, A03Y"
+    },
+    "price": 0.70,
+    "inStock": true,
+    "category": "paper",
+    "subcategory": "sticky_notes",
+    "images": ["images/chasanishni3.jpg"]
+  },
+  {
+    "id": 358,
+    "title": {
+      "ka": "ჩასანიშნი წებოვანი 76x76მმ 400ფ T4-400/901258",
+      "en": "Sticky Notes 76×76mm, 400 Sheets, T4-400/901258",
+      "ru": "Клейкие заметки 76×76 мм, 400 листов, T4-400/901258"
+    },
+    "price": 2.50,
+    "inStock": true,
+    "category": "paper",
+    "subcategory": "sticky_notes",
+    "images": ["images/chasanishni4.jpg"]
+  },
+  {
+    "id": 359,
+    "title": {
+      "ka": "ჩასანიშნი წებოვანი ნეონი 51x51მმ 400ფ A03303, DELI",
+      "en": "Neon Sticky Notes 51×51mm, 400 Sheets, A03303, DELI",
+      "ru": "Неоновые клейкие заметки 51×51 мм, 400 листов, A03303, DELI"
+    },
+    "price": 3.60,
+    "inStock": true,
+    "category": "paper",
+    "subcategory": "sticky_notes",
+    "images": ["images/chasanishni5.jpg"]
+  },
+  {
+    "id": 360,
+    "title": {
+      "ka": "წებოვანი ჩასანიშნი Deli Stationery",
+      "en": "Sticky Notes, Deli Stationery",
+      "ru": "Клейкие заметки, Deli Stationery"
+    },
+    "price": 5.00,
+    "inStock": true,
+    "category": "paper",
+    "subcategory": "sticky_notes",
+    "images": ["images/chasanishni6.png"]
+  },
+  {
+    "id": 361,
+    "title": {
+      "ka": "ჩასანიშნი ქაღალდი ყუთში D.A",
+      "en": "Memo Paper in a Box, D.A",
+      "ru": "Бумага для заметок в коробке, D.A"
+    },
+    "price": 1.80,
+    "inStock": true,
+    "category": "paper",
+    "subcategory": "sticky_notes",
+    "images": ["images/chasanishni7.jpg"]
+  },
+  {
+    "id": 362,
+    "title": {
+      "ka": "სახვრეტელა 150 ფურცლიანი 0150",
+      "en": "150-Sheet Hole Punch 0150",
+      "ru": "Дырокол на 150 листов 0150"
+    },
+    "price": 170.00,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/saxvretela1.jpg"]
+  },
+  {
+    "id": 363,
+    "title": {
+      "ka": "სახვრეტელა 10 ფურცლისათვის Deli Stationery",
+      "en": "10-Sheet Hole Punch, Deli Stationery",
+      "ru": "Дырокол на 10 листов, Deli Stationery"
+    },
+    "price": 4.50,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/saxvretela2.png"]
+  },
+  {
+    "id": 364,
+    "title": {
+      "ka": "სახვრეტელა 100 ფურცლიანი Deli Stationery",
+      "en": "100-Sheet Hole Punch, Deli Stationery",
+      "ru": "Дырокол на 100 листов, Deli Stationery"
+    },
+    "price": 100.00,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/saxvretela3.png"]
+  },
+  {
+    "id": 365,
+    "title": {
+      "ka": "სახვრეტელა 15 ფურც 0105",
+      "en": "15-Sheet Hole Punch 0105",
+      "ru": "Дырокол на 15 листов 0105"
+    },
+    "price": 10.00,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/saxvretela4.jpg"]
+  },
+  {
+    "id": 366,
+    "title": {
+      "ka": "სახვრეტელა 15 ფურც 0105",
+      "en": "15-Sheet Hole Punch 0105",
+      "ru": "Дырокол на 15 листов 0105"
+    },
+    "price": 10.00,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/saxvretela1.jpg"]
+  },
+  {
+    "id": 367,
+    "title": {
+      "ka": "მშრალი წებო 21გრ Deli Stationery",
+      "en": "Glue Stick 21g, Deli Stationery",
+      "ru": "Клей-карандаш 21 г, Deli Stationery"
+    },
+    "price": 1.15,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/webo1.png"]
+  },
+  {
+    "id": 368,
+    "title": {
+      "ka": "მშრალი წებო 36გრ Deli Stationery",
+      "en": "Glue Stick 36g, Deli Stationery",
+      "ru": "Клей-карандаш 36 г, Deli Stationery"
+    },
+    "price": 1.80,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/webo2.png"]
+  },
+  {
+    "id": 369,
+    "title": {
+      "ka": "მშრალი წებო 60 ცალიანი ნაკრები Deli Stationery",
+      "en": "Glue Stick Set, 60 pcs, Deli Stationery",
+      "ru": "Набор клея-карандаша, 60 шт., Deli Stationery"
+    },
+    "price": 85.00,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/webo3.png"]
+  },
+  {
+    "id": 370,
+    "title": {
+      "ka": "წებო თხევადი 125მლ E7303S, DELI",
+      "en": "Liquid Glue 125ml E7303S, DELI",
+      "ru": "Жидкий клей 125 мл E7303S, DELI"
+    },
+    "price": 1.80,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/webo4.jpg"]
+  },
+  {
+    "id": 371,
+    "title": {
+      "ka": "წებო თხევადი 30მლ A251 , DELI",
+      "en": "Liquid Glue 30ml A251, DELI",
+      "ru": "Жидкий клей 30 мл A251, DELI"
+    },
+    "price": 0.60,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/webo5.jpg"]
+  },
+  {
+    "id": 372,
+    "title": {
+      "ka": "თვითწებოვანი REUSABLE MAGIC TACK A21710, DELI",
+      "en": "Reusable Magic Tack Adhesive A21710, DELI",
+      "ru": "Многоразовый клейкий пластилин Magic Tack A21710, DELI"
+    },
+    "price": 3.50,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "clips",
+    "images": ["images/webo5.jpg"]
+  },
+  {
+    "id": 373,
+    "title": {
+      "ka": "მაკრატელი 135mm 6068, DELI",
+      "en": "Scissors 135mm 6068, DELI",
+      "ru": "Ножницы 135 мм 6068, DELI"
+    },
+    "price": 2.50,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "utility_knife",
+    "images": ["images/makrateli1.jpg"]
+  },
+  {
+    "id": 374,
+    "title": {
+      "ka": "მაკრატელი 130mm D60402 , DELI",
+      "en": "Scissors 130mm D60402, DELI",
+      "ru": "Ножницы 130 мм D60402, DELI"
+    },
+    "price": 1.80,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "utility_knife",
+    "images": ["images/makrateli2.jpg"]
+  },
+  {
+    "id": 375,
+    "title": {
+      "ka": "კალკულატორი M120 , DELI",
+      "en": "Calculator M120, DELI",
+      "ru": "Калькулятор M120, DELI"
+    },
+    "price": 8.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/kalkulatori1.jpg"]
+  },
+  {
+    "id": 376,
+    "title": {
+      "ka": "კალკულატორი M130 , DELI",
+      "en": "Calculator M130, DELI",
+      "ru": "Калькулятор M130, DELI"
+    },
+    "price": 6.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/kalkulatori2.jpg"]
+  },
+  {
+    "id": 377,
+    "title": {
+      "ka": "კალკულატორი M01120 , DELI",
+      "en": "Calculator M01120, DELI",
+      "ru": "Калькулятор M01120, DELI"
+    },
+    "price": 16.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/kalkulatori3.png"]
+  },
+  {
+    "id": 378,
+    "title": {
+      "ka": "კალკულატორი M01120 , DELI",
+      "en": "Calculator M01120, DELI",
+      "ru": "Калькулятор M01120, DELI"
+    },
+    "price": 9.50,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/kalkulatori4.jpg"]
+  },
+  {
+    "id": 379,
+    "title": {
+      "ka": "კალკულატორი M01120 , DELI",
+      "en": "12-Digit Calculator M888A ORANGE, Deli",
+      "ru": "12-разрядный калькулятор M888A ORANGE, Deli"
+    },
+    "price": 19.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/kalkulatori5.jpg"]
+  },
+  {
+    "id": 380,
+    "title": {
+      "ka": "კალკულატორი 12 თანრიგიანი EM18C , Deli",
+      "en": "12-Digit Calculator M888A ORANGE, Deli",
+      "ru": "12-разрядный калькулятор M888A ORANGE, Deli"
+    },
+    "price": 9.80,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/kalkulatori6.jpg"]
+  },
+  {
+    "id": 381,
+    "title": {
+      "ka": "კალკულატორი 12 თანრიგიანი EM18C , Deli",
+      "en": "12-Digit Calculator EM18C, Deli",
+      "ru": "12-разрядный калькулятор EM18C, Deli"
+    },
+    "price": 20.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/kalkulatori7.png"]
+  },
+  {
+    "id": 382,
+    "title": {
+      "ka": "კალკულატორი 12 თანრიგიანი 1589/P DELI",
+      "en": "12-Digit Calculator 1589/P, DELI",
+      "ru": "12-разрядный калькулятор 1589/P, DELI"
+    },
+    "price": 27.00,
+    "inStock": true,
+    "category": "office",
+    "subcategory": "organizer",
+    "images": ["images/kalkulatori8.jpg"]
+  },
+  {
+    "id": 383,
+    "title": {
+      "ka": "კორექტორი 39299 , DELI",
+      "en": "Correction Tape 39299, DELI",
+      "ru": "Корректирующая лента 39299, DELI"
+    },
+    "price": 1.00,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "eraser",
+    "images": ["images/koreqtori1.jpg"]
+  },
+  {
+    "id": 384,
+    "title": {
+      "ka": "კორექტორი კალამი EH10590 , DELI",
+      "en": "Correction Tape 5mm × 8m H20101, DELI",
+      "ru": "Корректирующая лента 5 мм × 8 м H20101, DELI"
+    },
+    "price": 1.60,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "eraser",
+    "images": ["images/koreqtori2.jpg"]
+  },
+  {
+    "id": 385,
+    "title": {
+      "ka": "კორექტორი კალამი EH10790 , DELI",
+      "en": "Correction Pen EH10590, DELI",
+      "ru": "Корректирующий карандаш EH10590, DELI"
+    },
+    "price": 0.80,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "eraser",
+    "images": ["images/koreqtori3.jpg"]
+  },
+  {
+    "id": 386,
+    "title": {
+      "ka": "კორექტორი კალამი EH10790 , DELI",
+      "en": "Correction Pen EH10790, DELI",
+      "ru": "Корректирующий карандаш EH10790, DELI"
+    },
+    "price": 0.80,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "eraser",
+    "images": ["images/koreqtori4.jpg"]
+  },
+  {
+    "id": 387,
+    "title": {
+      "ka": "კორექტორი კალამი Helio-206",
+      "en": "Correction Pen Helio-206",
+      "ru": "Корректирующая ручка Helio-206"
+    },
+    "price": 0.80,
+    "inStock": true,
+    "category": "stationery",
+    "subcategory": "eraser",
+    "images": ["images/koreqtori5.jpg"]
+  },
+  {
+    "id": 388,
+    "barcode": "126105",
+    "title": {
+      "ka": "თხევადი საპონი რძე და თაფლი 5ლ 126105",
+      "en": "Liquid Soap Milk and Honey 5L 126105",
+      "ru": "Жидкое мыло Молоко и мед 5л 126105"
+    },
+    "price": 36,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/126105.webp"]
+  },
+  {
+    "id": 389,
+    "barcode": "126205",
+    "title": {
+      "ka": "თხევადი საპონი მარგალიტი 5ლ 126205",
+      "en": "Liquid Soap Pearl 5L 126205",
+      "ru": "Жидкое мыло Жемчужина 5л 126205"
+    },
+    "price": 36,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/126205.jpg"]
+  },
+  {
+    "id": 390,
+    "barcode": "126305",
+    "title": {
+      "ka": "თხევადი საპონი იოგურტი 5ლ 126305",
+      "en": "Liquid Soap Yogurt 5L 126305",
+      "ru": "Жидкое мыло Йогурт 5л 126305"
+    },
+    "price": 36,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/126305.jpg"]
+  },
+  {
+    "id": 391,
+    "barcode": "126405",
+    "title": {
+      "ka": "თხევადი საპონი ალუბალი 5ლ 126405",
+      "en": "Liquid Soap Cherry 5L 126405",
+      "ru": "Жидкое мыло Вишня 5л 126405"
+    },
+    "price": 36,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/126405.jpg"]
+  },
+  {
+    "id": 392,
+    "barcode": "126605",
+    "title": {
+      "ka": "თხევადი საპონი ალოე 5ლ 126605",
+      "en": "Liquid Soap Aloe 5L 126605",
+      "ru": "Жидкое мыло Алоэ 5л 126605"
+    },
+    "price": 36,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/126605.jpg"]
+  },
+  {
+    "id": 393,
+    "barcode": "125318",
+    "title": {
+      "ka": "თხევადი საპონი ბუბლიგუმი 5ლ 125318",
+      "en": "Liquid Soap Bubble Gum 5L 125318",
+      "ru": "Жидкое мыло Баббл Гам 5л 125318"
+    },
+    "price": 36,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125318.jpg"]
+  },
+  {
+    "id": 394,
+    "barcode": "125361",
+    "title": {
+      "ka": "ანტიბაქტერიული თხევადი საპონი 5ლ 125361",
+      "en": "Antibacterial Liquid Soap 5L 125361",
+      "ru": "Антибактериальное жидкое мыло 5л 125361"
+    },
+    "price": 36,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125361,125362.webp"]
+  },
+  {
+    "id": 395,
+    "barcode": "125362",
+    "title": {
+      "ka": "ქაფი საპონი 5ლ 125362",
+      "en": "Foam Soap 5L 125362",
+      "ru": "Мыло-пена 5л 125362"
+    },
+    "price": 36,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125362.jpg"]
+  },
+  {
+    "id": 396,
+    "barcode": "130600",
+    "title": {
+      "ka": "შუშის საწმენდი ხსნარი 0.6მლ 130600",
+      "en": "Glass Cleaning Solution 0.6L 130600",
+      "ru": "Средство для мытья стекол 0.6л 130600"
+    },
+    "price": 8,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125361,125362.webp"]
+  },
+  {
+    "id": 397,
+    "barcode": "125247",
+    "title": {
+      "ka": "შუშის საწმენდი ხსნარი 0.6მლ 125247",
+      "en": "Glass Cleaner Solution 0.6L 125247",
+      "ru": "Средство для очистки стекол 0.6л 125247"
+    },
+    "price": 8,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125247.png"]
+  },
+  {
+    "id": 398,
+    "barcode": "125241",
+    "title": {
+      "ka": "შუშის საწმენდი ხსნარი 0.6მლ 125241",
+      "en": "Glass Cleaning Spray 0.6L 125241",
+      "ru": "Средство для стекол 0.6л 125241"
+    },
+    "price": 8,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125241.png"]
+  },
+  {
+    "id": 399,
+    "barcode": "125184",
+    "title": {
+      "ka": "მყარი იატაკის სარეცხი ხსნარი Arena 1ლ 125184",
+      "en": "Hard Floor Cleaner Arena 1L 125184",
+      "ru": "Моющее средство для пола Arena 1л 125184"
+    },
+    "price": 9.5,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125184.jpg"]
+  },
+  {
+    "id": 400,
+    "barcode": "125905",
+    "title": {
+      "ka": "მყარი იატაკის სარეცხი ხსნარი Arena 1ლ 125905",
+      "en": "Floor Wash Solution Arena 1L 125905",
+      "ru": "Средство для мытья полов Arena 1л 125905"
+    },
+    "price": 9.5,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125905.jpg"]
+  },
+  {
+    "id": 401,
+    "barcode": "125904",
+    "title": {
+      "ka": "მყარი იატაკის სარეცხი ხსნარი Arena 1ლ 125904",
+      "en": "Hard Floor Cleaner Solution Arena 1L 125904",
+      "ru": "Средство для пола Arena 1л 125904"
+    },
+    "price": 9.5,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125904.jpg"]
+  },
+  {
+    "id": 402,
+    "barcode": "125185",
+    "title": {
+      "ka": "მყარი იატაკის სარეცხი ხსნარი Arena 1ლ 125185",
+      "en": "Floor Cleaner Arena 1L 125185",
+      "ru": "Жидкость для мытья пола Arena 1л 125185"
+    },
+    "price": 9.5,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125185.jpg"]
+  },
+  {
+    "id": 403,
+    "barcode": "125195",
+    "title": {
+      "ka": "მყარი იატაკის სარეცხი ხსნარი Floor Wash 5ლ 125195",
+      "en": "Floor Cleaner Solution Floor Wash 5L 125195",
+      "ru": "Средство для мытья пола Floor Wash 5л 125195"
+    },
+    "price": 67,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125195.jpg"]
+  },
+  {
+    "id": 404,
+    "barcode": "125193",
+    "title": {
+      "ka": "მყარი იატაკის სარეცხი ხსნარი ძლიერი დაბინძურების Floor 125193",
+      "en": "Heavy Duty Floor Cleaner Solution Floor 125193",
+      "ru": "Моющее средство для сильных загрязнений пола Floor 125193"
+    },
+    "price": 78,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125193.jpg"]
+  },
+  {
+    "id": 405,
+    "barcode": "125520",
+    "title": {
+      "ka": "მყარი იატაკის სარეცხი ხსნარი ძლიერი დაბინძურების Floor 125520",
+      "en": "Heavy Duty Floor Wash Solution Floor 125520",
+      "ru": "Средство для глубокой очистки пола Floor 125520"
+    },
+    "price": 225,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125520.jpg"]
+  },
+  {
+    "id": 406,
+    "barcode": "218005",
+    "title": {
+      "ka": "ხის ზედაპირის სარეცხი ხსნარი Arena 5ლ 218005",
+      "en": "Wood Surface Cleaner Arena 5L 218005",
+      "ru": "Средство для мытья деревянных поверхностей Arena 5л 218005"
+    },
+    "price": 67,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/218005.jpg"]
+  },
+  {
+    "id": 407,
+    "barcode": "125337",
+    "title": {
+      "ka": "მყარი ზედაპირის სარეცხი საშუალება დაბალქაფიანი Prograss 5ლ 125337",
+      "en": "Low Foam Hard Surface Cleaner Prograss 5L 125337",
+      "ru": "Низкопенное средство для твердых поверхностей Prograss 5л 125337"
+    },
+    "price": 35,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125337.jpg"]
+  },
+  {
+    "id": 408,
+    "barcode": "112600",
+    "title": {
+      "ka": "უნივერსალური საწმენდი საშუალება Universacl Cleaner 0.6 112600",
+      "en": "Universal Cleaner Solution 0.6L 112600",
+      "ru": "Универсальное моющее средство Universacl Cleaner 0.6л 112600"
+    },
+    "price": 10,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/112600.jpg"]
+  },
+  {
+    "id": 409,
+    "barcode": "125200",
+    "title": {
+      "ka": "რბილი იატაკის, ავეჯის საწმენდი ხსნარი Carpet Cleaner 5ლ 125200",
+      "en": "Carpet and Furniture Cleaner Solution 5L 125200",
+      "ru": "Средство для чистки ковров и мебели Carpet Cleaner 5л 125200"
+    },
+    "price": 69,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125200.jpg"]
+  },
+  {
+    "id": 410,
+    "barcode": "125442",
+    "title": {
+      "ka": "რემონტის შემდგომი საწმენდი ხსნარი Cement Remover 125442",
+      "en": "Post-Renovation Cement Remover Solution 125442",
+      "ru": "Средство после ремонта Cement Remover 125442"
+    },
+    "price": 68,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125442.jpg"]
+  },
+  {
+    "id": 411,
+    "barcode": "125305",
+    "title": {
+      "ka": "რემონტის შემდგომი სარეცხი ხსნარი Cement Cleaner 125305",
+      "en": "Post-Renovation Cement Cleaner Solution 125305",
+      "ru": "Моющее средство после ремонта Cement Cleaner 125305"
+    },
+    "price": 65,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125305.jpg"]
+  },
+  {
+    "id": 412,
+    "barcode": "125420",
+    "title": {
+      "ka": "ჭურჭლის სარეცხი გელი Velly 5ლ 125420",
+      "en": "Dishwashing Gel Velly 5L 125420",
+      "ru": "Гель для мытья посуды Velly 5л 125420"
+    },
+    "price": 45,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125420.jpg"]
+  },
+  {
+    "id": 413,
+    "barcode": "125847",
+    "title": {
+      "ka": "ჭურჭლის სარეცხი გელი Velly გრეიფრუტი 5ლ 125847",
+      "en": "Dishwashing Gel Velly Grapefruit 5L 125847",
+      "ru": "Гель для мытья посуды Velly Грейпфрут 5л 125847"
+    },
+    "price": 40,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125847.jpg"]
+  },
+  {
+    "id": 414,
+    "barcode": "125717",
+    "title": {
+      "ka": "ჭურჭლის მანქანის ტაბლეტი ColoritPlus All in 1 100ც 125717",
+      "en": "Dishwasher Tablets ColoritPlus All in 1 100pcs 125717",
+      "ru": "Таблетки для посудомоечной машины ColoritPlus All in 1 100шт 125717"
+    },
+    "price": 75,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125717.jpg"]
+  },
+  {
+    "id": 415,
+    "barcode": "216110",
+    "title": {
+      "ka": "ჭურჭლის მანქანის სარეცხი ხსნარი Dishwasher 1ლ 216110",
+      "en": "Dishwasher Liquid Solution 1L 216110",
+      "ru": "Моющее средство для посудомоечной машины Dishwasher 1л 216110"
+    },
+    "price": 28,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/216110.jpg"]
+  },
+  {
+    "id": 416,
+    "barcode": "216100",
+    "title": {
+      "ka": "ჭურჭლის მანქანის დამარბილებელი ხსნარი Conditioner Dish 1ლ 216100",
+      "en": "Dishwasher Rinse Aid Conditioner Dish 1L 216100",
+      "ru": "Ополаскиватель для посудомоечной машины Conditioner Dish 1л 216100"
+    },
+    "price": 16,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/216100.jpg"]
+  },
+  {
+    "id": 417,
+    "barcode": "218600",
+    "title": {
+      "ka": "გაზქურის საწმენდი ხსნარი Azelit 0.6 მლ 218600",
+      "en": "Oven & Stove Cleaner Azelit 0.6L 218600",
+      "ru": "Средство для чистки плит Azelit 0.6л 218600"
+    },
+    "price": 13,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/218600.jpg"]
+  },
+  {
+    "id": 418,
+    "barcode": "125375",
+    "title": {
+      "ka": "გაზქურის საწმენდი ხსნარი Azelit 0.6 მლ 125375",
+      "en": "Kitchen Cleaner Spray Azelit 0.6L 125375",
+      "ru": "Жидкость для чистки плит Azelit 0.6л 125375"
+    },
+    "price": 13,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125375.jpg"]
+  },
+  {
+    "id": 419,
+    "barcode": "125239",
+    "title": {
+      "ka": "გაზქურის საწმენდი გელი Azelit 5 ლ 125239",
+      "en": "Oven Cleaner Gel Azelit 5L 125239",
+      "ru": "Гель для чистки плит Azelit 5л 125239"
+    },
+    "price": 76,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125239.jpg"]
+  },
+  {
+    "id": 420,
+    "barcode": "125470",
+    "title": {
+      "ka": "გაზქურის საწმენდი ხსნარი Grill 0.6 მლ 125470",
+      "en": "Grill Cleaner Solution 0.6L 125470",
+      "ru": "Средство для чистки гриля Grill 0.6л 125470"
+    },
+    "price": 17,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125470.jpg"]
+  },
+  {
+    "id": 421,
+    "barcode": "125586",
+    "title": {
+      "ka": "გაზქურის საწმენდი ხსნარი Grill 5 ლ 125586",
+      "en": "Grill Cleaner Solution 5L 125586",
+      "ru": "Средство для чистки гриля Grill 5л 125586"
+    },
+    "price": 87,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125586.jpg"]
+  },
+  {
+    "id": 422,
+    "barcode": "221500",
+    "title": {
+      "ka": "აბაზანის საწმენდი გელი Gloss gel 0.6 მლ 221500",
+      "en": "Bathroom Cleaner Gel Gloss 0.6L 221500",
+      "ru": "Гель для чистки ванной Gloss gel 0.6л 221500"
+    },
+    "price": 9,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/221500.jpg"]
+  },
+  {
+    "id": 423,
+    "barcode": "125322",
+    "title": {
+      "ka": "აბაზანის საწმენდი ხსნარი Gloss 1ლ 125322",
+      "en": "Bathroom Cleaning Solution Gloss 1L 125322",
+      "ru": "Средство для чистки ванной Gloss 1л 125322"
+    },
+    "price": 23,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125322.jpg"]
+  },
+  {
+    "id": 424,
+    "barcode": "125323",
+    "title": {
+      "ka": "აბაზანის საწმენდი ხსნარი Gloss 5ლ 125323",
+      "en": "Bathroom Cleaner Solution Gloss 5L 125323",
+      "ru": "Средство для чистки ванной Gloss 5л 125323"
+    },
+    "price": 65,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125323.jpg"]
+  },
+  {
+    "id": 425,
+    "barcode": "125489",
+    "title": {
+      "ka": "აბაზანის-ობის მომხსნელი ხსნარი Dos-Clean 0.6 ml 125489",
+      "en": "Mold & Mildew Remover Dos-Clean 0.6L 125489",
+      "ru": "Средство от плесени Dos-Clean 0.6л 125489"
+    },
+    "price": 12,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125489.jpg"]
+  },
+  {
+    "id": 426,
+    "barcode": "125203",
+    "title": {
+      "ka": "აბაზანის-უნიტაზის საწმენდი გელი WC-Gel 5ლ 125203",
+      "en": "Toilet & Bathroom Cleaner Gel WC-Gel 5L 125203",
+      "ru": "Гель для сантехники и туалета WC-Gel 5л 125203"
+    },
+    "price": 48,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125203.jpg"]
+  },
+  {
+    "id": 427,
+    "barcode": "125436",
+    "title": {
+      "ka": "აბაზანის-უნიტაზის სადეზინფექციო გელი Dos-Gel 1ლ 125436",
+      "en": "Disinfectant Toilet Gel Dos-Gel 1L 125436",
+      "ru": "Дезинфицирующий гель для туалета Dos-Gel 1л 125436"
+    },
+    "price": 11,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125436.jpg"]
+  },
+  {
+    "id": 428,
+    "barcode": "125240",
+    "title": {
+      "ka": "აბაზანის-უნიტაზის სადეზინფექციო გელი Dos-Gel 5ლ 125240",
+      "en": "Disinfectant Toilet Gel Dos-Gel 5L 125240",
+      "ru": "Дезинфицирующий гель для туалета Dos-Gel 5л 125240"
+    },
+    "price": 42,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125240.jpg"]
+  },
+  {
+    "id": 429,
+    "barcode": "125438",
+    "title": {
+      "ka": "საკანალიზაციო მილების საწმენდი გელი Digger-Gel 1ლ 125438",
+      "en": "Drain Cleaning Gel Digger-Gel 1L 125438",
+      "ru": "Гель для очистки водосточных труб Digger-Gel 1л 125438"
+    },
+    "price": 10,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125438.jpeg"]
+  },
+  {
+    "id": 430,
+    "barcode": "125206",
+    "title": {
+      "ka": "საკანალიზაციო მილების საწმენდი გელი Digger-Gel 5ლ 125206",
+      "en": "Drain Cleaning Gel Digger-Gel 5L 125206",
+      "ru": "Гель для очистки водосточных труб Digger-Gel 5л 125206"
+    },
+    "price": 29,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125206.jpg"]
+  },
+  {
+    "id": 431,
+    "barcode": "802004",
+    "title": {
+      "ka": "სუნის ჩამხშობი Smell Block 0.6მლ 802004",
+      "en": "Odor Neutralizer Smell Block 0.6L 802004",
+      "ru": "Нейтрализатор запаха Smell Block 0.6л 802004"
+    },
+    "price": 13,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/802004.jpg"]
+  },
+  {
+    "id": 432,
+    "barcode": "125536",
+    "title": {
+      "ka": "სუნის ჩამხშობი Smell Block 0.6მლ 125536",
+      "en": "Odor Neutralizer Smell Block 0.6L 125536",
+      "ru": "Нейтрализатор запаха Smell Block 0.6л 125536"
+    },
+    "price": 25,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125536.jpg"]
+  },
+  {
+    "id": 433,
+    "barcode": "219600",
+    "title": {
+      "ka": "ხის ზედაპირის გამწმენდი Torus 0.6მლ 219600",
+      "en": "Wood Surface Cleaner Torus 0.6L 219600",
+      "ru": "Средство для чистки деревянных поверхностей Torus 0.6л 219600"
+    },
+    "price": 11,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/219600.jpg"]
+  },
+  {
+    "id": 434,
+    "barcode": "117107",
+    "title": {
+      "ka": "საღებავის, წებოვანი ლენტის მომხსნელი საშუალება Antigrafiti 0.6მლ 117107",
+      "en": "Paint & Tape Remover Antigrafiti 0.6L 117107",
+      "ru": "Средство для удаления краски и скотча Antigrafiti 0.6л 117107"
+    },
+    "price": 28,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/117107.jpg"]
+  },
+  {
+    "id": 435,
+    "barcode": "125602",
+    "title": {
+      "ka": "საღებავის, წებოვანი ლენტის მომხსნელი საშუალება Antigrafiti 0.6მლ 125602",
+      "en": "Paint & Tape Remover Antigrafiti 0.6L 125602",
+      "ru": "Средство для удаления скотча и граффити Antigrafiti 0.6л 125602"
+    },
+    "price": 29,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125602.jpg"]
+  },
+  {
+    "id": 436,
+    "barcode": "140101",
+    "title": {
+      "ka": "საღებავის, წებოვანი ლენტის მომხსნელი საშუალება Antigrafiti 5ლ 140101",
+      "en": "Paint & Tape Remover Antigrafiti 5L 140101",
+      "ru": "Средство для удаления краски и скотча Antigrafiti 5л 140101"
+    },
+    "price": 179,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/140101.jpg"]
+  },
+  {
+    "id": 437,
+    "barcode": "110588",
+    "title": {
+      "ka": "ანტისკოჩი 0.25მლ 110588",
+      "en": "Anti-Sticker Spray 0.25L 110588",
+      "ru": "Средство для удаления скотча 0.25л 110588"
+    },
+    "price": 14,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/110588.png"]
+  },
+  {
+    "id": 438,
+    "barcode": "IT-0649",
+    "title": {
+      "ka": "საწმენდი ტილო მიკროფიბრა 30*30 IT-0649",
+      "en": "Microfiber Cleaning Cloth 30x30 IT-0649",
+      "ru": "Микрофибровая салфетка 30x30 IT-0649"
+    },
+    "price": 3,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/IT-0649.jpg"]
+  },
+  {
+    "id": 439,
+    "barcode": "IT-0460",
+    "title": {
+      "ka": "საწმენდი ტილო მიკროფიბრა 80*100 IT-0460",
+      "en": "Microfiber Cleaning Cloth 80x100 IT-0460",
+      "ru": "Микрофибровая салфетка 80x100 IT-0460"
+    },
+    "price": 29,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/IT-0460.jpg"]
+  },
+  {
+    "id": 440,
+    "barcode": "125874",
+    "title": {
+      "ka": "გელ-კონდენციონერი ყველა სახის თეთრეულისთვის Dory 1.8მლ 125874",
+      "en": "Fabric Softener Conditioner Dory 1.8L 125874",
+      "ru": "Гель-кондиционер для белья Dory 1.8л 125874"
+    },
+    "price": 15,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125874.jpg"]
+  },
+  {
+    "id": 441,
+    "barcode": "125747",
+    "title": {
+      "ka": "გელ-კონდენციონერი მუქი თეთრეულისთვის ALPI 1.8 მლ 125747",
+      "en": "Fabric Softener Gel for Dark Clothes ALPI 1.8L 125747",
+      "ru": "Гель-кондиционер для темного белья ALPI 1.8л 125747"
+    },
+    "price": 25,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125747.jpg"]
+  },
+  {
+    "id": 442,
+    "barcode": "125732",
+    "title": {
+      "ka": "კონცენტრირებული თხევადი სარეცხი საშუალება ALPI sensetive gel 125732",
+      "en": "Concentrated Liquid Detergent ALPI Sensitive Gel 125732",
+      "ru": "Концентрированное жидкое средство для стирки ALPI Sensitive Gel 125732"
+    },
+    "price": 25,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125732.jpg"]
+  },
+  {
+    "id": 443,
+    "barcode": "125733",
+    "title": {
+      "ka": "კონცენტრირებული თხევადი სარეცხი საშუალება ALPI white gel 1.8 მლ 125733",
+      "en": "Concentrated Liquid Detergent ALPI White Gel 1.8L 125733",
+      "ru": "Концентрированное жидкое средство для стирки ALPI White Gel 1.8л 125733"
+    },
+    "price": 25,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125733.jpg"]
+  },
+  {
+    "id": 444,
+    "barcode": "125748",
+    "title": {
+      "ka": "გელ-კონცენტრატი შალი და აბრეშუმი ALPI 1.8 მლ 125748",
+      "en": "Detergent Gel Concentrate Wool & Silk ALPI 1.8L 125748",
+      "ru": "Гель-концентрат для шерсти и шелка ALPI 1.8л 125748"
+    },
+    "price": 25,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125748.jpg"]
+  },
+  {
+    "id": 445,
+    "barcode": "125770",
+    "title": {
+      "ka": "ჭურჭლის მანქანის დამარბილებელი სავლები ხსნარი Velly 0.5 მლ 125770",
+      "en": "Dishwasher Rinse Aid Velly 0.5L 125770",
+      "ru": "Ополаскиватель для посудомоечной машины Velly 0.5л 125770"
+    },
+    "price": 10,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125770.jpg"]
+  },
+  {
+    "id": 446,
+    "barcode": "125886",
+    "title": {
+      "ka": "სარეცხი მანქანის საწმენდი Skalex 0.2 მლ 125886",
+      "en": "Washing Machine Cleaner Skalex 0.2L 125886",
+      "ru": "Средство для чистки стиральных машин Skalex 0.2л 125886"
+    },
+    "price": 9,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125886.jpg"]
+  },
+  {
+    "id": 447,
+    "barcode": "125443",
+    "title": {
+      "ka": "ობის მომხსნელი ხსნარი Bimold 1ლ 125443",
+      "en": "Mold Remover Solution Bimold 1L 125443",
+      "ru": "Средство для удаления плесени Bimold 1л 125443"
+    },
+    "price": 15,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125443.jpg"]
+  },
+  {
+    "id": 448,
+    "barcode": "126155",
+    "title": {
+      "ka": "უნივერსალური საწმენდი Home cleaner 0.6 მლ 126155",
+      "en": "Universal Surface Cleaner Home Cleaner 0.6L 126155",
+      "ru": "Универсальное чистящее средство Home Cleaner 0.6л 126155"
+    },
+    "price": 12,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/126155.jpg"]
+  },
+  {
+    "id": 449,
+    "barcode": "145126",
+    "title": {
+      "ka": "ჰაერის არომატიზატორი Milana Spring Bloom 0.3 მლ 145126",
+      "en": "Air Freshener Milana Spring Bloom 0.3L 145126",
+      "ru": "Освежитель воздуха Milana Spring Bloom 0.3л 145126"
+    },
+    "price": 15,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/145126.jpg"]
+  },
+  {
+    "id": 450,
+    "barcode": "145130",
+    "title": {
+      "ka": "ჰაერის არომატიზატორი Milana Oud Rood 0.3 მლ 145130",
+      "en": "Air Freshener Milana Oud Rood 0.3L 145130",
+      "ru": "Освежитель воздуха Milana Oud Rood 0.3л 145130"
+    },
+    "price": 15,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/145130.jpg"]
+  },
+  {
+    "id": 451,
+    "barcode": "125572",
+    "title": {
+      "ka": "Clean glass Professional 5ლ 125572",
+      "en": "Clean Glass Professional 5L 125572",
+      "ru": "Clean Glass Professional 5л 125572"
+    },
+    "price": 29,
+    "inStock": true,
+    "category": "hygiene",
+    "subcategory": "grass",
+    "images": ["images/125572.jpg"]
+  },
+  {
+    id: 452,
+    barcode: "4128",
+    title: {
+      ka: "ბაგის ავნიტი, ნადების მოსაცილებელი, 3ლიტ.",
+      en: "Bagi Avnit Limescale Remover 3L",
+      ru: "Баги Авнит Средство от накипи и известкового налета 3л"
+    },
+    price: 61,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/4128.jpg"]
+  },
+  {
+    id: 453,
+    barcode: "65",
+    title: {
+      ka: "ბაგის ავნიტი, ნადების მოსაცილებელი, 550მლ.",
+      en: "Bagi Avnit Limescale Remover 550ml",
+      ru: "Баги Авнит Средство от накипи и известкового налета 550мл"
+    },
+    price: 17.9,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/65.jpg"]
+  },
+  {
+    id: 454,
+    barcode: "5613",
+    title: {
+      ka: "ბაგის აკრილანი, აბაზანისა და ნიჟარების საწმენდი, 3ლიტ.",
+      en: "Bagi Acrilan Bathroom & Sink Cleaner 3L",
+      ru: "Баги Акрилан Средство для чистки ванн и раковин 3л"
+    },
+    price: 53.2,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5613.jpg"]
+  },
+  {
+    id: 455,
+    barcode: "8214",
+    title: {
+      ka: "ბაგის აკრილანი, სპრეი, აბაზანისა და ნიჟარების საწმენდი, 400მლ.",
+      en: "Bagi Acrilan Spray Bathroom & Sink Cleaner 400ml",
+      ru: "Баги Акрилан Спрей для чистки ванн и раковин 400мл"
+    },
+    price: 15.95,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8214.jpg"]
+  },
+  {
+    id: 456,
+    barcode: "5590",
+    title: {
+      ka: "ბაგის აკრილანი, სპრეი, აბაზანისა და ნიჟარების საწმენდი, 750მლ.",
+      en: "Bagi Acrilan Spray Bathroom & Sink Cleaner 750ml",
+      ru: "Баги Акрилан Спрей для чистки ванн и раковин 750мл"
+    },
+    price: 21.85,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5590.jpg"]
+  },
+  {
+    id: 457,
+    barcode: "4135",
+    title: {
+      ka: "ბაგის ანტი კალკი, ნიჟარების საწმენდი, ჟანგის საწინააღმდეგო, 750მლ.",
+      en: "Bagi Anti Kalk Sink & Rust Remover 750ml",
+      ru: "Баги Анти Кальк Средство для раковин и удаления ржавчины 750мл"
+    },
+    price: 19.75,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/4135.jpg"]
+  },
+  {
+    id: 458,
+    barcode: "5101",
+    title: {
+      ka: "ბაგის ანტი პლესენი, აბაზანის საწმენდი, ობის და სოკოს საწინააღმდეგო, 500მლ.",
+      en: "Bagi Anti Mold Bathroom Anti-Mold & Anti-Fungal Cleaner 500ml",
+      ru: "Баги Анти Плесень Средство против плесени и грибка для ванной 500мл"
+    },
+    price: 16.9,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5101.jpg"]
+  },
+  {
+    id: 459,
+    barcode: "8320",
+    title: {
+      ka: "ბაგის კლინერი, შუშების და სარკეების საწმენდი, 500მლ.",
+      en: "Bagi Cleaner Glass & Mirror Cleaner 500ml",
+      ru: "Баги Клинер Средство для мытья стекол и зеркал 500мл"
+    },
+    price: 13.1,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8320.jpg"]
+  },
+  {
+    id: 460,
+    barcode: "5125",
+    title: {
+      ka: "ბაგის კლინერი, შუშების და სარკეების საწმენდი, 750მლ.",
+      en: "Bagi Cleaner Glass & Mirror Cleaner 750ml",
+      ru: "Баги Клинер Средство для мытья стекол и зеркал 750мл"
+    },
+    price: 15.5,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5125.jpg"]
+  },
+  {
+    id: 461,
+    barcode: "5316",
+    title: {
+      ka: "ბაგის ლამინატი, ლამინატის იატაკის საწმენდი, 1ლიტ.",
+      en: "Bagi Laminate Laminate Floor Cleaner 1L",
+      ru: "Баги Ламинат Средство для мытья ламината 1л"
+    },
+    price: 20.75,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5316.jpg"]
+  },
+  {
+    id: 462,
+    barcode: "8344",
+    title: {
+      ka: "ბაგის ლამინატი, ლამინატის იატაკის საწმენდი, 550ლიტ.",
+      en: "Bagi Laminate Laminate Floor Cleaner 550ml",
+      ru: "Баги Ламинат Средство для мытья ламината 550мл"
+    },
+    price: 15,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8344.jpg"]
+  },
+  {
+    id: 463,
+    barcode: "4289",
+    title: {
+      ka: "ბაგის მაგიდის ტილო, უნივერსალური, შემწოვი (1 ცალიანი), 38x40სმ",
+      en: "Bagi Universal Absorbent Table Cloth (1 pc), 38x40cm",
+      ru: "Баги Салфетка настольная универсальная впитывающая (1 шт), 38x40см"
+    },
+    price: 2.1,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/4289.jpg"]
+  },
+  {
+    id: 464,
+    barcode: "5446",
+    title: {
+      ka: "ბაგის მასტიკა, ლამინატის და პარკეტის იატაკის მოსაპრიალებელი, 1ლიტ.",
+      en: "Bagi Mastic Laminate & Parquet Floor Polish 1L",
+      ru: "Баги Мастика Полироль для ламината и паркета 1л"
+    },
+    price: 31,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5446.jpg"]
+  },
+  {
+    id: 465,
+    barcode: "4418",
+    title: {
+      ka: "ბაგის მასტიკა, ლამინატის და პარკეტის იატაკის მოსაპრიალებელი, 3ლიტ.",
+      en: "Bagi Mastic Laminate & Parquet Floor Polish 3L",
+      ru: "Баги Мастика Полироль для ламината и паркета 3л"
+    },
+    price: 67.5,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/4418.jpg"]
+  },
+  {
+    id: 466,
+    barcode: "5422",
+    title: {
+      ka: "ბაგის მასტიკა, ლამინატის და პარკეტის იატაკის მოსაპრიალებელი, 500მლ.",
+      en: "Bagi Mastic Laminate & Parquet Floor Polish 500ml",
+      ru: "Баги Мастика Полироль для ламината и паркета 500мл"
+    },
+    price: 17.9,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5422.jpg"]
+  },
+  {
+    id: 467,
+    barcode: "218",
+    title: {
+      ka: "ბაგის მეტეორი, ნიჟარებისა და კერამიკული ფილების საწმენდი, 3ლიტ.",
+      en: "Bagi Meteor Sink & Ceramic Tile Cleaner 3L",
+      ru: "Баги Метеор Средство для чистки раковин и керамической плитки 3л"
+    },
+    price: 37.8,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/218.jpg"]
+  },
+  {
+    id: 468,
+    barcode: "8368",
+    title: {
+      ka: "ბაგის მეტეორი, სპრეი, ნიჟარებისა და კერამიკული ფილების საწმენდი, 400მლ.",
+      en: "Bagi Meteor Spray Sink & Ceramic Tile Cleaner 400ml",
+      ru: "Баги Метеор Спрей для чистки раковин и керамической плитки 400мл"
+    },
+    price: 13.8,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8368.jpg"]
+  },
+  {
+    id: 469,
+    barcode: "4241",
+    title: {
+      ka: "ბაგის მიკროფიბრული ტილო, უჯრედებიანი, 40x40სმ",
+      en: "Bagi Microfiber Cloth Waffle Texture 40x40cm",
+      ru: "Баги Микрофибровая салфетка ячеистая 40x40см"
+    },
+    price: 6.7,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/4241.jpg"]
+  },
+  {
+    id: 470,
+    barcode: "4227",
+    title: {
+      ka: "ბაგის მიკროფიბრული ტილო, უჯრედებიანი, 50x80სმ",
+      en: "Bagi Microfiber Cloth Waffle Texture 50x80cm",
+      ru: "Баги Микрофибровая салфетка ячеистая 50x80см"
+    },
+    price: 12.85,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/4227.jpg"]
+  },
+  {
+    id: 471,
+    barcode: "5309",
+    title: {
+      ka: "ბაგის ორანიტი, გრანიტის და ხის იატაკის უნივერსალური საწმენდი, 1ლიტ.",
+      en: "Bagi Oranit Universal Granite & Wood Floor Cleaner 1L",
+      ru: "Баги Оранит Универсальное средство для гранита и деревянных полов 1л"
+    },
+    price: 21.75,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5309.jpg"]
+  },
+  {
+    id: 472,
+    barcode: "232",
+    title: {
+      ka: "ბაგის ორანიტი, გრანიტის და ხის იატაკის უნივერსალური საწმენდი, 3ლიტ.",
+      en: "Bagi Oranit Universal Granite & Wood Floor Cleaner 3L",
+      ru: "Баги Оранит Универсальное средство для гранита и деревянных полов 3л"
+    },
+    price: 33.9,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/232.jpg"]
+  },
+  {
+    id: 473,
+    barcode: "9107",
+    title: {
+      ka: "ბაგის ორანიტი, გრანიტის და ხის იატაკის უნივერსალური საწმენდი, 500მლ.",
+      en: "Bagi Oranit Universal Granite & Wood Floor Cleaner 500ml",
+      ru: "Баги Оранит Универсальное средство для гранита и деревянных полов 500мл"
+    },
+    price: 12.95,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/9107.jpg"]
+  },
+  {
+    id: 474,
+    barcode: "5583",
+    title: {
+      ka: "ბაგის პარკეტი ბლესკი, პარკეტის იატაკის საწმენდი დამცავი ცვილით, 1ლიტ.",
+      en: "Bagi Parquet Blesk Parquet Cleaner with Protective Wax 1L",
+      ru: "Баги Паркет Блеск Средство для паркета с защитным воском 1л"
+    },
+    price: 24.95,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5583.jpg"]
+  },
+  {
+    id: 475,
+    barcode: "8412",
+    title: {
+      ka: "ბაგის პარკეტი, პარკეტის იატაკის საწმენდი, 500მლ.",
+      en: "Bagi Parquet Parquet Floor Cleaner 500ml",
+      ru: "Баги Паркет Средство для мытья паркета 500мл"
+    },
+    price: 14.7,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8412.jpg"]
+  },
+  {
+    id: 476,
+    barcode: "294",
+    title: {
+      ka: "ბაგის პერფექტ სოლი, ჭურჭლის სარცხი მანქანის გამწმენდი მარილი, 1,1 ლიტ.",
+      en: "Bagi Perfect Sol Dishwasher Salt 1.1L",
+      ru: "Баги Перфект Соль Соль для посудомоечных машин 1.1л"
+    },
+    price: 17.65,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/294.jpg"]
+  },
+  {
+    id: 477,
+    barcode: "5057",
+    title: {
+      ka: "ბაგის პოთხანი, მილების გამწმენდი გრანულები, 600გრ.",
+      en: "Bagi Pothan Drain Cleaner Granules 600g",
+      ru: "Баги Потхан Гранулы для прочистки труб 600г"
+    },
+    price: 22.55,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5057.jpg"]
+  },
+  {
+    id: 478,
+    barcode: "8238",
+    title: {
+      ka: "ბაგის ჟაველი ლიმონი, უნიტაზის საწმენდი, 650მლ.",
+      en: "Bagi Javel Lemon Toilet Bowl Cleaner 650ml",
+      ru: "Баги Жавель Лимон Средство для чистки унитаза 650мл"
+    },
+    price: 15.45,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8238.jpg"]
+  },
+  {
+    id: 479,
+    barcode: "8450",
+    title: {
+      ka: "ბაგის რაიტიტი, ავეჯის საწმენდი, 400მლ.",
+      en: "Bagi Raytit Furniture Polish & Cleaner 400ml",
+      ru: "Баги Райтит Средство для чистки мебели 400мл"
+    },
+    price: 15.95,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8450.jpg"]
+  },
+  {
+    id: 480,
+    barcode: "8474",
+    title: {
+      ka: "ბაგის სილიკონი, მინების და სარკეების საწმენდი სილიკონით, 500მლ.",
+      en: "Bagi Silicone Glass & Mirror Cleaner with Silicone 500ml",
+      ru: "Баги Силикон Средство для стекол и зеркал с силиконом 500мл"
+    },
+    price: 13.8,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8474.jpg"]
+  },
+  {
+    id: 481,
+    barcode: "8498",
+    title: {
+      ka: "ბაგის ტყავის საწმენდი, გამწმენდი, მკვებავი, განმაახლებელი, 400მლ.",
+      en: "Bagi Leather Cleaner, Conditioner & Restorer 400ml",
+      ru: "Баги Средство для чистки кожи, очиститель, питающий и восстанавливающий 400мл"
+    },
+    price: 15.85,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8498.jpg"]
+  },
+  {
+    id: 482,
+    barcode: "5798",
+    title: {
+      ka: "ბაგის შამპოლიში, ჭურჭლის სარეცხი ჟელე, 750მლ.",
+      en: "Bagi Shampolish Dishwashing Gel 750ml",
+      ru: "Баги Шамполиш Гель для мытья посуды 750мл"
+    },
+    price: 14.35,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5798.jpg"]
+  },
+  {
+    id: 483,
+    barcode: "5262",
+    title: {
+      ka: "ბაგის შტიხონიტი, ნაჭრის რბილი ავეჯის, მანქანის სალონის საწმენდი, 500მლ.",
+      en: "Bagi Shtihonit Upholstery & Car Interior Cleaner 500ml",
+      ru: "Баги Штихонит Средство для чистки мягкой мебели и салона авто 500мл"
+    },
+    price: 17.15,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5262.jpg"]
+  },
+  {
+    id: 484,
+    barcode: "140",
+    title: {
+      ka: "ბაგის შუმანიტი, ცხიმების მოსაშორებელი ემალირებული ზედაპირიდან, 3ლიტ.",
+      en: "Bagi Shumanit Grease Remover for Enameled Surfaces 3L",
+      ru: "Баги Шуманит Жироудалитель для эмалированных поверхностей 3л"
+    },
+    price: 61.55,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/140.jpg"]
+  },
+  {
+    id: 485,
+    barcode: "8559",
+    title: {
+      ka: "ბაგის შუმანიტი, ცხიმების მოსაშორებელი ემალირებული ზედაპირიდან, 400მლ.",
+      en: "Bagi Shumanit Grease Remover for Enameled Surfaces 400ml",
+      ru: "Баги Шуманит Жироудалитель для эмалированных поверхностей 400мл"
+    },
+    price: 15.95,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/8559.jpg"]
+  },
+  {
+    id: 486,
+    barcode: "5675",
+    title: {
+      ka: "ბაგის შუმანიტი, ცხიმების მოსაშორებელი ემალირებული ზედაპირიდან, 750მლ.",
+      en: "Bagi Shumanit Grease Remover for Enameled Surfaces 750ml",
+      ru: "Баги Шуманит Жироудалитель для эмалированных поверхностей 750мл"
+    },
+    price: 22.55,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5675.jpg"]
+  },
+  {
+    id: 487,
+    barcode: "5682",
+    title: {
+      ka: "ბაგის შუმანიტი, ცხიმების მოსაშორებელი მინის გაზქურებისთვის, 500მლ.",
+      en: "Bagi Shumanit Grease Remover for Glass Ceramic Stoves 500ml",
+      ru: "Баги Шуманит Жироудалитель для стеклокерамических плит 500мл"
+    },
+    price: 17.75,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5682.jpg"]
+  },
+  {
+    id: 488,
+    barcode: "997",
+    title: {
+      ka: "ბაგის ჩუდო ღრუბელი, ჭურჭლის სარეცხი ტეფლონის ღრუბელი, 1ც.",
+      en: "Bagi Miracle Sponge Dishwashing Teflon Sponge 1pc",
+      ru: "Баги Чудо Губка Губка для мытья посуды с тефлоновым покрытием 1шт"
+    },
+    price: 3.4,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/997.jpg"]
+  },
+  {
+    id: 489,
+    barcode: "911",
+    title: {
+      ka: "ბაგის ჩუდო ხელსახოცი, მრავალჯერადი ხელსახოცი ყველა ზედაპირისთვის, თეთრი, 20x20სმ, 180ც.",
+      en: "Bagi Miracle Wipe Multi-Use All Surface Wipe White 20x20cm 180pcs",
+      ru: "Баги Чудо Салфетка Многоразовая салфетка для всех поверхностей белая 20x20см 180шт"
+    },
+    price: 19.8,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/911.jpg"]
+  },
+  {
+    id: 490,
+    barcode: "935",
+    title: {
+      ka: "ბაგის ჩუდო, უნივერსალური მრავალჯერადი ხელსახოცი, თეთრი, 25x22სმ, 140ც.",
+      en: "Bagi Miracle Wipe Universal Multi-Use Wipe White 25x22cm 140pcs",
+      ru: "Баги Чудо Универсальная многоразовая салфетка белая 25x22см 140шт"
+    },
+    price: 18.3,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/935.jpg"]
+  },
+  {
+    id: 491,
+    barcode: "5569",
+    title: {
+      ka: "ბაგის ჩუდო, უნივერსალური მრავალჯერადი ხელსახოცი, ყვითელი, 25x23სმ, 33ც.",
+      en: "Bagi Miracle Wipe Universal Multi-Use Wipe Yellow 25x23cm 33pcs",
+      ru: "Баги Чудо Универсальная многоразовая салфетка желтая 25x23см 33шт"
+    },
+    price: 18.9,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5569.jpg"]
+  },
+  {
+    id: 492,
+    barcode: "5972",
+    title: {
+      ka: "ბაგის ცემენტინი, რემონტის შემდგომი დასუფთავებისთვის, 1ლიტ.",
+      en: "Bagi Cementin Post-Renovation Cleaner 1L",
+      ru: "Баги Цементин Средство для уборки после ремонта 1л"
+    },
+    price: 27.5,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/5972.jpg"]
+  },
+  {
+    id: 493,
+    barcode: "4104",
+    title: {
+      ka: "ბაგის ცემენტინი, რემონტის შემდგომი დასუფთავებისთვის, 500მლ.",
+      en: "Bagi Cementin Post-Renovation Cleaner 500ml",
+      ru: "Баги Цементин Средство для уборки после ремонта 500мл"
+    },
+    price: 16.7,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/4104.jpg"]
+  },
+  {
+    id: 494,
+    barcode: "9235",
+    title: {
+      ka: "ბაგის პოთხანი, მილების გამწმენდი გრანულები, 70გრ.",
+      en: "Bagi Pothan Drain Cleaner Granules 70g",
+      ru: "Баги Потхан Гранулы для прочистки труб 70г"
+    },
+    price: 4.8,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/9235.jpg"]
+  },
+  {
+    id: 495,
+    barcode: "9570",
+    title: {
+      ka: "ბაგის შუმანიტი, ცხიმების მოსაშორებელი ემალირებული ზედაპირიდან, 250მლ.",
+      en: "Bagi Shumanit Grease Remover for Enameled Surfaces 250ml",
+      ru: "Баги Шуманит Жироудалитель для эмалированных поверхностей 250мл"
+    },
+    price: 11.3,
+    inStock: true,
+    category: "hygiene",
+    "subcategory": "bagi",
+    images: ["images/9570.jpg"]
+  },
+  {
+    id: 496,
+    barcode: "",
+    title: {
+        ka: "ISBL375 ძაძებიანი ტილო  (მაკარონკა)",
+        en: "ISBL375 ძაძებიანი ტილო  (მაკარონკა)",
+        ru: "ISBL375 ძაძებიანი ტილო  (მაკარონკა)"
+    },
+    price: 14.8,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo1.jpg"]
+},
+
+{
+    id: 497,
+    barcode: "",
+    title: {
+        ka: "WET MOP FRAME  BLUE",
+        en: "WET MOP FRAME  BLUE",
+        ru: "WET MOP FRAME  BLUE"
+    },
+    price: 6.95,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo2.jpg"]
+},
+
+{
+    id: 498,
+    barcode: "",
+    title: {
+        ka: "DUST MOP 50CM (SYNTHETIC)",
+        en: "DUST MOP 50CM (SYNTHETIC)",
+        ru: "DUST MOP 50CM (SYNTHETIC)"
+    },
+    price: 15.95,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo3.jpg"]
+},
+
+{
+    id: 499,
+    barcode: "",
+    title: {
+        ka: "STANDART MOP HOLDER იატაკის ტილოს დამჭერი",
+        en: "STANDART MOP HOLDER იატაკის ტილოს დამჭერი",
+        ru: "STANDART MOP HOLDER იატაკის ტილოს დამჭერი"
+    },
+    price: 21.5,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo4.jpg"]
+},
+
+{
+    id: 500,
+    barcode: "",
+    title: {
+        ka: "ვედრო 22ლ BUCKET 22LT",
+        en: "ვედრო 22ლ BUCKET 22LT",
+        ru: "ვედრო 22ლ BUCKET 22LT"
+    },
+    price: 140,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Bucket",
+    images: ["images/sameurneo5.jpg"]
+},
+
+{
+    id: 501,
+    barcode: "",
+    title: {
+        ka: "მოპის საკიდი 4 დამჭერით MOP HANGER",
+        en: "მოპის საკიდი 4 დამჭერით MOP HANGER",
+        ru: "მოპის საკიდი 4 დამჭერით MOP HANGER"
+    },
+    price: 43.75,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo6.jpg"]
+},
+
+{
+    id: 502,
+    barcode: "",
+    title: {
+        ka: "MOP HANGER WITH ONE",
+        en: "MOP HANGER WITH ONE",
+        ru: "MOP HANGER WITH ONE"
+    },
+    price: 19,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo7.jpg"]
+},
+
+{
+    id: 503,
+    barcode: "",
+    title: {
+        ka: "MOP HANGER WITH TWO",
+        en: "MOP HANGER WITH TWO",
+        ru: "MOP HANGER WITH TWO"
+    },
+    price: 33.7,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo8.jpg"]
+},
+
+{
+    id: 504,
+    barcode: "",
+    title: {
+        ka: "ტუალეტის ქაღალდიT3333 (შეკვრაში 12 ცალი)",
+        en: "ტუალეტის ქაღალდიT3333 (შეკვრაში 12 ცალი)",
+        ru: "ტუალეტის ქაღალდიT3333 (შეკვრაში 12 ცალი)"
+    },
+    price: 2.65,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet paper",
+    images: ["images/sameurneo9.jpg"]
+},
+
+{
+    id: 505,
+    barcode: "",
+    title: {
+        ka: "ტუალეტის ქაღალდიT8888",
+        en: "ტუალეტის ქაღალდიT8888",
+        ru: "ტუალეტის ქაღალდიT8888"
+    },
+    price: 3.7,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet paper",
+    images: ["images/sameurneo10.jpg"]
+},
+
+{
+    id: 506,
+    barcode: "",
+    title: {
+        ka: "ტუალეტის ქაღალდიT6666 (შეკვრაში 12 ცალი)",
+        en: "ტუალეტის ქაღალდიT6666 (შეკვრაში 12 ცალი)",
+        ru: "ტუალეტის ქაღალდიT6666 (შეკვრაში 12 ცალი)"
+    },
+    price: 2.6,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet paper",
+    images: ["images/sameurneo11.jpg"]
+},
+
+{
+    id: 507,
+    barcode: "",
+    title: {
+        ka: "ტუალეტის ქაღალდიT1111 (შეკვრაში 12 ცალი)",
+        en: "ტუალეტის ქაღალდიT1111 (შეკვრაში 12 ცალი)",
+        ru: "ტუალეტის ქაღალდიT1111 (შეკვრაში 12 ცალი)"
+    },
+    price: 3.4,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet paper",
+    images: ["images/sameurneo12.jpg"]
+},
+
+{
+    id: 508,
+    barcode: "",
+    title: {
+        ka: "Multi Cream 0,5L/0,75KG საწმენდი საშუალება,",
+        en: "Multi Cream 0,5L/0,75KG საწმენდი საშუალება,",
+        ru: "Multi Cream 0,5L/0,75KG საწმენდი საშუალება,"
+    },
+    price: 11.95,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning agent",
+    images: ["images/sameurneo13.jpg"]
+},
+
+{
+    id: 509,
+    barcode: "",
+    title: {
+        ka: "Zoma ფერია პრემიუმი (ლიმ.), ჭურჭლის სარეცხი, 5 ლ, zoma0712 (HDPE)",
+        en: "Zoma ფერია პრემიუმი (ლიმ.), ჭურჭლის სარეცხი, 5 ლ, zoma0712 (HDPE)",
+        ru: "Zoma ფერია პრემიუმი (ლიმ.), ჭურჭლის სარეცხი, 5 ლ, zoma0712 (HDPE)"
+    },
+    price: 29,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning agent",
+    images: ["images/sameurneo14.jpg"]
+},
+
+{
+    id: 510,
+    barcode: "",
+    title: {
+        ka: "ჭურჭლის სარეცხი საშუალება ლიმონი 5ლ (PET) - zoma0711",
+        en: "ჭურჭლის სარეცხი საშუალება ლიმონი 5ლ (PET) - zoma0711",
+        ru: "ჭურჭლის სარეცხი საშუალება ლიმონი 5ლ (PET) - zoma0711"
+    },
+    price: 14,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning agent",
+    images: ["images/sameurneo15.jpg"]
+},
+
+{
+    id: 511,
+    barcode: "",
+    title: {
+        ka: "ZEO GELE - ჭურჭლის სარეცხი საშუალება ლიმონი 500მლ (PET), ZG0500",
+        en: "ZEO GELE - ჭურჭლის სარეცხი საშუალება ლიმონი 500მლ (PET), ZG0500",
+        ru: "ZEO GELE - ჭურჭლის სარეცხი საშუალება ლიმონი 500მლ (PET), ZG0500"
+    },
+    price: 2.5,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning agent",
+    images: ["images/sameurneo16.jpg"]
+},
+
+{
+    id: 512,
+    barcode: "",
+    title: {
+        ka: "ტუალეტის ქაღალდიT7020(შეკვრაში 26 ცალი)",
+        en: "ტუალეტის ქაღალდიT7020(შეკვრაში 26 ცალი)",
+        ru: "ტუალეტის ქაღალდიT7020(შეკვრაში 26 ცალი)"
+    },
+    price: 2,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet paper",
+    images: ["images/sameurneo17.jpg"]
+},
+
+{
+    id: 513,
+    barcode: "",
+    title: {
+        ka: "ტუალეტის ქაღალდიT7777 (შეკვრაში 12 ცალი)",
+        en: "ტუალეტის ქაღალდიT7777 (შეკვრაში 12 ცალი)",
+        ru: "ტუალეტის ქაღალდიT7777 (შეკვრაში 12 ცალი)"
+    },
+    price: 3.8,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet paper",
+    images: ["images/sameurneo18.jpg"]
+},
+
+{
+    id: 514,
+    barcode: "",
+    title: {
+        ka: "ხელსახოცი (რულონი)L1030 (შეკვრაში 6 ცალი)",
+        en: "ხელსახოცი (რულონი)L1030 (შეკვრაში 6 ცალი)",
+        ru: "ხელსახოცი (რულონი)L1030 (შეკვრაში 6 ცალი)"
+    },
+    price: 5.4,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Paper napkins",
+    images: ["images/sameurneo19.jpg"]
+},
+
+{
+    id: 515,
+    barcode: "",
+    title: {
+        ka: "ხელსახოცი (რულონი)L1040 (შეკვრაში 6 ცალი)",
+        en: "ხელსახოცი (რულონი)L1040 (შეკვრაში 6 ცალი)",
+        ru: "ხელსახოცი (რულონი)L1040 (შეკვრაში 6 ცალი)"
+    },
+    price: 7.5,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Paper napkins",
+    images: ["images/sameurneo20.jpg"]
+},
+
+{
+    id: 516,
+    barcode: "",
+    title: {
+        ka: "ხელსახოცი (რულონი)L1050(შეკვრაში 6 ცალი)",
+        en: "ხელსახოცი (რულონი)L1050(შეკვრაში 6 ცალი)",
+        ru: "ხელსახოცი (რულონი)L1050(შეკვრაში 6 ცალი)"
+    },
+    price: 8.5,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Paper napkins",
+    images: ["images/sameurneo21.jpg"]
+},
+
+{
+    id: 517,
+    barcode: "",
+    title: {
+        ka: "DUSTPAN BROOM SET CLOSED BLUE",
+        en: "DUSTPAN BROOM SET CLOSED BLUE",
+        ru: "DUSTPAN BROOM SET CLOSED BLUE"
+    },
+    price: 27.5,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Broom",
+    images: ["images/sameurneo22.jpg"]
+},
+
+{
+    id: 518,
+    barcode: "",
+    title: {
+        ka: "ჯოხი დაგრელების ფუნქციით TELESCOPIC POLE 1.5*3 4.5M",
+        en: "ჯოხი დაგრელების ფუნქციით TELESCOPIC POLE 1.5*3 4.5M",
+        ru: "ჯოხი დაგრელების ფუნქციით TELESCOPIC POLE 1.5*3 4.5M"
+    },
+    price: 185,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo23.jpg"]
+},
+
+{
+    id: 519,
+    barcode: "",
+    title: {
+        ka: "შუშის საწმენდი ტილო 35 სმ",
+        en: "შუშის საწმენდი ტილო 35 სმ",
+        ru: "შუშის საწმენდი ტილო 35 სმ"
+    },
+    price: 10,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning",
+    images: ["images/sameurneo24.jpg"]
+},
+
+{
+    id: 520,
+    barcode: "",
+    title: {
+        ka: "ZEO GELE - ჭურჭლის სარეცხი საშუალება ლიმონი 5ლ (PET), ZG5000",
+        en: "ZEO GELE - ჭურჭლის სარეცხი საშუალება ლიმონი 5ლ (PET), ZG5000",
+        ru: "ZEO GELE - ჭურჭლის სარეცხი საშუალება ლიმონი 5ლ (PET), ZG5000"
+    },
+    price: 10,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning agent",
+    images: ["images/sameurneo25.jpg"]
+},
+
+{
+    id: 521,
+    barcode: "",
+    title: {
+        ka: "ტილოს დამჭერი 35 სმ",
+        en: "ტილოს დამჭერი 35 სმ",
+        ru: "ტილოს დამჭერი 35 სმ"
+    },
+    price: 8.45,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning",
+    images: ["images/sameurneo26.jpg"]
+},
+
+{
+    id: 522,
+    barcode: "",
+    title: {
+        ka: "ერთავზიანი ურიკა (ლურჯი)",
+        en: "ერთავზიანი ურიკა (ლურჯი)",
+        ru: "ერთავზიანი ურიკა (ლურჯი)"
+    },
+    price: 190,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Bucket",
+    images: ["images/sameurneo27.jpg"]
+},
+
+{
+    id: 523,
+    barcode: "",
+    title: {
+        ka: "ორავზიანი ურიკა",
+        en: "ორავზიანი ურიკა",
+        ru: "ორავზიანი ურიკა"
+    },
+    price: 235,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Bucket",
+    images: ["images/sameurneo28.jpg"]
+},
+
+{
+    id: 524,
+    barcode: "",
+    title: {
+        ka: "საწური ერმოპის-ლურჯი",
+        en: "საწური ერმოპის-ლურჯი",
+        ru: "საწური ერმოპის-ლურჯი"
+    },
+    price: 95,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo29.jpg"]
+},
+
+{
+    id: 525,
+    barcode: "",
+    title: {
+        ka: "K.1-T Z Folded Paper Towel Dispenser Transp. ხელის საწმენდი ქაღალდის დისპენსერი",
+        en: "K.1-T Z Folded Paper Towel Dispenser Transp. ხელის საწმენდი ქაღალდის დისპენსერი",
+        ru: "K.1-T Z Folded Paper Towel Dispenser Transp. ხელის საწმენდი ქაღალდის დისპენსერი"
+    },
+    price: 24,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Paper dispensers",
+    images: ["images/sameurneo30.jpg"]
+},
+
+{
+    id: 526,
+    barcode: "",
+    title: {
+        ka: "Manual Autocut Dispenser - White - ქაღალდის მექანიკური დისპენსერი თეთრი",
+        en: "Manual Autocut Dispenser - White - ქაღალდის მექანიკური დისპენსერი თეთრი",
+        ru: "Manual Autocut Dispenser - White - ქაღალდის მექანიკური დისპენსერი თეთრი"
+    },
+    price: 230,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Paper dispensers",
+    images: ["images/sameurneo31.jpg"]
+},
+
+{
+    id: 527,
+    barcode: "",
+    title: {
+        ka: "MJ1 - Mini Jumbo WC Papear Disp. San (white) საპირფარეშოს ქაღალდის დისპენსერი",
+        en: "MJ1 - Mini Jumbo WC Papear Disp. San (white) საპირფარეშოს ქაღალდის დისპენსერი",
+        ru: "MJ1 - Mini Jumbo WC Papear Disp. San (white) საპირფარეშოს ქაღალდის დისპენსერი"
+    },
+    price: 26,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet Paper dispensers",
+    images: ["images/sameurneo32.jpg"]
+},
+
+{
+    id: 528,
+    barcode: "",
+    title: {
+        ka: "Mini Jumbo WC Tissue Disp. (Transparent) საპირფარეშოს ქაღალდის დისპენსერი",
+        en: "Mini Jumbo WC Tissue Disp. (Transparent) საპირფარეშოს ქაღალდის დისპენსერი",
+        ru: "Mini Jumbo WC Tissue Disp. (Transparent) საპირფარეშოს ქაღალდის დისპენსერი"
+    },
+    price: 25.5,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet Paper dispensers",
+    images: ["images/sameurneo33.jpg"]
+},
+
+{
+    id: 529,
+    barcode: "",
+    title: {
+        ka: "მოპის ტილო 60სმ მწვანე SPECIAL TUFTED DAMP MOP 60 CM-GREEN",
+        en: "მოპის ტილო 60სმ მწვანე SPECIAL TUFTED DAMP MOP 60 CM-GREEN",
+        ru: "მოპის ტილო 60სმ მწვანე SPECIAL TUFTED DAMP MOP 60 CM-GREEN"
+    },
+    price: 14,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo34.jpg"]
+},
+
+{
+    id: 530,
+    barcode: "",
+    title: {
+        ka: "მოპის დამჭერი ლითონის (ლურჯი)",
+        en: "მოპის დამჭერი ლითონის (ლურჯი)",
+        ru: "მოპის დამჭერი ლითონის (ლურჯი)"
+    },
+    price: 11,
+    sizes: [ { name: "80", price: 11.00 }, { name: "60", price: 10.70 }, { name: "100", price: 11.70 } ],
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo35.jpg"]
+
+},
+
+{
+    id: 531,
+    barcode: "",
+    title: {
+        ka: "საშხვეპი 75სმ FLOOR WIPER 75 CM BLUE",
+        en: "საშხვეპი 75სმ FLOOR WIPER 75 CM BLUE",
+        ru: "საშხვეპი 75სმ FLOOR WIPER 75 CM BLUE"
+    },
+    price: 34,
+     sizes: [ { name: "55", price: 26.00 }, { name: "75", price: 34.0 }, ],
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo36.jpg"]
+},
+
+{
+    id: 532,
+    barcode: "",
+    title: {
+        ka: "CAUTION BOARD",
+        en: "CAUTION BOARD",
+        ru: "CAUTION BOARD"
+    },
+    price: 40,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Security",
+    images: ["images/sameurneo37.jpg"]
+},
+
+{
+    id: 533,
+    barcode: "",
+    title: {
+        ka: "K6C - C FOLDED TOILET TISSUE DISPENSER WHITE დაკეცილი ტუალეტის ქაღალდის დისპენსერი თეთრი",
+        en: "K6C - C FOLDED TOILET TISSUE DISPENSER WHITE დაკეცილი ტუალეტის ქაღალდის დისპენსერი თეთრი",
+        ru: "K6C - C FOLDED TOILET TISSUE DISPENSER WHITE დაკეცილი ტუალეტის ქაღალდის დისპენსერი თეთრი"
+    },
+    price: 17,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet Paper dispensers",
+    images: ["images/sameurneo38.jpg"]
+},
+
+{
+    id: 534,
+    barcode: "",
+    title: {
+        ka: "C FOLDED TOILET TISSUE DISPENSER TRANSPARENT",
+        en: "C FOLDED TOILET TISSUE DISPENSER TRANSPARENT",
+        ru: "C FOLDED TOILET TISSUE DISPENSER TRANSPARENT"
+    },
+    price: 11,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Toilet Paper dispensers",
+    images: ["images/sameurneo39.jpg"]
+},
+
+{
+    id: 535,
+    barcode: "",
+    title: {
+        ka: "S5 - soap disp. with tank 500ml/white თხევადი საპნის და სადეზინფექციო საშუალებების დისპენსერი",
+        en: "S5 - soap disp. with tank 500ml/white თხევადი საპნის და სადეზინფექციო საშუალებების დისპენსერი",
+        ru: "S5 - soap disp. with tank 500ml/white თხევადი საპნის და სადეზინფექციო საშუალებების დისპენსერი"
+    },
+    price: 20,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Soap dispensers",
+    images: ["images/sameurneo40.jpg"]
+},
+
+{
+    id: 536,
+    barcode: "",
+    title: {
+        ka: "S2 LIQUID SOAP DISP. 500ML WHITE თხევადი საპნის დისპენსერი თეთრი",
+        en: "S2 LIQUID SOAP DISP. 500ML WHITE თხევადი საპნის დისპენსერი თეთრი",
+        ru: "S2 LIQUID SOAP DISP. 500ML WHITE თხევადი საპნის დისპენსერი თეთრი"
+    },
+    price: 10,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Soap dispensers",
+    images: ["images/sameurneo41.jpg"]
+},
+
+{
+    id: 537,
+    barcode: "",
+    title: {
+        ka: "Zoma Drainex - საკანალიზაციო მილების საწმენდი, 1 kg. (12 ცალი/ყუთში)",
+        en: "Zoma Drainex - საკანალიზაციო მილების საწმენდი, 1 kg. (12 ცალი/ყუთში)",
+        ru: "Zoma Drainex - საკანალიზაციო მილების საწმენდი, 1 kg. (12 ცალი/ყუთში)"
+    },
+    price: 22,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Sewer cleaning agents",
+    images: ["images/sameurneo42.jpg"]
+},
+
+{
+    id: 538,
+    barcode: "",
+    title: {
+        ka: "ქაღალდის ხელსახოცი Z ტიპის Z6031  (შეკვრაში 15 ცალი)",
+        en: "ქაღალდის ხელსახოცი Z ტიპის Z6031  (შეკვრაში 15 ცალი)",
+        ru: "ქაღალდის ხელსახოცი Z ტიპის Z6031  (შეკვრაში 15 ცალი)"
+    },
+    price: 2.2,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Paper napkins",
+    images: ["images/sameurneo43.jpg"]
+},
+
+{
+    id: 539,
+    barcode: "",
+    title: {
+        ka: "ქაღალდის ხელსახოცი Z ტიპის Z6007 (შეკვრაში 20 ცალი)",
+        en: "ქაღალდის ხელსახოცი Z ტიპის Z6007 (შეკვრაში 20 ცალი)",
+        ru: "ქაღალდის ხელსახოცი Z ტიპის Z6007 (შეკვრაში 20 ცალი)"
+    },
+    price: 2.25,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Paper napkins",
+    images: ["images/sameurneo44.jpg"]
+},
+
+{
+    id: 540,
+    barcode: "",
+    title: {
+        ka: "ქაღალდის ხელსახოცი Z ტიპის Z4011 (შეკვრაში 15 ცალი)",
+        en: "ქაღალდის ხელსახოცი Z ტიპის Z4011 (შეკვრაში 15 ცალი)",
+        ru: "ქაღალდის ხელსახოცი Z ტიპის Z4011 (შეკვრაში 15 ცალი)"
+    },
+    price: 2.15,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Paper napkins",
+    images: ["images/sameurneo45.jpg"]
+},
+
+{
+    id: 541,
+    barcode: "",
+    title: {
+        ka: "ჩუდესა-მიკროფიბრა \"კლეტკა\", 40*40, მ/ტ, ცისფერი",
+        en: "ჩუდესა-მიკროფიბრა \"კლეტკა\", 40*40, მ/ტ, ცისფერი",
+        ru: "ჩუდესა-მიკროფიბრა \"კლეტკა\", 40*40, მ/ტ, ცისფერი"
+    },
+    price: 1.35,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning",
+    images: ["images/sameurneo46.jpg"]
+},
+
+{
+    id: 542,
+    barcode: "",
+    title: {
+        ka: "ჩუდესა-მიკროფიბრა ბრაითი, 60*80, ი/ტ, ლურჯი",
+        en: "ჩუდესა-მიკროფიბრა ბრაითი, 60*80, ი/ტ, ლურჯი",
+        ru: "ჩუდესა-მიკროფიბრა ბრაითი, 60*80, ი/ტ, ლურჯი"
+    },
+    price: 3.8,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning",
+    images: ["images/sameurneo47.jpg"]
+},
+
+{
+    id: 543,
+    barcode: "",
+    title: {
+        ka: "WIPEXPERT 120 Super Strong 4C Extended Use Wipes  122 120B- 33x42cm- 25pcs/bag - ლურჯი",
+        en: "WIPEXPERT 120 Super Strong 4C Extended Use Wipes  122 120B- 33x42cm- 25pcs/bag - ლურჯი",
+        ru: "WIPEXPERT 120 Super Strong 4C Extended Use Wipes  122 120B- 33x42cm- 25pcs/bag - ლურჯი"
+    },
+    price: 21.9,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Cleaning",
+    images: ["images/sameurneo48.jpg"]
+},
+
+{
+    id: 544,
+    barcode: "",
+    title: {
+        ka: "ZEN Gagra Legends - გაგრის ლეგენდები 120მლ",
+        en: "ZEN Gagra Legends - გაგრის ლეგენდები 120მლ",
+        ru: "ZEN Gagra Legends - გაგრის ლეგენდები 120მლ"
+    },
+    price: 25,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Other",
+    images: ["images/sameurneo49.jpg"]
+},
+
+{
+    id: 545,
+    barcode: "",
+    title: {
+        ka: "ZEN Sokhumi Dream - სოხუმის ოცნება 120მლ",
+        en: "ZEN Sokhumi Dream - სოხუმის ოცნება 120მლ",
+        ru: "ZEN Sokhumi Dream - სოხუმის ოცნება 120მლ"
+    },
+    price: 25,
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Other",
+    images: ["images/sameurneo50.jpg"]
+},
+{
+    id: 551,
+    barcode: "",
+    title: {
+        ka: "მოპის დამჭერი ლითონის (ლურჯი)",
+        en: "მოპის დამჭერი ლითონის (ლურჯი)",
+        ru: "მოპის დამჭერი ლითონის (ლურჯი)"
+    },
+    price: 11,
+    sizes: [ { name: "50", price: 10.20 }, { name: "40", price: 10.40 }, ],
+    inStock: true,
+    category: "Household Goods",
+    subcategory: "Floor",
+    images: ["images/sameurneo51.jpg"]
+
+},
+{
+  id: 552,
+  barcode: "1881",
+  title: {
+    ka: "KDUSB2002-1M, KINGDA, USB 2.0 A female to micro B 5Pin male cable,CU ,1M",
+    en: "KDUSB2002-1M, KINGDA, USB 2.0 A female to micro B 5Pin male cable,CU ,1M",
+    ru: "KDUSB2002-1M, KINGDA, USB 2.0 A female to micro B 5Pin male cable,CU ,1M"
+  },
+  price: 2.6,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/1881.webp"]
+},
+{
+  id: 553,
+  barcode: "2965",
+  title: {
+    ka: "PP12-2M CAT5e UTP Patch cord, gray, 2m GEMBIRD Cablexpert",
+    en: "PP12-2M CAT5e UTP Patch cord, gray, 2m GEMBIRD Cablexpert",
+    ru: "PP12-2M CAT5e UTP Patch cord, gray, 2m GEMBIRD Cablexpert"
+  },
+  price: 3.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2965.webp"]
+},
+{
+  id: 554,
+  barcode: "2118",
+  title: {
+    ka: "Printer High Quality cable USB 1.5m",
+    en: "Printer High Quality cable USB 1.5m",
+    ru: "Printer High Quality cable USB 1.5m"
+  },
+  price: 3.1,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2118.webp"]
+},
+{
+  id: 555,
+  barcode: "2514",
+  title: {
+    ka: "Y-C451GBK Unitek USB 2.0 to Micro USB Charging Data sync Cable, Black, 1M, 0.25Y",
+    en: "Y-C451GBK Unitek USB 2.0 to Micro USB Charging Data sync Cable, Black, 1M, 0.25Y",
+    ru: "Y-C451GBK Unitek USB 2.0 to Micro USB Charging Data sync Cable, Black, 1M, 0.25Y"
+  },
+  price: 3.2,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2514.webp"]
+},
+{
+  id: 556,
+  barcode: "946",
+  title: {
+    ka: "FEF-H-001, Kingda, HDMI female to HDMI female adaptor",
+    en: "FEF-H-001, Kingda, HDMI female to HDMI female adaptor",
+    ru: "FEF-H-001, Kingda, HDMI female to HDMI female adaptor"
+  },
+  price: 3.3,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/946.webp"]
+},
+{
+  id: 557,
+  barcode: "2513",
+  title: {
+    ka: "Y-C442GBK, UNITEK, 1.5M USB 2.0 USB-A (M) to USB-A (M) Cable",
+    en: "Y-C442GBK, UNITEK, 1.5M USB 2.0 USB-A (M) to USB-A (M) Cable",
+    ru: "Y-C442GBK, UNITEK, 1.5M USB 2.0 USB-A (M) to USB-A (M) Cable"
+  },
+  price: 3.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2513.webp"]
+},
+{
+  id: 558,
+  barcode: "948",
+  title: {
+    ka: "FEF-V-001, Kingda, VGA female to VGA female adaptor",
+    en: "FEF-V-001, Kingda, VGA female to VGA female adaptor",
+    ru: "FEF-V-001, Kingda, VGA female to VGA female adaptor"
+  },
+  price: 4.1,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/948.webp"]
+},
+{
+  id: 559,
+  barcode: "1888",
+  title: {
+    ka: "KDUSB3001-0.5M, KINGDA USB Plug Cable to USB 3.0 Micro B Plug for external HDD 0,5 m",
+    en: "KDUSB3001-0.5M, KINGDA USB Plug Cable to USB 3.0 Micro B Plug for external HDD 0,5 m",
+    ru: "KDUSB3001-0.5M, KINGDA USB Plug Cable to USB 3.0 Micro B Plug for external HDD 0,5 m"
+  },
+  price: 4.2,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/1888.webp"]
+},
+{
+  id: 560,
+  barcode: "2806",
+  title: {
+    ka: "PP12-5M CAT5e UTP Patch cord, 5m GEMBIRD Cablexpert",
+    en: "PP12-5M CAT5e UTP Patch cord, 5m GEMBIRD Cablexpert",
+    ru: "PP12-5M CAT5e UTP Patch cord, 5m GEMBIRD Cablexpert"
+  },
+  price: 5.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2806.webp"]
+},
+{
+  id: 561,
+  barcode: "2505",
+  title: {
+    ka: "Y-C137M,UNITEK 1.5M, HDMI (M) to HDMI (M) Cable 4K 60Hz",
+    en: "Y-C137M,UNITEK 1.5M, HDMI (M) to HDMI (M) Cable 4K 60Hz",
+    ru: "Y-C137M,UNITEK 1.5M, HDMI (M) to HDMI (M) Cable 4K 60Hz"
+  },
+  price: 7.7,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2505.webp"]
+},
+{
+  id: 562,
+  barcode: "23",
+  title: {
+    ka: "A1046A, UNITEK, Adapter, 90° & 270° Right Angle HDMI Adapter 8K 60Hz & 4K 120Hz.",
+    en: "A1046A, UNITEK, Adapter, 90° & 270° Right Angle HDMI Adapter 8K 60Hz & 4K 120Hz.",
+    ru: "A1046A, UNITEK, Adapter, 90° & 270° Right Angle HDMI Adapter 8K 60Hz & 4K 120Hz."
+  },
+  price: 8.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/23.webp"]
+},
+{
+  id: 563,
+  barcode: "1893",
+  title: {
+    ka: "KDUSBC3005, KINGDA Type C Plug Cable to USB 3.0 Micro B Plug for external HDD 0,5 m",
+    en: "KDUSBC3005, KINGDA Type C Plug Cable to USB 3.0 Micro B Plug for external HDD 0,5 m",
+    ru: "KDUSBC3005, KINGDA Type C Plug Cable to USB 3.0 Micro B Plug for external HDD 0,5 m"
+  },
+  price: 8.9,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/1893.webp"]
+},
+{
+  id: 564,
+  barcode: "1900",
+  title: {
+    ka: "KDUSBSTE4001, Kingda Type C To 3.5 audio for android - stereo with mic",
+    en: "KDUSBSTE4001, Kingda Type C To 3.5 audio for android - stereo with mic",
+    ru: "KDUSBSTE4001, Kingda Type C To 3.5 audio for android - stereo with mic"
+  },
+  price: 9.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/1900.webp"]
+},
+{
+  id: 565,
+  barcode: "3678",
+  title: {
+    ka: "VAA-B06-B200 , Cable, Cable, .2K, 3D, 4K, Full HD 1080p, UHD 2160p .",
+    en: "VAA-B06-B200 , Cable, Cable, .2K, 3D, 4K, Full HD 1080p, UHD 2160p .",
+    ru: "VAA-B06-B200 , Cable, Cable, .2K, 3D, 4K, Full HD 1080p, UHD 2160p ."
+  },
+  price: 9.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/3678.webp"]
+},
+{
+  id: 566,
+  barcode: "1905",
+  title: {
+    ka: "KDVGA1001-3M, Kingda, 3+4 VGA Cable,Al shield,Copper,Nickel Plated Connector,double Ferrites,0.8mm",
+    en: "KDVGA1001-3M, Kingda, 3+4 VGA Cable,Al shield,Copper,Nickel Plated Connector,double Ferrites,0.8mm",
+    ru: "KDVGA1001-3M, Kingda, 3+4 VGA Cable,Al shield,Copper,Nickel Plated Connector,double Ferrites,0.8mm"
+  },
+  price: 9.8,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/1905.webp"]
+},
+{
+  id: 567,
+  barcode: "684",
+  title: {
+    ka: "AV141 UGREEN (30620) 3.5mm male to 2 Female Audio Cable ABS Case (Black)",
+    en: "AV141 UGREEN (30620) 3.5mm male to 2 Female Audio Cable ABS Case (Black)",
+    ru: "AV141 UGREEN (30620) 3.5mm male to 2 Female Audio Cable ABS Case (Black)"
+  },
+  price: 11.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/684.webp"]
+},
+{
+  id: 568,
+  barcode: "2805",
+  title: {
+    ka: "PP12-15M, Cablexpert CAT5e UTP Patch cord, gray, 15 m GEMBIRD",
+    en: "PP12-15M, Cablexpert CAT5e UTP Patch cord, gray, 15 m GEMBIRD",
+    ru: "PP12-15M, Cablexpert CAT5e UTP Patch cord, gray, 15 m GEMBIRD"
+  },
+  price: 11.2,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2805.webp"]
+},
+{
+  id: 569,
+  barcode: "1092",
+  title: {
+    ka: "KDHMAD7001B, KINGDA, HDMI to VGA Adaptor",
+    en: "KDHMAD7001B, KINGDA, HDMI to VGA Adaptor",
+    ru: "KDHMAD7001B, KINGDA, HDMI to VGA Adaptor"
+  },
+  price: 12.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/1092.webp"]
+},
+{
+  id: 570,
+  barcode: "609",
+  title: {
+    ka: "ACC-A2CC-3A, GENIUS Fast charging USB 3.0 1.5m, and sync a USB-C device from any USB-A charger, Black",
+    en: "ACC-A2CC-3A, GENIUS Fast charging USB 3.0 1.5m, and sync a USB-C device from any USB-A charger, Black",
+    ru: "ACC-A2CC-3A, GENIUS Fast charging USB 3.0 1.5m, and sync a USB-C device from any USB-A charger, Black"
+  },
+  price: 13.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/609.webp"]
+},
+{
+  id: 571,
+  barcode: "714",
+  title: {
+    ka: "C14059BK, UNITEK, 2M USB-C CM to CM PD 100W Charging Cable",
+    en: "C14059BK, UNITEK, 2M USB-C CM to CM PD 100W Charging Cable",
+    ru: "C14059BK, UNITEK, 2M USB-C CM to CM PD 100W Charging Cable"
+  },
+  price: 13.2,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/714.webp"]
+},
+{
+  id: 572,
+  barcode: "2871",
+  title: {
+    ka: "LALBH, VENTION, USB 2.0 Type-C Male to Lightning Male 3A Cable 2M Aluminum Alloy Type.",
+    en: "LALBH, VENTION, USB 2.0 Type-C Male to Lightning Male 3A Cable 2M Aluminum Alloy Type.",
+    ru: "LALBH, VENTION, USB 2.0 Type-C Male to Lightning Male 3A Cable 2M Aluminum Alloy Type."
+  },
+  price: 14.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2871.webp"]
+},
+{
+  id: 573,
+  barcode: "1105",
+  title: {
+    ka: "KDMHLHM8016, Kingda,MHL to HDMI adapter",
+    en: "KDMHLHM8016, Kingda,MHL to HDMI adapter",
+    ru: "KDMHLHM8016, Kingda,MHL to HDMI adapter"
+  },
+  price: 18.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/1105.webp"]
+},
+{
+  id: 574,
+  barcode: "3674",
+  title: {
+    ka: "HACBH DP, Cable, HACBH DP Cable 2M Black.",
+    en: "HACBH DP, Cable, HACBH DP Cable 2M Black.",
+    ru: "HACBH DP, Cable, HACBH DP Cable 2M Black."
+  },
+  price: 20.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/3674.webp"]
+},
+{
+  id: 575,
+  barcode: "2489",
+  title: {
+    ka: "Y-277,UNITEK 5M, USB2.0 Active Extension Cable",
+    en: "Y-277,UNITEK 5M, USB2.0 Active Extension Cable",
+    ru: "Y-277,UNITEK 5M, USB2.0 Active Extension Cable"
+  },
+  price: 23.8,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2489.webp"]
+},
+{
+  id: 576,
+  barcode: "2438",
+  title: {
+    ka: "V1608A, UNITEK 1.8M, DP1.2 To HDMI 4K 60Hz Adapter Cable, Balck",
+    en: "V1608A, UNITEK 1.8M, DP1.2 To HDMI 4K 60Hz Adapter Cable, Balck",
+    ru: "V1608A, UNITEK 1.8M, DP1.2 To HDMI 4K 60Hz Adapter Cable, Balck"
+  },
+  price: 31.1,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2438.webp"]
+},
+{
+  id: 577,
+  barcode: "2437",
+  title: {
+    ka: "V1423C, UNITEK 1.8M, USB-C To DP1.4 8K 60Hz Adapter Cable, Space Grey",
+    en: "V1423C, UNITEK 1.8M, USB-C To DP1.4 8K 60Hz Adapter Cable, Space Grey",
+    ru: "V1423C, UNITEK 1.8M, USB-C To DP1.4 8K 60Hz Adapter Cable, Space Grey"
+  },
+  price: 39.6,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2437.webp"]
+},
+{
+  id: 578,
+  barcode: "2414",
+  title: {
+    ka: "UGREEN CM596 (90748), Bluetooth, AUX, Car Adapter, Black",
+    en: "UGREEN CM596 (90748), Bluetooth, AUX, Car Adapter, Black",
+    ru: "UGREEN CM596 (90748), Bluetooth, AUX, Car Adapter, Black"
+  },
+  price: 49.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Cabels",
+  images: ["images/2414.webp"]
+},
+{
+  id: 579,
+  barcode: "66010199425",
+  title: {
+    ka: "Extensa 15 EX215-56-390J, ACER, Notebook, 15.6\" FHD Intel Core 3 100U 16GB 512GB SSD.",
+    en: "Extensa 15 EX215-56-390J, ACER, Notebook, 15.6\" FHD Intel Core 3 100U 16GB 512GB SSD.",
+    ru: "Extensa 15 EX215-56-390J, ACER, Notebook, 15.6\" FHD Intel Core 3 100U 16GB 512GB SSD."
+  },
+  price: 1599.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Leptops",
+  images: ["images/66010199425.webp"]
+},
+{
+  id: 580,
+  barcode: "66010198216",
+  title: {
+    ka: "HP OmniBook 5 16\" 2K (1920x1200) Ultra 5-225U, 16GB DDR5X 7467 MT/s, 512GB, Sky blue, aluminum AI PC CanopyR 25C1, C09G3EA",
+    en: "HP OmniBook 5 16\" 2K (1920x1200) Ultra 5-225U, 16GB DDR5X 7467 MT/s, 512GB, Sky blue, aluminum AI PC CanopyR 25C1, C09G3EA",
+    ru: "HP OmniBook 5 16\" 2K (1920x1200) Ultra 5-225U, 16GB DDR5X 7467 MT/s, 512GB, Sky blue, aluminum AI PC CanopyR 25C1, C09G3EA"
+  },
+  price: 2575.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Leptops",
+  images: ["images/66010198216.webp"]
+},
+{
+  id: 581,
+  barcode: "66010198753",
+  title: {
+    ka: "Thinkpad E16 G3 Lenovo, Notebook, 16\" FHD+ Ultra 7 255H 16C, 16GB. 512GB M.2, DOS,2Y.",
+    en: "Thinkpad E16 G3 Lenovo, Notebook, 16\" FHD+ Ultra 7 255H 16C, 16GB. 512GB M.2, DOS,2Y.",
+    ru: "Thinkpad E16 G3 Lenovo, Notebook, 16\" FHD+ Ultra 7 255H 16C, 16GB. 512GB M.2, DOS,2Y."
+  },
+  price: 3696.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Leptops",
+  images: ["images/66010198753.webp"]
+},
+{
+  id: 582,
+  barcode: "66010193891",
+  title: {
+    ka: "Lenovo Legion Pro 7, 16\"2.5K OLED 240Hz U9 275HX, 64GB, 1TB, RTX5090-24G, 16IAX10H",
+    en: "Lenovo Legion Pro 7, 16\"2.5K OLED 240Hz U9 275HX, 64GB, 1TB, RTX5090-24G, 16IAX10H",
+    ru: "Lenovo Legion Pro 7, 16\"2.5K OLED 240Hz U9 275HX, 64GB, 1TB, RTX5090-24G, 16IAX10H"
+  },
+  price: 13311.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Leptops",
+  images: ["images/66010193891.webp"]
+},
+{
+  id: 583,
+  barcode: "66010197462",
+  title: {
+    ka: "DAHUA A200Y Monitor 23.8\"",
+    en: "DAHUA A200Y Monitor 23.8\"",
+    ru: "DAHUA A200Y Monitor 23.8\""
+  },
+  price: 217.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Monitors",
+  images: ["images/66010197462.webp"]
+},
+{
+  id: 584,
+  barcode: "66010199424",
+  title: {
+    ka: "Acer Nitro KG240YP0BI 23.8\" FHD gaming Monitor",
+    en: "Acer Nitro KG240YP0BI 23.8\" FHD gaming Monitor",
+    ru: "Acer Nitro KG240YP0BI 23.8\" FHD gaming Monitor"
+  },
+  price: 245.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Monitors",
+  images: ["images/66010199424.webp"]
+},
+{
+  id: 585,
+  barcode: "66010190334",
+  title: {
+    ka: "Philips 24E1N1100A/01 Monitor 23,8\"",
+    en: "Philips 24E1N1100A/01 Monitor 23,8\"",
+    ru: "Philips 24E1N1100A/01 Monitor 23,8\""
+  },
+  price: 246.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Monitors",
+  images: ["images/66010190334.webp"]
+},
+{
+  id: 586,
+  barcode: "66010192489",
+  title: {
+    ka: "SAMSUNG Essential S3 S30GD LS27D300 Monitor 27\"",
+    en: "SAMSUNG Essential S3 S30GD LS27D300 Monitor 27\"",
+    ru: "SAMSUNG Essential S3 S30GD LS27D300 Monitor 27\""
+  },
+  price: 342.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Monitors",
+  images: ["images/66010192489.webp"]
+},
+{
+  id: 587,
+  barcode: "66010199392",
+  title: {
+    ka: "SE2726H, DELL, Monitor, 27\" 2хHDMI, IPS, 144Hz, FreeSyncc.",
+    en: "SE2726H, DELL, Monitor, 27\" 2хHDMI, IPS, 144Hz, FreeSyncc.",
+    ru: "SE2726H, DELL, Monitor, 27\" 2хHDMI, IPS, 144Hz, FreeSyncc."
+  },
+  price: 365.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Monitors",
+  images: ["images/66010199392.webp"]
+},
+{
+  id: 588,
+  barcode: "66010198601",
+  title: {
+    ka: "LG 29U531A-W 29\" UltraWide 21:9 WFHD Monitor",
+    en: "LG 29U531A-W 29\" UltraWide 21:9 WFHD Monitor",
+    ru: "LG 29U531A-W 29\" UltraWide 21:9 WFHD Monitor"
+  },
+  price: 702.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Monitors",
+  images: ["images/66010198601.webp"]
+},
+{
+  id: 589,
+  barcode: "FC-202",
+  title: {
+    ka: "მაუსი FC-202",
+    en: "მაუსი FC-202",
+    ru: "მაუსი FC-202"
+  },
+  price: 8.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/FC-202.webp"]
+},
+{
+  id: 590,
+  barcode: "RF-4000",
+  title: {
+    ka: "მაუსი RF-4000",
+    en: "მაუსი RF-4000",
+    ru: "მაუსი RF-4000"
+  },
+  price: 12.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/RF-4000.webp"]
+},
+{
+  id: 591,
+  barcode: "RF-2812",
+  title: {
+    ka: "მაუსი RF-2812",
+    en: "მაუსი RF-2812",
+    ru: "მაუსი RF-2812"
+  },
+  price: 13.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/RF-2812.webp"]
+},
+{
+  id: 592,
+  barcode: "RF-5084B",
+  title: {
+    ka: "მაუსი RF-5084B",
+    en: "მაუსი RF-5084B",
+    ru: "მაუსი RF-5084B"
+  },
+  price: 13.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/RF-5084B.webp"]
+},
+{
+  id: 593,
+  barcode: "21*26*0.3",
+  title: {
+    ka: "მაუსის დასადები 21*26*0.3",
+    en: "მაუსის დასადები 21*26*0.3",
+    ru: "მაუსის დასადები 21*26*0.3"
+  },
+  price: 2.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/21260.3.webp"]
+},
+{
+  id: 594,
+  barcode: "3691პ",
+  title: {
+    ka: "მაუსის დასადები 3691",
+    en: "მაუსის დასადები 3691",
+    ru: "მაუსის დასადები 3691"
+  },
+  price: 6.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/3691პ.webp"]
+},
+{
+  id: 595,
+  barcode: "30*25",
+  title: {
+    ka: "მაუსის დასადები 30*25",
+    en: "მაუსის დასადები 30*25",
+    ru: "მაუსის დასადები 30*25"
+  },
+  price: 6.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/3025.webp"]
+},
+{
+  id: 596,
+  barcode: "2537",
+  title: {
+    ka: "CD-R დისკი DELI 700Mb 2537",
+    en: "CD-R დისკი DELI 700Mb 2537",
+    ru: "CD-R დისკი DELI 700Mb 2537"
+  },
+  price: 0.8,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/2537.webp"]
+},
+{
+  id: 597,
+  barcode: "CD/50",
+  title: {
+    ka: "Cd-R დისკი (50ც) Princo",
+    en: "Cd-R დისკი (50ც) Princo",
+    ru: "Cd-R დისკი (50ც) Princo"
+  },
+  price: 22.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/CD50.webp"]
+},
+{
+  id: 598,
+  barcode: "DVD/50",
+  title: {
+    ka: "Dvd-R დისკი (50ც) Princo",
+    en: "Dvd-R დისკი (50ც) Princo",
+    ru: "Dvd-R დისკი (50ც) Princo"
+  },
+  price: 30.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/DVD50.webp"]
+},
+{
+  id: 599,
+  barcode: "E3725",
+  title: {
+    ka: "CD-R დისკი 700Mb 50 ცალი Deli Stationery",
+    en: "CD-R დისკი 700Mb 50 ცალი Deli Stationery",
+    ru: "CD-R დისკი 700Mb 50 ცალი Deli Stationery"
+  },
+  price: 36.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/E3725.webp"]
+},
+{
+  id: 600,
+  barcode: "E3724",
+  title: {
+    ka: "DVD-R დისკი 4.7GB 50 ცალი Deli Stationery",
+    en: "DVD-R დისკი 4.7GB 50 ცალი Deli Stationery",
+    ru: "DVD-R დისკი 4.7GB 50 ცალი Deli Stationery"
+  },
+  price: 40.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/E3724.webp"]
+},
+{
+  id: 601,
+  barcode: "66010188151",
+  title: {
+    ka: "logitech, K380s Pebble Keys 2, Keyboard Grey",
+    en: "logitech, K380s Pebble Keys 2, Keyboard Grey",
+    ru: "logitech, K380s Pebble Keys 2, Keyboard Grey"
+  },
+  price: 159.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/66010188151.webp"]
+},
+{
+  id: 602,
+  barcode: "66010196545",
+  title: {
+    ka: "2E, Projector, Deimos FHD (1920×1080), LED lumens 200 ANSI, HDMI, USB, MicroSD, WiFi, Bluetooth Speaker 5 W.",
+    en: "2E, Projector, Deimos FHD (1920×1080), LED lumens 200 ANSI, HDMI, USB, MicroSD, WiFi, Bluetooth Speaker 5 W.",
+    ru: "2E, Projector, Deimos FHD (1920×1080), LED lumens 200 ANSI, HDMI, USB, MicroSD, WiFi, Bluetooth Speaker 5 W."
+  },
+  price: 330.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010196545.webp"]
+},
+{
+  id: 603,
+  barcode: "66010196576",
+  title: {
+    ka: "HP Projector CC360 LED LCD",
+    en: "HP Projector CC360 LED LCD",
+    ru: "HP Projector CC360 LED LCD"
+  },
+  price: 658.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010196576.webp"]
+},
+{
+  id: 604,
+  barcode: "66010192475",
+  title: {
+    ka: "Byintek, X30 Smart LCD Projector, FHD 1920x1080, 650lm, Black",
+    en: "Byintek, X30 Smart LCD Projector, FHD 1920x1080, 650lm, Black",
+    ru: "Byintek, X30 Smart LCD Projector, FHD 1920x1080, 650lm, Black"
+  },
+  price: 700.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010192475.webp"]
+},
+{
+  id: 605,
+  barcode: "66010187222",
+  title: {
+    ka: "MR.JWM11.001, Aopen QF15A LED -Projection system LCD -Wireless Projection, HDMI,MicroSD, 1USB,1080p,500 Lumens,30,000 H",
+    en: "MR.JWM11.001, Aopen QF15A LED -Projection system LCD -Wireless Projection, HDMI,MicroSD, 1USB,1080p,500 Lumens,30,000 H",
+    ru: "MR.JWM11.001, Aopen QF15A LED -Projection system LCD -Wireless Projection, HDMI,MicroSD, 1USB,1080p,500 Lumens,30,000 H"
+  },
+  price: 954.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010187222.webp"]
+},
+{
+  id: 606,
+  barcode: "66010196546",
+  title: {
+    ka: "HP Projector MP2000 PRO LED TI DLP",
+    en: "HP Projector MP2000 PRO LED TI DLP",
+    ru: "HP Projector MP2000 PRO LED TI DLP"
+  },
+  price: 1956.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010196546.webp"]
+},
+{
+  id: 607,
+  barcode: "66010197284",
+  title: {
+    ka: "EPSON Projector EB-W53 3LCD",
+    en: "EPSON Projector EB-W53 3LCD",
+    ru: "EPSON Projector EB-W53 3LCD"
+  },
+  price: 2296.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010197284.webp"]
+},
+{
+  id: 608,
+  barcode: "66010184371",
+  title: {
+    ka: "MR.JR511.001,ACER PL6510 DLP Laser Projector,FHD, LampType Laser,Stand Mode Bright. 5500 LM,Lamp Life30 000H,Speaker10w,120Hz",
+    en: "MR.JR511.001,ACER PL6510 DLP Laser Projector,FHD, LampType Laser,Stand Mode Bright. 5500 LM,Lamp Life30 000H,Speaker10w,120Hz",
+    ru: "MR.JR511.001,ACER PL6510 DLP Laser Projector,FHD, LampType Laser,Stand Mode Bright. 5500 LM,Lamp Life30 000H,Speaker10w,120Hz"
+  },
+  price: 7465.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010184371.webp"]
+},
+{
+  id: 609,
+  barcode: "66010176821",
+  title: {
+    ka: "JZ.J7400.002, Acer M87-S01MW Roll-Up Projection Screen External dimensions (W x H): 181 x 191 cm",
+    en: "JZ.J7400.002, Acer M87-S01MW Roll-Up Projection Screen External dimensions (W x H): 181 x 191 cm",
+    ru: "JZ.J7400.002, Acer M87-S01MW Roll-Up Projection Screen External dimensions (W x H): 181 x 191 cm"
+  },
+  price: 313.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010176821.webp"]
+},
+{
+  id: 610,
+  barcode: "66010176822",
+  title: {
+    ka: "MC.JBG11.00F, Acer T87-S01M Projection Screen+Tripod External dimensions (W x H): 180 x 146 cm",
+    en: "MC.JBG11.00F, Acer T87-S01M Projection Screen+Tripod External dimensions (W x H): 180 x 146 cm",
+    ru: "MC.JBG11.00F, Acer T87-S01M Projection Screen+Tripod External dimensions (W x H): 180 x 146 cm"
+  },
+  price: 369.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010176822.webp"]
+},
+{
+  id: 611,
+  barcode: "66010176823",
+  title: {
+    ka: "MC.JBG11.009, Acer E100-W01MW Projection Screen-Control Electric-External dim. (W x H): 221x159 cm",
+    en: "MC.JBG11.009, Acer E100-W01MW Projection Screen-Control Electric-External dim. (W x H): 221x159 cm",
+    ru: "MC.JBG11.009, Acer E100-W01MW Projection Screen-Control Electric-External dim. (W x H): 221x159 cm"
+  },
+  price: 686.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Projectors",
+  images: ["images/66010176823.webp"]
+},
+{
+  id: 612,
+  barcode: "66010152565",
+  title: {
+    ka: "Media Pointer 100 ,Genius,Smart 2.4GHz Presenter",
+    en: "Media Pointer 100 ,Genius,Smart 2.4GHz Presenter",
+    ru: "Media Pointer 100 ,Genius,Smart 2.4GHz Presenter"
+  },
+  price: 71.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/66010152565.webp"]
+},
+{
+  id: 613,
+  barcode: "66010184364",
+  title: {
+    ka: "R500s LOGITECH Bluetooth Presentation Remote - MID GREY L910-006520",
+    en: "R500s LOGITECH Bluetooth Presentation Remote - MID GREY L910-006520",
+    ru: "R500s LOGITECH Bluetooth Presentation Remote - MID GREY L910-006520"
+  },
+  price: 139.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/66010184364.webp"]
+},
+{
+  id: 614,
+  barcode: "66010185556",
+  title: {
+    ka: "R500s LOGITECH Bluetooth Presentation Remote - GRAPHITE L910-005843",
+    en: "R500s LOGITECH Bluetooth Presentation Remote - GRAPHITE L910-005843",
+    ru: "R500s LOGITECH Bluetooth Presentation Remote - GRAPHITE L910-005843"
+  },
+  price: 139.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Peripheral devices",
+  images: ["images/66010185556.webp"]
+},
+{
+  id: 615,
+  barcode: "66010195053",
+  title: {
+    ka: "NETAC, U197, 64GB, USB2.0, Black+Red",
+    en: "NETAC, U197, 64GB, USB2.0, Black+Red",
+    ru: "NETAC, U197, 64GB, USB2.0, Black+Red"
+  },
+  price: 23.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Flesh cards",
+  images: ["images/66010195053.webp"]
+},
+{
+  id: 616,
+  barcode: "66010170146",
+  title: {
+    ka: "KINGSTON, DTX/128GB, USB3.2, Black + Yellow.",
+    en: "KINGSTON, DTX/128GB, USB3.2, Black + Yellow.",
+    ru: "KINGSTON, DTX/128GB, USB3.2, Black + Yellow."
+  },
+  price: 35.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Flesh cards",
+  images: ["images/66010170146.webp"]
+},
+{
+  id: 617,
+  barcode: "66010190067",
+  title: {
+    ka: "KINGSTON, DTSE9G3/64GB, USB 3.2",
+    en: "KINGSTON, DTSE9G3/64GB, USB 3.2",
+    ru: "KINGSTON, DTSE9G3/64GB, USB 3.2"
+  },
+  price: 51.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Flesh cards",
+  images: ["images/66010190067.webp"]
+},
+{
+  id: 618,
+  barcode: "66010177769",
+  title: {
+    ka: "KINGSTON, DTKN/64GB, USB 3.2",
+    en: "KINGSTON, DTKN/64GB, USB 3.2",
+    ru: "KINGSTON, DTKN/64GB, USB 3.2"
+  },
+  price: 57.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Flesh cards",
+  images: ["images/66010177769.webp"]
+},
+{
+  id: 619,
+  barcode: "66010195081",
+  title: {
+    ka: "NETAC, U336, 128GB, USB3.2, Write protection, Black",
+    en: "NETAC, U336, 128GB, USB3.2, Write protection, Black",
+    ru: "NETAC, U336, 128GB, USB3.2, Write protection, Black"
+  },
+  price: 66.5,
+  inStock: true,
+  category: "computers",
+  subcategory: "Flesh cards",
+  images: ["images/66010195081.webp"]
+},
+{
+  id: 620,
+  barcode: "66010177770",
+  title: {
+    ka: "KINGSTON, DTKN/128GB, USB 3.2",
+    en: "KINGSTON, DTKN/128GB, USB 3.2",
+    ru: "KINGSTON, DTKN/128GB, USB 3.2"
+  },
+  price: 93.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Flesh cards",
+  images: ["images/66010177770.webp"]
+},
+{
+  id: 621,
+  barcode: "66010190068",
+  title: {
+    ka: "KINGSTON, DTSE9G3/128GB, USB 3.2",
+    en: "KINGSTON, DTSE9G3/128GB, USB 3.2",
+    ru: "KINGSTON, DTSE9G3/128GB, USB 3.2"
+  },
+  price: 95.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Flesh cards",
+  images: ["images/66010190068.webp"]
+},
+{
+  id: 622,
+  barcode: "66010195589",
+  title: {
+    ka: "KINGSTON, DTMC3G2/256GB, USB 3.2",
+    en: "KINGSTON, DTMC3G2/256GB, USB 3.2",
+    ru: "KINGSTON, DTMC3G2/256GB, USB 3.2"
+  },
+  price: 187.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Flesh cards",
+  images: ["images/66010195589.webp"]
+},
+{
+  id: 623,
+  barcode: "66010135041",
+  title: {
+    ka: "NRN-236GV, Sumdex iPad Case",
+    en: "NRN-236GV, Sumdex iPad Case",
+    ru: "NRN-236GV, Sumdex iPad Case"
+  },
+  price: 29.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Begs",
+  images: ["images/66010135041.webp"]
+},
+{
+  id: 624,
+  barcode: "66010164042",
+  title: {
+    ka: "21551 TRUST PRIMO CARRY BAG FOR 16\" LAPTOPS Black",
+    en: "21551 TRUST PRIMO CARRY BAG FOR 16\" LAPTOPS Black",
+    ru: "21551 TRUST PRIMO CARRY BAG FOR 16\" LAPTOPS Black"
+  },
+  price: 30.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Begs",
+  images: ["images/66010164042.webp"]
+},
+{
+  id: 625,
+  barcode: "66010170656",
+  title: {
+    ka: "B210 Lenovo 15.6 Bag Laptop Casual Backpack GRAY (GX40Q17227)",
+    en: "B210 Lenovo 15.6 Bag Laptop Casual Backpack GRAY (GX40Q17227)",
+    ru: "B210 Lenovo 15.6 Bag Laptop Casual Backpack GRAY (GX40Q17227)"
+  },
+  price: 37.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Begs",
+  images: ["images/66010170656.webp"]
+},
+{
+  id: 626,
+  barcode: "66010186882",
+  title: {
+    ka: "B510 LENOVO CASE_BO 15.6 Backpack 375.6 x 253.4 x 22.7 mm - BLACK GX40Q75214",
+    en: "B510 LENOVO CASE_BO 15.6 Backpack 375.6 x 253.4 x 22.7 mm - BLACK GX40Q75214",
+    ru: "B510 LENOVO CASE_BO 15.6 Backpack 375.6 x 253.4 x 22.7 mm - BLACK GX40Q75214"
+  },
+  price: 60.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Begs",
+  images: ["images/66010186882.webp"]
+},
+{
+  id: 627,
+  barcode: "66010196046",
+  title: {
+    ka: "RC81-03640101-0000, RAZER, BAGS FOR NOTEBOOK, Razer Rogue Backpack (15.6\") V3, black.",
+    en: "RC81-03640101-0000, RAZER, BAGS FOR NOTEBOOK, Razer Rogue Backpack (15.6\") V3, black.",
+    ru: "RC81-03640101-0000, RAZER, BAGS FOR NOTEBOOK, Razer Rogue Backpack (15.6\") V3, black."
+  },
+  price: 292.0,
+  inStock: true,
+  category: "computers",
+  subcategory: "Begs",
+  images: ["images/66010196046.webp"]
+},
+{
+  id: 628,
+  barcode: "66010152579",
+  title: {
+    ka: "GXP1625, Grandstream business IP Phone with 2 lines, 132x48 LCD, HD audio, 3-way conferencing POE",
+    en: "GXP1625, Grandstream business IP Phone with 2 lines, 132x48 LCD, HD audio, 3-way conferencing POE",
+    ru: "GXP1625, Grandstream business IP Phone with 2 lines, 132x48 LCD, HD audio, 3-way conferencing POE"
+  },
+  price: 127.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010152579.webp"]
+},
+{
+  id: 629,
+  barcode: "66010188821",
+  title: {
+    ka: "GXP2160 Grandstream Enterprise IP Telephone: 6-line Enterprise HD IP Phone; 480x272 TFT color LCD",
+    en: "GXP2160 Grandstream Enterprise IP Telephone: 6-line Enterprise HD IP Phone; 480x272 TFT color LCD",
+    ru: "GXP2160 Grandstream Enterprise IP Telephone: 6-line Enterprise HD IP Phone; 480x272 TFT color LCD"
+  },
+  price: 343.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010188821.webp"]
+},
+{
+  id: 630,
+  barcode: "66010177486",
+  title: {
+    ka: "GRP2634 Grandstream GRP2634, Carrier-Grade IP Phones, 8 line keys, 4 SIP accounts, 32 VPK and 10 MPK",
+    en: "GRP2634 Grandstream GRP2634, Carrier-Grade IP Phones, 8 line keys, 4 SIP accounts, 32 VPK and 10 MPK",
+    ru: "GRP2634 Grandstream GRP2634, Carrier-Grade IP Phones, 8 line keys, 4 SIP accounts, 32 VPK and 10 MPK"
+  },
+  price: 354.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010177486.webp"]
+},
+{
+  id: 631,
+  barcode: "66010152511",
+  title: {
+    ka: "SPA962-EU, Linksys, 6-Line IP Telephone with 2-Port",
+    en: "SPA962-EU, Linksys, 6-Line IP Telephone with 2-Port",
+    ru: "SPA962-EU, Linksys, 6-Line IP Telephone with 2-Port"
+  },
+  price: 573.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010152511.webp"]
+},
+{
+  id: 632,
+  barcode: "66010196618",
+  title: {
+    ka: "TP-Link, Archer TX20U, Wi-Fi USB Adapter, AX1800",
+    en: "TP-Link, Archer TX20U, Wi-Fi USB Adapter, AX1800",
+    ru: "TP-Link, Archer TX20U, Wi-Fi USB Adapter, AX1800"
+  },
+  price: 85.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Adapters",
+  images: ["images/66010196618.webp"]
+},
+{
+  id: 633,
+  barcode: "66010184655",
+  title: {
+    ka: "TP-Link, Archer TX20U Plus, AX1800, Wireless USB Adapter",
+    en: "TP-Link, Archer TX20U Plus, AX1800, Wireless USB Adapter",
+    ru: "TP-Link, Archer TX20U Plus, AX1800, Wireless USB Adapter"
+  },
+  price: 99.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Adapters",
+  images: ["images/66010184655.webp"]
+},
+{
+  id: 634,
+  barcode: "66010197991",
+  title: {
+    ka: "TP-Link, Archer TXE75E, AXE5400 Wi-Fi 6E Bluetooth PCIe Adapter",
+    en: "TP-Link, Archer TXE75E, AXE5400 Wi-Fi 6E Bluetooth PCIe Adapter",
+    ru: "TP-Link, Archer TXE75E, AXE5400 Wi-Fi 6E Bluetooth PCIe Adapter"
+  },
+  price: 195.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Adapters",
+  images: ["images/66010197991.webp"]
+},
+{
+  id: 635,
+  barcode: "66010197236",
+  title: {
+    ka: "TP-Link, Archer TBE400UH, BE6500 Wi-Fi 7 High Gain Wireless USB Adapter",
+    en: "TP-Link, Archer TBE400UH, BE6500 Wi-Fi 7 High Gain Wireless USB Adapter",
+    ru: "TP-Link, Archer TBE400UH, BE6500 Wi-Fi 7 High Gain Wireless USB Adapter"
+  },
+  price: 239.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Adapters",
+  images: ["images/66010197236.webp"]
+},
+{
+  id: 636,
+  barcode: "66010195995",
+  title: {
+    ka: "TP-Link, RE505X, AX1500 Wi-Fi 6 Range Extender",
+    en: "TP-Link, RE505X, AX1500 Wi-Fi 6 Range Extender",
+    ru: "TP-Link, RE505X, AX1500 Wi-Fi 6 Range Extender"
+  },
+  price: 130.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010195995.webp"]
+},
+{
+  id: 637,
+  barcode: "66010197238",
+  title: {
+    ka: "TP-Link, RE705X, Range Extender, AX3000 Mesh WiFi 6 Extender",
+    en: "TP-Link, RE705X, Range Extender, AX3000 Mesh WiFi 6 Extender",
+    ru: "TP-Link, RE705X, Range Extender, AX3000 Mesh WiFi 6 Extender"
+  },
+  price: 210.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010197238.webp"]
+},
+{
+  id: 638,
+  barcode: "66010197986",
+  title: {
+    ka: "TP-Link, RE225BE, BE3600 Wi-Fi 7 Range Extender",
+    en: "TP-Link, RE225BE, BE3600 Wi-Fi 7 Range Extender",
+    ru: "TP-Link, RE225BE, BE3600 Wi-Fi 7 Range Extender"
+  },
+  price: 265.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010197986.webp"]
+},
+{
+  id: 639,
+  barcode: "66010145374",
+  title: {
+    ka: "TP-Link, Archer C60 AC1350 Wireless Dual Band Router",
+    en: "TP-Link, Archer C60 AC1350 Wireless Dual Band Router",
+    ru: "TP-Link, Archer C60 AC1350 Wireless Dual Band Router"
+  },
+  price: 93.5,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Routers",
+  images: ["images/66010145374.webp"]
+},
+{
+  id: 640,
+  barcode: "66010161131",
+  title: {
+    ka: "TP-Link, Archer C6 AC1200 Wireless MU-MIMO Gigabit Router",
+    en: "TP-Link, Archer C6 AC1200 Wireless MU-MIMO Gigabit Router",
+    ru: "TP-Link, Archer C6 AC1200 Wireless MU-MIMO Gigabit Router"
+  },
+  price: 99.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Routers",
+  images: ["images/66010161131.webp"]
+},
+{
+  id: 641,
+  barcode: "66010197882",
+  title: {
+    ka: "TP-Link, Archer AX56, Wi-Fi 6 Router",
+    en: "TP-Link, Archer AX56, Wi-Fi 6 Router",
+    ru: "TP-Link, Archer AX56, Wi-Fi 6 Router"
+  },
+  price: 200.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Routers",
+  images: ["images/66010197882.webp"]
+},
+{
+  id: 642,
+  barcode: "66010183822",
+  title: {
+    ka: "TP-Link, Archer AX53, AX3000 Wi-Fi 6 Router",
+    en: "TP-Link, Archer AX53, AX3000 Wi-Fi 6 Router",
+    ru: "TP-Link, Archer AX53, AX3000 Wi-Fi 6 Router"
+  },
+  price: 200.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Routers",
+  images: ["images/66010183822.webp"]
+},
+{
+  id: 643,
+  barcode: "66010184652",
+  title: {
+    ka: "TP-Link, Archer AXE75, AXE5400 Tri-Band Wi-Fi 6E Router",
+    en: "TP-Link, Archer AXE75, AXE5400 Tri-Band Wi-Fi 6E Router",
+    ru: "TP-Link, Archer AXE75, AXE5400 Tri-Band Wi-Fi 6E Router"
+  },
+  price: 405.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Routers",
+  images: ["images/66010184652.webp"]
+},
+{
+  id: 644,
+  barcode: "66010184645",
+  title: {
+    ka: "TP-Link, Deco M4(1-pack), AC1200 Whole Home Mesh Wi-Fi",
+    en: "TP-Link, Deco M4(1-pack), AC1200 Whole Home Mesh Wi-Fi",
+    ru: "TP-Link, Deco M4(1-pack), AC1200 Whole Home Mesh Wi-Fi"
+  },
+  price: 125.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010184645.webp"]
+},
+{
+  id: 645,
+  barcode: "66010169117",
+  title: {
+    ka: "TP-Link, Deco M4(2-pack), AC1200 Whole-Home Wi-Fi system",
+    en: "TP-Link, Deco M4(2-pack), AC1200 Whole-Home Wi-Fi system",
+    ru: "TP-Link, Deco M4(2-pack), AC1200 Whole-Home Wi-Fi system"
+  },
+  price: 250.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010169117.webp"]
+},
+{
+  id: 646,
+  barcode: "66010184138",
+  title: {
+    ka: "TP-Link, Deco M4(3-pack), AC1200 Whole-Home Wi-Fi system",
+    en: "TP-Link, Deco M4(3-pack), AC1200 Whole-Home Wi-Fi system",
+    ru: "TP-Link, Deco M4(3-pack), AC1200 Whole-Home Wi-Fi system"
+  },
+  price: 359.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010184138.webp"]
+},
+{
+  id: 647,
+  barcode: "66010195432",
+  title: {
+    ka: "TP-Link, Deco X50(1-pack), AX3000 Whole Home Mesh Wi-Fi 6",
+    en: "TP-Link, Deco X50(1-pack), AX3000 Whole Home Mesh Wi-Fi 6",
+    ru: "TP-Link, Deco X50(1-pack), AX3000 Whole Home Mesh Wi-Fi 6"
+  },
+  price: 239.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010195432.webp"]
+},
+{
+  id: 648,
+  barcode: "66010190797",
+  title: {
+    ka: "TP-Link, Deco X50(2-pack), AX3000 Whole Home Mesh Wi-Fi 6 System",
+    en: "TP-Link, Deco X50(2-pack), AX3000 Whole Home Mesh Wi-Fi 6 System",
+    ru: "TP-Link, Deco X50(2-pack), AX3000 Whole Home Mesh Wi-Fi 6 System"
+  },
+  price: 465.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010190797.webp"]
+},
+{
+  id: 649,
+  barcode: "66010183827",
+  title: {
+    ka: "TP-Link, Deco X50(3-pack), AX3000 Whole Home Mesh Wi-Fi 6 System",
+    en: "TP-Link, Deco X50(3-pack), AX3000 Whole Home Mesh Wi-Fi 6 System",
+    ru: "TP-Link, Deco X50(3-pack), AX3000 Whole Home Mesh Wi-Fi 6 System"
+  },
+  price: 659.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010183827.webp"]
+},
+{
+  id: 650,
+  barcode: "66010195834",
+  title: {
+    ka: "TP-Link, Deco BE22(1-pack), BE3600 Whole Home Mesh Wi-Fi 7",
+    en: "TP-Link, Deco BE22(1-pack), BE3600 Whole Home Mesh Wi-Fi 7",
+    ru: "TP-Link, Deco BE22(1-pack), BE3600 Whole Home Mesh Wi-Fi 7"
+  },
+  price: 289.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010195834.webp"]
+},
+{
+  id: 651,
+  barcode: "66010196986",
+  title: {
+    ka: "TP-Link, Deco BE22(2-pack), BE3600 Whole Home Mesh WiFi 7 System",
+    en: "TP-Link, Deco BE22(2-pack), BE3600 Whole Home Mesh WiFi 7 System",
+    ru: "TP-Link, Deco BE22(2-pack), BE3600 Whole Home Mesh WiFi 7 System"
+  },
+  price: 549.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010196986.jpg"]
+},
+{
+  id: 652,
+  barcode: "66010194689",
+  title: {
+    ka: "TP-Link, Deco BE22(3-pack), BE3600 Whole Home Mesh WiFi 7 System",
+    en: "TP-Link, Deco BE22(3-pack), BE3600 Whole Home Mesh WiFi 7 System",
+    ru: "TP-Link, Deco BE22(3-pack), BE3600 Whole Home Mesh WiFi 7 System"
+  },
+  price: 789.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010194689.webp"]
+},
+{
+  id: 653,
+  barcode: "66010197989",
+  title: {
+    ka: "TP-Link, Deco XE75(2-pack), AXE5400 Whole Home Mesh Wi-Fi 6E System",
+    en: "TP-Link, Deco XE75(2-pack), AXE5400 Whole Home Mesh Wi-Fi 6E System",
+    ru: "TP-Link, Deco XE75(2-pack), AXE5400 Whole Home Mesh Wi-Fi 6E System"
+  },
+  price: 849.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010197989.webp"]
+},
+{
+  id: 654,
+  barcode: "66010197988",
+  title: {
+    ka: "TP-Link, Deco XE75(3-pack), AXE5400 Whole Home Mesh Wi-Fi 6E System",
+    en: "TP-Link, Deco XE75(3-pack), AXE5400 Whole Home Mesh Wi-Fi 6E System",
+    ru: "TP-Link, Deco XE75(3-pack), AXE5400 Whole Home Mesh Wi-Fi 6E System"
+  },
+  price: 1199.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010197988.webp"]
+},
+{
+  id: 655,
+  barcode: "66010191067",
+  title: {
+    ka: "TP-Link, EAP223, AC1350 Wireless Dual Band Ceiling Mount Access Point",
+    en: "TP-Link, EAP223, AC1350 Wireless Dual Band Ceiling Mount Access Point",
+    ru: "TP-Link, EAP223, AC1350 Wireless Dual Band Ceiling Mount Access Point"
+  },
+  price: 185.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010191067.webp"]
+},
+{
+  id: 656,
+  barcode: "66010183828",
+  title: {
+    ka: "TP-Link, EAP660 HD, AX3600 Wireless Dual-Band Multi-Gigabit Ceiling Mount Access Point",
+    en: "TP-Link, EAP660 HD, AX3600 Wireless Dual-Band Multi-Gigabit Ceiling Mount Access Point",
+    ru: "TP-Link, EAP660 HD, AX3600 Wireless Dual-Band Multi-Gigabit Ceiling Mount Access Point"
+  },
+  price: 865.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010183828.webp"]
+},
+{
+  id: 657,
+  barcode: "66010195466",
+  title: {
+    ka: "TP-Link, Omada EAP650-Outdoor, AX3000, Wi-Fi 6 AP",
+    en: "TP-Link, Omada EAP650-Outdoor, AX3000, Wi-Fi 6 AP",
+    ru: "TP-Link, Omada EAP650-Outdoor, AX3000, Wi-Fi 6 AP"
+  },
+  price: 509.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010195466.webp"]
+},
+{
+  id: 658,
+  barcode: "66010196989",
+  title: {
+    ka: "TP-Link, Omada EAP772-Outdoor, Access Point, BE9300 Indoor/Outdoor Wi-Fi 7",
+    en: "TP-Link, Omada EAP772-Outdoor, Access Point, BE9300 Indoor/Outdoor Wi-Fi 7",
+    ru: "TP-Link, Omada EAP772-Outdoor, Access Point, BE9300 Indoor/Outdoor Wi-Fi 7"
+  },
+  price: 859.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Signals",
+  images: ["images/66010196989.webp"]
+},
+{
+  id: 659,
+  barcode: "66010192540",
+  title: {
+    ka: "TP-Link, Festa FS308GP, 8-Port Gigabit Smart Switch with 4-Port PoE+ 62W",
+    en: "TP-Link, Festa FS308GP, 8-Port Gigabit Smart Switch with 4-Port PoE+ 62W",
+    ru: "TP-Link, Festa FS308GP, 8-Port Gigabit Smart Switch with 4-Port PoE+ 62W"
+  },
+  price: 228.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Switches",
+  images: ["images/66010192540.webp"]
+},
+{
+  id: 660,
+  barcode: "66010111271",
+  title: {
+    ka: "TP-Link, TL-SF1005D, 5-port 10/100M mini Desktop Switch, Plastic case",
+    en: "TP-Link, TL-SF1005D, 5-port 10/100M mini Desktop Switch, Plastic case",
+    ru: "TP-Link, TL-SF1005D, 5-port 10/100M mini Desktop Switch, Plastic case"
+  },
+  price: 25.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Switches",
+  images: ["images/66010111271.webp"]
+},
+{
+  id: 661,
+  barcode: "10020202339",
+  title: {
+    ka: "TP-Link, TL-SF1008D, 8-port 10/100M mini Desktop Switch, 8 10/100M RJ45 ports, Plastic case",
+    en: "TP-Link, TL-SF1008D, 8-port 10/100M mini Desktop Switch, 8 10/100M RJ45 ports, Plastic case",
+    ru: "TP-Link, TL-SF1008D, 8-port 10/100M mini Desktop Switch, 8 10/100M RJ45 ports, Plastic case"
+  },
+  price: 30.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Switches",
+  images: ["images/10020202339.webp"]
+},
+{
+  id: 662,
+  barcode: "66010126167",
+  title: {
+    ka: "TP-Link, TL-SG105, 5-Port 10/100/1000Mbps Desktop Switch",
+    en: "TP-Link, TL-SG105, 5-Port 10/100/1000Mbps Desktop Switch",
+    ru: "TP-Link, TL-SG105, 5-Port 10/100/1000Mbps Desktop Switch"
+  },
+  price: 55.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Switches",
+  images: ["images/66010126167.webp"]
+},
+{
+  id: 663,
+  barcode: "66010113745",
+  title: {
+    ka: "TP-Link, TL-SG1008D, 8-port Gigabit Switch, 8 10/100/1000M RJ45 ports, plastic case",
+    en: "TP-Link, TL-SG1008D, 8-port Gigabit Switch, 8 10/100/1000M RJ45 ports, plastic case",
+    ru: "TP-Link, TL-SG1008D, 8-port Gigabit Switch, 8 10/100/1000M RJ45 ports, plastic case"
+  },
+  price: 65.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Switches",
+  images: ["images/66010113745.webp"]
+},
+{
+  id: 664,
+  barcode: "66010160921",
+  title: {
+    ka: "TP-Link, TL-SG1016D, 16-port Gigabit Switch, 16 10/100/1000, Desktop/Rackmount switch",
+    en: "TP-Link, TL-SG1016D, 16-port Gigabit Switch, 16 10/100/1000, Desktop/Rackmount switch",
+    ru: "TP-Link, TL-SG1016D, 16-port Gigabit Switch, 16 10/100/1000, Desktop/Rackmount switch"
+  },
+  price: 200.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Racks",
+  images: ["images/66010160921.webp"]
+},
+{
+  id: 665,
+  barcode: "66010118264",
+  title: {
+    ka: "TP-Link, TL-SG1024D, 24-port Gigabit Switch, 24 10/100/1000M RJ45 ports, metal case",
+    en: "TP-Link, TL-SG1024D, 24-port Gigabit Switch, 24 10/100/1000M RJ45 ports, metal case",
+    ru: "TP-Link, TL-SG1024D, 24-port Gigabit Switch, 24 10/100/1000M RJ45 ports, metal case"
+  },
+  price: 270.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Racks",
+  images: ["images/66010118264.webp"]
+},
+{
+  id: 666,
+  barcode: "66010152595",
+  title: {
+    ka: "TP-Link, TL-SG1048, 48-port Gigabit Switch, 48 10/100/1000 Rackmount Switch",
+    en: "TP-Link, TL-SG1048, 48-port Gigabit Switch, 48 10/100/1000 Rackmount Switch",
+    ru: "TP-Link, TL-SG1048, 48-port Gigabit Switch, 48 10/100/1000 Rackmount Switch"
+  },
+  price: 920.0,
+  inStock: true,
+  category: "Network equipment",
+  subcategory: "Racks",
+  images: ["images/66010152595.webp"]
+},
+{
+  id: 667,
+  barcode: "66010195099",
+  title: {
+    ka: "POWERCOM RPT-600A, 600VA/360W, Line-Interactive, Automatic internal bypass, Black.",
+    en: "POWERCOM RPT-600A, 600VA/360W, Line-Interactive, Automatic internal bypass, Black.",
+    ru: "POWERCOM RPT-600A, 600VA/360W, Line-Interactive, Automatic internal bypass, Black."
+  },
+  price: 90.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195099.webp"]
+},
+{
+  id: 668,
+  barcode: "66010195100",
+  title: {
+    ka: "POWERCOM RPT-800A, 800VA/480W, Line-Interactive, Automatic internal bypass, Black.",
+    en: "POWERCOM RPT-800A, 800VA/480W, Line-Interactive, Automatic internal bypass, Black.",
+    ru: "POWERCOM RPT-800A, 800VA/480W, Line-Interactive, Automatic internal bypass, Black."
+  },
+  price: 108.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195100.webp"]
+},
+{
+  id: 669,
+  barcode: "66010195101",
+  title: {
+    ka: "POWERCOM RPT-1000A, 1000VA/600W, Line-Interactive, Automatic internal bypass, Black.",
+    en: "POWERCOM RPT-1000A, 1000VA/600W, Line-Interactive, Automatic internal bypass, Black.",
+    ru: "POWERCOM RPT-1000A, 1000VA/600W, Line-Interactive, Automatic internal bypass, Black."
+  },
+  price: 138.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195101.webp"]
+},
+{
+  id: 670,
+  barcode: "66010195085",
+  title: {
+    ka: "POWERCOM WOW-700U, 700VA/350W, Offline, Automatic internal bypass, Black.",
+    en: "POWERCOM WOW-700U, 700VA/350W, Offline, Automatic internal bypass, Black.",
+    ru: "POWERCOM WOW-700U, 700VA/350W, Offline, Automatic internal bypass, Black."
+  },
+  price: 146.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195085.webp"]
+},
+{
+  id: 671,
+  barcode: "66010150810",
+  title: {
+    ka: "ARTRONIC ART 600, 600VA/360W, Black. Internal automatic bypass.",
+    en: "ARTRONIC ART 600, 600VA/360W, Black. Internal automatic bypass.",
+    ru: "ARTRONIC ART 600, 600VA/360W, Black. Internal automatic bypass."
+  },
+  price: 165.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010150810.webp"]
+},
+{
+  id: 672,
+  barcode: "66010156939",
+  title: {
+    ka: "APC Easy UPS BV650I-GR, 650VA/375W Floor/Wall Mount, Line-Interactive, 230V, Internal automatic bypass, Black.",
+    en: "APC Easy UPS BV650I-GR, 650VA/375W Floor/Wall Mount, Line-Interactive, 230V, Internal automatic bypass, Black.",
+    ru: "APC Easy UPS BV650I-GR, 650VA/375W Floor/Wall Mount, Line-Interactive, 230V, Internal automatic bypass, Black."
+  },
+  price: 170.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010156939.webp"]
+},
+{
+  id: 673,
+  barcode: "66010195148",
+  title: {
+    ka: "POWERCOM WOW-850S, 850VA/425W, Offline, Automatic internal bypass, Black.",
+    en: "POWERCOM WOW-850S, 850VA/425W, Offline, Automatic internal bypass, Black.",
+    ru: "POWERCOM WOW-850S, 850VA/425W, Offline, Automatic internal bypass, Black."
+  },
+  price: 182.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195148.webp"]
+},
+{
+  id: 674,
+  barcode: "66010195149",
+  title: {
+    ka: "POWERCOM WOW-1000S, 1000VA/500W, Offline, Automatic internal bypass, Black.",
+    en: "POWERCOM WOW-1000S, 1000VA/500W, Offline, Automatic internal bypass, Black.",
+    ru: "POWERCOM WOW-1000S, 1000VA/500W, Offline, Automatic internal bypass, Black."
+  },
+  price: 198.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195149.webp"]
+},
+{
+  id: 675,
+  barcode: "66010157308",
+  title: {
+    ka: "APC BV800I-GR, 800VA/450W, Line-Interactive, Automatic internal bypass, Black.",
+    en: "APC BV800I-GR, 800VA/450W, Line-Interactive, Automatic internal bypass, Black.",
+    ru: "APC BV800I-GR, 800VA/450W, Line-Interactive, Automatic internal bypass, Black."
+  },
+  price: 201.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010157308.webp"]
+},
+{
+  id: 676,
+  barcode: "66010195102",
+  title: {
+    ka: "POWERCOM RPT-1025AP, 1025VA/615W, Line-Interactive, Automatic internal bypass, Black.",
+    en: "POWERCOM RPT-1025AP, 1025VA/615W, Line-Interactive, Automatic internal bypass, Black.",
+    ru: "POWERCOM RPT-1025AP, 1025VA/615W, Line-Interactive, Automatic internal bypass, Black."
+  },
+  price: 210.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195102.webp"]
+},
+{
+  id: 677,
+  barcode: "66010195103",
+  title: {
+    ka: "POWERCOM RPT-1500AP, 1500VA/900W, Line-Interactive, Automatic internal bypass, Black.",
+    en: "POWERCOM RPT-1500AP, 1500VA/900W, Line-Interactive, Automatic internal bypass, Black.",
+    ru: "POWERCOM RPT-1500AP, 1500VA/900W, Line-Interactive, Automatic internal bypass, Black."
+  },
+  price: 229.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195103.webp"]
+},
+{
+  id: 678,
+  barcode: "66010143747",
+  title: {
+    ka: "ARTRONIC ART 1000, 1000VA/600W, Line-Interactive, Internal automatic bypass, Black.",
+    en: "ARTRONIC ART 1000, 1000VA/600W, Line-Interactive, Internal automatic bypass, Black.",
+    ru: "ARTRONIC ART 1000, 1000VA/600W, Line-Interactive, Internal automatic bypass, Black."
+  },
+  price: 330.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010143747.webp"]
+},
+{
+  id: 679,
+  barcode: "66010194026",
+  title: {
+    ka: "APC BVX1600LI-GR, 1600VA/900W, Black. Automatic internal bypass.",
+    en: "APC BVX1600LI-GR, 1600VA/900W, Black. Automatic internal bypass.",
+    ru: "APC BVX1600LI-GR, 1600VA/900W, Black. Automatic internal bypass."
+  },
+  price: 527.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010194026.webp"]
+},
+{
+  id: 680,
+  barcode: "66010146469",
+  title: {
+    ka: "ARTRONIC ART 2000, 2000VA/1200W, Line-Interactive, Black.",
+    en: "ARTRONIC ART 2000, 2000VA/1200W, Line-Interactive, Black.",
+    ru: "ARTRONIC ART 2000, 2000VA/1200W, Line-Interactive, Black."
+  },
+  price: 548.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010146469.webp"]
+},
+{
+  id: 681,
+  barcode: "66010195106",
+  title: {
+    ka: "POWERCOM MAC-1000, 1000VA/1000W, Online, Black.",
+    en: "POWERCOM MAC-1000, 1000VA/1000W, Online, Black.",
+    ru: "POWERCOM MAC-1000, 1000VA/1000W, Online, Black."
+  },
+  price: 629.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195106.webp"]
+},
+{
+  id: 682,
+  barcode: "66010195107",
+  title: {
+    ka: "POWERCOM MAC-1500, 1500VA/1500W, Online, Automatic and manual internal bypass, Black.",
+    en: "POWERCOM MAC-1500, 1500VA/1500W, Online, Automatic and manual internal bypass, Black.",
+    ru: "POWERCOM MAC-1500, 1500VA/1500W, Online, Automatic and manual internal bypass, Black."
+  },
+  price: 847.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195107.webp"]
+},
+{
+  id: 683,
+  barcode: "66010143750",
+  title: {
+    ka: "ARTRONIC ARTon Beta 1kVA, 800W, On-LINE, USB, RJ45-RS232 port.",
+    en: "ARTRONIC ARTon Beta 1kVA, 800W, On-LINE, USB, RJ45-RS232 port.",
+    ru: "ARTRONIC ARTon Beta 1kVA, 800W, On-LINE, USB, RJ45-RS232 port."
+  },
+  price: 910.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010143750.webp"]
+},
+{
+  id: 684,
+  barcode: "66010144859",
+  title: {
+    ka: "ARTRONIC ALFA 1kVA, 1000VA/900W, Online, Internal automatic and manual bypass, Black.",
+    en: "ARTRONIC ALFA 1kVA, 1000VA/900W, Online, Internal automatic and manual bypass, Black.",
+    ru: "ARTRONIC ALFA 1kVA, 1000VA/900W, Online, Internal automatic and manual bypass, Black."
+  },
+  price: 1040.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010144859.webp"]
+},
+{
+  id: 685,
+  barcode: "66010195108",
+  title: {
+    ka: "POWERCOM MAC-2000, 2000VA/2000W, Online, Automatic and manual internal bypass, Black.",
+    en: "POWERCOM MAC-2000, 2000VA/2000W, Online, Automatic and manual internal bypass, Black.",
+    ru: "POWERCOM MAC-2000, 2000VA/2000W, Online, Automatic and manual internal bypass, Black."
+  },
+  price: 1048.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195108.webp"]
+},
+{
+  id: 686,
+  barcode: "66010149946",
+  title: {
+    ka: "ARTRONIC ARTon Titanium Liion RT 1KVA, 900W, ONLINE, RS232 port.",
+    en: "ARTRONIC ARTon Titanium Liion RT 1KVA, 900W, ONLINE, RS232 port.",
+    ru: "ARTRONIC ARTon Titanium Liion RT 1KVA, 900W, ONLINE, RS232 port."
+  },
+  price: 1195.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010149946.webp"]
+},
+{
+  id: 687,
+  barcode: "66010143753",
+  title: {
+    ka: "ARTRONIC ARTon Beta 2kVA, 1600W, On-LINE, USB, RJ45-RS232 port.",
+    en: "ARTRONIC ARTon Beta 2kVA, 1600W, On-LINE, USB, RJ45-RS232 port.",
+    ru: "ARTRONIC ARTon Beta 2kVA, 1600W, On-LINE, USB, RJ45-RS232 port."
+  },
+  price: 1356.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010143753.webp"]
+},
+{
+  id: 688,
+  barcode: "66010144860",
+  title: {
+    ka: "ARTRONIC ALFA 2kVA, 2000VA/1800W, Online, USB, RJ45-RS232 port.",
+    en: "ARTRONIC ALFA 2kVA, 2000VA/1800W, Online, USB, RJ45-RS232 port.",
+    ru: "ARTRONIC ALFA 2kVA, 2000VA/1800W, Online, USB, RJ45-RS232 port."
+  },
+  price: 1551.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010144860.webp"]
+},
+{
+  id: 689,
+  barcode: "66010149947",
+  title: {
+    ka: "ARTRONIC UPS ARTon Titanium Liion RT 2KVA, 1800W, ONLINE, USB, RS232 port.",
+    en: "ARTRONIC UPS ARTon Titanium Liion RT 2KVA, 1800W, ONLINE, USB, RS232 port.",
+    ru: "ARTRONIC UPS ARTon Titanium Liion RT 2KVA, 1800W, ONLINE, USB, RS232 port."
+  },
+  price: 1691.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010149947.webp"]
+},
+{
+  id: 690,
+  barcode: "66010143755",
+  title: {
+    ka: "ARTRONIC ARTon Beta 3kVA, 2400W, On-LINE, USB, RJ45-RS232 port.",
+    en: "ARTRONIC ARTon Beta 3kVA, 2400W, On-LINE, USB, RJ45-RS232 port.",
+    ru: "ARTRONIC ARTon Beta 3kVA, 2400W, On-LINE, USB, RJ45-RS232 port."
+  },
+  price: 2069.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010143755.webp"]
+},
+{
+  id: 691,
+  barcode: "66010150811",
+  title: {
+    ka: "ARTRONIC ARTon Titanium Liion RT 3KVA, 2700W, Online, Black.",
+    en: "ARTRONIC ARTon Titanium Liion RT 3KVA, 2700W, Online, Black.",
+    ru: "ARTRONIC ARTon Titanium Liion RT 3KVA, 2700W, Online, Black."
+  },
+  price: 2362.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010150811.webp"]
+},
+{
+  id: 692,
+  barcode: "66010191263",
+  title: {
+    ka: "APC SRV6KI, 6kVA/6kW, LCD, Online, Automatic internal bypass, Black.",
+    en: "APC SRV6KI, 6kVA/6kW, LCD, Online, Automatic internal bypass, Black.",
+    ru: "APC SRV6KI, 6kVA/6kW, LCD, Online, Automatic internal bypass, Black."
+  },
+  price: 4058.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010191263.webp"]
+},
+{
+  id: 693,
+  barcode: "66010152653",
+  title: {
+    ka: "ARTRONIC ARTon Beta 6kVA, 4800W, ONLINE, USB, RJ45-RS232 port.",
+    en: "ARTRONIC ARTon Beta 6kVA, 4800W, ONLINE, USB, RJ45-RS232 port.",
+    ru: "ARTRONIC ARTon Beta 6kVA, 4800W, ONLINE, USB, RJ45-RS232 port."
+  },
+  price: 4310.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010152653.webp"]
+},
+{
+  id: 694,
+  barcode: "66010195154",
+  title: {
+    ka: "POWERCOM MAC-6K, 6000VA/6000W, Online, Automatic and manual internal bypass, Black.",
+    en: "POWERCOM MAC-6K, 6000VA/6000W, Online, Automatic and manual internal bypass, Black.",
+    ru: "POWERCOM MAC-6K, 6000VA/6000W, Online, Automatic and manual internal bypass, Black."
+  },
+  price: 4353.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195154.webp"]
+},
+{
+  id: 695,
+  barcode: "66010169997",
+  title: {
+    ka: "ARTRONIC ARTon Beta 10kVA, 8000W, ONLINE, USB, RJ45-RS232 port.",
+    en: "ARTRONIC ARTon Beta 10kVA, 8000W, ONLINE, USB, RJ45-RS232 port.",
+    ru: "ARTRONIC ARTon Beta 10kVA, 8000W, ONLINE, USB, RJ45-RS232 port."
+  },
+  price: 5011.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010169997.webp"]
+},
+{
+  id: 696,
+  barcode: "66010195155",
+  title: {
+    ka: "POWERCOM MAC-10K, 10000VA/10000W, Online, Automatic and manual internal bypass, Black.",
+    en: "POWERCOM MAC-10K, 10000VA/10000W, Online, Automatic and manual internal bypass, Black.",
+    ru: "POWERCOM MAC-10K, 10000VA/10000W, Online, Automatic and manual internal bypass, Black."
+  },
+  price: 5561.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010195155.webp"]
+},
+{
+  id: 697,
+  barcode: "66010196433",
+  title: {
+    ka: "REDOH, TRUST, Power Bank, 10000mAh POWERBANK 20W USB-C, USB-A BLUE.",
+    en: "REDOH, TRUST, Power Bank, 10000mAh POWERBANK 20W USB-C, USB-A BLUE.",
+    ru: "REDOH, TRUST, Power Bank, 10000mAh POWERBANK 20W USB-C, USB-A BLUE."
+  },
+  price: 45.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010196433.webp"]
+},
+{
+  id: 698,
+  barcode: "66010179788",
+  title: {
+    ka: "TRUST, 24678 , Power Bank, PRIMO ECO 10000 USB-C micro-USB.3.0A/15W, Black.",
+    en: "TRUST, 24678 , Power Bank, PRIMO ECO 10000 USB-C micro-USB.3.0A/15W, Black.",
+    ru: "TRUST, 24678 , Power Bank, PRIMO ECO 10000 USB-C micro-USB.3.0A/15W, Black."
+  },
+  price: 45.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010179788.webp"]
+},
+{
+  id: 699,
+  barcode: "66010199193",
+  title: {
+    ka: "P15ZM, XIAOMI, Power Bank, 10000mAh, Type-C, USB Two-way 22.5W fast charging, Integrated Cable, Ice Blue, BHR9073GL.",
+    en: "P15ZM, XIAOMI, Power Bank, 10000mAh, Type-C, USB Two-way 22.5W fast charging, Integrated Cable, Ice Blue, BHR9073GL.",
+    ru: "P15ZM, XIAOMI, Power Bank, 10000mAh, Type-C, USB Two-way 22.5W fast charging, Integrated Cable, Ice Blue, BHR9073GL."
+  },
+  price: 54.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010199193.webp"]
+},
+{
+  id: 700,
+  barcode: "66010179787",
+  title: {
+    ka: "TRUST, 24677, Power Bank, PRIMO ECO 15000 USB-C micro-USB.3.0A/15W, USB-C, Black.",
+    en: "TRUST, 24677, Power Bank, PRIMO ECO 15000 USB-C micro-USB.3.0A/15W, USB-C, Black.",
+    ru: "TRUST, 24677, Power Bank, PRIMO ECO 15000 USB-C micro-USB.3.0A/15W, USB-C, Black."
+  },
+  price: 54.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010179787.webp"]
+},
+{
+  id: 701,
+  barcode: "66010189844",
+  title: {
+    ka: "CHOETECH, B728, Power Bank, 10000mAh, 22.5W, Dual USB-A+Type-C, Digital Screen.",
+    en: "CHOETECH, B728, Power Bank, 10000mAh, 22.5W, Dual USB-A+Type-C, Digital Screen.",
+    ru: "CHOETECH, B728, Power Bank, 10000mAh, 22.5W, Dual USB-A+Type-C, Digital Screen."
+  },
+  price: 57.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010189844.webp"]
+},
+{
+  id: 702,
+  barcode: "66010199194",
+  title: {
+    ka: "PB2020MI, XIAOMI, Power Bank, 20000mAh, Type-C, USB Two-way 22,5W fast charging, Integrated Cable, 342g, Gray, BHR9738GL.",
+    en: "PB2020MI, XIAOMI, Power Bank, 20000mAh, Type-C, USB Two-way 22,5W fast charging, Integrated Cable, 342g, Gray, BHR9738GL.",
+    ru: "PB2020MI, XIAOMI, Power Bank, 20000mAh, Type-C, USB Two-way 22,5W fast charging, Integrated Cable, 342g, Gray, BHR9738GL."
+  },
+  price: 68.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010199194.webp"]
+},
+{
+  id: 703,
+  barcode: "66010193102",
+  title: {
+    ka: "Choetech, B730 , Power Bank, 30000mAh, 22.5W, Dual USB-A+Type-C Power bank Digital Screen",
+    en: "Choetech, B730 , Power Bank, 30000mAh, 22.5W, Dual USB-A+Type-C Power bank Digital Screen",
+    ru: "Choetech, B730 , Power Bank, 30000mAh, 22.5W, Dual USB-A+Type-C Power bank Digital Screen"
+  },
+  price: 106.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010193102.webp"]
+},
+{
+  id: 704,
+  barcode: "66010199104",
+  title: {
+    ka: "LARO, TRUST, Power Bank, 65W 65W 20,000mAh USB-C LAPTOP POWERBANK.",
+    en: "LARO, TRUST, Power Bank, 65W 65W 20,000mAh USB-C LAPTOP POWERBANK.",
+    ru: "LARO, TRUST, Power Bank, 65W 65W 20,000mAh USB-C LAPTOP POWERBANK."
+  },
+  price: 150.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010199104.webp"]
+},
+{
+  id: 705,
+  barcode: "66010123929",
+  title: {
+    ka: "DEFENDER, Surge Protector, 10A, 5 Sockets.",
+    en: "DEFENDER, Surge Protector, 10A, 5 Sockets.",
+    ru: "DEFENDER, Surge Protector, 10A, 5 Sockets."
+  },
+  price: 10.5,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Power strip",
+  images: ["images/66010123929.webp"]
+},
+{
+  id: 706,
+  barcode: "66010139115",
+  title: {
+    ka: "KD-PDU-GM-1U-P8, Kingda, 19\" Power distribution unit,German type",
+    en: "KD-PDU-GM-1U-P8, Kingda, 19\" Power distribution unit,German type",
+    ru: "KD-PDU-GM-1U-P8, Kingda, 19\" Power distribution unit,German type"
+  },
+  price: 49.5,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Power strip",
+  images: ["images/66010139115.webp"]
+},
+{
+  id: 707,
+  barcode: "66010191955",
+  title: {
+    ka: "AR3-1000G, EconoPower , Surge Protector, AUTOMATIC VOLTAGE REGULATOR 1000VA/500W.",
+    en: "AR3-1000G, EconoPower , Surge Protector, AUTOMATIC VOLTAGE REGULATOR 1000VA/500W.",
+    ru: "AR3-1000G, EconoPower , Surge Protector, AUTOMATIC VOLTAGE REGULATOR 1000VA/500W."
+  },
+  price: 76.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010191955.webp"]
+},
+{
+  id: 708,
+  barcode: "66010194860",
+  title: {
+    ka: "AR3-2200G, EconoPower , Surge Protector, AUTOMATIC VOLTAGE REGULATOR 2200VA/1100W.",
+    en: "AR3-2200G, EconoPower , Surge Protector, AUTOMATIC VOLTAGE REGULATOR 2200VA/1100W.",
+    ru: "AR3-2200G, EconoPower , Surge Protector, AUTOMATIC VOLTAGE REGULATOR 2200VA/1100W."
+  },
+  price: 129.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "Ups",
+  images: ["images/66010194860.webp"]
+},
+{
+  id: 709,
+  barcode: "66010196224",
+  title: {
+    ka: "CR2016-2CPU5, GP, Battery, CR2016.",
+    en: "CR2016-2CPU5, GP, Battery, CR2016.",
+    ru: "CR2016-2CPU5, GP, Battery, CR2016."
+  },
+  price: 1.3,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010196224.webp"]
+},
+{
+  id: 710,
+  barcode: "66010184326",
+  title: {
+    ka: "GPPBA27AF002, GP, Battery, 12.0V 27AF-U5 Alkaline for Remote control.",
+    en: "GPPBA27AF002, GP, Battery, 12.0V 27AF-U5 Alkaline for Remote control.",
+    ru: "GPPBA27AF002, GP, Battery, 12.0V 27AF-U5 Alkaline for Remote control."
+  },
+  price: 1.4,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010184326.webp"]
+},
+{
+  id: 711,
+  barcode: "66010161603",
+  title: {
+    ka: "Maxell BATARY CR2032 4902580131258",
+    en: "Maxell BATARY CR2032 4902580131258",
+    ru: "Maxell BATARY CR2032 4902580131258"
+  },
+  price: 1.4,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010161603.webp"]
+},
+{
+  id: 712,
+  barcode: "66010184325",
+  title: {
+    ka: "GPPBA23AF002, GP 12.0V 23AF-U5 Alkaline for Remote control 4891199042140",
+    en: "GPPBA23AF002, GP 12.0V 23AF-U5 Alkaline for Remote control 4891199042140",
+    ru: "GPPBA23AF002, GP 12.0V 23AF-U5 Alkaline for Remote control 4891199042140"
+  },
+  price: 1.4,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010184325.webp"]
+},
+{
+  id: 713,
+  barcode: "66010187787",
+  title: {
+    ka: "CR2025-2CPUS, GP, Battery, CR2025.",
+    en: "CR2025-2CPUS, GP, Battery, CR2025.",
+    ru: "CR2025-2CPUS, GP, Battery, CR2025."
+  },
+  price: 1.5,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010187787.webp"]
+},
+{
+  id: 714,
+  barcode: "66010186748",
+  title: {
+    ka: "LR3/AAA Duracell Basic Blister 24, 24xAAA, 1.5V/B 1 piece from a pack 60118",
+    en: "LR3/AAA Duracell Basic Blister 24, 24xAAA, 1.5V/B 1 piece from a pack 60118",
+    ru: "LR3/AAA Duracell Basic Blister 24, 24xAAA, 1.5V/B 1 piece from a pack 60118"
+  },
+  price: 1.95,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010186748.webp"]
+},
+{
+  id: 715,
+  barcode: "66010193607",
+  title: {
+    ka: "CR1620 CP-5C TOSHIBA",
+    en: "CR1620 CP-5C TOSHIBA",
+    ru: "CR1620 CP-5C TOSHIBA"
+  },
+  price: 2.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010193607.webp"]
+},
+{
+  id: 716,
+  barcode: "66010186747",
+  title: {
+    ka: "LR6/AA Duracell Basic Blister 24, 24xAA, 1.5V/B 1 piece from a pack 160071",
+    en: "LR6/AA Duracell Basic Blister 24, 24xAA, 1.5V/B 1 piece from a pack 160071",
+    ru: "LR6/AA Duracell Basic Blister 24, 24xAA, 1.5V/B 1 piece from a pack 160071"
+  },
+  price: 2.2,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010186747.webp"]
+},
+{
+  id: 717,
+  barcode: "66010196221",
+  title: {
+    ka: "GPPCA24AU641, GP, Battery, AAAx2, 1.5V, Ultra Alkaline.",
+    en: "GPPCA24AU641, GP, Battery, AAAx2, 1.5V, Ultra Alkaline.",
+    ru: "GPPCA24AU641, GP, Battery, AAAx2, 1.5V, Ultra Alkaline."
+  },
+  price: 2.5,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010196221.webp"]
+},
+{
+  id: 718,
+  barcode: "66010196218",
+  title: {
+    ka: "GPPCA15AU719, GP, Battery, AAx2, 1.5V, Ultra Alkaline.",
+    en: "GPPCA15AU719, GP, Battery, AAx2, 1.5V, Ultra Alkaline.",
+    ru: "GPPCA15AU719, GP, Battery, AAx2, 1.5V, Ultra Alkaline."
+  },
+  price: 2.5,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010196218.webp"]
+},
+{
+  id: 719,
+  barcode: "66010166660",
+  title: {
+    ka: "GPPVCF9VG006, GP, Battery, 9.0V.",
+    en: "GPPVCF9VG006, GP, Battery, 9.0V.",
+    ru: "GPPVCF9VG006, GP, Battery, 9.0V."
+  },
+  price: 2.6,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010166660.webp"]
+},
+{
+  id: 720,
+  barcode: "66010186753",
+  title: {
+    ka: "PBL1632, GP, Battery, 3V, Lithium.",
+    en: "PBL1632, GP, Battery, 3V, Lithium.",
+    ru: "PBL1632, GP, Battery, 3V, Lithium."
+  },
+  price: 3.6,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010186753.webp"]
+},
+{
+  id: 721,
+  barcode: "66010193355",
+  title: {
+    ka: "GPPVA9VAS781 1604A21-SBC1 bat Super ALKALINE GP 4891199002311",
+    en: "GPPVA9VAS781 1604A21-SBC1 bat Super ALKALINE GP 4891199002311",
+    ru: "GPPVA9VAS781 1604A21-SBC1 bat Super ALKALINE GP 4891199002311"
+  },
+  price: 4.1,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010193355.webp"]
+},
+{
+  id: 722,
+  barcode: "66010196210",
+  title: {
+    ka: "GPPCA24AS529, GP, Battery, AAAx4, Super Alkaline.",
+    en: "GPPCA24AS529, GP, Battery, AAAx4, Super Alkaline.",
+    ru: "GPPCA24AS529, GP, Battery, AAAx4, Super Alkaline."
+  },
+  price: 4.2,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010196210.webp"]
+},
+{
+  id: 723,
+  barcode: "66010192491",
+  title: {
+    ka: "GPPCA15UP200, GP AAx4, 15AUPETA21-2GSB4 bat. Ultra+ ALKALINE (AA) 4891199203923",
+    en: "GPPCA15UP200, GP AAx4, 15AUPETA21-2GSB4 bat. Ultra+ ALKALINE (AA) 4891199203923",
+    ru: "GPPCA15UP200, GP AAx4, 15AUPETA21-2GSB4 bat. Ultra+ ALKALINE (AA) 4891199203923"
+  },
+  price: 5.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010192491.webp"]
+},
+{
+  id: 724,
+  barcode: "66010189128",
+  title: {
+    ka: "PVA9VUP046, GP, Battery, 9V, 6LR61, Ultra Alkaline.",
+    en: "PVA9VUP046, GP, Battery, 9V, 6LR61, Ultra Alkaline.",
+    ru: "PVA9VUP046, GP, Battery, 9V, 6LR61, Ultra Alkaline."
+  },
+  price: 6.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010189128.webp"]
+},
+{
+  id: 725,
+  barcode: "66010191030",
+  title: {
+    ka: "PCA24UP178, GP, Battery, AAAx4, 1.5V, LR03, Ultra Alkaline.",
+    en: "PCA24UP178, GP, Battery, AAAx4, 1.5V, LR03, Ultra Alkaline.",
+    ru: "PCA24UP178, GP, Battery, AAAx4, 1.5V, LR03, Ultra Alkaline."
+  },
+  price: 6.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010191030.webp"]
+},
+{
+  id: 726,
+  barcode: "66010182498",
+  title: {
+    ka: "LR03/MX2400, DURACELL ultra 2xAAA (060425)",
+    en: "LR03/MX2400, DURACELL ultra 2xAAA (060425)",
+    ru: "LR03/MX2400, DURACELL ultra 2xAAA (060425)"
+  },
+  price: 6.1,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010182498.webp"]
+},
+{
+  id: 727,
+  barcode: "66010196228",
+  title: {
+    ka: "GPPCA14AS096, GP, Battery, Cx2 1.5V, LR14, Super Alkaline.",
+    en: "GPPCA14AS096, GP, Battery, Cx2 1.5V, LR14, Super Alkaline.",
+    ru: "GPPCA14AS096, GP, Battery, Cx2 1.5V, LR14, Super Alkaline."
+  },
+  price: 6.5,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010196228.webp"]
+},
+{
+  id: 728,
+  barcode: "66010163876",
+  title: {
+    ka: "DL/CR2032, DURACELL, Battery, 3V, 2 pack.",
+    en: "DL/CR2032, DURACELL, Battery, 3V, 2 pack.",
+    ru: "DL/CR2032, DURACELL, Battery, 3V, 2 pack."
+  },
+  price: 7.7,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010163876.webp"]
+},
+{
+  id: 729,
+  barcode: "66010172433",
+  title: {
+    ka: "DURACELL LI 2025 2BL (045514)",
+    en: "DURACELL LI 2025 2BL (045514)",
+    ru: "DURACELL LI 2025 2BL (045514)"
+  },
+  price: 7.7,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010172433.webp"]
+},
+{
+  id: 730,
+  barcode: "66010196225",
+  title: {
+    ka: "GPPCA13AS127, GP, Battery, Dx2, 1.5V Super Alkaline.",
+    en: "GPPCA13AS127, GP, Battery, Dx2, 1.5V Super Alkaline.",
+    ru: "GPPCA13AS127, GP, Battery, Dx2, 1.5V Super Alkaline."
+  },
+  price: 8.5,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010196225.webp"]
+},
+{
+  id: 731,
+  barcode: "66010192023",
+  title: {
+    ka: "GPPCA13UP037 GP 13AUP21-SB2 bat. Ultra+ ALKALINE (SIZE-D) 4891199220159",
+    en: "GPPCA13UP037 GP 13AUP21-SB2 bat. Ultra+ ALKALINE (SIZE-D) 4891199220159",
+    ru: "GPPCA13UP037 GP 13AUP21-SB2 bat. Ultra+ ALKALINE (SIZE-D) 4891199220159"
+  },
+  price: 8.9,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010192023.webp"]
+},
+{
+  id: 732,
+  barcode: "66010186340",
+  title: {
+    ka: "Duracell Basic LR6 / AA Blister 4pcs 5000394127050 1.5 ALKALINE LR6/MN1500",
+    en: "Duracell Basic LR6 / AA Blister 4pcs 5000394127050 1.5 ALKALINE LR6/MN1500",
+    ru: "Duracell Basic LR6 / AA Blister 4pcs 5000394127050 1.5 ALKALINE LR6/MN1500"
+  },
+  price: 10.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010186340.webp"]
+},
+{
+  id: 733,
+  barcode: "66010196231",
+  title: {
+    ka: "PCL123A136, GP, Battery, CR123A, Lithium Pro.",
+    en: "PCL123A136, GP, Battery, CR123A, Lithium Pro.",
+    ru: "PCL123A136, GP, Battery, CR123A, Lithium Pro."
+  },
+  price: 10.1,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010196231.webp"]
+},
+{
+  id: 734,
+  barcode: "66010192043",
+  title: {
+    ka: "GPRHCH63E041 GP65AAAHCER21-2TLB2 NiMH 1.2V 650mAh (AAA) x2 GP 4891199212666",
+    en: "GPRHCH63E041 GP65AAAHCER21-2TLB2 NiMH 1.2V 650mAh (AAA) x2 GP 4891199212666",
+    ru: "GPRHCH63E041 GP65AAAHCER21-2TLB2 NiMH 1.2V 650mAh (AAA) x2 GP 4891199212666"
+  },
+  price: 11.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010192043.webp"]
+},
+{
+  id: 735,
+  barcode: "66010186339",
+  title: {
+    ka: "Duracell Basic LR3 / AAA Blister 4 5000394127326 1.5 ALKALINE LR03/MN2400",
+    en: "Duracell Basic LR3 / AAA Blister 4 5000394127326 1.5 ALKALINE LR03/MN2400",
+    ru: "Duracell Basic LR3 / AAA Blister 4 5000394127326 1.5 ALKALINE LR03/MN2400"
+  },
+  price: 11.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010186339.webp"]
+},
+{
+  id: 736,
+  barcode: "66010187781",
+  title: {
+    ka: "6LR61/MN1604, Duracell Basic Blister 9V (125308)",
+    en: "6LR61/MN1604, Duracell Basic Blister 9V (125308)",
+    ru: "6LR61/MN1604, Duracell Basic Blister 9V (125308)"
+  },
+  price: 11.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010187781.webp"]
+},
+{
+  id: 737,
+  barcode: "66010179928",
+  title: {
+    ka: "5000394158696 DURACELL OPTIMUM AA 4x BKP CEE 3L, MX1500, 1.5V/B, UP TO 30X EXTRA LIFE",
+    en: "5000394158696 DURACELL OPTIMUM AA 4x BKP CEE 3L, MX1500, 1.5V/B, UP TO 30X EXTRA LIFE",
+    ru: "5000394158696 DURACELL OPTIMUM AA 4x BKP CEE 3L, MX1500, 1.5V/B, UP TO 30X EXTRA LIFE"
+  },
+  price: 12.0,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010179928.webp"]
+},
+{
+  id: 738,
+  barcode: "66010196227",
+  title: {
+    ka: "RHC103E041, GP, Battery, AAAx2, NiMH 1.2V 950mAh Rechargeable.",
+    en: "RHC103E041, GP, Battery, AAAx2, NiMH 1.2V 950mAh Rechargeable.",
+    ru: "RHC103E041, GP, Battery, AAAx2, NiMH 1.2V 950mAh Rechargeable."
+  },
+  price: 12.5,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010196227.webp"]
+},
+{
+  id: 739,
+  barcode: "66010192024",
+  title: {
+    ka: "GPRHC272E045, GP, Battery, AAx2 Rechargeable, NiMH 1.2V 2600mA.",
+    en: "GPRHC272E045, GP, Battery, AAx2 Rechargeable, NiMH 1.2V 2600mA.",
+    ru: "GPRHC272E045, GP, Battery, AAx2 Rechargeable, NiMH 1.2V 2600mA."
+  },
+  price: 21.5,
+  inStock: true,
+  category: "Electrical energy",
+  subcategory: "External chargers",
+  images: ["images/66010192024.webp"]
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+];
+
+let cart = JSON.parse(localStorage.getItem('cart_items')) || [];
+let currentUser = JSON.parse(localStorage.getItem('logged_user')) || null;
+const currentImageIndexes = {};
+let pendingGoogleUser = null;
+let currentLang = localStorage.getItem('site_lang') || 'ka';
+
+// ==========================================
+// 0. ავტორიზაციის ფორმების გადართვა (TOGGLE)
+// ==========================================
+function toggleAuthForms(showLogin) {
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+
+    if (loginForm && registerForm) {
+        if (showLogin) {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+        } else {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        }
+    }
+}
+
+function changeLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('site_lang', lang);
+    const prodList = (typeof products !== 'undefined' ? products : []);
+    renderProducts(prodList);
+}
+
+function getUsersFromStorage() {
+    return JSON.parse(localStorage.getItem('registered_users')) || [];
+}
+
+// ==========================================
+// 1. Google Sign-In & პროფილის დასრულება
+// ==========================================
+function parseJwt(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    } catch (e) {
+        console.error("JWT დეკოდირების შეცდომა:", e);
+        return null;
+    }
+}
+
+function handleCredentialResponse(response) {
+    const responsePayload = parseJwt(response.credential);
+    if (!responsePayload) {
+        alert("⚠️ Google-ით ავტორიზაცია ვერ მოხერხდა.");
+        return;
+    }
+
+    const email = responsePayload.email;
+    const name = responsePayload.name;
+    const googleId = responsePayload.sub;
+
+    const users = getUsersFromStorage();
+    let foundUser = users.find(u => u.email === email || u.googleId === googleId);
+
+    if (foundUser) {
+        currentUser = foundUser;
+        localStorage.setItem('logged_user', JSON.stringify(currentUser));
+        updateUserNav();
+        renderOrderHistory();
+        alert(`კეთილი იყოს თქვენი მობრძანება, ${currentUser.username}!`);
+        showPage('home');
+    } else {
+        pendingGoogleUser = {
+            username: name,
+            email: email,
+            googleId: googleId,
+            phone: '',
+            address: '',
+            pass: '',
+            orderHistory: []
+        };
+
+        const modal = document.getElementById('complete-profile-modal');
+        if (modal) {
+            modal.style.display = 'block';
+        }
+    }
+}
+
+function saveGoogleUserInfo(e) {
+    e.preventDefault();
+    const phone = document.getElementById('google-phone').value.trim();
+    const address = document.getElementById('google-address').value.trim();
+
+    if (!phone || !address) {
+        alert('გთხოვთ შეავსოთ ტელეფონის ნომერი და მისამართი!');
+        return;
+    }
+
+    if (pendingGoogleUser) {
+        pendingGoogleUser.phone = phone;
+        pendingGoogleUser.address = address;
+
+        const users = getUsersFromStorage();
+        users.push(pendingGoogleUser);
+        localStorage.setItem('registered_users', JSON.stringify(users));
+
+        currentUser = pendingGoogleUser;
+        localStorage.setItem('logged_user', JSON.stringify(currentUser));
+
+        pendingGoogleUser = null;
+
+        const modal = document.getElementById('complete-profile-modal');
+        if (modal) modal.style.display = 'none';
+
+        updateUserNav();
+        renderOrderHistory();
+        alert(`🎉 რეგისტრაცია წარმატებით დასრულდა! კეთილი იყოს თქვენი მობრძანება, ${currentUser.username}!`);
+        showPage('home');
+    }
+}
+
+// ==========================================
+// 2. SPA გვერდების გადართვა & მენიუ
+// ==========================================
+function showPage(pageId) {
+    const sections = document.querySelectorAll('.page-section');
+    sections.forEach(section => section.classList.remove('active-section'));
+
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) targetPage.classList.add('active-section');
+    
+    const navMenu = document.getElementById('nav-menu');
+    if (navMenu && navMenu.classList.contains('active-menu')) {
+        navMenu.classList.remove('active-menu');
+    }
+
+    if (pageId === 'profile-section' || pageId === 'history-section') {
+        renderOrderHistory();
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMenu() {
+    const navMenu = document.getElementById('nav-menu');
+    if (navMenu) {
+        navMenu.classList.toggle('active');
+        navMenu.classList.toggle('active-menu');
+    }
+}
+
+// ==========================================
+// 3. მომხმარებლის ნავბარი & პროფილის მოდალი
+// ==========================================
+function updateUserNav() {
+    const navUserInfo = document.getElementById('nav-user-info');
+    const loggedUsername = document.getElementById('logged-username');
+    const navLogin = document.getElementById('nav-login');
+    const navLogout = document.getElementById('nav-logout');
+    const navHistory = document.getElementById('nav-history');
+
+    if (currentUser) {
+        if (loggedUsername) loggedUsername.innerText = `👤 ${currentUser.username}`;
+        if (navUserInfo) navUserInfo.style.display = 'inline-block';
+        if (navLogout) navLogout.style.display = 'inline-block';
+        if (navHistory) navHistory.style.display = 'inline-block';
+        if (navLogin) navLogin.style.display = 'none';
+    } else {
+        if (navUserInfo) navUserInfo.style.display = 'none';
+        if (navLogout) navLogout.style.display = 'none';
+        if (navHistory) navHistory.style.display = 'none';
+        if (navLogin) navLogin.style.display = 'inline-block';
+    }
+}
+
+function openProfileModal() {
+    if (!currentUser) return;
+
+    const pUsername = document.getElementById('p-username');
+    const pPhone = document.getElementById('p-phone');
+    const pAddress = document.getElementById('p-address');
+
+    if (pUsername) pUsername.innerText = currentUser.username || 'არ არის მითითებული';
+    if (pPhone) pPhone.innerText = currentUser.phone || 'არ არის მითითებული';
+    if (pAddress) pAddress.innerText = currentUser.address || 'არ არის მითითებული';
+
+    const modal = document.getElementById('profile-modal');
+    if (modal) modal.style.display = 'block';
+}
+
+function closeProfileModal() {
+    const modal = document.getElementById('profile-modal');
+    if (modal) modal.style.display = 'none';
+}
+
+function logout() {
+    currentUser = null;
+    localStorage.removeItem('logged_user');
+    updateUserNav();
+    alert('წარმატებით გამოხვედით სისტემიდან.');
+    showPage('home');
+}
+
+function renderOrderHistory() {
+    const historyList = document.getElementById('order-history-list');
+    if (!historyList) return;
+
+    if (!currentUser || !currentUser.orderHistory || currentUser.orderHistory.length === 0) {
+        historyList.innerHTML = '<p>შეკვეთების ისტორია ცარიელია.</p>';
+        return;
+    }
+
+    historyList.innerHTML = currentUser.orderHistory.map(order => `
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 6px;">
+            <p><strong>შეკვეთა:</strong> ${order.orderId}</p>
+            <p><strong>ჯამი:</strong> ${order.totalSum} ₾</p>
+        </div>
+    `).join('');
+}
+
+// ==========================================
+// 🌐 პროდუქციის თარგმნის დამხმარე ფუნქცია
+// ==========================================
+function getTranslatedText(value) {
+    if (value === null || value === undefined) return '';
+
+    if (typeof value === 'object' && !Array.isArray(value)) {
+        return (
+            value[currentLang] ||
+            value.ka ||
+            value.ge ||
+            value.en ||
+            value.ru ||
+            Object.values(value)[0] ||
+            ''
+        );
+    }
+
+    return String(value);
+}
+
+function getLangText(ka, en, ru) {
+    return ({ ka, en, ru }[currentLang]) || ka;
+}
+
+// ==========================================
+// 4. პროდუქციის გამოჩენა (Render Products)
+// ==========================================
+function renderProducts(productList = (typeof products !== 'undefined' ? products : [])) {
+    const grid = document.getElementById('products-grid');
+    if (!grid) return;
+    
+    if (productList.length === 0) {
+        const noProdText = {
+            ka: "პროდუქტი ვერ მოიძებნა.",
+            en: "No products found.",
+            ru: "Продукты не найдены."
+        };
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 20px;">${noProdText[currentLang] || noProdText.ka}</p>`;
+        return;
+    }
+
+    grid.innerHTML = productList.map(prod => {
+        const imgList = prod.images && prod.images.length > 0 ? prod.images : ['https://via.placeholder.com/200'];
+        const isAvailable = prod.inStock !== false;
+        const hasMultipleImages = imgList.length > 1;
+
+        const rawName = prod.title || prod.name || prod.productName;
+        const productName = getTranslatedText(rawName) || 'უსახელო პროდუქტი';
+
+        const btnTexts = {
+            ka: isAvailable ? '👁️ დეტალურად / ყიდვა' : '🚫 ამოყიდულია',
+            en: isAvailable ? '👁️ Details / Buy' : '🚫 Out of Stock',
+            ru: isAvailable ? '👁️ Подробнее / Купить' : '🚫 Нет в наличии'
+        };
+
+        const outOfStockBadge = {
+            ka: '❌ არ არის მარაგში',
+            en: '❌ Out of stock',
+            ru: '❌ Нет в наличии'
+        };
+
+        if (!(prod.id in currentImageIndexes)) {
+            currentImageIndexes[prod.id] = 0;
+        }
+
+        return `
+            <div class="product-card ${!isAvailable ? 'out-of-stock-card' : ''}" id="card-${prod.id}" style="position: relative;">
+                ${!isAvailable ? `<span style="position: absolute; top: 10px; right: 10px; background: #ef4444; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; z-index: 2;">${outOfStockBadge[currentLang] || outOfStockBadge.ka}</span>` : ''}
+                
+                <div class="product-img-container" style="height: 200px; border-radius: 8px; overflow: hidden; position: relative; background: var(--bg-color, #f8fafc); display: flex; align-items: center; justify-content: center; opacity: ${isAvailable ? '1' : '0.5'};">
+                    <img id="card-img-${prod.id}" src="${imgList[currentImageIndexes[prod.id]]}" class="product-img" alt="${productName}" onclick="openProductModal(${prod.id})" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:contain; cursor:pointer;">
+                    
+                    ${hasMultipleImages ? `
+                        <button onclick="event.stopPropagation(); changeImage(${prod.id}, -1)" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; z-index: 3;">❮</button>
+                        <button onclick="event.stopPropagation(); changeImage(${prod.id}, 1)" style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; z-index: 3;">❯</button>
+                    ` : ''}
+                </div>
+
+                <div onclick="openProductModal(${prod.id})" style="cursor: pointer;">
+                    <h4 style="margin-top: 10px;">${productName}</h4>
+                    <p class="price">${prod.price ? Number(prod.price).toFixed(2) : '0.00'} ₾</p>
+                </div>
+                
+                <button class="add-btn" 
+                        style="${!isAvailable ? 'background-color: #9ca3af; cursor: not-allowed;' : ''}" 
+                        onclick="openProductModal(${prod.id})" 
+                        ${!isAvailable ? 'disabled' : ''}>
+                    ${btnTexts[currentLang] || btnTexts.ka}
+                </button>
+            </div>
+        `;
+    }).join('');
+}
+function changeImage(productId, direction) {
+    const prodList = (typeof products !== 'undefined' ? products : []);
+    const prod = prodList.find(p => p.id === productId);
+    if (!prod || !prod.images || prod.images.length <= 1) return;
+
+    let currentIndex = currentImageIndexes[productId] || 0;
+    currentIndex += direction;
+
+    if (currentIndex < 0) {
+        currentIndex = prod.images.length - 1;
+    } else if (currentIndex >= prod.images.length) {
+        currentIndex = 0;
+    }
+
+    currentImageIndexes[productId] = currentIndex;
+    const imgElement = document.getElementById(`card-img-${productId}`);
+    if (imgElement) {
+        imgElement.src = prod.images[currentIndex];
+    }
+}
+
+// ==========================================
+// 5. ძებნის ფუნქციონალი & ინიციალიზაცია
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input') || document.querySelector('.search-box input');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const prodList = (typeof products !== 'undefined' ? products : []);
+
+            const filteredProducts = prodList.filter(prod => {
+                let productName = '';
+                let rawName = prod.title || prod.name || prod.productName;
+                if (typeof rawName === 'object' && rawName !== null) {
+                    productName = (rawName[currentLang] || rawName.ka || '').toLowerCase();
+                } else if (typeof rawName === 'string') {
+                    productName = rawName.toLowerCase();
+                }
+
+                const nameMatch = productName.includes(searchTerm);
+                
+                let descMatch = false;
+                if (typeof prod.description === 'object' && prod.description !== null) {
+                    const descStr = (prod.description[currentLang] || prod.description.ka || '').toLowerCase();
+                    descMatch = descStr.includes(searchTerm);
+                } else if (Array.isArray(prod.description)) {
+                    descMatch = prod.description.some(d => d.toLowerCase().includes(searchTerm));
+                } else if (typeof prod.description === 'string') {
+                    descMatch = prod.description.toLowerCase().includes(searchTerm);
+                }
+
+                const barcodeMatch = prod.barcode ? String(prod.barcode).toLowerCase().includes(searchTerm) : false;
+
+                return nameMatch || descMatch || barcodeMatch;
+            });
+
+            renderProducts(filteredProducts);
+        });
+    }
+
+    updateUserNav();
+    updateCart();
+    renderOrderHistory();
+});
+
+// ==========================================
+// 6. Modal & URL Link & Price Updates
+// ==========================================
+function updateModalPrice(productId) {
+    const prodList = (typeof products !== 'undefined' ? products : []);
+    const prod = prodList.find(p => p.id === productId);
+    if (!prod) return;
+
+    let selectedPrice = prod.price;
+
+    const brandSelect = document.getElementById(`modal-brand-${productId}`);
+    if (brandSelect && brandSelect.options[brandSelect.selectedIndex]) {
+        const p = brandSelect.options[brandSelect.selectedIndex].getAttribute('data-price');
+        if (p) selectedPrice = parseFloat(p);
+    }
+
+    const sizeSelect = document.getElementById(`modal-size-${productId}`);
+    if (sizeSelect && sizeSelect.options[sizeSelect.selectedIndex]) {
+        const p = sizeSelect.options[sizeSelect.selectedIndex].getAttribute('data-price');
+        if (p) selectedPrice = parseFloat(p);
+    }
+
+    const priceEl = document.getElementById(`modal-price-${productId}`);
+    if (priceEl) priceEl.innerText = `${selectedPrice.toFixed(2)} ₾`;
+}
+
+function openProductModal(productId) {
+    const prodList = (typeof products !== 'undefined' ? products : []);
+    const prod = prodList.find(p => p.id === productId);
+    if (!prod) return;
+
+    window.location.hash = `product-${productId}`;
+
+    const modal = document.getElementById('product-modal');
+    const modalBody = document.getElementById('modal-body');
+    const imgList = prod.images && prod.images.length > 0 ? prod.images : ['https://via.placeholder.com/300'];
+    const isAvailable = prod.inStock !== false;
+
+    let productName = 'უსახელო პროდუქტი';
+    let rawName = prod.title || prod.name || prod.productName;
+    if (typeof rawName === 'object' && rawName !== null) {
+        productName = rawName[currentLang] || rawName.ka || Object.values(rawName)[0] || 'უსახელო პროდუქტი';
+    } else if (typeof rawName === 'string') {
+        productName = rawName;
+    }
+
+    let descText = '';
+    if (typeof prod.description === 'object' && prod.description !== null && !Array.isArray(prod.description)) {
+        descText = prod.description[currentLang] || prod.description.ka || Object.values(prod.description)[0];
+    } else if (Array.isArray(prod.description)) {
+        descText = prod.description.join(', ');
+    } else {
+        descText = prod.description || 'მაღალი ხარისხის საოფისე/საკანცელარიო პროდუქცია.';
+    }
+
+    const statusText = {
+        ka: isAvailable ? '🟢 მარაგშია' : '🔴 არ არის მარაგში',
+        en: isAvailable ? '🟢 In Stock' : '🔴 Out of Stock',
+        ru: isAvailable ? '🟢 В наличии' : '🔴 Нет в наличии'
+    };
+
+    const btnText = {
+        ka: isAvailable ? '🛒 კალათაში დამატება' : '🚫 არ არის მარაგში',
+        en: isAvailable ? '🛒 Add to Cart' : '🚫 Out of Stock',
+        ru: isAvailable ? '🛒 В корзину' : '🚫 Нет в наличии'
+    };
+
+    let brandHTML = '';
+    if (prod.brands && prod.brands.length > 0) {
+        brandHTML = `
+            <div style="margin-bottom:10px;">
+                <label><strong>${getLangText('ფირმა:', 'Brand:', 'Бренд:')}</strong></label>
+                <select id="modal-brand-${prod.id}" onchange="updateModalPrice(${prod.id})">
+                    ${prod.brands.map(b => {
+                        const text = getTranslatedText(b.name !== undefined ? b : b);
+                        const value = typeof b === 'object' ? (b.name || text) : b;
+                        const price = typeof b === 'object' && b.price !== undefined ? `data-price="${b.price}"` : '';
+                        return `<option value="${value}" ${price}>${text}</option>`;
+                    }).join('')}
+                </select>
+            </div>`;
+    }
+
+    let colorHTML = '';
+    if (prod.colors && prod.colors.length > 0) {
+        colorHTML = `
+            <div style="margin-bottom:10px;">
+                <label><strong>${getLangText('ფერი:', 'Color:', 'Цвет:')}</strong></label>
+                <select id="modal-color-${prod.id}">
+                    ${prod.colors.map(c => {
+                        const text = getTranslatedText(c);
+                        const value = typeof c === 'object' ? (c[currentLang] || c.ka || text) : c;
+                        return `<option value="${value}">${text}</option>`;
+                    }).join('')}
+                </select>
+            </div>`;
+    }
+
+    let sizeHTML = '';
+    if (prod.sizes && prod.sizes.length > 0) {
+        sizeHTML = `
+            <div style="margin-bottom:10px;">
+                <label><strong>${getLangText('ზომა:', 'Size:', 'Размер:')}</strong></label>
+                <select id="modal-size-${prod.id}" onchange="updateModalPrice(${prod.id})">
+                    ${prod.sizes.map(item => {
+                        const text = getTranslatedText(item);
+                        const value = typeof item === 'object' ? (item[currentLang] || item.ka || item.name || text) : item;
+                        const price = typeof item === 'object' && item.price !== undefined ? `data-price="${item.price}"` : '';
+                        return `<option value="${value}" ${price}>${text}</option>`;
+                    }).join('')}
+                </select>
+            </div>`;
+    }
+
+    modalBody.innerHTML = `
+        <div class="modal-product-details">
+            <div style="background: var(--bg-color, #f8fafc); border-radius: 8px; display: flex; align-items: center; justify-content: center; height: 300px; overflow: hidden;">
+                <img id="modal-img-${prod.id}" src="${imgList[0]}" loading="lazy" decoding="async" style="width:100%; height:100%; border-radius:8px; object-fit:contain;">
+            </div>
+            <div>
+                <h2>${productName}</h2>
+                <h3 id="modal-price-${prod.id}" style="color: #2563eb; margin: 10px 0;">${prod.price ? Number(prod.price).toFixed(2) : '0.00'} ₾</h3>
+                
+                <p style="margin-bottom: 6px;">
+                    <strong>${getLangText('სტატუსი:', 'Status:', 'Статус:')}</strong> 
+                    <span style="color: ${isAvailable ? '#16a34a' : '#dc2626'}; font-weight: bold;">
+                        ${statusText[currentLang] || statusText.ka}
+                    </span>
+                </p>
+
+                <!-- 🏷️ შტრიხკოდის გამოჩენა -->
+                <p style="margin-bottom: 10px;">
+                    <strong>${getLangText('შტრიხკოდი:', 'Barcode:', 'Штрихкод:')}</strong> 
+                    <span style="color: #475569; font-weight: 600;">${prod.barcode || '—'}</span>
+                </p>
+
+                <p style="font-size: 14px; color: #555;">${descText}</p>
+                <hr style="margin: 15px 0;">
+                
+                ${brandHTML}
+                ${sizeHTML}
+                ${colorHTML}
+
+                <div style="margin: 15px 0;">
+                    <label><strong>${getLangText('რაოდენობა:', 'Quantity:', 'Количество:')}</strong></label>
+                    <input type="number" id="modal-qty-${prod.id}" value="1" min="1" max="99" style="width:60px; padding:4px; text-align:center;" ${!isAvailable ? 'disabled' : ''}>
+                </div>
+
+                <button class="add-btn" 
+                        style="width:100%; padding:10px; background:${isAvailable ? '#2563eb' : '#9ca3af'}; color:white; border:none; border-radius:6px; cursor:${isAvailable ? 'pointer' : 'not-allowed'};" 
+                        onclick="addToCartFromModal(${prod.id})" 
+                        ${!isAvailable ? 'disabled' : ''}>
+                    ${btnText[currentLang] || btnText.ka}
+                </button>
+            </div>
+        </div>
+    `;
+
+    if (modal) modal.style.display = 'block';
+}
+
+function closeProductModal() {
+    const modal = document.getElementById('product-modal');
+    if (modal) modal.style.display = 'none';
+    history.pushState("", document.title, window.location.pathname + window.location.search);
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('product-modal');
+    const profileModal = document.getElementById('profile-modal');
+    const googleModal = document.getElementById('complete-profile-modal');
+    
+    if (event.target === modal) closeProductModal();
+    if (event.target === profileModal) closeProfileModal();
+    if (event.target === googleModal) googleModal.style.display = 'none';
+};
+
+window.addEventListener('load', checkUrlHash);
+window.addEventListener('hashchange', checkUrlHash);
+
+function checkUrlHash() {
+    const hash = window.location.hash;
+    if (hash.startsWith('#product-')) {
+        const productId = parseInt(hash.replace('#product-', ''));
+        if (productId) {
+            openProductModal(productId);
+        }
+    }
+}
+function filterBysubcategory(brandName) {
+    // 1. თუ გაქვს კატალოგის გვერდზე გადასვლის ფუნქცია
+    if (typeof showSection === 'function') {
+        showSection('catalog'); 
+    }
+    
+    // 2. ვფილტრავთ პროდუქტებს, სადაც ქვეკატეგორია ან ბრენდი ემთხვევა მითებულს
+    const filtered = (typeof products !== 'undefined' ? products : []).filter(p => {
+        const subCat = (p.subcategory || p.subCategory || '').toLowerCase();
+        const brand = (p.brand || '').toLowerCase();
+        const query = brandName.toLowerCase();
+        
+        return subCat.includes(query) || brand.includes(query);
+    });
+
+    // 3. გამოვსახავთ გაფილტრულ პროდუქტებს
+    if (typeof renderProducts === 'function') {
+        renderProducts(filtered);
+    }
+}
+
+function addToCartFromModal(productId) {
+    const prodList = (typeof products !== 'undefined' ? products : []);
+    const prod = prodList.find(p => p.id === productId);
+    if (!prod) return;
+
+    if (prod.inStock === false) {
+        alert(getLangText('⚠️ სამწუხაროდ, ეს პროდუქტი დროებით მარაგში არ არის!', '⚠️ Unfortunately, this product is temporarily out of stock!', '⚠️ К сожалению, этого товара временно нет в наличии!'));
+        return;
+    }
+
+    const qtyInput = document.getElementById(`modal-qty-${productId}`);
+    const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+    
+    let finalPrice = prod.price;
+    const priceEl = document.getElementById(`modal-price-${productId}`);
+    if (priceEl) {
+        finalPrice = parseFloat(priceEl.innerText) || prod.price;
+    }
+
+    const sizeSelect = document.getElementById(`modal-size-${productId}`);
+    const colorSelect = document.getElementById(`modal-color-${productId}`);
+    const selectedSize = sizeSelect ? sizeSelect.value : null;
+    const selectedColor = colorSelect ? colorSelect.value : null;
+
+    let rawName = prod.title || prod.name || prod.productName;
+    let prodNameStr = getTranslatedText(rawName) || 'უსახელო პროდუქტი';
+
+    const existingIndex = cart.findIndex(item => 
+        item.id === productId && 
+        item.selectedSize === selectedSize && 
+        item.selectedColor === selectedColor
+    );
+
+    if (existingIndex > -1) {
+        cart[existingIndex].quantity += qty;
+    } else {
+        cart.push({ 
+            ...prod, 
+            displayName: prodNameStr,
+            price: finalPrice, 
+            quantity: qty,
+            selectedSize: selectedSize,
+            selectedColor: selectedColor
+        });
+    }
+
+    updateCart();
+    alert(`✅ "${prodNameStr}" (${qty} ${getLangText('ცალი', 'pcs', 'шт.')}) ${getLangText('დაემატა კალათაში!', 'was added to the cart!', 'добавлен в корзину!')}`);
+    closeProductModal();
+}
+
+function filterCategory(categoryName, element) {
+    if (element) {
+        const menuItems = document.querySelectorAll('.category-menu li');
+        menuItems.forEach(item => item.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+    const prodList = (typeof products !== 'undefined' ? products : []);
+
+    if (categoryName === 'all') {
+        renderProducts(prodList);
+    } else {
+        const filtered = prodList.filter(p => p.category === categoryName);
+        renderProducts(filtered);
+    }
+}
+// ==========================================
+// 7. კატეგორიები და ქვეკატეგორიები
+// ==========================================
+
+// მთავარი კატეგორიის გაფილტვრა
+// ==========================================
+// 7. კატეგორიები და ქვეკატეგორიები
+// ==========================================
+
+// ტექსტის გასუფთავება შედარებისთვის
+function normalizeCategoryValue(value) {
+    if (value === null || value === undefined) return '';
+
+    return String(value)
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, '_')
+        .replace(/-/g, '_');
+}
+
+
+// ==========================================
+// მთავარი კატეგორიის გაფილტვრა
+// ==========================================
+function filterCategory(categoryName, element) {
+
+    const prodList = (typeof products !== 'undefined' ? products : []);
+
+    // აქტიური კატეგორიის მონიშვნა
+    document.querySelectorAll('.category-main-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    if (element) {
+        const parentItem = element.closest('.category-main-item');
+
+        if (parentItem) {
+            parentItem.classList.add('active');
+        }
+    }
+
+    // ყველა პროდუქტი
+    if (categoryName === 'all') {
+        renderProducts(prodList);
+        return;
+    }
+
+    const wantedCategory = normalizeCategoryValue(categoryName);
+
+    const filtered = prodList.filter(product => {
+
+        const category =
+            product.category ??
+            product.categoryName ??
+            product.mainCategory ??
+            product.main_category;
+
+        return normalizeCategoryValue(category) === wantedCategory;
+    });
+
+    console.log('მთავარი კატეგორია:', categoryName);
+    console.log('ნაპოვნი პროდუქტები:', filtered);
+
+    renderProducts(filtered);
+}
+
+
+// ==========================================
+// ქვეკატეგორიის მენიუს გახსნა / დახურვა
+// ==========================================
+function toggleSubcategoryMenu(subId) {
+    const targetSub = document.getElementById(subId);
+
+    if (!targetSub) {
+        console.error(`ქვეკატეგორია ვერ მოიძებნა: ${subId}`);
+        return;
+    }
+
+    // ამ ქვეკატეგორიის მშობელი
+    const parentItem = targetSub.closest('.category-main-item');
+
+    // ყველა სხვა ქვეკატეგორიის დახურვა
+    document.querySelectorAll('.subcategory-menu').forEach(sub => {
+        if (sub !== targetSub) {
+            sub.classList.remove('subcategory-open');
+
+            const otherParent = sub.closest('.category-main-item');
+            if (otherParent) {
+                otherParent.classList.remove('active');
+            }
+        }
+    });
+
+    // თუ გახსნილია → დავხუროთ
+    if (targetSub.classList.contains('subcategory-open')) {
+        targetSub.classList.remove('subcategory-open');
+
+        if (parentItem) {
+            parentItem.classList.remove('active');
+        }
+    } 
+    // თუ დახურულია → გავხსნათ
+    else {
+        targetSub.classList.add('subcategory-open');
+
+        if (parentItem) {
+            parentItem.classList.add('active');
+        }
+    }
+}
+
+
+// ==========================================
+// ქვეკატეგორიის მიხედვით გაფილტვრა
+// ==========================================
+function filterSubcategory(categoryName, subcategoryName) {
+
+    const prodList = (typeof products !== 'undefined' ? products : []);
+
+    const wantedCategory = normalizeCategoryValue(categoryName);
+    const wantedSubcategory = normalizeCategoryValue(subcategoryName);
+
+    console.log('==============================');
+    console.log('კატეგორია:', wantedCategory);
+    console.log('ქვეკატეგორია:', wantedSubcategory);
+    console.log('==============================');
+
+    // ==========================================
+    // "ყველა" ქვეკატეგორიაში
+    // ==========================================
+    if (subcategoryName === 'all') {
+
+        const filtered = prodList.filter(product => {
+
+            const category =
+                product.category ??
+                product.categoryName ??
+                product.mainCategory ??
+                product.main_category;
+
+            return normalizeCategoryValue(category) === wantedCategory;
+        });
+
+        console.log('ყველა პროდუქტი კატეგორიაში:', filtered);
+
+        renderProducts(filtered);
+        return;
+    }
+
+
+    // ==========================================
+    // ჩვეულებრივი ქვეკატეგორია
+    // ==========================================
+    const filtered = prodList.filter(product => {
+
+        // ძირითადი კატეგორია
+        const category =
+            product.category ??
+            product.categoryName ??
+            product.mainCategory ??
+            product.main_category;
+
+        // ქვეკატეგორია
+        const subcategory =
+            product.subcategory ??
+            product.subCategory ??
+            product.sub_category ??
+            product.category2 ??
+            product.category_2 ??
+            product.type;
+
+        const actualCategory =
+            normalizeCategoryValue(category);
+
+        const actualSubcategory =
+            normalizeCategoryValue(subcategory);
+
+        console.log(
+            'პროდუქტი:',
+            product.title || product.name,
+            '| category:',
+            actualCategory,
+            '| subcategory:',
+            actualSubcategory
+        );
+
+        return (
+            actualCategory === wantedCategory &&
+            actualSubcategory === wantedSubcategory
+        );
+    });
+
+
+    console.log('ნაპოვნი პროდუქტები:', filtered);
+
+    renderProducts(filtered);
+
+
+    // ==========================================
+    // აქტიური ქვეკატეგორიის მონიშვნა
+    // ==========================================
+    document.querySelectorAll('.subcategory-menu li').forEach(item => {
+        item.classList.remove('active-subcategory');
+    });
+
+    const clickedItem = Array.from(
+        document.querySelectorAll('.subcategory-menu li')
+    ).find(item => {
+
+        const onclick = item.getAttribute('onclick');
+
+        return onclick &&
+            onclick.includes(
+                `filterSubcategory('${categoryName}', '${subcategoryName}')`
+            );
+    });
+
+    if (clickedItem) {
+        clickedItem.classList.add('active-subcategory');
+    }
+}
+// ==========================================
+// 7. კალათა & შეკვეთის გაფორმება (CHECKOUT)
+// ==========================================
+function updateCart() {
+    localStorage.setItem('cart_items', JSON.stringify(cart));
+
+    const cartCountEl = document.getElementById('cart-count');
+    const cartListEl = document.getElementById('cart-list');
+    const totalPriceEl = document.getElementById('cart-total-price');
+    const checkoutSection = document.getElementById('checkout-section');
+
+    const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (cartCountEl) cartCountEl.innerText = totalCount;
+
+    if (!cartListEl) return;
+
+    if (cart.length === 0) {
+        cartListEl.innerHTML = '<p class="empty-msg" data-i18n="emptyCartMsg">თქვენი კალათა ამჟამად ცარიელია.</p>';
+        if (checkoutSection) checkoutSection.style.display = 'none';
+        return;
+    }
+
+    if (checkoutSection) checkoutSection.style.display = 'block';
+    cartListEl.innerHTML = '';
+    let totalSum = 0;
+
+    cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        totalSum += itemTotal;
+
+        const optionsText = [
+            item.selectedSize ? `${getLangText('ზომა:', 'Size:', 'Размер:')} ${item.selectedSize}` : '',
+            item.selectedColor ? `${getLangText('ფერი:', 'Color:', 'Цвет:')} ${item.selectedColor}` : ''
+        ].filter(Boolean).join(', ');
+
+        let nameToShow = item.displayName || item.title || item.name;
+        nameToShow = getTranslatedText(nameToShow);
+
+        // 🖼️ პროდუქტის ფოტოს მისამართის მიღება (პირველი სურათი მასივიდან)
+        const imgSrc = (item.images && item.images.length > 0) ? item.images[0] : 'images/default.jpg';
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.style.cssText = "display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 8px; border-bottom: 1px solid #ddd;";
+        itemDiv.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="${imgSrc}" alt="${nameToShow}" style="width: 45px; height: 45px; object-fit: cover; border-radius: 4px; border: 1px solid #eee;">
+                <div>
+                    <strong>${nameToShow}</strong> ${optionsText ? `<small style="color:#666;">(${optionsText})</small>` : ''}<br>
+                    <small>${item.price.toFixed(2)} ₾ x ${item.quantity} = ${itemTotal.toFixed(2)} ₾</small>
+                </div>
+            </div>
+            <button class="qty-btn" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:4px; cursor:pointer;" onclick="removeFromCart(${index})">🗑️</button>
+        `;
+        cartListEl.appendChild(itemDiv);
+    });
+
+    if (totalPriceEl) totalPriceEl.innerText = totalSum.toFixed(2);
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+let isCheckoutProcessing = false;
+
+async function checkout() {
+
+    // თუ შეკვეთა უკვე მუშავდება, ხელმეორედ აღარ გაიგზავნოს
+    if (isCheckoutProcessing) {
+        return;
+    }
+
+    if (!currentUser) {
+        alert('⚠️ შეკვეთის გასაფორმებლად გთხოვთ გაიაროთ ავტორიზაცია ან დარეგისტრირდეთ!');
+        if (typeof showPage === 'function') showPage('auth-section');
+        return;
+    }
+
+    if (!cart || cart.length === 0) {
+        alert('კალათა ცარიელია!');
+        return;
+    }
+
+    let paperTotal = 0;
+    let otherTotal = 0;
+
+    cart.forEach(item => {
+
+        const itemPrice = Number(item.price) || 0;
+        const itemQty = Number(item.quantity) || 1;
+        const itemSum = itemPrice * itemQty;
+
+        const isPaperProduct =
+            item.category === 'paper' ||
+            item.isPaper === true ||
+            (typeof item.category === 'string' && item.category.toLowerCase().includes('paper')) ||
+            (typeof item.name === 'string' && item.name.toLowerCase().includes('ქაღალდი')) ||
+            (typeof item.title === 'string' && item.title.toLowerCase().includes('ქაღალდი'));
+
+        if (isPaperProduct) {
+            paperTotal += itemSum;
+        } else {
+            otherTotal += itemSum;
+        }
+    });
+
+    if (otherTotal === 0 && paperTotal > 0) {
+
+        if (paperTotal < 200) {
+            alert(`⚠️ მხოლოდ საბეჭდი ქაღალდის შეკვეთისას მინიმალური თანხა შეადგენს 200 ₾-ს.
+თქვენი ქაღალდის ჯამი: ${paperTotal.toFixed(2)} ₾`);
+            return;
+        }
+    }
+
+    if (otherTotal > 0) {
+
+        if (otherTotal < 50) {
+            alert(`⚠️ შეკვეთის გასაფორმებლად პროდუქტების ჯამური თანხა (საბეჭდი ქაღალდის გარეშე) უნდა იყოს ნაკლები 50 ₾-ზე.
+თქვენი პროდუქტების ჯამი (ქაღალდის გარეშე): ${otherTotal.toFixed(2)} ₾`);
+            return;
+        }
+    }
+
+    // ==========================================
+    // შეკვეთის გაგზავნის დაწყება
+    // ==========================================
+
+    isCheckoutProcessing = true;
+
+    const checkoutBtn = document.getElementById('checkout-btn');
+
+    if (checkoutBtn) {
+        checkoutBtn.disabled = true;
+        checkoutBtn.innerText = 'მუშავდება...';
+    }
+
+    const orderId = '#' + Math.floor(10000 + Math.random() * 90000);
+
+    const totalSum = cart.reduce(
+        (sum, item) =>
+            sum + (Number(item.price) * Number(item.quantity || 1)),
+        0
+    ).toFixed(2);
+
+    const userInfo = `${currentUser.username || ''} (${currentUser.phone || 'ტელეფონი არ არის'})`;
+
+    const address = currentUser.address || 'არ არის მითითებული';
+
+    const lang = typeof currentLang !== 'undefined'
+        ? currentLang
+        : 'ka';
+
+    const orderData = {
+
+        orderId,
+
+        userInfo,
+
+        address,
+
+        cart: cart.map(item => {
+
+            let itemName =
+                item.displayName ||
+                item.title ||
+                item.name ||
+                'უცნობი პროდუქტი';
+
+            if (typeof itemName === 'object') {
+                itemName =
+                    itemName[lang] ||
+                    itemName.ka ||
+                    Object.values(itemName)[0];
+            }
+
+            // 📸 სურათის მისამართების გარდაქმნა სრულ დომენურ URL-ად
+            const rawImages = Array.isArray(item.images)
+                ? item.images
+                : (item.images ? [item.images] : []);
+
+            const fullUrlImages = rawImages.map(img => {
+
+                if (typeof img === 'string' && img.startsWith('http')) {
+                    return img;
+                }
+
+                const cleanImgPath = String(img)
+                    .replace(/^\/+/, '');
+
+                return `https://gltrade.ge/${cleanImgPath}`;
+            });
+
+            return {
+
+                id: item.id,
+
+                barcode: item.barcode || '',
+
+                name: itemName,
+
+                price: Number(item.price),
+
+                quantity: item.quantity || 1,
+
+                images: fullUrlImages,
+
+                selectedSize: item.selectedSize || null,
+
+                selectedColor: item.selectedColor || null
+            };
+        }),
+
+        totalSum: Number(totalSum)
+    };
+
+    try {
+
+        const token =
+            currentUser.token ||
+            localStorage.getItem('auth_token');
+
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(
+            'https://gltrade-backend.onrender.com/api/checkout',
+            {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(orderData)
+            }
+        );
+
+        if (response.ok) {
+
+            alert('🎉 შეკვეთა წარმატებით გაფორმდა!');
+
+            if (!currentUser.orderHistory) {
+                currentUser.orderHistory = [];
+            }
+
+            currentUser.orderHistory.push(orderData);
+
+            localStorage.setItem(
+                'logged_user',
+                JSON.stringify(currentUser)
+            );
+
+            cart = [];
+
+            updateCart();
+
+            showPage('home');
+
+        } else {
+
+            alert('⚠️ შეკვეთის გაგზავნისას დაფიქსირდა შეცდომა.');
+
+            // მხოლოდ შეცდომის შემთხვევაში გავხსნათ ღილაკი
+            isCheckoutProcessing = false;
+
+            if (checkoutBtn) {
+                checkoutBtn.disabled = false;
+                checkoutBtn.innerText = '✅ შეკვეთის გაფორმება';
+            }
+        }
+
+    } catch (err) {
+
+        console.error('Checkout error:', err);
+
+        alert('⚠️ სერვერთან კავშირი ვერ დამყარდა.');
+
+        // კავშირის შეცდომის შემთხვევაში ხელახლა ცდის უფლება
+        isCheckoutProcessing = false;
+
+        if (checkoutBtn) {
+            checkoutBtn.disabled = false;
+            checkoutBtn.innerText = '✅ შეკვეთის გაფორმება';
+        }
+    }
+}
+
+// ==========================================
+// 8. შეკვეთების ისტორია & გამეორება (RE-ORDER)
+// ==========================================
+function renderOrderHistory() {
+    const historyContainer = document.getElementById('order-history-list');
+    if (!historyContainer) return;
+
+    if (!currentUser || !currentUser.orderHistory || currentUser.orderHistory.length === 0) {
+        historyContainer.innerHTML = '<p style="text-align:center; padding: 20px;">შეკვეთების ისტორია ცარიელია.</p>';
+        return;
+    }
+
+    historyContainer.innerHTML = currentUser.orderHistory.map(order => `
+        <div class="order-card" style="border: 1px solid #e2e8f0; padding: 15px; margin-bottom: 15px; border-radius: 8px; background: #fff;">
+            <div style="display:flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                <strong>შეკვეთა ${order.orderId}</strong>
+                <small style="color: #666;">${order.date}</small>
+            </div>
+            
+            <ul style="margin: 10px 0; padding-left: 20px;">
+                ${order.cart.map(item => `
+                    <li>${item.name} ${item.selectedSize ? `[${item.selectedSize}]` : ''} ${item.selectedColor ? `[${item.selectedColor}]` : ''} - ${item.quantity} ცალი (${(item.price * item.quantity).toFixed(2)} ₾)</li>
+                `).join('')}
+            </ul>
+            
+            <div style="display:flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 10px;">
+                <strong>სულ: ${order.totalSum} ₾</strong>
+                
+                <button onclick="repeatOrder('${order.orderId}')" style="background: #2563eb; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                    🔄 შეკვეთის გამეორება
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function repeatOrder(orderId) {
+    if (!currentUser || !currentUser.orderHistory) return;
+
+    const pastOrder = currentUser.orderHistory.find(o => o.orderId === orderId);
+    
+    if (!pastOrder) {
+        alert('⚠️ შეკვეთა ვერ მოიძებნა!');
+        return;
+    }
+
+    pastOrder.cart.forEach(item => {
+        const existingIndex = cart.findIndex(c => 
+            c.name === item.name && 
+            c.selectedSize === item.selectedSize && 
+            c.selectedColor === item.selectedColor
+        );
+
+        if (existingIndex > -1) {
+            cart[existingIndex].quantity += item.quantity;
+        } else {
+            cart.push({ ...item });
+        }
+    });
+
+    updateCart();
+    alert('✅ პროდუქტები წარმატებით დაემატა კალათაში!');
+    showPage('cart');
+}
+// ==========================================
+// 8. ენები (i18n) & Dark Mode & Init
+// ==========================================
+const translations = {
+    ka: {
+        navHome: "🏠 მთავარი",
+        navCatalog: "📦 პროდუქცია",
+        navAbout: "ℹ️ ჩვენს შესახებ",
+        navTerms: "📜 მომსახურების პირობები",
+        navCart: "🛒 კალათა",
+        navLogin: "🔑 შესვლა / რეგისტრაცია",
+        navLogout: "🚪 გამოსვლა",
+        searchPlaceholder: "მოძებნეთ პროდუქტი...",
+        heroTitle: "🏢 GLTrade - თქვენი სანდო პარტნიორი",
+        heroSubtitle: "საბითუმო მომარაგება სწრაფად, მარტივად და საუკეთესო ფასად.",
+        heroBtn: "🛍️ იხილეთ პროდუქცია",
+        contactUs: "დაგვიკავშირდით:",
+        locationTitle: "📍 ჩვენი ლოკაცია",
+        addressLabel: "მისამართი:",
+        addressText: "ქ. თბილისი, ვ.გულისაშვილის 18 ბ ",
+        phoneLabel: "ტელეფონი:",
+        hoursLabel: "სამუშაო საათები:",
+        hoursText: "ორშ - პარ: 09:00 - 18:00",
+        emailLabel: "ელ-ფოსტა:",
+        
+        // Categories (კატეგორიები)
+     catTitle: "კატეგორიები",
+    catAll: "📦 ყველა პროდუქტი",
+    catPaper: "📄 ქაღალდის პროდუქცია",
+    catPrintPaper: "საბეჭდი ქაღალდი",
+    catWatercolor: "აკვარელის ქაღალდი",
+    catLabel: "ლეიბლი",
+    catStickyNotes: "ჩასანიშნი ქაღალდი",
+    catNotebook: "ბლოკნოტი",
+    catEnvelope: "კონვერტი",
+    
+    catStationery: "✂️ საკანცელარიო ნივთები",
+    catRuler: "სახაზავი",
+    catSharpener: "სათლელი",
+    catEraser: "საშლელი",
+    catFileFolder: "ფაილი",
+    catBinderFolder: "სწრაფჩამკერი",
+    catUtilityKnife: "საკანცელარიო დანა",
+    catClips: "კლიპსი",
+    catPaperclips: "სკრეპი",
+    catPenHolder: "საკანცელარიო ჭიქა",
+    catDeskShelf: "საკანცელარიო თარო",
+    
+    catWriting: "✏️ საწერი ნივთები",
+    catPen: "კალამი",
+    catPencil: "ფანქარი",
+    
+    catOffice: "📂 საოფისე ნივთები",
+    catBinder: "ბაინდერი",
+    catDivider: "დივაიდერი",
+    catBindingCover: "ასაკინძი ყდა",
+    catOrganizer: "ორგანაიზერი",
+    catSignboard: "ფირნიში",
+    catBusinessCardHolder: "სავიზიტე",
+    catDeskLamp: "სამაგიდე სანათი",
+    catBadge: "ბეიჯი / ბეიჯის თოკი",
+    catKeyBox: "გასაღების ყუთი / ბრელოკი",
+    catCleaningSet: "საოფისე ურნა / ცოცხი და აქანდაზი",
+    
+    catHygiene: "🏥 ჰიგიენა და დასუფთავება",
+    catGrass: "ჰიგიენა გრასი",
+    catBagi: "ჰიგიენა ბაგი",
+
+        //bank
+        bankLabel: "საბანკო ანგარიში:",
+        accountLabel: "ანგარიშის ნომერი:",
+        recipientLabel: "მიმღები:",
+
+        barcodeLabel: "შტრიხკოდი:",
+            
+
+        loginTitle: "🔑 სისტემაში შესვლა",
+        orGoogle: "ან გაიარეთ ავტორიზაცია Google-ით",
+        regTitle: "📝 რეგისტრაცია",
+        userPlaceholder: "მომხმარებლის სახელი",
+        passPlaceholder: "პაროლი",
+        emailPlaceholder: "ელ-ფოსტა",
+        phonePlaceholder: "5XX XX XX XX",
+        addressPlaceholder: "მიწოდების მისამართი",
+        sendCodeBtn: "📲 კოდის გაგზავნა",
+        codePlaceholder: "ჩაწერეთ 4-ნიშნა SMS კოდი",
+        loginBtn: "შესვლა",
+        regBtn: "რეგისტრაცია",
+        noAccountMsg: "ჯერ არ გაქვთ ანგარიში?",
+        hasAccountMsg: "უკვე გაქვთ ანგარიში?",
+        regLink: "დარეგისტრირდით",
+        loginLink: "შედით",
+        aboutTitle: "🏢 GLTrade-ის შესახებ",
+        aboutText: "GLTrade არის სადისტრიბუციო კომპანია, რომელიც ბიზნესებს ყოველდღიურად საჭირო პროდუქციით ამარაგებს. ჩვენი საქმიანობის ძირითადი მიმართულებებია საკანცელარიო და საოფისე პროდუქცია, დასუფთავებისა და ჰიგიენის საშუალებები, სარეცხი საშუალებები, ასევე სასტუმროსა და სხვა კომერციული ობიექტებისთვის საჭირო ინვენტარი. ჩვენ ვთანამშრომლობთ კომპანიებთან, ოფისებთან, სასტუმროებთან, რესტორნებთან და სხვადასხვა ორგანიზაციასთან. ჩვენი მთავარი მიზანია მომხმარებელს შევთავაზოთ ხარისხიანი პროდუქცია, კონკურენტული ფასები, დროული მიწოდება და საიმედო მომსახურება. GLTrade — თქვენი ბიზნესის ყოველდღიური საჭიროებები ერთ სივრცეში.",
+        termsTitle: "📜 მომსახურების პირობები",
+        termsMainTitle: "📜 ჩვენი მომსახურების პირობები",
+        termsIntro: "ჩვენი კომპანია იურიდიულ და ფიზიკურ პირებს სთავაზობს საოფისე ნივთების ონლაინ შეძენას და უფასო მიტანის სერვისს მთელი საქართველოს მასშტაბით.",
+        termsOrderTitle: "1. შეკვეთის განთავსება",
+        termsOrderRule1: "შეკვეთის მინიმალური ჯამური ღირებულება შეადგენს 50 ლარს (საბეჭდი ქაღალდის ღირებულების გარეშე).",
+        termsOrderRule2: "შეკვეთის გასაფორმებლად აუცილებელია საიტზე რეგისტრაცია და მოთხოვნილი ინფორმაციის შევსება.",
+        termsOrderRule3: "რეგისტრაციის დასრულების შემდეგ მომხმარებელს ეძლევა შესაძლებლობა ისარგებლოს პროდუქციის ონლაინ შეძენისა და უფასო მიტანის სერვისით.",
+        termsOrderRule4: "შეკვეთა განხორციელებულად ითვლება შეკვეთის გაფორმების შემდგომ GL Trade-ის წარმომადგენლის მიერ თქვენს მიერ მითითებულ ელექტრონულ ფოსტაზე ან/და ტელეფონის ნომერზე დაკავშირებისა და დადასტურების შემდგომ.",
+        termsDeliveryTitle: "2. მიწოდების პირობები",
+        termsDeliveryRule1: "თბილისში შეკვეთის მიწოდება ხორციელდება 1 სამუშაო დღის განმავლობაში ანგარიშწორების განხორციელების მომენტიდან.",
+        termsDeliveryRule2: "რეგიონებში შეკვეთის მიწოდება ხორციელდება 3 სამუშაო დღის განმავლობაში ანგარიშწორების განხორციელების მომენტიდან",
+        termsDeliveryRule3: "მიწოდება ხორციელდება უფასოდ.",
+        termsPaymentTitle: "3. გადახდის პირობები",
+        termsPaymentRule1: "ანგარიშსწორება ხორციელდება მხოლოდ უნაღდო ფორმით.",
+        termsPaymentRule2: "გადახდა სასურველია განხორციელდეს შეკვეთის გაფორმებისთანავე.",
+        termsPaymentRule3: "შეკვეთის მიწოდება ხორციელდება ანგარიშსწორების დადასტურების შემდეგ.",
+        termsImportantTitle: "მნიშვნელოვანი ინფორმაცია",
+        termsImportantText: "შეკვეთის გაფორმებამდე გთხოვთ, ყურადღებით გადაამოწმოთ მითითებული საკონტაქტო და მიწოდების ინფორმაცია, რათა შეკვეთის დროული და შეუფერხებელი მიწოდება უზრუნველვყოთ.",
+        cartTitle: "🛒 თქვენი კალათა",
+        emptyCartMsg: "თქვენი კალათა ამჟამად ცარიელია.",
+        totalLabel: "ჯამური თანხა:",
+        orderCodeLabel: "შეკვეთის კოდი:",
+        checkoutBtn: "✅ შეკვეთის გაფორმება",
+        
+        // Profile & History
+        profileTitle: "👤 ჩემი პროფილი",
+        nameLabel: "სახელი:",
+        profilePhoneLabel: "ტელეფონი:",
+        profileAddressLabel: "მისამართი:",
+        historyBtn: "📄 შეკვეთების ისტორია",
+        historyTitle: "📦 შეკვეთების ისტორია",
+        noHistoryMsg: "შეკვეთების ისტორია ცარიელია.",
+        completeProfileTitle: "📍 მონაცემების შევსება",
+        completeProfileSubtitle: "შეკვეთის გასაფორმებლად გთხოვთ მიუთითოთ თქვენი ტელეფონის ნომერი და მისამართი.",
+        saveBtn: "💾 შენახვა და გაგრძელება",
+        
+        footerRights: "© 2026 GLTrade. ყველა უფლება დაცულია."
+    },
+    en: {
+        navHome: "🏠 Home",
+        navCatalog: "📦 Products",
+        navAbout: "ℹ️ About Us",
+        navTerms: "📜 Terms of Service",
+        navCart: "🛒 Cart",
+        navLogin: "🔑 Login / Register",
+        navLogout: "🚪 Logout",
+        searchPlaceholder: "Search product...",
+        heroTitle: "🏢 GLTrade - Your trusted partner",
+        heroSubtitle: "Wholesale supply quickly, easily, and at the best price.",
+        heroBtn: "🛍️ View Products",
+        contactUs: "Contact Us:",
+        locationTitle: "📍 Our Location",
+        addressLabel: "Address:",
+        addressText: "Tbilisi, V. Gulisashvili 18 b",
+        phoneLabel: "Phone:",
+        hoursLabel: "Working Hours:",
+        hoursText: "Mon - Fri: 09:00 - 18:00",
+        emailLabel: "Email:",
+        
+        // Categories
+      catTitle: "Categories",
+    catAll: "📦 All Products",
+    catPaper: "📄 Paper Products",
+    catPrintPaper: "Print Paper",
+    catWatercolor: "Watercolor Paper",
+    catLabel: "Label",
+    catStickyNotes: "Sticky Notes",
+    catNotebook: "Notebook",
+    catEnvelope: "Envelope",
+    
+    catStationery: "✂️ Stationery",
+    catRuler: "Ruler",
+    catSharpener: "Sharpener",
+    catEraser: "Eraser",
+    catFileFolder: "File Folder",
+    catBinderFolder: "Binder Folder",
+    catUtilityKnife: "Utility Knife",
+    catClips: "Clips",
+    catPaperclips: "Paperclips",
+    catPenHolder: "Pen Holder",
+    catDeskShelf: "Desk Shelf",
+    
+    catWriting: "✏️ Writing Supplies",
+    catPen: "Pen",
+    catPencil: "Pencil",
+    
+    catOffice: "📂 Office Supplies",
+    catBinder: "Binder",
+    catDivider: "Divider",
+    catBindingCover: "Binding Cover",
+    catOrganizer: "Organizer",
+    catSignboard: "Signboard",
+    catBusinessCardHolder: "Business Card Holder",
+    catDeskLamp: "Desk Lamp",
+    catBadge: "Badge / Lanyard",
+    catKeyBox: "Key Box / Keychain",
+    catCleaningSet: "Office Bin / Cleaning Set",
+    
+    catHygiene: "🏥 Hygiene & Cleaning",
+    catGrass: "Grass Hygiene",
+    catBagi: "Bagi Hygiene",
+
+        //bank
+        bankLabel: "Bank Account:",
+        accountLabel: "Account Number:",
+        recipientLabel: "Recipient:",
+
+        barcodeLabel: "Barcode:",
+        
+
+        loginTitle: "🔑 User Login",
+        orGoogle: "Or sign in with Google",
+        regTitle: "📝 Registration",
+        userPlaceholder: "Username",
+        passPlaceholder: "Password",
+        emailPlaceholder: "Email",
+        phonePlaceholder: "5XX XX XX XX",
+        addressPlaceholder: "Delivery Address",
+        sendCodeBtn: "📲 Send Code",
+        codePlaceholder: "Enter 4-digit SMS code",
+        loginBtn: "Login",
+        regBtn: "Register",
+        noAccountMsg: "Don't have an account?",
+        hasAccountMsg: "Already have an account?",
+        regLink: "Register here",
+        loginLink: "Log in",
+        aboutTitle: "🏢 About GLTrade",
+        aboutText: "GLTrade is a distribution company that supplies businesses with everyday essential products. Our main fields of activity are stationery and office supplies, cleaning and hygiene products, detergents, as well as equipment for hotels and other commercial facilities. We cooperate with companies, offices, hotels, restaurants, and various organizations. Our main goal is to offer customers quality products, competitive prices, timely delivery, and reliable service. GLTrade — your business's daily needs in one space.",
+        termsTitle: "📜 Terms of Service",
+        termsMainTitle: "📜 Terms of Service",
+        termsIntro: "Our company offers legal entities and individuals online purchase of office supplies and free delivery service throughout Georgia.",
+        termsOrderTitle: "1. Placing an Order",
+        termsOrderRule1: "The minimum total order value is 50 GEL (excluding printing paper).",
+        termsOrderRule2: "To place an order, it is necessary to register on the website and fill in the required information.",
+        termsOrderRule3: "After completing registration, the user gets access to online purchases and free delivery services.",
+        termsOrderRule4: "The order is considered to be placed after the order is placed and a GL Trade representative contacts you at the email address and/or phone number you provided and confirms it.",
+        termsDeliveryTitle: "2. Delivery Terms",
+        termsDeliveryRule1: "In Tbilisi, order delivery is carried out within 1 business day from the moment of payment.",
+        termsDeliveryRule2: "Orders in the regions are delivered within 3 business days from the moment of payment.",
+        termsDeliveryRule3: "Delivery is free of charge.",
+        termsPaymentTitle: "3. Payment Terms",
+        termsPaymentRule1: "Payment is made exclusively by non-cash methods.",
+        termsPaymentRule2: "Payment is recommended immediately upon placing the order.",
+        termsPaymentRule3: "Order delivery is performed after confirmation of payment.",
+        termsImportantTitle: "Important Information",
+        termsImportantText: "Before placing an order, please double-check your contact and delivery information to ensure timely and smooth delivery.",
+        cartTitle: "🛒 Your Cart",
+        emptyCartMsg: "Your cart is currently empty.",
+        totalLabel: "Total Amount:",
+        orderCodeLabel: "Order ID:",
+        checkoutBtn: "✅ Place Order",
+        
+        // Profile & History
+        profileTitle: "👤 My Profile",
+        nameLabel: "Name:",
+        profilePhoneLabel: "Phone:",
+        profileAddressLabel: "Address:",
+        historyBtn: "📄 Order History",
+        historyTitle: "📦 Order History",
+        noHistoryMsg: "Order history is empty.",
+        completeProfileTitle: "📍 Complete Your Profile",
+        completeProfileSubtitle: "Please provide your phone number and address to complete the order.",
+        saveBtn: "💾 Save & Continue",
+        
+        footerRights: "© 2026 GLTrade. All rights reserved."
+    },
+    ru: {
+        navHome: "🏠 Главная",
+        navCatalog: "📦 Продукция",
+        navAbout: "ℹ️ О нас",
+        navTerms: "📜 Условия обслуживания",
+        navCart: "🛒 Корзина",
+        navLogin: "🔑 Вход / Регистрация",
+        navLogout: "🚪 Выход",
+        searchPlaceholder: "Поиск товара...",
+        heroTitle: "🏢 GLTrade - Ваш надежный партнер",
+        heroSubtitle: "Оптовые поставки быстро, просто и по лучшей цене.",
+        heroBtn: "🛍️ Смотреть товары",
+        contactUs: "Свяжитесь с нами:",
+        locationTitle: "📍 Локация офиса",
+        addressLabel: "Адрес:",
+        addressText: "г. Тбилиси, В. Гулисашвили 18 б",
+        phoneLabel: "Телефон:",
+        hoursLabel: "Часы работы:",
+        hoursText: "Пн - Пт: 09:00 - 18:00",
+        emailLabel: "Эл. почта:",
+        
+        // Categories
+       catTitle: "Категории",
+    catAll: "📦 Все продукты",
+    catPaper: "📄 Бумажная продукция",
+    catPrintPaper: "Бумага для печати",
+    catWatercolor: "Акварельная бумага",
+    catLabel: "Этикетка",
+    catStickyNotes: "Бумажные стикеры",
+    catNotebook: "Блокнот",
+    catEnvelope: "Конверт",
+    
+    catStationery: "✂️ Канцелярские товары",
+    catRuler: "Линейка",
+    catSharpener: "Точилка",
+    catEraser: "Ластик",
+    catFileFolder: "Файл-папка",
+    catBinderFolder: "Папка-скоросшиватель",
+    catUtilityKnife: "Канцелярский нож",
+    catClips: "Зажимы для бумаг",
+    catPaperclips: "Скрепки",
+    catPenHolder: "Стакан для ручек",
+    catDeskShelf: "Настольная полка",
+    
+    catWriting: "✏️ Письменные принадлежности",
+    catPen: "Ручка",
+    catPencil: "Карандаш",
+    
+    catOffice: "📂 Офисные принадлежности",
+    catBinder: "Папка-регистратор",
+    catDivider: "Разделитель",
+    catBindingCover: "Обложка для переплета",
+    catOrganizer: "Органайзер",
+    catSignboard: "Вывеска / Табличка",
+    catBusinessCardHolder: "Визитница",
+    catDeskLamp: "Настольная лампа",
+    catBadge: "Бейдж / Лента для бейджа",
+    catKeyBox: "Ключница / Брелок",
+    catCleaningSet: "Офисная урна / Инвентарь",
+    
+    catHygiene: "🏥 Гигиена и уборка",
+    catGrass: "Гигиена Grass",
+    catBagi: "Гигиена Bagi",
+
+        //bank
+        bankLabel: "Банковский счет:",
+        accountLabel: "Номер счета:",
+        recipientLabel: "Получатель:",
+        
+       barcodeLabel: "Штрихкод:",
+     
+        loginTitle: "🔑 Вход в систему",
+        orGoogle: "Или войдите через Google",
+        regTitle: "📝 Регистрация",
+        userPlaceholder: "Имя пользователя",
+        passPlaceholder: "Пароль",
+        emailPlaceholder: "Эл. почта",
+        phonePlaceholder: "5XX XX XX XX",
+        addressPlaceholder: "Адрес доставки",
+        sendCodeBtn: "📲 Отправить код",
+        codePlaceholder: "Введите 4-значный SMS код",
+        loginBtn: "Войти",
+        regBtn: "Зарегистрироваться",
+        noAccountMsg: "Еще нет аккаунта?",
+        hasAccountMsg: "Уже есть аккаунт?",
+        regLink: "Зарегистрируйтесь",
+        loginLink: "Войдите",
+        aboutTitle: "🏢 Об GLTrade",
+        aboutText: "GLTrade — это дистрибьюторская компания, которая обеспечивает бизнес всеми необходимыми повседневными товарами. Основные направления нашей деятельности — канцелярия и офисные принадлежности, чистящие и гигиенические средства, моющие средства, а также инвентарь для отелей и других коммерческих объектов. Мы сотрудничаем с компаниями, офисами, отелями, ресторанами и различными организациями. Наша главная цель — предложить клиентам качественную продукцию, конкурентоспособные цены, своевременную доставку и надежный сервис. GLTrade — повседневные потребности вашего бизнеса в одном пространстве.",
+        termsTitle: "📜 Условия обслуживания",
+        termsMainTitle: "📜 Условия обслуживания",
+        termsIntro: "Наша компания предлагает юридическим и физическим лицам онлайн-покупку офисных товаров и бесплатную доставку по всей Грузии.",
+        termsOrderTitle: "1. Оформление заказа",
+        termsOrderRule1: "Минимальная общая сумма заказа составляет 50 лари (без учета стоимости бумаги для печати).",
+        termsOrderRule2: "Для оформления заказа необходимо зарегистрироваться на сайте и заполнить требуемую информацию.",
+        termsOrderRule3: "После завершения регистрации пользователь получает возможность пользоваться онлайн-покупками и бесплатной доставкой.",
+        termsOrderRule4: "Заказ считается размещенным после его оформления и подтверждения представителем GL Trade по указанному вами адресу электронной почты и/или номеру телефона",
+        termsDeliveryRule1: "В Тбилиси доставка заказа осуществляется в течение 1 рабочего дня с момента оплаты.",
+        termsDeliveryRule2: "Заказы в указанные регионы доставляются в течение 3 рабочих дней с момента оплаты.",
+        termsDeliveryRule3: "Доставка осуществляется бесплатно.",
+        termsPaymentTitle: "3. Условия оплаты",
+        termsPaymentRule1: "Расчет производится только в безналичной форме.",
+        termsPaymentRule2: "Оплату желательно произвести сразу после оформления заказа.",
+        termsPaymentRule3: "Доставка заказа осуществляется после подтверждения оплаты.",
+        termsImportantTitle: "Важная информация",
+        termsImportantText: "Перед оформлением заказа, пожалуйста, внимательно проверьте контактную информацию и адрес доставки для своевременного выполнения заказа.",
+        cartTitle: "🛒 Ваша корзина",
+        emptyCartMsg: "Ваша корзина пуста.",
+        totalLabel: "Итоговая сумма:",
+        orderCodeLabel: "Код заказа:",
+        checkoutBtn: "✅ Оформить заказ",
+        
+        // Profile & History
+        profileTitle: "👤 Мой профиль",
+        nameLabel: "Имя:",
+        profilePhoneLabel: "Телефон:",
+        profileAddressLabel: "Адрес:",
+        historyBtn: "📄 История заказов",
+        historyTitle: "📦 История заказов",
+        noHistoryMsg: "История заказов пуста.",
+        completeProfileTitle: "📍 Заполнение данных",
+        completeProfileSubtitle: "Укажите номер телефона и адрес для завершения заказа.",
+        saveBtn: "💾 Сохранить и продолжить",
+        
+        footerRights: "© 2026 GLTrade. Все права защищены."
+    }
+};
+
+
+function changeLanguage(lang) {
+    currentLang = lang;
+
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => btn.classList.remove('active'));
+
+    const activeBtn = document.getElementById(`btn-${lang}`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // გვერდის ტექსტების განახლება
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            el.innerText = translations[lang][key];
+        }
+    });
+
+    // Placeholder-ების განახლება
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang] && translations[lang][key]) {
+            el.placeholder = translations[lang][key];
+        }
+    });
+
+    // პროდუქტების ხელახლა დახატვა ახალ ენაზე
+    const prodList = typeof products !== 'undefined' ? products : [];
+    renderProducts(prodList);
+
+    // კალათის ტექსტების განახლება
+    updateCart();
+
+    // ერთიანი localStorage key
+    localStorage.setItem('site_lang', lang);
+    localStorage.setItem('app_lang', lang);
+}
+
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('dark_mode', isDark);
+    
+    const themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) {
+        themeBtn.innerText = isDark ? '☀️ Light' : '🌙 Dark';
+    }
+}
+
+// ინიციალიზაცია გვერდის ჩატვირთვისას
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('site_lang') || localStorage.getItem('app_lang') || 'ka';
+    changeLanguage(savedLang);
+
+    if (localStorage.getItem('dark_mode') === 'true') {
+        document.body.classList.add('dark-mode');
+        const themeBtn = document.getElementById('theme-toggle');
+        if (themeBtn) themeBtn.innerText = '☀️ Light';
+    }
+
+    updateUserNav();
+    updateCart();
+});
