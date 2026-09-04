@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLTrade - საოფისე და ჰიგიენური პორტალი</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 🔑 სახელის ზომის შემცირების სტილი -->
+    <style>
+        #logged-username, .user-name-header {
+            font-size: 13px !important;
+            font-weight: 600;
+            white-space: nowrap;
+            max-width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* 🔍 პროდუქციის სექციის საძიებო ველის სტილი */
+        .catalog-search-wrapper {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .catalog-search-wrapper .search-box {
+            display: flex;
+            align-items: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .catalog-search-wrapper .search-box input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        /* 📋 შეკვეთების ისტორიის სტილები */
+        .history-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 🏦 საბანკო ანგარიშის ბლოკის სტილი */
+        .bank-details {
+            background-color: var(--bg-secondary, #f8fafc);
+            border: 1px dashed #cbd5e1;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .bank-details p {
+            margin: 4px 0;
+        }
+
+        /* 🏷️ შტრიხკოდის სტილი */
+        .product-barcode {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #334155;
+        }
+
+        /* 📁 კატეგორიების სტილები */
+        .category-menu-group {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-main-item {
+            margin-bottom: 8px;
+        }
+
+        .category-btn {
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            padding: 10px 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s ease;
+        }
+
+        .category-btn:hover {
+            background-color: #f1f5f9;
+        }
+
+        .subcategory-menu {
+            list-style: none;
+            padding-left: 15px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .subcategory-menu li {
+            padding: 6px 10px;
+            font-size: 14px;
+            color: #475569;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .subcategory-menu li:hover {
+            background-color: #e2e8f0;
+            color: #0f172a;
+        }
+    </style>
+
+    <!-- 🔑 Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="header-left">
+                <div class="logo" onclick="showPage('home')">GL<span>Trade</span></div>
+            </div>
+
+            <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="nav-wrapper" id="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showPage('home'); toggleMenu();" data-i18n="navHome">🏠 მთავარი</a></li>
+                    <li><a href="#" onclick="showPage('catalog'); toggleMenu();" data-i18n="navCatalog">📦 პროდუქცია</a></li>
+                    <li><a href="#" onclick="showPage('about'); toggleMenu();" data-i18n="navAbout">ℹ️ ჩვენს შესახებ</a></li>
+                    <li><a href="#" onclick="showPage('terms'); toggleMenu();" data-i18n="navTerms">📜 მომსახურების პირობები</a></li>
+                    <li>
+                        <a href="#" onclick="showPage('cart'); toggleMenu();" class="cart-btn"> 
+                            <span data-i18n="navCart">🛒 კალათა</span> (<span id="cart-count">0</span>)
+                        </a>
+                    </li>
+                    
+                    <!-- 👤 მომხმარებლის სახელი -->
+                    <li id="nav-user-info" style="display:none; cursor:pointer;" onclick="openProfileModal(); toggleMenu();">
+                        <strong id="logged-username" class="user-name-header"></strong>
+                    </li>
+                    
+                    <li id="nav-login"><a href="#" onclick="showPage('auth-section'); toggleMenu();" data-i18n="navLogin">🔑 შესვლა / რეგისტრაცია</a></li>
+                    <li id="nav-logout" style="display:none;"><a href="#" onclick="logout(); toggleMenu();" data-i18n="navLogout">🚪 გამოსვლა</a></li>
+                </ul>
+
+                <div class="header-controls">
+                    <div class="lang-switcher">
+                        <button onclick="changeLanguage('ka')" class="lang-btn active" id="btn-ka">GE</button>
+                        <button onclick="changeLanguage('en')" class="lang-btn" id="btn-en">EN</button>
+                        <button onclick="changeLanguage('ru')" class="lang-btn" id="btn-ru">RU</button>
+                    </div>
+
+                    <button id="theme-toggle" class="theme-btn" onclick="toggleDarkMode()">
+                        🌙 Dark
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        <section id="auth-section" class="page-section">
+            <div class="auth-card">
+                <div id="login-form">
+                    <h2 data-i18n="loginTitle">🔑 სისტემაში შესვლა</h2>
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                    <input type="text" id="login-user" placeholder="მომხმარებლის სახელი" class="input-field" data-i18n-placeholder="userPlaceholder">
+                    <input type="password" id="login-pass" placeholder="პაროლი" class="input-field" data-i18n-placeholder="passPlaceholder">
+                    <button class="primary-btn" onclick="login()" data-i18n="loginBtn">შესვლა</button>
+                    
+                    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+
+                    <!-- 🌐 Google Sign-In Container -->
+                    <div style="margin: 15px 0; text-align: center;">
+                        <p style="margin-bottom: 10px; color: #666; font-size: 14px;" data-i18n="orGoogle">ან გაიარეთ ავტორიზაცია Google-ით</p>
+                        <div id="g_id_onload"
+                             data-client_id="866386160743-088e822qoqei7cbm8pfcd9skhuc8falg.apps.googleusercontent.com"
+                             data-callback="handleCredentialResponse">
+                        </div>
+                        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
+                    </div>
+
+                    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+
+                    <p class="auth-toggle">
+                        <span data-i18n="noAccountMsg">ჯერ არ გაქვთ ანგარიში?</span> 
+                        <a href="javascript:void(0)" onclick="document.getElementById('login-form').style.display='none'; document.getElementById('register-form').style.display='block';" data-i18n="regLink">დარეგისტრირდით</a>
+                    </p>
+                </div>
+
+                <div id="register-form" style="display: none;">
+                    <h2 data-i18n="regTitle">📝 რეგისტრაცია</h2>
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                    <input type="text" id="reg-user" placeholder="მომხმარებლის სახელი" class="input-field" data-i18n-placeholder="userPlaceholder">
+                    <input type="email" id="reg-email" placeholder="ელ-ფოსტა" class="input-field" data-i18n-placeholder="emailPlaceholder">
+                    
+                    <div class="phone-input-group">
+                        <input type="tel" id="reg-phone" placeholder="5XX XX XX XX" class="input-field" data-i18n-placeholder="phonePlaceholder">
+                        <button type="button" class="send-code-btn" onclick="sendSMSCode()" data-i18n="sendCodeBtn">📲 კოდის გაგზავნა</button>
+                    </div>
+
+                    <div id="sms-verify-group" style="display: none; margin-top: 10px;">
+                        <input type="text" id="sms-code" placeholder="ჩაწერეთ 4-ნიშნა SMS კოდი" class="input-field" maxlength="4" data-i18n-placeholder="codePlaceholder">
+                        <small style="color: #10b981; display: block; margin-bottom: 10px;">
+                            ✅ კოდი გაიგზავნა ნომერზე! (ტესტირებისთვის კოდია: <strong>1234</strong>)
+                        </small>
+                    </div>
+
+                    <input type="text" id="reg-address" placeholder="მიწოდების მისამართი" class="input-field" data-i18n-placeholder="addressPlaceholder">
+                    <input type="password" id="reg-pass" placeholder="პაროლი" class="input-field" data-i18n-placeholder="passPlaceholder">
+                    
+                    <button class="primary-btn green" onclick="register()" data-i18n="regBtn">რეგისტრაცია</button>
+                    
+                    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+                    
+                    <p class="auth-toggle">
+                        <span data-i18n="hasAccountMsg">უკვე გაქვთ ანგარიში?</span> 
+                        <a href="javascript:void(0)" onclick="document.getElementById('register-form').style.display='none'; document.getElementById('login-form').style.display='block';" data-i18n="loginLink">შედით</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="home" class="page-section active-section">
+            <div class="hero-section">
+                <h1 data-i18n="heroTitle">🏢 GLTrade - თქვენი სანდო პარტნიორი</h1>
+                <p data-i18n="heroSubtitle">საბითუმო მომარაგება სწრაფად, მარტივად და საუკეთესო ფასად.</p>
+                <button class="cta-btn" onclick="showPage('catalog')" data-i18n="heroBtn">🛍️ იხილეთ პროდუქცია</button>
+                
+                <hr style="margin: 25px auto; width: 60%; border: 0; border-top: 1px solid rgba(255,255,255,0.3);">
+                
+                <div class="hero-socials">
+                    <span data-i18n="contactUs">დაგვიკავშირდით:</span>
+                    <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a>
+                    <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                    <a href="mailto:info@gltrade.ge"><i class="fa-solid fa-envelope"></i> Gmail</a>
+                </div>
+            </div>
+
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+            <div class="location-section">
+                <h2 data-i18n="locationTitle">📍 ჩვენი ლოკაცია</h2>
+                <div class="location-grid">
+                    <div class="location-info">
+                        <p><i class="fa-solid fa-location-dot"></i> <strong data-i18n="addressLabel">მისამართი:</strong> <span data-i18n="addressText">ქ. თბილისი, ვ.გულისაშვილის 18 ბ </span></p>
+                        <p><i class="fa-solid fa-phone"></i> <strong data-i18n="phoneLabel">ტელეფონი:</strong> +995 597 779 830 </p>
+                        <p><i class="fa-solid fa-clock"></i> <strong data-i18n="hoursLabel">სამუშაო საათები:</strong> <span data-i18n="hoursText">ორშ - პარ: 09:00 - 18:00</span></p>
+                        <p><i class="fa-solid fa-envelope"></i> <strong data-i18n="emailLabel">ელ-ფოსტა:</strong> info@gltrade.ge</p>
+                    </div>
+                    
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps?q=41.730340,44.754067&z=17&output=embed"
+                            height="220" 
+                            style="border:0; border-radius: 8px;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+    
+            <div class="partners-section" style="margin-top: 40px;">
+                <h3 data-i18n="partnersTitle">პარტნიორი ბრენდები</h3>
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <img src="images/grasi.jpg" alt="grass">
+                    </div>
+                    <div class="partner-card" >
+                        <img src="images/bagi.png" alt="bagi">
+                    </div>
+                    <div class="partner-card">
+                        <img src="images/deli.jpg" alt="Brand 3">
+                    </div>
+                 
+                </div>
+            </div>
+</section>
+
+        <section id="catalog" class="page-section">
+            <div class="catalog-layout">
+                <aside class="sidebar">
+                    <h3 data-i18n="catTitle">კატეგორიები</h3>
+                    <hr style="margin: 10px 0; border: 0; border-top: 1px solid #e2e8f0;">
+                    
+                    <ul class="category-menu-group">
+                        <li class="category-main-item">
+                            <button class="category-btn" onclick="filterCategory('all', this)" data-i18n="catall">📦 ყველა პროდუქტი</button>
+                        </li>
+
+                        <!-- 1. ქაღალდის პროდუქცია -->
+                        <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-paper')">
+                                <span>📄 ქაღალდის პროდუქცია</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-paper" class="subcategory-menu">
+                                <li onclick="filterSubcategory('paper', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('paper', 'print_paper')">საბეჭდი ქაღალდი</li>
+                                <li onclick="filterSubcategory('paper', 'watercolor')">აკვარელის ქაღალდი</li>
+                                <li onclick="filterSubcategory('paper', 'termo_paper')">თერმო ქაღალდი</li>
+                                <li onclick="filterSubcategory('paper', 'label')">ლეიბლი</li>
+                                <li onclick="filterSubcategory('paper', 'etiket')">სასწორის ეტიკეტი</li>
+                                <li onclick="filterSubcategory('paper', 'sticky_notes')">ჩასანიშნი ქაღალდი</li>
+                                <li onclick="filterSubcategory('paper', 'notebook')">ბლოკნოტი</li>
+                                <li onclick="filterSubcategory('paper', 'envelope')">კონვერტი</li>
+                            </ul>
+                        </li>
+
+                        <!-- 2. საკანცელარიო ნივთები -->
+                        <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-stationery')">
+                                <span>✂️ საკანცელარიო ნივთები</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-stationery" class="subcategory-menu">
+                                <li onclick="filterSubcategory('stationery', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('stationery', 'ruler')">სახაზავი</li>
+                                <li onclick="filterSubcategory('stationery', 'sharpener')">სათლელი</li>
+                                <li onclick="filterSubcategory('stationery', 'eraser')">საშლელი</li>
+                                <li onclick="filterSubcategory('stationery', 'stepletr')">სტეპლერი</li>
+                                <li onclick="filterSubcategory('stationery', 'file_folder')">ფაილი</li>
+                                <li onclick="filterSubcategory('stationery', 'binder_folder')">სწრაფჩამკერი</li>
+                                <li onclick="filterSubcategory('stationery', 'utility_knife')">საკანცელარიო დანა და მაკრატელი</li>
+                                <li onclick="filterSubcategory('stationery', 'clips')">კლიპსი</li>
+                                <li onclick="filterSubcategory('stationery', 'paperclips')">სკრეპი</li>
+                                <li onclick="filterSubcategory('stationery', 'pen_holder')">საკანცელარიო ჭიქა</li>
+                                <li onclick="filterSubcategory('stationery', 'desk_shelf')">საკანცელარიო თარო</li>
+                            </ul>
+                        </li>
+
+                        <!-- 3. საწერი ნივთები -->
+                        <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-writing')">
+                                <span>✏️ საწერი და სახატავი ნივთები</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-writing" class="subcategory-menu">
+                                <li onclick="filterSubcategory('writing', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('writing', 'pen')">კალამი</li>
+                                <li onclick="filterSubcategory('writing', 'pencil')">ფანქარი</li>
+                                 <li onclick="filterSubcategory('writing', 'markers')">მარკერი</li>
+                            </ul>
+                        </li>
+
+                        <!-- 4. საოფისე ნივთები -->
+                        <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-office')">
+                                <span>📂 საოფისე ნივთები</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-office" class="subcategory-menu">
+                                <li onclick="filterSubcategory('office', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('office', 'binder')">ბაინდერი</li>
+                                <li onclick="filterSubcategory('office', 'divider')">დივაიდერი</li>
+                                <li onclick="filterSubcategory('office', 'binding_cover')">ასაკინძი ყდა</li>
+                                <li onclick="filterSubcategory('office', 'organizer')">ორგანაიზერი</li>
+                                <li onclick="filterSubcategory('office', 'signboard')">ფირნიში</li>
+                                <li onclick="filterSubcategory('office', 'business_card_holder')">სავიზიტე</li>
+                                <li onclick="filterSubcategory('office', 'desk_lamp')">სამაგიდე სანათი</li>
+                                <li onclick="filterSubcategory('office', 'badge')">ბეიჯი / ბეიჯის თოკი</li>
+                                <li onclick="filterSubcategory('office', 'key_box')">გასაღების ყუთი / ბრელოკი</li>
+                                <li onclick="filterSubcategory('office', 'cleaning_set')">საოფისე ურნა / ცოცხი და აქანდაზი</li>
+                            </ul>
+                        </li>
+
+                        <!-- 5. ჰიგიენა და დასუფთავება -->
+                        <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-hygiene')">
+                                <span>🏥 ჰიგიენა და დასუფთავება</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-hygiene" class="subcategory-menu">
+                                <li onclick="filterSubcategory('hygiene', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('hygiene', 'grass')">ჰიგიენა გრასი</li>
+                                <li onclick="filterSubcategory('hygiene', 'bagi')">ჰიგიენა ბაგი</li>
+                            </ul>
+                        </li>
+                           <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-fire safety')">
+                                <span>🚒 სახანძრო უსაფრთხოება</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-fire safety" class="subcategory-menu">
+                                <li onclick="filterSubcategory('fire safety', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('fire safety', 'medicine')">პირველადი სამედიცინო დხმარება</li>
+                                <li onclick="filterSubcategory('fire safety', 'emergency')">საევაკუაციო და უსაფრხოების ნიშნები</li>
+                                <li onclick="filterSubcategory('fire safety', 'fire')">ხანძარსაწინააღმდეგო საშუალებები</li>
+                            </ul>
+                        </li>
+                         <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-Household Goods')">
+                                <span>📦 სამეურნეო საქონელი </span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-Household Goods" class="subcategory-menu">
+                                <li onclick="filterSubcategory('Household Goods', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Floor')">მოპები და იატაკის წმენდა</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Cleaning')">საწმენდი ტილოები და მიკროფიბრა</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Broom')">ცოცხები და აქანდაზები</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Bucket')">ვედროები და დასუფთავების ურიკები</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Cleaning agent')">საწმენდი ქიმიური საშუალებები</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Toilet paper')">ტუალეტის ქაღალდი</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Paper napkins')">ქაღალდის ხელსახოცები</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Paper dispensers')">ქაღალდის დისპენსერები</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Toilet Paper dispensers')">ტუალეტის ქაღალდის დისპენსერები</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Soap dispensers')">საპნის დისპენსერები</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Sewer cleaning agents')">საკანალიზაციო საწმენდი საშუალებები</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Security')">უსაფრთხოების ნიშნები და დაფები</li>
+                                <li onclick="filterSubcategory('Household Goods', 'Other')">სხვა</li>
+                            </ul>
+                        </li>
+                             <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-Computers')">
+                                <span>🖥️ კომპიუტერული და საოფისე ტექნიკა </span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-Computers" class="subcategory-menu">
+                                <li onclick="filterSubcategory('Computers', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('Computers', 'Leptops')">ლეპტოპები</li>
+                                <li onclick="filterSubcategory('Computers', 'Leptop stands')">ლეპტოპის სადგამები</li>
+                                <li onclick="filterSubcategory('Computers', 'Chargers')">დამტენები</li>
+                                <li onclick="filterSubcategory('Computers', 'Begs')">ჩანთები</li>
+                                <li onclick="filterSubcategory('Computers', 'Monitors')">მონიტორები</li>
+                                <li onclick="filterSubcategory('Computers', 'Peripheral devices')">პერიფერიული მოწყობილობები</li>
+                                <li onclick="filterSubcategory('Computers', 'Projectors')">პროექტორები</li>
+                                <li onclick="filterSubcategory('Computers', 'Printers')">პრინტერები</li>
+                                <li onclick="filterSubcategory('Computers', 'Flesh cards')">ფლეშ ბარათები</li>
+                                 <li onclick="filterSubcategory('Computers', 'Cabels')">კაბელები</li>
+                               
+                            </ul>
+                        </li>
+                            
+                                   <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-Network equipment')">
+                                <span>🌐 ქსელური ტექნიკა </span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-Network equipment" class="subcategory-menu">
+                                <li onclick="filterSubcategory('Network equipment', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('Network equipment', 'Routers')">როუტერები</li>
+                                <li onclick="filterSubcategory('Network equipment', 'Switches')">სვიჩები</li>
+                                <li onclick="filterSubcategory('Network equipment', 'Adapters')">WIFI ადაპტერები</li>
+                                <li onclick="filterSubcategory('Network equipment', 'Signals')">WIFI სიგნალის გამაძლიერებლები</li>
+                                <li onclick="filterSubcategory('Network equipment', 'Racks')">რეკები/აქსესუარები</li>
+                                
+                               
+                            </ul>
+                        </li>
+                         <li class="category-main-item">
+                            <button class="category-btn" onclick="toggleSubcategoryMenu('sub-Electrical energy')">
+                                <span>⚡ ელ.ენერგია </span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul id="sub-Electrical energy" class="subcategory-menu">
+                                <li onclick="filterSubcategory('Electrical energy', 'all')">ყველა</li>
+                                <li onclick="filterSubcategory('Electrical energy', 'External chargers')">გარე დამტენები</li>
+                                 <li onclick="filterSubcategory('Electrical energy', 'Power strip')">დენის დამაგრძელებლები</li>
+                                <li onclick="filterSubcategory('Electrical energy', 'Ups')">ups უწყვეტი ენერგია</li>
+                                
+                                
+                               
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+
+                <div class="products-container">
+                    <div class="catalog-search-wrapper">
+                        <div class="search-box">
+                            <input type="text" id="search-input" placeholder="მოძებნეთ პროდუქტი..." data-i18n-placeholder="searchPlaceholder">
+                        </div>
+                    </div>
+
+                    <div class="products-grid" id="products-grid"></div>
+                </div>
+            </div>
+        </section>
+
+  <section id="about" class="page-section">
+    <div class="about-card" style="line-height: 1.7; color: #334155; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <h2 data-i18n="aboutTitle">🏢 GLTrade-ის შესახებ</h2>
+        <hr style="margin: 15px 0 25px 0; border: 0; border-top: 1px solid #e2e8f0;">
+        
+        <h3 data-i18n="aboutNewStandard" style="font-size: 20px; color: #0f172a; margin-bottom: 15px;">🚀 ახალი სტანდარტი ბიზნესის მომარაგებაში</h3>
+        
+        <p data-i18n="aboutText1" style="margin-bottom: 15px;">დღეს კომპანიებისთვის პროდუქციის შეძენა მხოლოდ საჭირო ნივთების მოძიებას აღარ ნიშნავს. მნიშვნელოვანია სწორი არჩევანი, კონკურენტული პირობები, ხელმისაწვდომობა და მომსახურების ხარისხი — ყველაფერი ერთად.</p>
+        
+        <p style="margin-bottom: 15px;"><strong data-i18n="aboutText2">GLTrade სწორედ ამ საჭიროებაზე შეიქმნა.</strong></p>
+        
+        <p data-i18n="aboutText3" style="margin-bottom: 15px;">ჩვენ ვაერთიანებთ ტექნოლოგიურ, საოფისე და ყოველდღიური საქმიანობისთვის აუცილებელ პროდუქციას და ბიზნესებს ვთავაზობთ მომარაგების ერთიან, მოქნილ და პროფესიონალურ გადაწყვეტას.</p>
+        
+        <p data-i18n="aboutText4" style="margin-bottom: 25px;">ჩვენი პორტფელი მოიცავს IT ტექნიკას და აღჭურვილობას, კომპიუტერებსა და პერიფერიულ მოწყობილობებს, პრინტერებსა და ბეჭდვის მასალებს, საოფისე და საკანცელარიო პროდუქციას, ჰიგიენისა და დასუფთავების საშუალებებს და სხვა აუცილებელ პროდუქტებს.</p>
+        
+        <h3 data-i18n="aboutMoreChoice" style="font-size: 18px; color: #1e293b; margin-top: 25px; margin-bottom: 10px;">📦 მეტი არჩევანი. ნაკლები სირთულე.</h3>
+        <p data-i18n="aboutText5" style="margin-bottom: 15px;">ჩვენი მიზანია, კომპანიას აღარ დასჭირდეს დროის დახარჯვა სხვადასხვა პროდუქტის სხვადასხვა ადგილას მოსაძიებლად.</p>
+        
+        <p data-i18n="aboutText6" style="margin-bottom: 15px;">GLTrade აერთიანებს მრავალ მიმართულებას ერთ სივრცეში და მომხმარებელს აძლევს შესაძლებლობას, სხვადასხვა საჭიროება ერთი საიმედო პარტნიორის მეშვეობით მოაგვაროს.</p>
+        
+        <p data-i18n="aboutText7" style="margin-bottom: 25px;">ეს ნიშნავს უფრო მარტივ შესყიდვებს, ნაკლებ კომუნიკაციას, უკეთ ორგანიზებულ პროცესს და მეტ დროს იმ საქმიანობისთვის, რომელიც ბიზნესისთვის რეალურად მნიშვნელოვანია.</p>
+        
+        <h3 data-i18n="aboutProfessionalism" style="font-size: 18px; color: #1e293b; margin-top: 25px; margin-bottom: 10px;">⭐ პროფესიონალიზმი იწყება დეტალებიდან</h3>
+        <p data-i18n="aboutText8" style="margin-bottom: 15px;">ჩვენთვის ხარისხიანი მომსახურება მხოლოდ შეკვეთის შესრულება არ არის.</p>
+        
+        <p data-i18n="aboutText9" style="margin-bottom: 15px;">ეს არის ზუსტად გაგებული მოთხოვნა, სწორად შერჩეული პროდუქტი, მკაფიო კომერციული პირობები, დროული რეაგირება და პასუხისმგებლობა თითოეულ შეთანხმებაზე.</p>
+        
+        <p data-i18n="aboutText10" style="margin-bottom: 25px;">ჩვენ ვცდილობთ, თითოეული თანამშრომლობა ავაშენოთ ნდობაზე, გამჭვირვალობაზე და რეალურ შედეგზე.</p>
+
+        <h3 data-i18n="aboutSolutions" style="font-size: 18px; color: #1e293b; margin-top: 25px; margin-bottom: 10px;">🤝 გადაწყვეტილებები, რომლებიც ბიზნესს შეესაბამება</h3>
+        <p data-i18n="aboutText11" style="margin-bottom: 15px;">ყველა ორგანიზაციას განსხვავებული მოთხოვნა აქვს.</p>
+        
+        <p data-i18n="aboutText12" style="margin-bottom: 15px;">ამიტომ ჩვენ არ ვთავაზობთ ყველას ერთსა და იმავე მიდგომას. კონკრეტული საჭიროებიდან გამომდინარე, ვარჩევთ შესაბამის პროდუქტებს, ვაყალიბებთ კომერციულ პირობებს და ვთავაზობთ თანამშრომლობის ფორმატს, რომელიც მომხმარებლისთვის პრაქტიკული და ეფექტურია.</p>
+        
+        <p data-i18n="aboutText13" style="margin-bottom: 25px;">იქნება ეს ერთჯერადი შესყიდვა, რეგულარული მომარაგება თუ ხანგრძლივი თანამშრომლობა — ჩვენთვის მნიშვნელოვანია, რომ მიღებული გადაწყვეტილება რეალურ ღირებულებას ქმნიდეს.</p>
+
+        <h3 data-i18n="aboutVision" style="font-size: 18px; color: #1e293b; margin-top: 25px; margin-bottom: 10px;">🎯 ჩვენი ხედვა</h3>
+        <p data-i18n="aboutText14" style="margin-bottom: 15px;">ჩვენ ვაშენებთ GLTrade-ს, როგორც ძლიერ, თანამედროვე და სანდო კომპანიას, რომელიც საქართველოში ბიზნესის მომარაგების სფეროში ხარისხისა და მომსახურების მაღალი სტანდარტის შექმნას შეძლებს.</p>
+        
+        <p data-i18n="aboutText15" style="margin-bottom: 15px;">ჩვენი განვითარების საფუძველია მუდმივი გაუმჯობესება — პროდუქციის ასორტიმენტის გაფართოება, მომსახურების პროცესების დახვეწა და მომხმარებლისთვის უფრო მეტი შესაძლებლობის შექმნა.</p>
+        
+        <p data-i18n="aboutText16">ჩვენთვის საუკეთესო შედეგი არის ის მომენტი, როდესაც მომხმარებელი GLTrade-ს უბრალოდ მომწოდებლად აღარ აღიქვამს და მას საკუთარ საიმედო პარტნიორად მიიჩნევს.</p>
+    </div>
+</section>
+
+        <section id="terms" class="page-section">
+            <div class="terms-container">
+                <h1 data-i18n="termsMainTitle">📜 ჩვენი მომსახურების პირობები</h1>
+                <p class="terms-intro" data-i18n="termsIntro">
+                    ჩვენი კომპანია იურიდიულ და ფიზიკურ პირებს სთავაზობს საოფისე ნივთების ონლაინ შეძენას და უფასო მიტანის სერვისს მთელი საქართველოს მასშტაბით.
+                </p>
+
+                <hr style="margin: 25px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+                <div class="terms-card">
+                    <h3><span class="icon">🛒</span> <span data-i18n="termsOrderTitle">1. შეკვეთის განთავსება</span></h3>
+                    <ul>
+                        <li data-i18n="termsOrderRule1">შეკვეთის მინიმალური ჯამური ღირებულება შეადგენს 50 ლარს (საბეჭდი ქაღალდის ღირებულების გარეშე).</li>
+                        <li data-i18n="termsOrderRule2">შეკვეთის გასაფორმებლად აუცილებელია საიტზე რეგისტრაცია და მოთხოვნილი ინფორმაციის შევსება.</li>
+                        <li data-i18n="termsOrderRule3">რეგისტრაციის დასრულების შემდეგ მომხმარებელს ეძლევა შესაძლებლობა ისარგებლოს პროდუქციის ონლაინ შეძენისა და უფასო მიტანის სერვისით.</li>
+                        <li data-i18n="termsOrderRule4">შეკვეთა განხორციელებულად ითვლება შეკვეთის გაფორმების შემდგომ GL Trade-ის წარმომადგენლის მიერ თქვენს მიერ მითითებულ ელექტრონულ ფოსტაზე ან/და ტელეფონის ნომერზე დაკავშირებისა და დადასტურების შემდგომ."</li>
+                         <li data-i18n="termsOrderRule5">ანგარიშის ნომრები: IBANK-GE03BG0000000613125631 , TBC-GE69TB7874536020100009"</li>
+                    </ul>
+                </div>
+
+                <div class="terms-card">
+                    <h3><span class="icon">🚚</span> <span data-i18n="termsDeliveryTitle">2. მიწოდების პირობები</span></h3>
+                    <ul>
+                        <li data-i18n="termsDeliveryRule1">თბილისში შეკვეთის მიწოდება ხორციელდება 1 სამუშაო დღის განმავლობაში ანგარიშწორების განხორციელების მომენტიდან.</li>
+                        <li data-i18n="termsDeliveryRule2">რეგიონებში შეკვეთის მიწოდება ხორციელდება 3 სამუშაო დღის განმავლობაში ანგარიშწორების განხორციელების მომენტიდან</li>
+                        <li data-i18n="termsDeliveryRule3">მიწოდება ხორციელდება უფასოდ.</li>
+                    </ul>
+                </div>
+
+                <div class="terms-card">
+                    <h3><span class="icon">💳</span> <span data-i18n="termsPaymentTitle">3. გადახდის პირობები</span></h3>
+                    <ul>
+                        <li data-i18n="termsPaymentRule1">ანგარიშსწორება ხორციელდება მხოლოდ უნაღდო ფორმით.</li>
+                        <li data-i18n="termsPaymentRule2">გადახდა სასურველია განხორციელდეს შეკვეთის გაფორმებისთანავე.</li>
+                        <li data-i18n="termsPaymentRule3">შეკვეთის მიწოდება ხორციელდება ანგარიშსწორების დადასტურების შემდეგ.</li>
+                    </ul>
+                </div>
+
+                <div class="terms-card terms-warning">
+                    <h3><span class="icon">⚠️</span> <span data-i18n="termsImportantTitle">მნიშვნელოვანი ინფორმაცია</span></h3>
+                    <p data-i18n="termsImportantText">
+                        შეკვეთის გაფორმებამდე გთხოვთ, ყურადღებით გადაამოწმოთ მითითებული საკონტაქტო და მიწოდების ინფორმაცია, რათა შეკვეთის დროული და შეუფერხებელი მიწოდება უზრუნველვყოთ.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cart" class="page-section">
+            <div class="cart-wrapper">
+                <div class="cart-items-section">
+                    <h2 data-i18n="cartTitle">🛒 თქვენი კალათა</h2>
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;">
+                    <div id="cart-list">
+                        <p class="empty-msg" data-i18n="emptyCartMsg">თქვენი კალათა ამჟამად ცარიელია.</p>
+                    </div>
+                </div>
+
+                <div id="checkout-section" style="display: none;" class="checkout-box">
+                    <h3><span data-i18n="totalLabel">ჯამური თანხა:</span> <span id="cart-total-price">0.00</span> ₾</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;"><span data-i18n="orderCodeLabel">შეკვეთის კოდი:</span> <strong id="order-id">#00000</strong></p>
+                    
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+                    <!-- 🏦 საბანკო ანგარიშის ბლოკი -->
+                    <div class="bank-details">
+                        <p><strong><span data-i18n="bankLabel">საბანკო ანგარიში:</span></strong> საქართველოს ბანკი (Bank of Georgia)</p>
+                        <p><strong><span data-i18n="accountLabel">ანგარიშის ნომერი:</span></strong> GE03BG0000000613125631</p>
+                        <hr style="margin: 8px 0; border: 0; border-top: 1px dashed #cbd5e1;">
+                        <p><strong><span data-i18n="bankLabel">საბანკო ანგარიში:</span></strong> TBC ბანკი (TBC Bank)</p>
+                        <p><strong><span data-i18n="accountLabel">ანგარიშის ნომერი:</span></strong> GE69TB7874536020100009</p>
+                        <hr style="margin: 8px 0; border: 0; border-top: 1px dashed #cbd5e1;">
+                        <p><strong><span data-i18n="recipientLabel">მიმღები:</span></strong> შპს GLTrade</p>
+                    </div>
+
+                    <button id="checkout-btn" class="primary-btn green" onclick="checkout()" data-i18n="checkoutBtn">
+    ✅ შეკვეთის გაფორმება
+</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 📋 შეკვეთების ისტორიის სექცია -->
+        <section id="history-section" class="page-section">
+            <div class="history-card">
+                <h2 style="margin-bottom: 20px; border-bottom: 2px solid #2563eb; padding-bottom: 10px;" data-i18n="historyTitle">📦 შეკვეთების ისტორია</h2>
+                <div id="order-history-list">
+                    <p style="text-align: center; color: #666;" data-i18n="noHistoryMsg">შეკვეთების ისტორია ცარიელია.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- პროდუქტის დეტალების მოდალი -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal-btn" onclick="closeProductModal()">&times;</span>
+            <div id="modal-body" class="modal-body">
+                <!-- 🏷️ დამატებული შტრიხკოდის ელემენტი -->
+                <p class="product-barcode">
+                    <strong>შტრიხკოდი:</strong> <span>${product.barcode || '—'}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 👤 მომხმარებლის პროფილის მოდალური ფანჯარა -->
+    <div id="profile-modal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 380px; text-align: center; padding: 25px; position: relative;">
+            <span class="close-modal-btn" onclick="closeProfileModal()">&times;</span>
+            <h2 data-i18n="profileTitle" style="margin-bottom: 15px;">👤 ჩემი პროფილი</h2>
+            <hr style="margin-bottom: 15px; border: 0; border-top: 1px solid #eee;">
+            
+            <div style="text-align: left; margin-bottom: 20px; font-size: 15px; line-height: 1.8;">
+                <p><strong>👤 <span data-i18n="nameLabel">სახელი:</span></strong> <span id="p-username">-</span></p>
+                <p><strong>📞 <span data-i18n="profilePhoneLabel">ტელეფონი:</span></strong> <span id="p-phone">-</span></p>
+                <p><strong>📍 <span data-i18n="profileAddressLabel">მისამართი:</span></strong> <span id="p-address">-</span></p>
+            </div>
+
+            <hr style="margin-bottom: 20px; border: 0; border-top: 1px solid #eee;">
+
+            <button class="primary-btn" onclick="showPage('history-section'); closeProfileModal();" style="width: 100%;" data-i18n="historyBtn">
+                📄 შეკვეთების ისტორია
+            </button>
+        </div>
+    </div>
+
+    <!-- 📍 Google-ით რეგისტრაციისას ტელეფონის და მისამართის შევსების მოდალური ფანჯარა -->
+    <div id="complete-profile-modal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 420px; text-align: center; padding: 25px;">
+            <h2 data-i18n="completeProfileTitle">📍 მონაცემების შევსება</h2>
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+            <p style="margin: 12px 0 20px 0; color: #666; font-size: 14px;" data-i18n="completeProfileSubtitle">
+                შეკვეთის გასაფორმებლად გთხოვთ მიუთითოთ თქვენი ტელეფონის ნომერი და მისამართი.
+            </p>
+
+            <form id="complete-profile-form" onsubmit="saveGoogleUserInfo(event)">
+                <input type="tel" id="google-phone" placeholder="5XX XX XX XX" class="input-field" required style="margin-bottom: 12px;" data-i18n-placeholder="phonePlaceholder">
+                <input type="text" id="google-address" placeholder="მიწოდების მისამართი" class="input-field" required style="margin-bottom: 20px;" data-i18n-placeholder="addressPlaceholder">
+                
+                <button type="submit" class="primary-btn green" style="width: 100%;" data-i18n="saveBtn">💾 შენახვა და გაგრძელება</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <p data-i18n="footerRights">© 2026 GLTrade. ყველა უფლება დაცულია.</p>
+        </div>
+    </footer>
+
+    <!-- 💡 მენიუს გაშლის ფუნქცია JS-ისთვის -->
+    <script>
+        function toggleSubcategoryMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            const isVisible = menu.style.display === 'block';
+            
+            // ხურავს ყველა სხვა გაშლილ მენიუს
+            document.querySelectorAll('.subcategory-menu').forEach(item => {
+                item.style.display = 'none';
+            });
+
+            // ცვლის არჩეული მენიუს სტატუსს
+            menu.style.display = isVisible ? 'none' : 'block';
+        }
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
