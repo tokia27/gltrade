@@ -5084,7 +5084,7 @@ const products = [
   "price": 8,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "glass",
   "images": ["images/130600.png"]
 },
 {
@@ -5098,7 +5098,7 @@ const products = [
   "price": 8,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "glass",
   "images": ["images/125247.png"]
 },
 {
@@ -5112,7 +5112,7 @@ const products = [
   "price": 8,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "glass",
   "images": ["images/125241.png"]
 },
 {
@@ -5126,7 +5126,7 @@ const products = [
   "price": 9.5,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "floor_cleaners",
   "images": ["images/125184.jpg"]
 },
 {
@@ -5140,7 +5140,7 @@ const products = [
   "price": 9.5,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "floor_cleaners",
   "images": ["images/125905.jpg"]
 },
 {
@@ -5154,7 +5154,7 @@ const products = [
   "price": 9.5,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "floor_cleaners",
   "images": ["images/125904.jpg"]
 },
 {
@@ -5168,7 +5168,7 @@ const products = [
   "price": 9.5,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "floor_cleaners",
   "images": ["images/125185.jpg"]
 },
 {
@@ -5182,7 +5182,7 @@ const products = [
   "price": 67,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "floor_cleaners",
   "images": ["images/125195.jpg"]
 },
 {
@@ -5196,7 +5196,7 @@ const products = [
   "price": 78,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "floor_cleaners",
   "images": ["images/125193.jpg"]
 },
 {
@@ -5210,7 +5210,7 @@ const products = [
   "price": 225,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "floor_cleaners",
   "images": ["images/125520.jpg"]
 },
 {
@@ -5224,7 +5224,7 @@ const products = [
   "price": 67,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "floor_cleaners",
   "images": ["images/218005.jpg"]
 },
 {
@@ -5238,7 +5238,7 @@ const products = [
   "price": 35,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "floor_cleaners",
   "images": ["images/125337.jpg"]
 },
 {
@@ -5252,7 +5252,7 @@ const products = [
   "price": 10,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "universal",
   "images": ["images/112600.jpg"]
 },
 {
@@ -5266,7 +5266,7 @@ const products = [
   "price": 69,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "furniture",
   "images": ["images/125200.jpg"]
 },
 {
@@ -5280,7 +5280,7 @@ const products = [
   "price": 68,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "renovation",
   "images": ["images/125442.jpg"]
 },
 {
@@ -5294,7 +5294,7 @@ const products = [
   "price": 65,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "renovation",
   "images": ["images/125305.jpg"]
 },
 {
@@ -5308,7 +5308,7 @@ const products = [
   "price": 45,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "dish",
   "images": ["images/125420.jpg"]
 },
 {
@@ -5322,7 +5322,7 @@ const products = [
   "price": 40,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "dish",
   "images": ["images/125847.jpg"]
 },
 {
@@ -5336,7 +5336,7 @@ const products = [
   "price": 75,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "dishwasher",
   "images": ["images/125717.jpg"]
 },
 {
@@ -5350,7 +5350,7 @@ const products = [
   "price": 28,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "dishwasher",
   "images": ["images/216110.jpg"]
 },
 {
@@ -5364,7 +5364,7 @@ const products = [
   "price": 16,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "dishwasher",
   "images": ["images/216100.jpg"]
 },
 {
@@ -5378,7 +5378,7 @@ const products = [
   "price": 13,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "kitchen",
   "images": ["images/218600.jpg"]
 },
 {
@@ -5392,7 +5392,7 @@ const products = [
   "price": 13,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "kitchen",
   "images": ["images/125375.jpg"]
 },
 {
@@ -5406,7 +5406,7 @@ const products = [
   "price": 76,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "kitchen",
   "images": ["images/125239.jpg"]
 },
 {
@@ -5420,7 +5420,7 @@ const products = [
   "price": 17,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "kitchen",
   "images": ["images/125470.jpg"]
 },
 {
@@ -5434,7 +5434,7 @@ const products = [
   "price": 87,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "kitchen",
   "images": ["images/125586.jpg"]
 },
 {
@@ -5448,7 +5448,7 @@ const products = [
   "price": 9,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "bathroom",
   "images": ["images/221500.jpg"]
 },
 {
@@ -5462,7 +5462,7 @@ const products = [
   "price": 23,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "bathroom",
   "images": ["images/125322.jpg"]
 },
 {
@@ -5476,7 +5476,7 @@ const products = [
   "price": 65,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "bathroom",
   "images": ["images/125323.jpg"]
 },
 {
@@ -5490,7 +5490,7 @@ const products = [
   "price": 12,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "bathroom",
   "images": ["images/125489.jpg"]
 },
 {
@@ -5504,7 +5504,7 @@ const products = [
   "price": 48,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "bathroom",
   "images": ["images/125203.jpg"]
 },
 {
@@ -5518,7 +5518,7 @@ const products = [
   "price": 11,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "bathroom",
   "images": ["images/125436.jpg"]
 },
 {
@@ -5532,7 +5532,7 @@ const products = [
   "price": 42,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "bathroom",
   "images": ["images/125240.jpg"]
 },
 {
@@ -5546,7 +5546,7 @@ const products = [
   "price": 10,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "Sewer cleaning agents",
   "images": ["images/125438.jpeg"]
 },
 {
@@ -5560,7 +5560,7 @@ const products = [
   "price": 29,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "Sewer cleaning agents",
   "images": ["images/125206.jpg"]
 },
 {
@@ -5574,7 +5574,7 @@ const products = [
   "price": 13,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "air",
   "images": ["images/802004.jpg"]
 },
 {
@@ -5588,7 +5588,7 @@ const products = [
   "price": 25,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "air",
   "images": ["images/125536.jpg"]
 },
 {
@@ -5602,7 +5602,7 @@ const products = [
   "price": 11,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "furniture",
   "images": ["images/219600.jpg"]
 },
 {
@@ -5616,7 +5616,7 @@ const products = [
   "price": 28,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "renovation",
   "images": ["images/117107.jpg"]
 },
 {
@@ -5630,7 +5630,7 @@ const products = [
   "price": 29,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "renovation",
   "images": ["images/125602.jpg"]
 },
 {
@@ -5644,7 +5644,7 @@ const products = [
   "price": 179,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "renovation",
   "images": ["images/140101.jpg"]
 },
 {
@@ -5658,7 +5658,7 @@ const products = [
   "price": 14,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "renovation",
   "images": ["images/110588.png"]
 },
 {
@@ -5700,7 +5700,7 @@ const products = [
   "price": 15,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "laundry",
   "images": ["images/125874.jpg"]
 },
 {
@@ -5714,7 +5714,7 @@ const products = [
   "price": 25,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "laundry",
   "images": ["images/125747.jpg"]
 },
 {
@@ -5728,7 +5728,7 @@ const products = [
   "price": 25,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "laundry",
   "images": ["images/125732.jpg"]
 },
 {
@@ -5742,7 +5742,7 @@ const products = [
   "price": 25,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "laundry",
   "images": ["images/125733.jpg"]
 },
 {
@@ -5756,7 +5756,7 @@ const products = [
   "price": 25,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "laundry",
   "images": ["images/125748.jpg"]
 },
 {
@@ -5770,7 +5770,7 @@ const products = [
   "price": 10,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "dishwasher",
   "images": ["images/125770.jpg"]
 },
 {
@@ -5784,7 +5784,7 @@ const products = [
   "price": 9,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "laundry",
   "images": ["images/125886.jpg"]
 },
 {
@@ -5798,7 +5798,7 @@ const products = [
   "price": 15,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "bathroom",
   "images": ["images/125443.jpg"]
 },
 {
@@ -5812,7 +5812,7 @@ const products = [
   "price": 12,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "universal",
   "images": ["images/126155.jpg"]
 },
 {
@@ -5826,7 +5826,7 @@ const products = [
   "price": 15,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "air",
   "images": ["images/145126.jpg"]
 },
 {
@@ -5840,7 +5840,7 @@ const products = [
   "price": 15,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "air",
   "images": ["images/145130.jpg"]
 },
 {
@@ -5854,7 +5854,7 @@ const products = [
   "price": 29,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "grass",
+  "subcategory": "glass",
   "images": ["images/125572.jpg"]
 },
 {
@@ -5868,7 +5868,7 @@ const products = [
   "price": 61,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/4128.jpg"]
 },
 {
@@ -5882,7 +5882,7 @@ const products = [
   "price": 17.9,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/65.jpg"]
 },
 {
@@ -5896,7 +5896,7 @@ const products = [
   "price": 53.2,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/5613.jpg"]
 },
 {
@@ -5910,7 +5910,7 @@ const products = [
   "price": 15.95,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/8214.jpg"]
 },
 {
@@ -5924,7 +5924,7 @@ const products = [
   "price": 21.85,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/5590.jpg"]
 },
 {
@@ -5938,7 +5938,7 @@ const products = [
   "price": 19.75,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/4135.jpg"]
 },
 {
@@ -5952,7 +5952,7 @@ const products = [
   "price": 16.9,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/5101.jpg"]
 },
 {
@@ -5966,7 +5966,7 @@ const products = [
   "price": 13.1,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "glass",
   "images": ["images/8320.jpg"]
 },
 {
@@ -5980,7 +5980,7 @@ const products = [
   "price": 15.5,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "glass",
   "images": ["images/5125.jpg"]
 },
 {
@@ -5994,7 +5994,7 @@ const products = [
   "price": 20.75,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/5316.jpg"]
 },
 {
@@ -6008,7 +6008,7 @@ const products = [
   "price": 15,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/8344.jpg"]
 },
 {
@@ -6036,7 +6036,7 @@ const products = [
   "price": 31,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/5446.jpg"]
 },
 {
@@ -6050,7 +6050,7 @@ const products = [
   "price": 67.5,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/4418.jpg"]
 },
 {
@@ -6064,7 +6064,7 @@ const products = [
   "price": 17.9,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/5422.jpg"]
 },
 {
@@ -6078,7 +6078,7 @@ const products = [
   "price": 37.8,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/218.jpg"]
 },
 {
@@ -6092,7 +6092,7 @@ const products = [
   "price": 13.8,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/8368.jpg"]
 },
 {
@@ -6134,7 +6134,7 @@ const products = [
   "price": 21.75,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/5309.jpg"]
 },
 {
@@ -6148,7 +6148,7 @@ const products = [
   "price": 33.9,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/232.jpg"]
 },
 {
@@ -6162,7 +6162,7 @@ const products = [
   "price": 12.95,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/9107.jpg"]
 },
 {
@@ -6176,7 +6176,7 @@ const products = [
   "price": 24.95,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/5583.jpg"]
 },
 {
@@ -6190,7 +6190,7 @@ const products = [
   "price": 14.7,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "floor_cleaners",
   "images": ["images/8412.jpg"]
 },
 {
@@ -6204,7 +6204,7 @@ const products = [
   "price": 17.65,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "dishwasher",
   "images": ["images/294.jpg"]
 },
 {
@@ -6218,7 +6218,7 @@ const products = [
   "price": 22.55,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "Sewer cleaning agents",
   "images": ["images/5057.jpg"]
 },
 {
@@ -6232,7 +6232,7 @@ const products = [
   "price": 15.45,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "bathroom",
   "images": ["images/8238.jpg"]
 },
 {
@@ -6246,7 +6246,7 @@ const products = [
   "price": 15.95,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "furniture",
   "images": ["images/8450.jpg"]
 },
 {
@@ -6260,7 +6260,7 @@ const products = [
   "price": 13.8,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "glass",
   "images": ["images/8474.jpg"]
 },
 {
@@ -6274,7 +6274,7 @@ const products = [
   "price": 15.85,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "furniture",
   "images": ["images/8498.jpg"]
 },
 {
@@ -6288,7 +6288,7 @@ const products = [
   "price": 14.35,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "dish",
   "images": ["images/5798.jpg"]
 },
 {
@@ -6302,7 +6302,7 @@ const products = [
   "price": 17.15,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "furniture",
   "images": ["images/5262.jpg"]
 },
 {
@@ -6316,7 +6316,7 @@ const products = [
   "price": 61.55,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "kitchen",
   "images": ["images/140.jpg"]
 },
 {
@@ -6330,7 +6330,7 @@ const products = [
   "price": 15.95,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "kitchen",
   "images": ["images/8559.jpg"]
 },
 {
@@ -6344,7 +6344,7 @@ const products = [
   "price": 22.55,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "kitchen",
   "images": ["images/5675.jpg"]
 },
 {
@@ -6358,7 +6358,7 @@ const products = [
   "price": 17.75,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "kitchen",
   "images": ["images/5682.jpg"]
 },
 {
@@ -6428,7 +6428,7 @@ const products = [
   "price": 27.5,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "renovation",
   "images": ["images/5972.jpg"]
 },
 {
@@ -6442,7 +6442,7 @@ const products = [
   "price": 16.7,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "renovation",
   "images": ["images/4104.jpg"]
 },
 {
@@ -6456,7 +6456,7 @@ const products = [
   "price": 4.8,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "Sewer cleaning agents",
   "images": ["images/9235.jpg"]
 },
 {
@@ -6470,7 +6470,7 @@ const products = [
   "price": 11.3,
   "inStock": true,
   "category": "Household Goods",
-  "subcategory": "bagi",
+  "subcategory": "kitchen",
   "images": ["images/9570.jpg"]
 },
   {
@@ -6648,7 +6648,7 @@ const products = [
     price: 11.95,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "universal",
     images: ["images/sameurneo13.jpg"]
 },
 
@@ -6663,7 +6663,7 @@ const products = [
     price: 29,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dish",
     images: ["images/sameurneo14.jpg"]
 },
 
@@ -6678,7 +6678,7 @@ const products = [
     price: 14,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dish",
     images: ["images/sameurneo15.jpg"]
 },
 
@@ -6693,7 +6693,7 @@ const products = [
     price: 2.5,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dish",
     images: ["images/sameurneo16.jpg"]
 },
 
@@ -6828,7 +6828,7 @@ const products = [
     price: 10,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dish",
     images: ["images/sameurneo25.jpg"]
 },
 
@@ -7191,7 +7191,7 @@ const products = [
     price: 25,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Other",
+    subcategory: "air",
     images: ["images/sameurneo49.jpg"]
 },
 
@@ -7206,7 +7206,7 @@ const products = [
     price: 25,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Other",
+    subcategory: "air",
     images: ["images/sameurneo50.jpg"]
 },
 {
@@ -9868,6 +9868,7 @@ const products = [
     price: 0.60,
     inStock: true,
     category: "Hotel",
+    subcategory: "amenities",
     images: ["images/1.jpg"]
   },
   {
@@ -9881,6 +9882,7 @@ const products = [
     price: 0.60,
     inStock: true,
     category: "Hotel",
+    subcategory: "amenities",
     images: ["images/2.jpg"]
   },
   {
@@ -9894,6 +9896,7 @@ const products = [
     price: 0.60,
     inStock: true,
     category: "Hotel",
+    subcategory: "amenities",
     images: ["images/3.jpg"]
   },
   {
@@ -9907,6 +9910,7 @@ const products = [
     price: 0.60,
     inStock: true,
     category: "Hotel",
+    subcategory: "amenities",
     images: ["images/4.jpg"]
   },
   {
@@ -9920,6 +9924,7 @@ const products = [
     price: 1.00,
     inStock: true,
     category: "Hotel",
+    subcategory: "amenities",
     images: ["images/5.jpg"]
   },
   {
@@ -9933,6 +9938,7 @@ const products = [
     price: 1.30,
     inStock: true,
     category: "Hotel",
+    subcategory: "amenities",
     images: ["images/6.jpg"]
   },
 {
@@ -16581,7 +16587,7 @@ const products = [
     price: 11.3,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "bathroom",
     images: ["images/R9.7GL.jpg"]
   },
   {
@@ -16595,7 +16601,7 @@ const products = [
     price: 10.2,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "bathroom",
     images: ["images/R9HP.jpg"]
   },
   {
@@ -16609,7 +16615,7 @@ const products = [
     price: 10.1,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "bathroom",
     images: ["images/R1.7GL.jpg"]
   },
   {
@@ -16623,7 +16629,7 @@ const products = [
     price: 3.7,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "universal",
     images: ["images/DE0750.jpg"]
   },
   {
@@ -16637,7 +16643,7 @@ const products = [
     price: 4.1,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "universal",
     images: ["images/DO0750.jpg"]
   },
   {
@@ -16651,7 +16657,7 @@ const products = [
     price: 14.3,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "bathroom",
     images: ["images/DS0600.jpg"]
   },
   {
@@ -16665,7 +16671,7 @@ const products = [
     price: 9.6,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "furniture",
     images: ["images/TP0600.jpg"]
   },
   {
@@ -16679,7 +16685,7 @@ const products = [
     price: 2.6,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "glass",
     images: ["images/ZG0600.jpg"]
   },
   {
@@ -16693,7 +16699,7 @@ const products = [
     price: 8.3,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "bathroom",
     images: ["images/OX1600.jpg"]
   },
   {
@@ -16721,7 +16727,7 @@ const products = [
     price: 9.5,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "kitchen",
     images: ["images/GR0600.jpg"]
   },
   {
@@ -16735,7 +16741,7 @@ const products = [
     price: 8.3,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "kitchen",
     images: ["images/GX0600.jpg"]
   },
   {
@@ -16749,7 +16755,7 @@ const products = [
     price: 6.6,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "universal",
     images: ["images/R2HP.jpg"]
   },
   {
@@ -16763,7 +16769,7 @@ const products = [
     price: 5.1,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "renovation",
     images: ["images/FX0600.jpg"]
   },
   {
@@ -16777,7 +16783,7 @@ const products = [
     price: 5.4,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dish",
     images: ["images/5502.jpg"]
   },
   {
@@ -16791,7 +16797,7 @@ const products = [
     price: 2.5,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dish",
     images: ["images/ZG0500.jpg"]
   },
   {
@@ -16833,7 +16839,7 @@ const products = [
     price: 4.7,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "floor_cleaners",
     images: ["images/U5055.jpg"]
   },
   {
@@ -16847,7 +16853,7 @@ const products = [
     price: 4.8,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "floor_cleaners",
     images: ["images/U5052.jpg"]
   },
   {
@@ -16861,7 +16867,7 @@ const products = [
     price: 8.2,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "floor_cleaners",
     images: ["images/FW1000.jpg"]
   },
   {
@@ -16875,7 +16881,7 @@ const products = [
     price: 2.1,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "bathroom",
     images: ["images/JV0501.jpg"]
   },
   {
@@ -16889,7 +16895,7 @@ const products = [
     price: 34.3,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "universal",
     images: ["images/HG5000.jpg"]
   },
   {
@@ -16903,7 +16909,7 @@ const products = [
     price: 91.7,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "disinfect",
     images: ["images/K10 CONC.jpg"]
   },
   {
@@ -16917,7 +16923,7 @@ const products = [
     price: 54.2,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "bathroom",
     images: ["images/DS5000.jpg"]
   },
   {
@@ -16931,7 +16937,7 @@ const products = [
     price: 50.3,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "kitchen",
     images: ["images/BF5000.jpg"]
   },
   {
@@ -16945,7 +16951,7 @@ const products = [
     price: 39.6,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "disinfect",
     images: ["images/AD5000.jpg"]
   },
   {
@@ -16959,7 +16965,7 @@ const products = [
     price: 33.7,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "floor_cleaners",
     images: ["images/FW5000.jpg"]
   },
   {
@@ -16973,7 +16979,7 @@ const products = [
     price: 51.0,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "disinfect",
     images: ["images/U0079.jpg"]
   },
   {
@@ -16987,7 +16993,7 @@ const products = [
     price: 77.7,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "disinfect",
     images: ["images/SMP5000.jpg"]
   },
   {
@@ -17001,7 +17007,7 @@ const products = [
     price: 8.2,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "disinfect",
     images: ["images/SMP0390.jpg"]
   },
   {
@@ -17015,7 +17021,7 @@ const products = [
     price: 57.8,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dishwasher",
     images: ["images/DR5000.jpg"]
   },
   {
@@ -17029,7 +17035,7 @@ const products = [
     price: 227.7,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dishwasher",
     images: ["images/DR2020.jpg"]
   },
   {
@@ -17043,7 +17049,7 @@ const products = [
     price: 46.9,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dishwasher",
     images: ["images/MW5000.jpg"]
   },
   {
@@ -17057,7 +17063,7 @@ const products = [
     price: 183.1,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dishwasher",
     images: ["images/MW2024.jpg"]
   },
   {
@@ -17071,7 +17077,7 @@ const products = [
     price: 31.8,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dish",
     images: ["images/0712.jpg"]
   },
   {
@@ -17085,7 +17091,7 @@ const products = [
     price: 17.8,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dish",
     images: ["images/0711.jpg"]
   },
   {
@@ -17099,7 +17105,7 @@ const products = [
     price: 11.3,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "dish",
     images: ["images/ZG5000.jpg"]
   },
   {
@@ -17169,7 +17175,7 @@ const products = [
     price: 35.2,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "kitchen",
     images: ["images/VD5000.jpg"]
   },
   {
@@ -17183,7 +17189,7 @@ const products = [
     price: 35.2,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "kitchen",
     images: ["images/GR5000.jpg"]
   },
   {
@@ -17197,7 +17203,7 @@ const products = [
     price: 23.4,
     inStock: true,
     category: "Household Goods",
-    subcategory: "Cleaning agent",
+    subcategory: "bathroom",
     images: ["images/BFS5000.jpg"]
   },
   {
@@ -18324,16 +18330,22 @@ const CATEGORIES = [
         ['organizer', 'ორგანაიზერი'], ['business_card_holder', 'სავიზიტე'], ['desk_lamp', 'სამაგიდე სანათი'],
         ['badge', 'ბეიჯი / ბეიჯის თოკი'], ['key_box', 'გასაღების ყუთი / ბრელოკი'], ['cleaning_set', 'საოფისე ურნა'],
         ['finger', 'თითის დასასველებელი'], ['bell', 'ზარი'], ['clock', 'საათი'], ['Guillotine', 'გილიოტინა'],
-        ['ring', 'ბეჭედი და მელანი'], ['chear', 'საოფისე სკამი']
+        ['ring', 'ბეჭედი და მელანი'], ['chear', 'საოფისე სკამი'], ['signboard', 'სამაგიდე ფირნიში']
     ] },
     { id: 'Household Goods', icon: 'sparkles', name: { ka: 'სამეურნეო საქონელი', en: 'Cleaning & hygiene', ru: 'Хозяйственные товары' }, subs: [
-        ['grass', 'GRASS საწმენდი საშუალებები'], ['bagi', 'BAGI საწმენდი საშუალებები'], ['Cleaning agent', 'ZOMA საწმენდი საშუალებები'],
-        ['soap', 'მყარი და თხევადი საპონი'], ['Stain remover', 'ლაქების ამომყვანი'], ['Floor', 'მოპები და იატაკის წმენდა'],
+        ['floor_cleaners', 'იატაკის საწმენდი საშუალებები'], ['dish', 'ჭურჭლის სარეცხი საშუალებები'],
+        ['dishwasher', 'ჭურჭლის სარეცხი მანქანის საშუალებები'], ['kitchen', 'სამზარეულოს და გაზქურის საწმენდი'],
+        ['bathroom', 'აბაზანის, უნიტაზის და ნადების საწმენდი'], ['glass', 'მინის და სარკის საწმენდი'],
+        ['universal', 'უნივერსალური საწმენდი საშუალებები'], ['disinfect', 'სადეზინფექციო საშუალებები'],
+        ['furniture', 'ავეჯის, ხალიჩის და ტყავის საწმენდი'], ['renovation', 'რემონტის შემდგომი საწმენდი'],
+        ['laundry', 'სარეცხი საშუალებები და კონდიციონერები'], ['Sewer cleaning agents', 'საკანალიზაციო მილების საწმენდი'],
+        ['Stain remover', 'ლაქების ამომყვანი'], ['air', 'ჰაერის არომატიზატორები'],
+        ['soap', 'მყარი და თხევადი საპონი'], ['Floor', 'მოპები და იატაკის წმენდა'],
         ['spong', 'ღრუბელი'], ['Cleaning', 'საწმენდი ტილოები და მიკროფიბრა'], ['Broom', 'ცოცხები და აქანდაზები'],
         ['Bucket', 'ვედროები და დასუფთავების ურიკები'], ['Toilet paper', 'ტუალეტის ქაღალდი'], ['Paper napkins', 'ქაღალდის ხელსახოცები'],
         ['Paper dispensers', 'ქაღალდის დისპენსერები'], ['Toilet Paper dispensers', 'ტუალეტის ქაღალდის დისპენსერები'],
-        ['Soap dispensers', 'საპნის დისპენსერები'], ['Sewer cleaning agents', 'საკანალიზაციო საწმენდი საშუალებები'],
-        ['Security', 'უსაფრთხოების ნიშნები და დაფები'], ['trash beg', 'ნაგვის პარკები'], ['Other', 'სხვა']
+        ['Soap dispensers', 'საპნის დისპენსერები'],
+        ['Security', 'უსაფრთხოების ნიშნები და დაფები'], ['trash beg', 'ნაგვის პარკები']
     ] },
     { id: 'Computers', icon: 'laptop', name: { ka: 'კომპიუტერული და საოფისე ტექნიკა', en: 'Computers & office equipment', ru: 'Компьютерная и офисная техника' }, subs: [
         ['mouse', 'მაუსი'], ['keyboard', 'კლავიატურა'], ['mouse and keyboard', 'მაუსი და კლავიატურა'], ['mouse pad', 'მაუსის პადი'],
@@ -18348,7 +18360,9 @@ const CATEGORIES = [
     { id: 'Electrical energy', icon: 'zap', name: { ka: 'ელ. ენერგია', en: 'Power & batteries', ru: 'Электропитание' }, subs: [
         ['External chargers', 'გარე დამტენები'], ['Power strip', 'დენის დამაგრძელებლები'], ['Ups', 'UPS უწყვეტი ენერგია']
     ] },
-    { id: 'Hotel', icon: 'bell', name: { ka: 'სასტუმროს ინვენტარი', en: 'Hotel supplies', ru: 'Гостиничный инвентарь' }, subs: [] },
+    { id: 'Hotel', icon: 'bell', name: { ka: 'სასტუმროს ინვენტარი', en: 'Hotel supplies', ru: 'Гостиничный инвентарь' }, subs: [
+        ['amenities', 'ერთჯერადი სასტუმროს აქსესუარები']
+    ] },
     { id: 'Office Food', icon: 'coffee', name: { ka: 'საოფისე კვება', en: 'Office food & drinks', ru: 'Офисное питание' }, subs: [
         ['tea', 'ჩაი'], ['coffe', 'ყავა'], ['disposable coffee', 'ერთჯერადი ყავა'], ['sugar', 'შაქარი და დამატკბობელი'], ['drink', 'წყალი და სასმელები'], ['Snakes', 'სნექები']
     ] },
@@ -20073,6 +20087,20 @@ function slugify(text) {
     if (out.length > 70) out = out.slice(0, 70).replace(/-[^-]*$/, '');
     return out;
 }
+
+// ცარიელი ქვეკატეგორიები მენიუში არ ჩანს. პროდუქტის დამატებისას თავისით გამოჩნდება.
+(function pruneEmptySubcategories() {
+    if (typeof products === 'undefined') return;
+    const used = new Set(products.map(p => productCategory(p) + '|' + productSubcategory(p)));
+    CATEGORIES.forEach(c => {
+        c.subs = c.subs.filter(s => used.has(normalizeCategoryValue(c.id) + '|' + normalizeCategoryValue(s[0])));
+    });
+    // ცარიელი კატეგორიებიც იმალება
+    const usedCats = new Set(products.map(p => productCategory(p)));
+    for (let i = CATEGORIES.length - 1; i >= 0; i--) {
+        if (CATEGORIES[i].id !== 'all' && !usedCats.has(normalizeCategoryValue(CATEGORIES[i].id))) CATEGORIES.splice(i, 1);
+    }
+})();
 
 let ROUTES = null;
 function buildRoutes() {
