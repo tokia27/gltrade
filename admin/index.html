@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>GLTrade ადმინი</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* layout: sticky top bar; toolbar; product list (table on desktop, cards on phone); editor as a right-side drawer (full screen on phone) */
+:root{
+  --bg:#F4F5F7; --surface:#FFFFFF; --surface-2:#EEF1F6; --ink:#0E1726; --muted:#566070; --line:#E2E5EA;
+  --accent:#1D4ED8; --accent-hover:#1E40AF; --accent-ink:#FFFFFF; --accent-soft:#E0E8FF;
+  --ok:#15803D; --ok-soft:#E3F4EA; --warn:#9A5B00; --warn-soft:#FFF3DC; --err:#B42318; --err-soft:#FDECEA;
+  --shadow:0 6px 24px rgba(14,23,38,.08); --overlay:rgba(14,23,38,.45);
+  --font:'Noto Sans Georgian', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B111C; --surface:#121A28; --surface-2:#1A2333; --ink:#EEF1F6; --muted:#9AA4B5; --line:#253045;
+  --accent:#7AA2FF; --accent-hover:#A5C0FF; --accent-ink:#0B1530; --accent-soft:#16224A;
+  --ok:#5BD18B; --ok-soft:#12301F; --warn:#FFC266; --warn-soft:#33260F; --err:#FF8A80; --err-soft:#3A1715;
+  --shadow:0 6px 24px rgba(0,0,0,.35); --overlay:rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B111C; --surface:#121A28; --surface-2:#1A2333; --ink:#EEF1F6; --muted:#9AA4B5; --line:#253045;
+  --accent:#7AA2FF; --accent-hover:#A5C0FF; --accent-ink:#0B1530; --accent-soft:#16224A;
+  --ok:#5BD18B; --ok-soft:#12301F; --warn:#FFC266; --warn-soft:#33260F; --err:#FF8A80; --err-soft:#3A1715;
+  --shadow:0 6px 24px rgba(0,0,0,.35); --overlay:rgba(0,0,0,.6); color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+[hidden]{display:none!important}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.in{max-width:1200px;margin:0 auto}
+button,input,select{font:inherit;color:inherit}
+.btn{border:0;border-radius:12px;height:44px;padding:0 16px;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--surface-2);color:var(--ink);white-space:nowrap;text-decoration:none}
+.btn:hover{filter:brightness(.97)}
+.btn:focus-visible,.icon-btn:focus-visible,.sw:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:var(--accent-hover);filter:none}
+.btn.danger{background:var(--err-soft);color:var(--err)}
+.btn.ghost{background:transparent;border:1px solid var(--line)}
+.btn[disabled]{opacity:.55;cursor:wait}
+.btn svg,.icon-btn svg{width:18px;height:18px;flex-shrink:0}
+.icon-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);box-shadow:var(--shadow)}
+.top .in{display:flex;align-items:center;gap:12px;min-height:64px;flex-wrap:wrap;padding-block:8px}
+.logo{font-size:21px;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.logo span{color:var(--accent)}
+.logo small{font-size:13px;font-weight:700;color:var(--muted);margin-left:6px;letter-spacing:0}
+.top .sp{flex:1}
+.who{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px}
+.badge-demo{background:var(--warn-soft);color:var(--warn);font-weight:700;font-size:12px;border-radius:999px;padding:4px 10px;white-space:nowrap}
+
+/* login */
+.login{min-height:calc(100vh - 80px);display:flex;align-items:center;justify-content:center;padding-block:40px}
+.login-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:32px;max-width:420px;width:100%;display:flex;flex-direction:column;gap:16px;text-align:center;box-shadow:var(--shadow)}
+.login-card h1{font-size:24px;margin:0}
+.login-card p{margin:0;color:var(--muted)}
+#gbtn{display:flex;justify-content:center;min-height:44px}
+.msg{border-radius:12px;padding:10px 14px;font-size:13px;text-align:left}
+.msg.err{background:var(--err-soft);color:var(--err)}
+.msg.warn{background:var(--warn-soft);color:var(--warn)}
+
+/* main */
+main{padding-block:20px 80px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.head h1{font-size:clamp(22px,3vw,28px);margin:0;font-weight:800}
+.head p{margin:2px 0 0;color:var(--muted)}
+.deploy{display:flex;align-items:center;gap:10px;background:var(--accent-soft);color:var(--accent);border-radius:12px;padding:10px 14px;font-weight:600;margin-bottom:14px}
+.deploy i{width:10px;height:10px;border-radius:50%;background:currentColor;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.deploy i{animation:none}}
+.tools{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,140px);gap:10px;margin-bottom:12px}
+@media (max-width:860px){.tools{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.tools .search{grid-column:1/-1}}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field>span{font-size:12px;font-weight:600;color:var(--muted)}
+.field>span .req{color:var(--err)}
+.inp{height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);padding:0 12px;width:100%;min-width:0}
+.inp:focus{outline:2px solid var(--accent);outline-offset:1px}
+.inp[aria-invalid="true"]{border-color:var(--err);background:var(--err-soft)}
+.search{position:relative}
+.search svg{position:absolute;left:12px;top:13px;width:18px;height:18px;color:var(--muted)}
+.search .inp{padding-left:38px}
+.count{color:var(--muted);font-size:13px;margin-bottom:8px}
+
+/* list */
+.list{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,220px) 100px 120px 44px;gap:12px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row.headrow{background:var(--surface-2);font-size:12px;font-weight:700;color:var(--muted);padding-block:8px}
+.thumb{width:56px;height:56px;border-radius:10px;background:var(--surface-2);object-fit:contain;border:1px solid var(--line);display:block}
+.pname{font-weight:600;line-height:1.35;overflow-wrap:anywhere}
+.pmeta{font-size:12px;color:var(--muted)}
+.pcat{font-size:12.5px;color:var(--muted);line-height:1.35}
+.pprice{font-weight:800;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.stock{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.sw{width:44px;height:26px;border-radius:999px;border:0;background:var(--line);padding:3px;cursor:pointer;display:flex;flex-shrink:0;transition:background .15s}
+.sw span{width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.sw[aria-checked="true"]{background:var(--ok)}
+.sw[aria-checked="true"] span{transform:translateX(18px)}
+.more{display:flex;justify-content:center;padding:14px}
+.empty{padding:40px 16px;text-align:center;color:var(--muted)}
+@media (max-width:760px){
+  .row.headrow{display:none}
+  .row{grid-template-columns:56px minmax(0,1fr) auto;grid-template-areas:"img name edit" "img cat cat" "img price stock";row-gap:4px}
+  .row .c-img{grid-area:img;align-self:start}.row .c-name{grid-area:name}.row .c-cat{grid-area:cat}
+  .row .c-price{grid-area:price;text-align:left}.row .c-stock{grid-area:stock;justify-self:end}.row .c-edit{grid-area:edit;align-self:start}
+}
+
+/* drawer */
+.overlay{position:fixed;inset:0;background:var(--overlay);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--surface);z-index:41;display:flex;flex-direction:column;box-shadow:var(--shadow);padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px)}
+.d-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.d-head h2{flex:1;margin:0;font-size:18px}
+.d-body{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:16px}
+.d-foot{display:flex;gap:10px;padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);flex-wrap:wrap}
+.d-foot .sp{flex:1}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media (max-width:480px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.ph{position:relative;aspect-ratio:1;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);overflow:hidden;max-width:100%}
+.ph img{width:100%;height:100%;object-fit:contain;display:block;background:#fff;cursor:pointer}
+.ph .x{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:8px;border:0;background:rgba(14,23,38,.7);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ph .main{position:absolute;left:4px;bottom:4px;background:var(--accent);color:var(--accent-ink);font-size:10.5px;font-weight:700;border-radius:6px;padding:1px 6px}
+.ph .new{position:absolute;left:4px;top:4px;background:var(--warn-soft);color:var(--warn);font-size:10.5px;font-weight:700;border-radius:6px;padding:1px 6px}
+.add-ph{aspect-ratio:1;border-radius:12px;border:2px dashed var(--line);background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--muted);font-weight:600;font-size:12px}
+.add-ph:hover,.add-ph.drag{border-color:var(--accent);color:var(--accent)}
+.add-ph svg{width:24px;height:24px}
+.hint{font-size:12px;color:var(--muted)}
+.lbl-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.lbl-row label{font-size:12px;font-weight:600;color:var(--muted)}
+.lbl-row .req{color:var(--err)}
+.btn.mini{height:32px;padding:0 12px;font-size:12.5px;border-radius:10px;background:var(--accent-soft);color:var(--accent)}
+.inp.flash{animation:flash 1.2s ease-out}
+@keyframes flash{0%{background:var(--accent-soft)}100%{background:var(--surface)}}
+.err-t{font-size:12px;color:var(--err);font-weight:600}
+.confirm{background:var(--err-soft);color:var(--err);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-weight:600}
+.confirm .sp{flex:1}
+
+/* toast */
+.toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;flex-direction:column;gap:8px;width:min(480px,calc(100% - 32px))}
+.toast{background:var(--ink);color:var(--bg);border-radius:12px;padding:12px 16px;font-weight:600;box-shadow:var(--shadow)}
+.toast.err{background:var(--err);color:#fff}
+</style>
+</head>
+<body>
+
+<header class="top gut"><div class="in">
+  <div class="logo">GL<span>Trade</span><small>ადმინი</small></div>
+  <span class="badge-demo" id="demo-badge" hidden>სატესტო რეჟიმი — ცვლილებები არ ინახება</span>
+  <span class="sp"></span>
+  <span class="who" id="who"></span>
+  <a class="btn ghost" href="/" target="_blank" rel="noopener">საიტი</a>
+  <button class="icon-btn" type="button" id="theme" aria-label="მუქი / ღია რეჟიმი"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+  <button class="btn ghost" type="button" id="logout" hidden>გასვლა</button>
+</div></header>
+
+<!-- შესვლა -->
+<section class="login gut" id="login-view">
+  <div class="login-card">
+    <h1>ადმინ-პანელი</h1>
+    <p>შესვლა მხოლოდ ნებადართული Google ანგარიშით.</p>
+    <div id="gbtn"></div>
+    <button class="btn primary" type="button" id="demo-login" hidden>სატესტო შესვლა</button>
+    <div class="msg err" id="login-err" role="alert" hidden></div>
+  </div>
+</section>
+
+<!-- პროდუქტები -->
+<main class="gut" id="app-view" hidden><div class="in">
+  <div class="head">
+    <div><h1>პროდუქტები</h1><p id="total"></p></div>
+    <button class="btn primary" type="button" id="add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>ახალი პროდუქტი</button>
+  </div>
+  <div class="deploy" id="deploy" role="status" hidden><i></i><span id="deploy-text"></span></div>
+  <div class="tools">
+    <label class="field search"><span>ძებნა</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="top:35px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="inp" id="q" type="search" placeholder="სახელი, შტრიხკოდი ან ID" autocomplete="off"></label>
+    <label class="field"><span>კატეგორია</span><select class="inp" id="f-cat"></select></label>
+    <label class="field"><span>ქვეკატეგორია</span><select class="inp" id="f-sub"></select></label>
+    <label class="field"><span>მარაგი</span><select class="inp" id="f-stock"><option value="">ყველა</option><option value="1">მარაგშია</option><option value="0">არ არის</option></select></label>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="list" id="list"></div>
+  <div class="more" id="more-wrap" hidden><button class="btn ghost" type="button" id="more">მეტის ჩვენება</button></div>
+</div></main>
+
+<!-- რედაქტორი -->
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title" hidden>
+  <div class="d-head"><h2 id="d-title">პროდუქტი</h2><button class="icon-btn" type="button" id="d-close" aria-label="დახურვა"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <form class="d-body" id="form" novalidate>
+    <div class="field"><span>ფოტოები <span class="hint">— პირველი არის მთავარი (დააჭირეთ ფოტოს, რომ მთავარი გახდეს). ავტომატურად შემცირდება 1000 პიქსელამდე.</span></span>
+      <div class="photos" id="photos"></div>
+      <input type="file" id="file" accept="image/*" multiple hidden>
+    </div>
+    <div class="field"><div class="lbl-row"><label for="t-ka">დასახელება ქართულად <span class="req">*</span></label><button class="btn mini" type="button" id="tr-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></svg>თარგმნა</button></div><input class="inp" id="t-ka" autocomplete="off"></div>
+    <div class="grid2">
+      <label class="field"><span>ინგლისურად</span><input class="inp" id="t-en" autocomplete="off" placeholder="თუ ცარიელია — ქართული"></label>
+      <label class="field"><span>რუსულად</span><input class="inp" id="t-ru" autocomplete="off" placeholder="თუ ცარიელია — ქართული"></label>
+    </div>
+    <div class="grid2">
+      <label class="field"><span>ფასი (₾) <span class="req">*</span></span><input class="inp" id="price" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00"></label>
+      <label class="field"><span>შტრიხკოდი / კოდი</span><input class="inp" id="barcode" autocomplete="off"></label>
+    </div>
+    <div class="grid2">
+      <label class="field"><span>კატეგორია <span class="req">*</span></span><select class="inp" id="cat"></select></label>
+      <label class="field"><span>ქვეკატეგორია <span class="req">*</span></span><select class="inp" id="sub"></select></label>
+    </div>
+    <div class="field"><span>მარაგი</span>
+      <div class="stock"><button class="sw" type="button" role="switch" id="instock" aria-checked="true" aria-label="მარაგშია"><span></span></button><b id="instock-l">მარაგშია</b></div>
+    </div>
+    <p class="hint" id="slug-hint" hidden>სახელის შეცვლისას პროდუქტის გვერდის მისამართიც შეიცვლება.</p>
+    <div class="confirm" id="del-confirm" hidden><span>ნამდვილად წავშალო ეს პროდუქტი?</span><span class="sp"></span><button class="btn ghost" type="button" id="del-no">არა</button><button class="btn danger" type="button" id="del-yes">დიახ, წაშალე</button></div>
+  </form>
+  <div class="d-foot">
+    <button class="btn danger" type="button" id="del">წაშლა</button>
+    <span class="sp"></span>
+    <button class="btn ghost" type="button" id="cancel">გაუქმება</button>
+    <button class="btn primary" type="button" id="save">შენახვა</button>
+  </div>
+</aside>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="../categories.js"></script>
+<script>
+(function () {
+  'use strict';
+  // ---------- პარამეტრები ----------
+  var API = 'https://gltrade-backend.onrender.com';
+  var GOOGLE_CLIENT_ID = '866386160743-088e822qoqei7cbm8pfcd9skhuc8falg.apps.googleusercontent.com';
+  var DEMO = !/(^|\.)gltrade\.ge$/.test(location.hostname) || /[?&]demo\b/.test(location.search);
+  var PAGE = 60;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var money = function (n) { return (Number(n) || 0).toFixed(2); };
+  var norm = function (v) { return String(v == null ? '' : v).trim().toLowerCase().replace(/\s+/g, '_').replace(/-/g, '_'); };
+  var CATS = (typeof CATEGORIES !== 'undefined' ? CATEGORIES : []).filter(function (c) { return c.id !== 'all'; });
+
+  var state = { token: null, email: '', products: [], shown: PAGE, editing: null, photos: [] };
+
+  // ---------- თემა ----------
+  try { var th = localStorage.getItem('gl_admin_theme'); if (th) document.documentElement.setAttribute('data-theme', th); } catch (e) {}
+  $('theme').onclick = function () {
+    var r = document.documentElement, cur = r.getAttribute('data-theme');
+    var dark = cur ? cur === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    r.setAttribute('data-theme', dark ? 'light' : 'dark');
+    try { localStorage.setItem('gl_admin_theme', dark ? 'light' : 'dark'); } catch (e) {}
+  };
+
+  function toast(text, err) {
+    var t = document.createElement('div'); t.className = 'toast' + (err ? ' err' : ''); t.textContent = text;
+    $('toasts').appendChild(t); setTimeout(function () { t.remove(); }, err ? 6000 : 3500);
+  }
+
+  // ---------- API ----------
+  function api(method, path, body) {
+    return fetch(API + path, {
+      method: method,
+      headers: Object.assign({ 'Authorization': 'Bearer ' + state.token }, body ? { 'Content-Type': 'application/json' } : {}),
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (r.status === 401 || r.status === 403) { logout(j.message || 'სესია ამოიწურა, შედით თავიდან.'); throw new Error('auth'); }
+        if (!r.ok || j.success === false) throw new Error(j.message || ('სერვერის შეცდომა (' + r.status + ')'));
+        return j;
+      });
+    });
+  }
+
+  // ---------- შესვლა ----------
+  function showLoginError(msg) { var e = $('login-err'); e.textContent = msg; e.hidden = !msg; }
+  function onSignedIn(token, email) {
+    state.token = token; state.email = email;
+    try { sessionStorage.setItem('gl_admin_token', token); sessionStorage.setItem('gl_admin_email', email); } catch (e) {}
+    $('who').textContent = email; $('logout').hidden = false;
+    $('login-view').hidden = true; $('app-view').hidden = false;
+    loadProducts();
+  }
+  function logout(msg) {
+    state.token = null;
+    try { sessionStorage.removeItem('gl_admin_token'); sessionStorage.removeItem('gl_admin_email'); } catch (e) {}
+    $('app-view').hidden = true; $('login-view').hidden = false; $('logout').hidden = true; $('who').textContent = '';
+    closeEditor(true);
+    showLoginError(msg || '');
+  }
+  $('logout').onclick = function () { logout(''); };
+
+  function jwtEmail(token) {
+    try { return JSON.parse(decodeURIComponent(escape(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))))).email || ''; } catch (e) { return ''; }
+  }
+  function startGoogle() {
+    var s = document.createElement('script'); s.src = 'https://accounts.google.com/gsi/client'; s.async = true;
+    s.onload = function () {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: function (resp) {
+          var token = resp.credential;
+          state.token = token;
+          api('GET', '/api/admin/me').then(function (j) { onSignedIn(token, j.email || jwtEmail(token)); })
+            .catch(function (err) { if (err.message !== 'auth') showLoginError(err.message); });
+        }
+      });
+      google.accounts.id.renderButton($('gbtn'), { theme: 'outline', size: 'large', text: 'signin_with', shape: 'pill', width: 280 });
+    };
+    s.onerror = function () { showLoginError('Google-ის შესვლა ვერ ჩაიტვირთა. შეამოწმეთ ინტერნეტი.'); };
+    document.head.appendChild(s);
+  }
+
+  if (DEMO) {
+    $('demo-badge').hidden = false; $('demo-login').hidden = false;
+    $('demo-login').onclick = function () { onSignedIn('demo', 'info@gltrade.ge'); };
+  } else {
+    var saved = null; try { saved = sessionStorage.getItem('gl_admin_token'); } catch (e) {}
+    if (saved) { state.token = saved; api('GET', '/api/admin/me').then(function (j) { onSignedIn(saved, j.email); }).catch(function () {}); }
+    startGoogle();
+  }
+
+  // ---------- პროდუქტების ჩატვირთვა ----------
+  function loadProducts() {
+    $('list').innerHTML = '<div class="empty">იტვირთება…</div>';
+    var p = DEMO ? loadDemo() : api('GET', '/api/admin/products').then(function (j) { return j.products; });
+    p.then(function (list) {
+      state.products = list || [];
+      renderAll();
+    }).catch(function (err) {
+      if (err.message !== 'auth') $('list').innerHTML = '<div class="empty">' + esc(err.message) + '<br><br>სერვერი შეიძლება „იღვიძებდეს“ — სცადეთ 1 წუთში.</div>';
+    });
+  }
+  function loadDemo() {
+    return new Promise(function (resolve, reject) {
+      if (typeof products !== 'undefined') return resolve(JSON.parse(JSON.stringify(products)));
+      var s = document.createElement('script'); s.src = '../products.js';
+      s.onload = function () { resolve(JSON.parse(JSON.stringify(products))); };
+      s.onerror = function () { reject(new Error('products.js ვერ ჩაიტვირთა')); };
+      document.head.appendChild(s);
+    });
+  }
+
+  // ---------- ფილტრები ----------
+  function catById(id) { return CATS.find(function (c) { return norm(c.id) === norm(id); }); }
+  function subName(cat, sub) { var s = cat && cat.subs.find(function (x) { return norm(x[0]) === norm(sub); }); return s ? s[1] : (sub || '—'); }
+  function fillCatSelect(sel, withAll) {
+    sel.innerHTML = (withAll ? '<option value="">ყველა</option>' : '<option value="">— აირჩიეთ —</option>') +
+      CATS.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.name.ka) + '</option>'; }).join('');
+  }
+  function fillSubSelect(sel, catId, withAll) {
+    var c = catById(catId);
+    var subs = c ? c.subs : [];
+    sel.innerHTML = (withAll ? '<option value="">ყველა</option>' : (subs.length ? '<option value="">— აირჩიეთ —</option>' : '<option value="">ქვეკატეგორია არ აქვს</option>')) +
+      subs.map(function (s) { return '<option value="' + esc(s[0]) + '">' + esc(s[1]) + '</option>'; }).join('');
+    sel.disabled = !subs.length;
+  }
+  fillCatSelect($('f-cat'), true); fillSubSelect($('f-sub'), '', true);
+  $('f-cat').onchange = function () { fillSubSelect($('f-sub'), this.value, true); state.shown = PAGE; renderList(); };
+  ['f-sub', 'f-stock'].forEach(function (id) { $(id).onchange = function () { state.shown = PAGE; renderList(); }; });
+  var qT; $('q').oninput = function () { clearTimeout(qT); qT = setTimeout(function () { state.shown = PAGE; renderList(); }, 150); };
+
+  function filtered() {
+    var q = $('q').value.trim().toLowerCase(), cat = $('f-cat').value, sub = $('f-sub').value, st = $('f-stock').value;
+    return state.products.filter(function (p) {
+      if (cat && norm(p.category) !== norm(cat)) return false;
+      if (sub && norm(p.subcategory) !== norm(sub)) return false;
+      if (st === '1' && p.inStock === false) return false;
+      if (st === '0' && p.inStock !== false) return false;
+      if (q) {
+        var hay = [p.id, p.barcode, p.title && p.title.ka, p.title && p.title.en, p.title && p.title.ru].join(' ').toLowerCase();
+        if (hay.indexOf(q) < 0) return false;
+      }
+      return true;
+    }).sort(function (a, b) { return b.id - a.id; });
+  }
+  function imgSrc(p) {
+    var src = p.images && p.images[0];
+    if (!src) return '';
+    return /^(https?:|data:|\/)/.test(src) ? src : '/' + src;
+  }
+  var PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56"><rect width="56" height="56" fill="#EEF1F6"/><path d="M18 36l7-8 5 6 4-4 6 6z" fill="#9AA4B5"/><circle cx="22" cy="22" r="3" fill="#9AA4B5"/></svg>');
+
+  function renderAll() {
+    $('total').textContent = 'სულ ' + state.products.length + ' პროდუქტი';
+    renderList();
+  }
+  function renderList() {
+    var list = filtered();
+    $('count').textContent = list.length === state.products.length ? 'ნაჩვენებია ' + Math.min(state.shown, list.length) + ' / ' + list.length : 'ნაპოვნია ' + list.length + (list.length > state.shown ? ' — ნაჩვენებია ' + state.shown : '');
+    if (!list.length) { $('list').innerHTML = '<div class="empty">ვერაფერი მოიძებნა.</div>'; $('more-wrap').hidden = true; return; }
+    var rows = list.slice(0, state.shown).map(function (p) {
+      var c = catById(p.category), on = p.inStock !== false;
+      return '<div class="row" data-id="' + p.id + '">' +
+        '<div class="c-img"><img class="thumb" src="' + esc(imgSrc(p) || PLACEHOLDER) + '" alt="" loading="lazy" onerror="this.onerror=null;this.src=\'' + PLACEHOLDER + '\'"></div>' +
+        '<div class="c-name"><div class="pname">' + esc(p.title && p.title.ka) + '</div><div class="pmeta">ID ' + p.id + (p.barcode ? ' · ' + esc(p.barcode) : '') + '</div></div>' +
+        '<div class="c-cat pcat">' + esc(c ? c.name.ka : p.category) + ' › ' + esc(subName(c, p.subcategory)) + '</div>' +
+        '<div class="c-price pprice">' + money(p.price) + ' ₾</div>' +
+        '<div class="c-stock stock"><button class="sw" type="button" role="switch" aria-checked="' + on + '" aria-label="მარაგშია" data-act="stock"><span></span></button><span>' + (on ? 'მარაგშია' : 'არ არის') + '</span></div>' +
+        '<div class="c-edit"><button class="icon-btn" type="button" data-act="edit" aria-label="რედაქტირება"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button></div>' +
+        '</div>';
+    }).join('');
+    $('list').innerHTML = '<div class="row headrow"><div></div><div>დასახელება</div><div>კატეგორია</div><div style="text-align:right">ფასი</div><div>მარაგი</div><div></div></div>' + rows;
+    $('more-wrap').hidden = list.length <= state.shown;
+  }
+  $('more').onclick = function () { state.shown += PAGE; renderList(); };
+  $('list').onclick = function (e) {
+    var btn = e.target.closest('[data-act]'); if (!btn) return;
+    var id = Number(btn.closest('.row').dataset.id);
+    var p = state.products.find(function (x) { return x.id === id; });
+    if (btn.dataset.act === 'edit') openEditor(p);
+    else if (btn.dataset.act === 'stock') toggleStock(p, btn);
+  };
+
+  function toggleStock(p, btn) {
+    var next = p.inStock === false;
+    var copy = Object.assign({}, p, { inStock: next });
+    btn.disabled = true;
+    saveProduct(copy, []).then(function () { toast(next ? 'მარაგში დაბრუნდა' : 'მოინიშნა: არ არის მარაგში'); })
+      .catch(function (err) { if (err.message !== 'auth') toast(err.message, true); })
+      .then(function () { btn.disabled = false; });
+  }
+
+  // ---------- რედაქტორი ----------
+  var form = { tka: $('t-ka'), ten: $('t-en'), tru: $('t-ru'), price: $('price'), barcode: $('barcode'), cat: $('cat'), sub: $('sub'), stock: $('instock') };
+  fillCatSelect(form.cat, false);
+  form.cat.onchange = function () { fillSubSelect(form.sub, this.value, false); clearErr(form.cat); };
+  form.stock.onclick = function () { setStock(this.getAttribute('aria-checked') !== 'true'); };
+  function setStock(on) { form.stock.setAttribute('aria-checked', on); $('instock-l').textContent = on ? 'მარაგშია' : 'არ არის მარაგში'; }
+
+  function openEditor(p) {
+    state.editing = p ? JSON.parse(JSON.stringify(p)) : null;
+    $('d-title').textContent = p ? 'რედაქტირება · ID ' + p.id : 'ახალი პროდუქტი';
+    form.tka.value = p ? (p.title.ka || '') : '';
+    form.ten.value = p && p.title.en && p.title.en !== p.title.ka ? p.title.en : '';
+    form.tru.value = p && p.title.ru && p.title.ru !== p.title.ka ? p.title.ru : '';
+    form.price.value = p ? p.price : '';
+    form.barcode.value = p && p.barcode ? p.barcode : '';
+    form.cat.value = p ? (catById(p.category) || {}).id || '' : ($('f-cat').value || '');
+    fillSubSelect(form.sub, form.cat.value, false);
+    form.sub.value = p ? ((catById(p.category) || { subs: [] }).subs.find(function (s) { return norm(s[0]) === norm(p.subcategory); }) || [''])[0] : ($('f-sub').value || '');
+    setStock(p ? p.inStock !== false : true);
+    state.photos = (p && p.images ? p.images : []).map(function (src) { return { src: src }; });
+    renderPhotos();
+    document.querySelectorAll('#form [aria-invalid]').forEach(clearErr);
+    $('del').hidden = !p; $('del-confirm').hidden = true; $('slug-hint').hidden = true;
+    $('overlay').hidden = false; $('drawer').hidden = false;
+    setTimeout(function () { form.tka.focus(); }, 50);
+  }
+  function closeEditor(force) {
+    if (!force && $('save').disabled) return;
+    $('overlay').hidden = true; $('drawer').hidden = true; state.editing = null;
+  }
+  $('d-close').onclick = $('cancel').onclick = $('overlay').onclick = function () { closeEditor(); };
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('drawer').hidden) closeEditor(); });
+  form.tka.oninput = function () { clearErr(form.tka); $('slug-hint').hidden = !(state.editing && state.editing.title.ka !== form.tka.value); };
+  // ავტომატური თარგმნა: ღილაკით, ან თავისით — თუ ინგლისური და რუსული ველები ცარიელია
+  form.tka.onblur = function () { if (!form.ten.value.trim() && !form.tru.value.trim()) translateName(true); };
+  $('tr-btn').onclick = function () { translateName(false); };
+  function translateName(auto) {
+    var ka = form.tka.value.trim(), btn = $('tr-btn');
+    if (ka.length < 2) { if (!auto) setErr(form.tka, 'ჯერ ჩაწერეთ ქართული დასახელება'); return; }
+    if (btn.disabled) return;
+    if (DEMO) { if (!auto) toast('სატესტო ვერსიაში თარგმნა არ მუშაობს — საიტზე იმუშავებს.', true); return; }
+    btn.disabled = true; var old = btn.innerHTML; btn.textContent = 'ითარგმნება…';
+    api('POST', '/api/admin/translate', { text: ka }).then(function (j) {
+      form.ten.value = j.en || ''; form.tru.value = j.ru || '';
+      [form.ten, form.tru].forEach(function (el) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); });
+      if (!auto) toast('ნათარგმნია — შეამოწმეთ და საჭიროების შემთხვევაში შეასწორეთ');
+    }).catch(function (err) { if (err.message !== 'auth' && !auto) toast(err.message, true); })
+      .then(function () { btn.disabled = false; btn.innerHTML = old; });
+  }
+  form.price.oninput = function () { clearErr(form.price); };
+  form.sub.onchange = function () { clearErr(form.sub); };
+
+  // ფოტოები
+  function renderPhotos() {
+    $('photos').innerHTML = state.photos.map(function (ph, i) {
+      var src = ph.data || (/^(https?:|data:|\/)/.test(ph.src) ? ph.src : '/' + ph.src);
+      return '<div class="ph"><img src="' + esc(src) + '" alt="" onerror="this.onerror=null;this.src=\'' + PLACEHOLDER + '\'">' +
+        (i === 0 ? '<span class="main">მთავარი</span>' : '') + (ph.data ? '<span class="new">ახალი</span>' : '') +
+        '<button class="x" type="button" data-i="' + i + '" aria-label="ფოტოს წაშლა"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>';
+    }).join('') + '<button class="add-ph" type="button" id="add-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>ფოტოს დამატება</button>';
+    var add = $('add-ph');
+    add.onclick = function () { $('file').click(); };
+    add.ondragover = function (e) { e.preventDefault(); add.classList.add('drag'); };
+    add.ondragleave = function () { add.classList.remove('drag'); };
+    add.ondrop = function (e) { e.preventDefault(); add.classList.remove('drag'); addFiles(e.dataTransfer.files); };
+  }
+  $('photos').onclick = function (e) {
+    var x = e.target.closest('.x');
+    if (x) { state.photos.splice(Number(x.dataset.i), 1); renderPhotos(); return; }
+    var ph = e.target.closest('.ph');
+    if (ph) {
+      var i = Array.prototype.indexOf.call($('photos').querySelectorAll('.ph'), ph);
+      if (i > 0) { state.photos.unshift(state.photos.splice(i, 1)[0]); renderPhotos(); }
+    }
+  };
+  $('file').onchange = function () { addFiles(this.files); this.value = ''; };
+  function addFiles(files) {
+    Array.prototype.forEach.call(files, function (f) {
+      if (!/^image\//.test(f.type)) return;
+      resizeImage(f, 1000).then(function (data) { state.photos.push({ data: data }); renderPhotos(); })
+        .catch(function () { toast('ფოტო „' + f.name + '“ ვერ წავიკითხე', true); });
+    });
+  }
+  function resizeImage(file, max) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var w = img.naturalWidth, h = img.naturalHeight, k = Math.min(1, max / Math.max(w, h));
+        var c = document.createElement('canvas'); c.width = Math.round(w * k); c.height = Math.round(h * k);
+        var ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+        ctx.drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+        resolve(c.toDataURL('image/jpeg', 0.85));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(); };
+      img.src = url;
+    });
+  }
+
+  // ვალიდაცია და შენახვა
+  function setErr(el, msg) { clearErr(el); el.setAttribute('aria-invalid', 'true'); var s = document.createElement('span'); s.className = 'err-t'; s.textContent = msg; el.parentNode.appendChild(s); }
+  function clearErr(el) { el.removeAttribute('aria-invalid'); var s = el.parentNode.querySelector('.err-t'); if (s) s.remove(); }
+  function collect() {
+    var ok = true, first = null;
+    function need(el, cond, msg) { if (!cond) { setErr(el, msg); ok = false; first = first || el; } else clearErr(el); }
+    var ka = form.tka.value.trim(), price = parseFloat(String(form.price.value).replace(',', '.'));
+    var cat = catById(form.cat.value);
+    need(form.tka, ka.length >= 2, 'შეიყვანეთ დასახელება');
+    need(form.price, isFinite(price) && price > 0, 'შეიყვანეთ ფასი');
+    need(form.cat, !!cat, 'აირჩიეთ კატეგორია');
+    if (cat && cat.subs.length) need(form.sub, !!form.sub.value, 'აირჩიეთ ქვეკატეგორია');
+    if (!ok) { first.focus(); return null; }
+    var base = state.editing || {};
+    var p = Object.assign({}, base, {
+      barcode: form.barcode.value.trim() || undefined,
+      title: { ka: ka, en: form.ten.value.trim() || ka, ru: form.tru.value.trim() || ka },
+      price: Math.round(price * 100) / 100,
+      inStock: form.stock.getAttribute('aria-checked') === 'true',
+      category: cat.id,
+      subcategory: form.sub.value || undefined,
+      images: state.photos.filter(function (ph) { return !ph.data; }).map(function (ph) { return ph.src; })
+    });
+    if (!p.barcode) delete p.barcode;
+    if (!p.subcategory) delete p.subcategory;
+    var uploads = []; var order = [];
+    state.photos.forEach(function (ph) { if (ph.data) { order.push({ upload: uploads.length }); uploads.push(ph.data); } else order.push({ src: ph.src }); });
+    p.__order = order;
+    return { product: p, uploads: uploads };
+  }
+  function saveProduct(p, uploads) {
+    if (DEMO) {
+      return new Promise(function (r) { setTimeout(r, 500); }).then(function () {
+        var saved = Object.assign({}, p);
+        var order = saved.__order; delete saved.__order;
+        if (order) saved.images = order.map(function (o) { return o.src || uploads[o.upload]; });
+        if (!saved.id) saved.id = Math.max.apply(null, state.products.map(function (x) { return x.id; })) + 1;
+        upsertLocal(saved); return saved;
+      });
+    }
+    return api('POST', '/api/admin/products', { product: p, uploads: uploads }).then(function (j) {
+      upsertLocal(j.product); deploying(); return j.product;
+    });
+  }
+  function upsertLocal(saved) {
+    var i = state.products.findIndex(function (x) { return x.id === saved.id; });
+    if (i >= 0) state.products[i] = saved; else state.products.push(saved);
+    renderAll();
+  }
+  $('save').onclick = function () {
+    var d = collect(); if (!d) return;
+    var btn = $('save'); btn.disabled = true; btn.textContent = d.uploads.length ? 'ფოტოები იტვირთება…' : 'ინახება…';
+    var isNew = !state.editing;
+    saveProduct(d.product, d.uploads).then(function (saved) {
+      btn.disabled = false; closeEditor(true);
+      toast((isNew ? 'დაემატა' : 'შენახულია') + ': ' + saved.title.ka + (DEMO ? ' (სატესტო — საიტზე არ შეინახა)' : ''));
+    }).catch(function (err) { if (err.message !== 'auth') toast(err.message, true); })
+      .then(function () { btn.disabled = false; btn.textContent = 'შენახვა'; });
+  };
+  $('del').onclick = function () { $('del-confirm').hidden = false; $('del-yes').focus(); };
+  $('del-no').onclick = function () { $('del-confirm').hidden = true; };
+  $('del-yes').onclick = function () {
+    var p = state.editing; if (!p) return;
+    var btn = this; btn.disabled = true;
+    var done = function () {
+      state.products = state.products.filter(function (x) { return x.id !== p.id; });
+      renderAll(); closeEditor(true); toast('წაიშალა: ' + p.title.ka + (DEMO ? ' (სატესტო)' : ''));
+    };
+    (DEMO ? Promise.resolve() : api('DELETE', '/api/admin/products/' + p.id).then(deploying))
+      .then(done).catch(function (err) { if (err.message !== 'auth') toast(err.message, true); })
+      .then(function () { btn.disabled = false; });
+  };
+  $('add').onclick = function () { openEditor(null); };
+
+  // „საიტი ახლდება“ შეტყობინება
+  var depT;
+  function deploying() {
+    var box = $('deploy'); box.hidden = false;
+    var left = 120;
+    clearInterval(depT);
+    var tick = function () {
+      $('deploy-text').textContent = left > 0 ? 'ცვლილება შენახულია. საიტი ახლდება — დაახლოებით ' + Math.ceil(left / 60) + ' წუთი.' : 'საიტი განახლდა. საიტზე Ctrl+F5-ით შეამოწმეთ.';
+      if (left <= -20) { clearInterval(depT); box.hidden = true; }
+      left -= 5;
+    };
+    tick(); depT = setInterval(tick, 5000);
+  }
+})();
+</script>
+</body>
+</html>

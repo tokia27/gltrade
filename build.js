@@ -25,7 +25,9 @@ const SITE = 'https://gltrade.ge';
 const SKIP = new Set(['.git', '.github', '_site', 'node_modules', 'build.js', 'package.json', 'package-lock.json', '.DS_Store', 'README.md']);
 
 const template = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const appCode = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8');
+// პროდუქტები, კატეგორიები და საიტის კოდი — იმავე თანმიმდევრობით, როგორც index.html-ში
+const appCode = ['products.js', 'categories.js', 'app.js']
+    .map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n;\n');
 
 // ---------- app.js-ის გაშვება ბრაუზერის გარეშე ----------
 let elements = {};
@@ -252,7 +254,7 @@ fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
     sitemap.map(([p, pr]) => `  <url><loc>${esc(SITE + p)}</loc><lastmod>${today}</lastmod><priority>${pr}</priority></url>`).join('\n') +
     '\n</urlset>\n');
 fs.writeFileSync(path.join(OUT, 'robots.txt'),
-    `User-agent: *\nAllow: /\nDisallow: /kalata/\nDisallow: /shesvla/\nDisallow: /shekvetebis-istoria/\n\nSitemap: ${SITE}/sitemap.xml\n`);
+    `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /kalata/\nDisallow: /shesvla/\nDisallow: /shekvetebis-istoria/\n\nSitemap: ${SITE}/sitemap.xml\n`);
 
 // GitHub Pages-ს Jekyll-ის დამუშავება არ სჭირდება
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
