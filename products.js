@@ -1568,5 +1568,6 @@ const products = [
 {"id":1624,"barcode":"FY-1350","title":{"ka":"Fairy ფეირი 1350მლ","en":"Fairy Dishwashing Liquid 1350 ml","ru":"Fairy средство для мытья посуды 1350 мл"},"price":11.59,"inStock":true,"category":"Household Goods","subcategory":"dish","images":["images/p1624-mw7yfp4d-1.jpg"]},
 {"id":1625,"barcode":"FY-500","title":{"ka":"Fairy ფეირი 500მლ","en":"Fairy Dishwashing Liquid 500 ml","ru":"Fairy средство для мытья посуды 500 мл"},"price":5.25,"inStock":true,"category":"Household Goods","subcategory":"dish","images":["images/p1625-mw7yk3xy-1.jpg"]},
 {"id":1626,"barcode":"FY-2600","title":{"ka":"Fairy ფეირი 2600მლ","en":"Fairy ფეირი 2600მლ","ru":"Fairy ფეირი 2600მლ"},"price":19.99,"inStock":true,"category":"Household Goods","subcategory":"dish","images":["images/p1626-mw7ymjpq-1.jpg"]},
-{"id":1627,"barcode":"BLUE_L","title":{"ka":"ნატრილის სამედიცინო ხელთათმანი L","en":"Nitrile medical glove","ru":"медицинские перчатки Натрили"},"price":10,"inStock":true,"category":"Medical inventory","images":["images/p1627-mw83a2wi-1.jpg"]}
+{"id":1627,"barcode":"BLUE_L","title":{"ka":"ნატრილის სამედიცინო ხელთათმანი L","en":"Nitrile medical glove","ru":"медицинские перчатки Натрили"},"price":10,"inStock":true,"category":"Medical inventory","images":["images/p1627-mw83a2wi-1.jpg"]},
+{"id":1628,"barcode":"BLUE_M","title":{"ka":"ნატრილის სამედიცინო ხელთათმანი (M)","en":"Nitrile Medical Glove (M)","ru":"Медицинские перчатки из натрия (M)"},"price":10,"inStock":true,"category":"Medical inventory","images":["images/p1628-mw83e3ov-1.jpg"]}
 ];
