@@ -1292,10 +1292,30 @@ function getCatalogList() {
     if (s === 'price-asc') list.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
     else if (s === 'price-desc') list.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
     else if (s === 'name') list.sort((a, b) => productName(a).localeCompare(productName(b), currentLang));
+    // ქვეკატეგორიის საკუთარი თანმიმდევრობა (მაგ. იატაკის მოსავლელი აქსესუარები)
+    if (s === 'default' && !q && catalogState.sub !== 'all') {
+        const rank = SUB_ORDER[normalizeCategoryValue(catalogState.sub)];
+        if (rank) list.sort((a, b) => rank(a) - rank(b));
+    }
     // მარაგში არმყოფი პროდუქტები ბოლოში
     if (s === 'default') list.sort((a, b) => (a.inStock === false) - (b.inStock === false));
     return list;
 }
+
+// ქვეკატეგორიაში პროდუქტების ჯგუფების რიგი — ახალი პროდუქტიც დასახელებით თავის ჯგუფში ჩადგება
+const SUB_ORDER = {
+    floor_care: (p) => {
+        const t = ((p.title && (p.title.ka + ' ' + p.title.en)) || '').toLowerCase();
+        if (/ქართული ცოცხ|ცოცხი ქართ/.test(t)) return 0;
+        if (/ვიეტნამ/.test(t)) return 1;
+        if (/ცოცხ|აქანდაზ|broom/.test(t)) return 2;
+        if (/ჯოხ|pole/.test(t)) return 3;
+        if (/სათლ|ვედრო|bucket|ურიკა/.test(t) && !/მოპ|mop/.test(t)) return 7;
+        if (/ჯაგრის|ჩოთქ|brush/.test(t)) return 6;
+        if (/ძაძ|ტილო(?!ს\s*(დამჭერ|სამაგრ))/.test(t)) return 5;
+        return 4; // მოპები და მოპის აქსესუარები
+    }
+};
 
 function renderCatalog(resetLimit) {
     if (resetLimit) catalogState.limit = PAGE_SIZE;
