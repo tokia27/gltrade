@@ -1449,5 +1449,6 @@ const products = [
 {"id":1504,"barcode":"L5+1","title":{"ka":"კიბე 5+1 საფეხური","en":"Ladder with 5+1 steps","ru":"Лестница 5+1 ступени"},"price":140,"inStock":true,"category":"Household Goods","subcategory":"Security","images":["images/p1504-mw7pzhz7-1.jpg"]},
 {"id":1505,"barcode":"G2530","title":{"ka":"ნაგვის პარკი 25L 30 ც","en":"Garbage Bags 25L, 30 pcs","ru":"Мусорные пакеты 25 л, 30 шт."},"price":2.5,"inStock":true,"category":"Household Goods","subcategory":"trash beg","images":["images/p1505-mw7rqacd-1.jpg"]},
 {"id":1506,"barcode":"G3520","title":{"ka":"ნაგვის პარკი 35L 20 ც","en":"Garbage Bags 35L, 20 pcs","ru":"Мусорные пакеты 25 л, 20 шт."},"price":2.5,"inStock":true,"category":"Household Goods","subcategory":"trash beg","images":["images/p1506-mw7rsrgv-1.jpg"]},
-{"id":1507,"barcode":"G2533","title":{"ka":"ნაგვის პარკი 50L 10 ც","en":"Garbage Bags 50L, 10 pcs","ru":"Мусорные пакеты 50 л, 10 шт."},"price":3.5,"inStock":true,"category":"Household Goods","subcategory":"trash beg","images":["images/p1507-mw7ryl22-1.jpg"]}
+{"id":1507,"barcode":"G2533","title":{"ka":"ნაგვის პარკი 50L 10 ც","en":"Garbage Bags 50L, 10 pcs","ru":"Мусорные пакеты 50 л, 10 шт."},"price":3.5,"inStock":true,"category":"Household Goods","subcategory":"trash beg","images":["images/p1507-mw7ryl22-1.jpg"]},
+{"id":1508,"barcode":"G2534","title":{"ka":"ნაგვის პარკი 70L 20 ც","en":"Garbage Bags 70L, 20 pcs","ru":"Мусорные пакеты 70 л, 20 шт"},"price":6,"inStock":true,"category":"Household Goods","subcategory":"trash beg","images":["images/p1508-mw7s0io3-1.jpg"]}
 ];
