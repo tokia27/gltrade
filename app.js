@@ -1297,11 +1297,6 @@ function getCatalogList() {
         const rank = SUB_ORDER[normalizeCategoryValue(catalogState.sub)];
         if (rank) list.sort((a, b) => rank(a) - rank(b));
     }
-    // კატეგორიის მთავარი გვერდის თანმიმდევრობა (ყველაზე გაყიდვადი პროდუქტები თავში)
-    if (s === 'default' && !q && catalogState.sub === 'all') {
-        const rank = CAT_ORDER[normalizeCategoryValue(catalogState.cat)];
-        if (rank) list.sort((a, b) => rank(a) - rank(b));
-    }
     // მარაგში არმყოფი პროდუქტები ბოლოში
     if (s === 'default') list.sort((a, b) => (a.inStock === false) - (b.inStock === false));
     return list;
@@ -1313,7 +1308,6 @@ const fairyFirst = (p) => {
     const t = ((p.title && (p.title.ka + ' ' + p.title.en)) || '').toLowerCase();
     return /fairy|ფეირი/.test(t) ? (Number(p.price) || 0) : 1e6;
 };
-const CAT_ORDER = { household_goods: fairyFirst };
 const SUB_ORDER = {
     dish: fairyFirst,
     floor_care: (p) => {
