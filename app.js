@@ -1454,10 +1454,12 @@ function renderChips() {
     const catBox = document.getElementById('cat-chips');
     const subBox = document.getElementById('subcat-chips');
     if (catBox) {
-        catBox.innerHTML = CATEGORIES.map((c, i) => ({ c, i }))
-            .filter(x => x.c.id === 'all' || categoryCount(x.c.id) > 0)
-            .map(x => `<button type="button" class="${catalogState.cat === x.c.id && !catalogState.query.trim() ? 'active' : ''}" onclick="selectCategory(${x.i}, true)">${escapeHtml(getTranslatedText(x.c.name))}</button>`)
-            .join('');
+        // მობილური: ერთი „კატეგორიები“ ღილაკი, რომელიც ქვემოდან ამოსრიალებულ მენიუს ხსნის
+        const cur = CATEGORIES.find(c => c.id === catalogState.cat);
+        const curName = cur && cur.id !== 'all' && !catalogState.query.trim() ? getTranslatedText(cur.name) : '';
+        catBox.innerHTML = `<button type="button" class="cat-open" onclick="openCatSheet()" aria-haspopup="dialog">
+            ${icon('list')}<span class="co-lbl">${escapeHtml(t('catTitle') || 'კატეგორიები')}</span>
+            ${curName ? `<span class="cur">${escapeHtml(curName)}</span>` : ''}${icon('chev', 'chev')}</button>`;
     }
     if (subBox) {
         const ci = CATEGORIES.findIndex(c => c.id === catalogState.cat);
@@ -1473,6 +1475,77 @@ function renderChips() {
         }
     }
 }
+
+// ---- მობილური: კატეგორიების მენიუ (bottom sheet) ----
+let sheetOpenCat = null;
+const subCountCache = {};
+function subCount(catId, subId) {
+    const key = catId + '|' + subId;
+    if (key in subCountCache) return subCountCache[key];
+    const cid = normalizeCategoryValue(catId), sid = normalizeCategoryValue(subId);
+    const list = typeof products !== 'undefined' ? products : [];
+    return (subCountCache[key] = list.filter(p => productCategory(p) === cid && productSubcategory(p) === sid).length);
+}
+function renderCatSheet() {
+    const box = document.getElementById('cat-sheet-list');
+    if (!box) return;
+    const q = catalogState.query.trim();
+    const allActive = catalogState.cat === 'all' && !q;
+    const rows = CATEGORIES.map((c, i) => ({ c, i })).filter(x => x.c.id !== 'all' && categoryCount(x.c.id) > 0).map(({ c, i }) => {
+        const active = catalogState.cat === c.id && !q;
+        const open = sheetOpenCat === c.id;
+        const subs = c.subs.map((s, j) => ({ s, j, n: subCount(c.id, s[0]) })).filter(x => x.n > 0);
+        const head = subs.length
+            ? `<button type="button" class="cs-cat" onclick="toggleSheetCat(${i})" aria-expanded="${open}">`
+            : `<a class="cs-cat" href="${catPath(c.id)}" onclick="return sheetPick(event, ${i}, null)">`;
+        const end = subs.length ? '</button>' : '</a>';
+        return `<li class="cs-item${active ? ' active' : ''}${open ? ' open' : ''}">
+            ${head}<span class="tile-ic">${icon(c.icon)}</span><span class="name">${escapeHtml(getTranslatedText(c.name))}</span>
+            <span class="count">${categoryCount(c.id)}</span>${subs.length ? icon('chev', 'chev') : ''}${end}
+            ${subs.length && open ? `<ul class="cs-subs">
+                <li><a href="${catPath(c.id)}" class="${active && catalogState.sub === 'all' ? 'active' : ''}" onclick="return sheetPick(event, ${i}, -1)">${escapeHtml(t('allWord'))} <small>${categoryCount(c.id)}</small></a></li>
+                ${subs.map(x => `<li><a href="${catPath(c.id, x.s[0])}" class="${active && catalogState.sub === x.s[0] ? 'active' : ''}" onclick="return sheetPick(event, ${i}, ${x.j})">${escapeHtml(x.s[1])} <small>${x.n}</small></a></li>`).join('')}
+            </ul>` : ''}
+        </li>`;
+    }).join('');
+    box.innerHTML = `<li class="cs-item${allActive ? ' active' : ''}"><a class="cs-cat" href="${PAGE_PATHS.catalog}" onclick="return sheetPick(event, 0, null)">
+        <span class="tile-ic">${icon('grid')}</span><span class="name">${escapeHtml(t('allProducts') || 'ყველა პროდუქტი')}</span><span class="count">${categoryCount('all')}</span></a></li>` + rows;
+}
+function openCatSheet() {
+    const el = document.getElementById('cat-sheet');
+    if (!el) return;
+    sheetOpenCat = catalogState.cat !== 'all' && !catalogState.query.trim() ? catalogState.cat : null;
+    renderCatSheet();
+    el.hidden = false;
+    document.body.classList.add('sheet-open');
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('show')));
+    const act = el.querySelector('.cs-item.open') || el.querySelector('.cs-item.active');
+    if (act) setTimeout(() => act.scrollIntoView({ block: 'nearest' }), 60);
+}
+function closeCatSheet() {
+    const el = document.getElementById('cat-sheet');
+    if (!el || el.hidden) return;
+    el.classList.remove('show');
+    document.body.classList.remove('sheet-open');
+    setTimeout(() => { if (!el.classList.contains('show')) el.hidden = true; }, 260);
+}
+function toggleSheetCat(i) {
+    const c = CATEGORIES[i];
+    if (!c) return;
+    sheetOpenCat = sheetOpenCat === c.id ? null : c.id;
+    renderCatSheet();
+    const it = document.querySelector('#cat-sheet .cs-item.open');
+    if (it) setTimeout(() => it.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 30);
+}
+function sheetPick(event, i, j) {
+    if (event && (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button === 1)) return true;
+    if (event) event.preventDefault();
+    closeCatSheet();
+    if (j === null) selectCategory(i, true); else selectSub(i, j);
+    window.scrollTo({ top: 0 });
+    return false;
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCatSheet(); });
 
 function clearSearch() {
     catalogState.query = '';

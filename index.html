@@ -689,6 +689,15 @@
 </div>
 
 <!-- შეტყობინებები -->
+<!-- მობილური: კატეგორიების მენიუ -->
+<div class="cat-sheet" id="cat-sheet" hidden role="dialog" aria-modal="true" aria-labelledby="cat-sheet-title">
+  <div class="cs-dim" onclick="closeCatSheet()"></div>
+  <div class="cs-panel">
+    <div class="cs-grab"></div>
+    <div class="cs-top"><h2 id="cat-sheet-title" data-i18n="catTitle">კატეგორიები</h2><button type="button" class="cs-x" onclick="closeCatSheet()" aria-label="დახურვა"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <ul class="cs-list" id="cat-sheet-list"></ul>
+  </div>
+</div>
 <div class="toast-zone" id="toast-zone" aria-live="polite"></div>
 
 <script src="/products.js"></script>
