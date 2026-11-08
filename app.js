@@ -1297,13 +1297,25 @@ function getCatalogList() {
         const rank = SUB_ORDER[normalizeCategoryValue(catalogState.sub)];
         if (rank) list.sort((a, b) => rank(a) - rank(b));
     }
+    // კატეგორიის მთავარი გვერდის თანმიმდევრობა (ყველაზე გაყიდვადი პროდუქტები თავში)
+    if (s === 'default' && !q && catalogState.sub === 'all') {
+        const rank = CAT_ORDER[normalizeCategoryValue(catalogState.cat)];
+        if (rank) list.sort((a, b) => rank(a) - rank(b));
+    }
     // მარაგში არმყოფი პროდუქტები ბოლოში
     if (s === 'default') list.sort((a, b) => (a.inStock === false) - (b.inStock === false));
     return list;
 }
 
 // ქვეკატეგორიაში პროდუქტების ჯგუფების რიგი — ახალი პროდუქტიც დასახელებით თავის ჯგუფში ჩადგება
+// Fairy ყველაზე გაყიდვადია — თავში, ფასის ზრდის მიხედვით (500მლ, 1350მლ, 2600მლ); დანარჩენი თავის რიგში რჩება
+const fairyFirst = (p) => {
+    const t = ((p.title && (p.title.ka + ' ' + p.title.en)) || '').toLowerCase();
+    return /fairy|ფეირი/.test(t) ? (Number(p.price) || 0) : 1e6;
+};
+const CAT_ORDER = { household_goods: fairyFirst };
 const SUB_ORDER = {
+    dish: fairyFirst,
     floor_care: (p) => {
         const t = ((p.title && (p.title.ka + ' ' + p.title.en)) || '').toLowerCase();
         if (/ქართული ცოცხ|ცოცხი ქართ/.test(t)) return 0;
