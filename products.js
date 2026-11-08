@@ -1570,5 +1570,6 @@ const products = [
 {"id":1626,"barcode":"FY-2600","title":{"ka":"Fairy ფეირი 2600მლ","en":"Fairy ფეირი 2600მლ","ru":"Fairy ფეირი 2600მლ"},"price":19.99,"inStock":true,"category":"Household Goods","subcategory":"dish","images":["images/p1626-mw7ymjpq-1.jpg"]},
 {"id":1627,"barcode":"BLUE_L","title":{"ka":"ნატრილის სამედიცინო ხელთათმანი (L)","en":"Nitrile medical glove (L)","ru":"медицинские перчатки Натрили (L)"},"price":10,"inStock":true,"category":"Medical inventory","images":["images/p1627-mw83a2wi-1.jpg"]},
 {"id":1628,"barcode":"BLUE_M","title":{"ka":"ნატრილის სამედიცინო ხელთათმანი (M)","en":"Nitrile Medical Glove (M)","ru":"Медицинские перчатки из натрия (M)"},"price":10,"inStock":true,"category":"Medical inventory","images":["images/p1628-mw83e3ov-1.jpg"]},
-{"id":1629,"barcode":"BLUE_S","title":{"ka":"ნატრილის სამედიცინო ხელთათმანი (s)","en":"Nitrile Medical Glove (s)","ru":"Медицинские перчатки из натрия (s)"},"price":10,"inStock":true,"category":"Medical inventory","images":["images/p1629-mw83fnwj-1.jpg"]}
+{"id":1629,"barcode":"BLUE_S","title":{"ka":"ნატრილის სამედიცინო ხელთათმანი (s)","en":"Nitrile Medical Glove (s)","ru":"Медицинские перчатки из натрия (s)"},"price":10,"inStock":true,"category":"Medical inventory","images":["images/p1629-mw83fnwj-1.jpg"]},
+{"id":1630,"barcode":"BLACK_L","title":{"ka":"ნატრილის სამედიცინო ხელთათმანი (L) (შავი)","en":"Nitrile medical glove (L) (შავი)","ru":"медицинские перчатки Натрили (L) (შავი)"},"price":11,"inStock":true,"category":"Medical inventory","images":["images/p1630-mw83gvbh-1.jpg"]}
 ];
