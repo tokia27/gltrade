@@ -1432,5 +1432,6 @@ const products = [
 {"id":1487,"barcode":"GL1026","title":{"ka":"მოპის ტილო ფერადი 60სმ","en":"Colored Mop Head 60 cm","ru":"Разноцветная тряпка для швабры, 60 см."},"price":9.5,"inStock":true,"category":"Household Goods","subcategory":"Floor","images":["images/p1487-mw7ovlzf-1.jpg"]},
 {"id":1488,"barcode":"FP-York-28","title":{"ka":"იატაკის საწმენდი მოპი (იორკი) 28 სმ","en":"Floor Mop (York) 28 cm","ru":"Швабра для мытья полов (Йорк) 28cm"},"price":28,"inStock":true,"category":"Household Goods","subcategory":"Floor","images":["images/p1488-mw7ovp0e-1.jpg"]},
 {"id":1489,"barcode":"GL1027","title":{"ka":"მოპის ტილო ფერადი 40სმ","en":"Colored Mop Head 40 cm","ru":"Разноцветная тряпка для швабры, 40 см."},"price":7.5,"inStock":true,"category":"Household Goods","subcategory":"Floor","images":["images/p1489-mw7p11l5-1.jpg"]},
-{"id":1490,"barcode":"FB-L","title":{"ka":"იატაკის ჯაგრისი","en":"Floor brush","ru":"Щетка для пола"},"price":13,"inStock":true,"category":"Household Goods","subcategory":"Floor","images":["images/p1490-mw7p1vhs-1.jpg"]}
+{"id":1490,"barcode":"FB-L","title":{"ka":"იატაკის ჯაგრისი","en":"Floor brush","ru":"Щетка для пола"},"price":13,"inStock":true,"category":"Household Goods","subcategory":"Floor","images":["images/p1490-mw7p1vhs-1.jpg"]},
+{"id":1491,"barcode":"FB-M","title":{"ka":"იატაკის ჯაგრისი","en":"Щетка для пола","ru":"Floor brush"},"price":10,"inStock":true,"category":"Household Goods","subcategory":"Floor","images":["images/p1491-mw7p306n-1.jpg"]}
 ];
