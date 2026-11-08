@@ -1444,6 +1444,6 @@ const products = [
 {"id":1499,"barcode":"GL1034","title":{"ka":"სათლი პლასტმასის 12ლ","en":"Plastic bucket 12L","ru":"Пластиковое ведро 12 л"},"price":6.5,"inStock":true,"category":"Household Goods","subcategory":"Bucket","images":["images/p1499-mw7prjzx-1.jpg"]},
 {"id":1500,"barcode":"L2+1","title":{"ka":"კიბე 2+1 საფეხური","en":"Ladder with 2+1 steps","ru":"Лестница 2+1 ступени"},"price":90,"inStock":true,"category":"Household Goods","subcategory":"Security","images":["images/p1500-mw7psnyq-1.jpg"]},
 {"id":1501,"barcode":"L3+1","title":{"ka":"კიბე 3+1 საფეხური","en":"Ladder with 3+1 steps","ru":"Лестница 3+1 ступени"},"price":110,"inStock":true,"category":"Household Goods","subcategory":"Security","images":["images/p1501-mw7pw7jj-1.jpg"]},
-{"id":1502,"barcode":"L4+1","title":{"ka":"კიბე 2+1 საფეხური","en":"Ladder with 4+1 steps","ru":"Лестница 4+1 ступени"},"price":130,"inStock":true,"category":"Household Goods","subcategory":"Security","images":["images/p1502-mw7pxu5e-1.jpg"]},
+{"id":1502,"barcode":"L4+1","title":{"ka":"კიბე 2+1 საფეხური","en":"Ladder with 4+1 steps","ru":"Лестница 4+1 ступени"},"price":125,"inStock":true,"category":"Household Goods","subcategory":"Security","images":["images/p1502-mw7pxu5e-1.jpg"]},
 {"id":1503,"barcode":"1074","title":{"ka":"მინის საწმენდი ჯოხი 2 მეტრიანი","en":"2-meter glass cleaning pole","ru":"Палочка для чистки стекол длиной 2 метра"},"price":28,"inStock":true,"category":"Household Goods","subcategory":"Floor","images":["images/p1503-mw7py8an-1.jpg"]}
 ];
