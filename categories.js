@@ -55,6 +55,9 @@ const CATEGORIES = [
     { id: 'Hotel', icon: 'bell', name: { ka: 'სასტუმროს ინვენტარი', en: 'Hotel supplies', ru: 'Гостиничный инвентарь' }, subs: [
         ['amenities', 'ერთჯერადი სასტუმროს აქსესუარები']
     ] },
+    { id: 'disposables', icon: 'cup', name: { ka: 'ერთჯერადი პროდუქცია', en: 'Disposable products', ru: 'Одноразовая продукция' }, subs: [
+        ['disposable_tableware', 'ერთჯერადი ჭურჭელი'], ['disposable_cups', 'ერთჯერადი ჭიქები და აქსესუარები'], ['packaging', 'შესაფუთი მასალები'], ['disposable_containers', 'ერთჯერადი კონტეინერები']
+    ] },
     { id: 'Office Food', icon: 'coffee', name: { ka: 'საოფისე კვება', en: 'Office food & drinks', ru: 'Офисное питание' }, subs: [
         ['tea', 'ჩაი'], ['coffe', 'ყავა'], ['disposable coffee', 'ერთჯერადი ყავა'], ['sugar', 'შაქარი და დამატკბობელი'], ['drink', 'წყალი და სასმელები'], ['Snakes', 'სნექები']
     ] },
