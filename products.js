@@ -1422,5 +1422,6 @@ const products = [
 {"id":1477,"barcode":"G-cocxi","title":{"ka":"ქართული ცოცხი","en":"Georgian broom","ru":"грузинский метёл"},"price":10,"inStock":true,"category":"Household Goods","subcategory":"Broom","images":["images/p1477-mw7nkkxj-1.jpg"]},
 {"id":1478,"barcode":"p-cocxi/aqandazi","title":{"ka":"პლასმასის ცოცხი და აქანდაზი","en":"Plastic broom and dustpan","ru":"Пластиковая метла и совок"},"price":16,"inStock":true,"category":"Household Goods","subcategory":"Broom","images":["images/p1478-mw7np38o-1.jpg"]},
 {"id":1479,"barcode":"p-cocxi/savarcxeli","title":{"ka":"პლასმასის ცოცხი და აქანდაზი სავარცხლით","en":"Plastic broom and dustpan with a comb","ru":"Пластиковая метла и совок с расческой"},"price":16,"inStock":true,"category":"Household Goods","subcategory":"Broom","images":["images/p1479-mw7nr9nr-1.jpg"]},
-{"id":1480,"barcode":"jagrisi","title":{"ka":"ტუალეტის ჯაგრისი","en":"Toilet brush","ru":"Щетка для унитаза"},"price":7,"inStock":true,"category":"Household Goods","subcategory":"Broom","images":["images/p1480-mw7o2sbl-1.jpg"]}
+{"id":1480,"barcode":"jagrisi","title":{"ka":"ტუალეტის ჯაგრისი","en":"Toilet brush","ru":"Щетка для унитаза"},"price":7,"inStock":true,"category":"Household Goods","subcategory":"Broom","images":["images/p1480-mw7o2sbl-1.jpg"]},
+{"id":1481,"barcode":"metal-jagrisi","title":{"ka":"მეტალის ტუალეტის ჯაგრისი","en":"Metal toilet brush","ru":"Металлическая щетка для унитаза"},"price":15.5,"inStock":true,"category":"Household Goods","subcategory":"Broom","images":["images/p1481-mw7o5eeg-1.jpg"]}
 ];
