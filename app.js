@@ -1291,6 +1291,7 @@ function renderRotator() {
             if (k === wordIndex) el.classList.add('in');
             else if (k === prev) el.classList.add('out');
         });
+        if (list[wordIndex] && list[wordIndex].classList.contains('ny')) fitNyWord();
     }, 2400);
 }
 
@@ -1310,12 +1311,20 @@ function nyWireHTML() {
 }
 function fitNyWord() {
     const word = document.querySelector('#hero-rotator .word.ny');
-    const title = document.querySelector('.hero-title');
-    if (!word || !title) return;
+    const text = document.querySelector('.hero-text');
+    if (!word || !text || !text.offsetWidth) return;
     word.style.fontSize = '';
-    const avail = title.clientWidth - 18;
-    const w = word.scrollWidth;
-    if (w > avail && avail > 0) word.style.fontSize = (avail / w).toFixed(3) + 'em';
+    const txt = word.querySelector('.ny-word-text') || word;
+    // ხელმისაწვდომი სიგანე: სიტყვის დასაწყისიდან ტექსტის სვეტის მარჯვენა კიდემდე
+    const avail = text.getBoundingClientRect().right - word.getBoundingClientRect().left - 14;
+    const w = txt.getBoundingClientRect().width;
+    if (w > avail && avail > 0) word.style.fontSize = (Math.floor(avail / w * 1000) / 1000) + 'em';
+}
+if (typeof ResizeObserver !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        const text = document.querySelector('.hero-text');
+        if (text) new ResizeObserver(() => fitNyWord()).observe(text);
+    });
 }
 window.addEventListener('resize', () => fitNyWord());
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitNyWord());
@@ -1471,14 +1480,24 @@ function renderCatalog(resetLimit) {
 let snowTimer = null;
 function updateSeasonTheme() {
     const catalogOpen = document.getElementById('catalog')?.classList.contains('active-section');
-    const on = !!(catalogOpen && SEASONAL_PROMO.active && catalogState.cat === SEASONAL_PROMO.cat && !catalogState.query.trim());
+    const prodOpen = document.getElementById('product-page')?.classList.contains('active-section');
+    const pp = prodOpen && currentProductPageId != null ? findProduct(currentProductPageId) : null;
+    const onCatalog = !!(catalogOpen && catalogState.cat === SEASONAL_PROMO.cat && !catalogState.query.trim());
+    const onProduct = !!(pp && productCategory(pp) === normalizeCategoryValue(SEASONAL_PROMO.cat));
+    const on = SEASONAL_PROMO.active && (onCatalog || onProduct);
+    const host = document.getElementById(onProduct ? 'product-page' : 'catalog');
     document.body.classList.toggle('ny-theme', on);
     document.querySelectorAll('.hnav a').forEach(a => {
         if (a.dataset.page === 'promo') a.classList.toggle('active', on);
         else if (a.dataset.page === 'catalog' && on) a.classList.remove('active');
     });
-    const catalog = document.getElementById('catalog');
+    const catalog = host;
     let deco = document.getElementById('ny-deco');
+    if (on && deco && deco.parentElement !== host) { // სხვა გვერდზე გადავედით
+        clearInterval(snowTimer); clearInterval(nyCountTimer);
+        deco.remove(); document.getElementById('ny-banner')?.remove(); deco = null;
+    }
+    if (on && deco && !document.getElementById('ny-banner')) { deco.remove(); deco = null; } // გვერდი თავიდან დაიხატა
     if (on && !deco && catalog) {
         deco = document.createElement('div');
         deco.id = 'ny-deco';
@@ -1889,7 +1908,7 @@ function productDetailsHTML(prod, presetQty, headingTag) {
     let descText = '';
     if (prod.description && typeof prod.description === 'object' && !Array.isArray(prod.description)) descText = getTranslatedText(prod.description);
     else if (Array.isArray(prod.description)) descText = prod.description.join(', ');
-    else descText = prod.description || t('defaultDesc');
+    else descText = prod.description || (productCategory(prod) === normalizeCategoryValue(SEASONAL_PROMO.cat) ? getLangText('საახალწლო დეკორაცია — ფასდაკლებით.', 'New Year decoration — on sale.', 'Новогодний декор — со скидкой.') : t('defaultDesc'));
 
     const brandHTML = prod.brands && prod.brands.length ? optionSelect('brand', prod, prod.brands, true) : '';
     const sizeHTML = prod.sizes && prod.sizes.length ? optionSelect('size', prod, prod.sizes, true) : '';

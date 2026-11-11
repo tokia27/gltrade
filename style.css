@@ -934,13 +934,13 @@ body.sheet-open { overflow: hidden; }
 
 /* =========== კატალოგი: საახალწლო თემა =========== */
 body.ny-theme { --accent: #C81D33; --accent-hover: #A3162A; --accent-soft: #FDE4E7; --grad: linear-gradient(90deg, #C81D33, #E63946); }
-body.ny-theme #catalog { position: relative; background:
+body.ny-theme #catalog, body.ny-theme #product-page { position: relative; background:
   radial-gradient(1200px 400px at 10% -10%, rgba(214, 40, 57, .14), transparent 60%),
   radial-gradient(900px 400px at 100% 0%, rgba(15, 138, 75, .16), transparent 60%),
   linear-gradient(180deg, #FFF8F2 0%, #F3FBF6 100%);
   min-height: 100vh; overflow: hidden; }
-body.ny-theme.dark-mode #catalog { background: radial-gradient(1200px 400px at 10% -10%, rgba(214, 40, 57, .22), transparent 60%), radial-gradient(900px 400px at 100% 0%, rgba(15, 138, 75, .25), transparent 60%), #0A1712; }
-body.ny-theme #catalog .container { position: relative; z-index: 2; }
+body.ny-theme.dark-mode #catalog, body.ny-theme.dark-mode #product-page { background: radial-gradient(1200px 400px at 10% -10%, rgba(214, 40, 57, .22), transparent 60%), radial-gradient(900px 400px at 100% 0%, rgba(15, 138, 75, .25), transparent 60%), #0A1712; }
+body.ny-theme #catalog .container, body.ny-theme #product-page .container { position: relative; z-index: 2; }
 body.ny-theme #catalog-title { background: linear-gradient(90deg, var(--ny-red), #E63946 40%, var(--ny-green-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 body.ny-theme .product-card { border-color: rgba(214, 40, 57, .18); box-shadow: 0 10px 26px rgba(214, 40, 57, .08); transition: transform .25s, box-shadow .25s; }
 body.ny-theme .product-card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(15, 138, 75, .16); }
@@ -969,7 +969,7 @@ body.ny-theme.dark-mode .ny-flakes span { color: #FFFFFF; }
 .ny-banner small { opacity: .9; }
 .ny-banner-ic { width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,.18); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; animation: nyWiggle 2.6s ease-in-out infinite; }
 @keyframes nyWiggle { 0%, 80%, 100% { transform: rotate(0); } 85% { transform: rotate(-12deg); } 90% { transform: rotate(10deg); } 95% { transform: rotate(-6deg); } }
-body.ny-theme #catalog > .container { padding-top: 6px; }
+body.ny-theme #catalog > .container, body.ny-theme #product-page > .container { padding-top: 6px; }
 
 @media (max-width: 900px) {
   .hero-show.has-ny { flex-basis: 100%; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; justify-content: flex-start; padding: 4px 2px 18px; margin: 0 -16px; padding-left: 16px; }
@@ -1060,3 +1060,34 @@ body.ny-theme .page-title h1::after { content: " 🎄"; -webkit-text-fill-color:
 .cat-tile.is-promo strong { color: var(--ny-red); }
 body.dark-mode .cat-item.is-promo:not(.active) > .cat-btn, body.dark-mode .cs-item.is-promo:not(.active) > .cs-cat, body.dark-mode .cat-tile.is-promo { background: rgba(214, 40, 57, .16); }
 
+
+/* ახალი წელი — პროდუქტის გვერდი */
+body.ny-theme .product-page-card { position: relative; border-color: rgba(214, 40, 57, .25); box-shadow: 0 18px 40px rgba(214, 40, 57, .10); }
+body.ny-theme .product-page-card::before { content: ""; position: absolute; left: 14px; right: 14px; top: -10px; height: 20px; z-index: 3; pointer-events: none;
+  background: radial-gradient(13px 10px at 13px 11px, #FFFFFF 96%, transparent 100%) 0 0 / 24px 20px repeat-x, linear-gradient(#FFFFFF, #FFFFFF) 0 0 / 100% 9px no-repeat;
+  filter: drop-shadow(0 2px 2px rgba(120,160,200,.35)); }
+body.ny-theme .m-price { color: var(--ny-red); }
+body.ny-theme .m-main { background: radial-gradient(circle at 50% 40%, #FFFFFF 0%, #FFF4E6 100%); }
+body.ny-theme .product-page-card .btn-grad { background: linear-gradient(135deg, var(--ny-green), var(--ny-green-2)); box-shadow: 0 12px 26px rgba(15, 138, 75, .35); }
+body.ny-theme #product-page .similar h2 { color: var(--ny-red); }
+
+/* „სეზონური აქცია“ — მწვანე ნაძვის ხე */
+.ny-tree-ic { width: 18px; height: 18px; flex-shrink: 0; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+.drawer-promo .ny-tree-ic { width: 20px; height: 20px; filter: none; }
+
+/* ჰედერი: ძებნის ველი არ უნდა შევიწროვდეს */
+.hsearch { min-width: 220px; }
+.hsearch input { min-width: 60px; }
+.hsearch .btn { flex-shrink: 0; }
+@media (max-width: 1440px) {
+  .header-inner { gap: 14px; }
+  .hnav { gap: 14px; font-size: 14px; }
+  #nav-login span, #nav-user-info .user-name-header { display: none; }
+  #nav-login, #nav-user-info { padding: 0 12px; }
+}
+@media (max-width: 1320px) { .hnav a[data-page="terms"] { display: none; } }
+@media (max-width: 1180px) { .hsearch { min-width: 0; } }
+
+/* „ახალი წლისთვის“ — სიტყვა ყოველთვის ჩანს, ფანჯარა არ ეფარება */
+.hero-text { position: relative; z-index: 3; }
+body.ny-theme .product-page-card { margin-top: 22px; }
