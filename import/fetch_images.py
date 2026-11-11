@@ -16,6 +16,7 @@ for it in items:
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
         'Referer': it.get('referer', ''), 'Accept': 'image/avif,image/webp,image/*,*/*;q=0.8'})
     data = None
+    err = 'ცარიელი პასუხი'
     for attempt in range(3):
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
