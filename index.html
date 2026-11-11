@@ -73,6 +73,8 @@
     <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></symbol>
     <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></symbol>
     <symbol id="i-edit" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="m12 2-5 7h3l-4 6h4l-3 4h10l-3-4h4l-4-6h3z"/><path d="M12 19v3"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
     <symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></symbol>
   </defs>
 </svg>
@@ -92,6 +94,7 @@
 
     <nav class="hnav" aria-label="მთავარი მენიუ">
       <a href="/produqcia/" data-page="catalog" onclick="return go(event, '/produqcia/')" data-i18n="navCatalog">პროდუქცია</a>
+      <a href="/produqcia/akhali-weli/" class="nav-promo" data-page="promo" onclick="return go(event, '/produqcia/akhali-weli/')"><svg class="ic"><use href="#i-gift"/></svg><span data-i18n="navPromo">სეზონური აქცია</span></a>
       <a href="/chvens-shesakheb/" data-page="about" onclick="return go(event, '/chvens-shesakheb/')" data-i18n="navAbout">ჩვენს შესახებ</a>
       <a href="/momsakhurebis-pirobebi/" data-page="terms" onclick="return go(event, '/momsakhurebis-pirobebi/')" data-i18n="navTerms">მომსახურების პირობები</a>
     </nav>
@@ -146,6 +149,7 @@
     <nav class="drawer-nav">
       <a href="/" onclick="return go(event, '/')"><span data-i18n="navHome">მთავარი</span><svg class="ic"><use href="#i-chevr"/></svg></a>
       <a href="/produqcia/" onclick="return go(event, '/produqcia/')"><span data-i18n="navCatalog">პროდუქცია</span><svg class="ic"><use href="#i-chevr"/></svg></a>
+      <a href="/produqcia/akhali-weli/" class="drawer-promo" onclick="return go(event, '/produqcia/akhali-weli/')"><span><svg class="ic"><use href="#i-gift"/></svg> <span data-i18n="navPromo">სეზონური აქცია</span></span><svg class="ic"><use href="#i-chevr"/></svg></a>
       <a href="/chvens-shesakheb/" onclick="return go(event, '/chvens-shesakheb/')"><span data-i18n="navAbout">ჩვენს შესახებ</span><svg class="ic"><use href="#i-chevr"/></svg></a>
       <a href="/momsakhurebis-pirobebi/" onclick="return go(event, '/momsakhurebis-pirobebi/')"><span data-i18n="navTerms">მომსახურების პირობები</span><svg class="ic"><use href="#i-chevr"/></svg></a>
       <a href="/kalata/" onclick="return go(event, '/kalata/')"><span data-i18n="navCart">კალათა</span><span class="badge cart-count">0</span></a>
@@ -196,7 +200,7 @@
         <p class="hero-sub" data-i18n="heroSubtitle">საკანცელარიო, ჰიგიენური და კომპიუტერული პროდუქცია ბიზნესისთვის — უფასო მიწოდებით თბილისის მასშტაბით.</p>
         <div class="hero-actions">
           <button class="btn btn-grad btn-lg shine" type="button" onclick="openCatalog()"><span data-i18n="heroBtn">იხილეთ პროდუქცია</span><svg class="ic"><use href="#i-arrow"/></svg></button>
-          <a class="btn btn-glass btn-lg" href="tel:+995597779830"><svg class="ic"><use href="#i-phone"/></svg><span data-i18n="heroCall">დაგვიკავშირდით</span></a>
+          <a class="btn btn-glass btn-lg" href="tel:+995597779830" onclick="return heroCall(event)"><svg class="ic"><use href="#i-phone"/></svg><span data-i18n="heroCall">დაგვიკავშირდით</span></a>
         </div>
         <div class="stats">
           <div class="stat"><strong><span id="stat-count">1200</span>+</strong><span data-i18n="statProducts">პროდუქტი</span></div>
@@ -206,11 +210,19 @@
         </div>
       </div>
 
-      <div class="hero-show">
+      <div class="hero-show" id="hero-show">
         <div class="showcase float">
           <div class="feat-stack" id="feat-stack"></div>
           <div class="feat-dots" id="feat-dots" role="group" aria-label="პროდუქტის არჩევა"></div>
           <div class="marquee-wrap"><div class="marquee" id="hero-marquee"></div></div>
+        </div>
+        <!-- საახალწლო ფანჯარა — ჩანს მხოლოდ მაშინ, როცა SEASONAL_PROMO ჩართულია -->
+        <div class="showcase showcase-ny float-ny" id="ny-showcase" hidden>
+          <div class="ny-lights" aria-hidden="true"></div>
+          <div class="ny-snow" aria-hidden="true"></div>
+          <div class="feat-stack" id="ny-feat-stack"></div>
+          <div class="feat-dots" id="ny-feat-dots" role="group" aria-label="საახალწლო პროდუქტის არჩევა"></div>
+          <div class="marquee-wrap"><div class="marquee" id="ny-marquee"></div></div>
         </div>
       </div>
     </div>

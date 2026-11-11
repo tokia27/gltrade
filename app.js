@@ -685,6 +685,50 @@ const HERO_WORDS = {
 };
 
 // =====================================================================
+// სეზონური აქცია — „ახალი წელი“
+//   active: false — ღილაკი, საახალწლო ფანჯარა, სიტყვა და ფასდაკლება ერთად ითიშება
+//   percent — ფასდაკლება % (ვრცელდება მხოლოდ ამ კატეგორიის პროდუქციაზე)
+// =====================================================================
+const SEASONAL_PROMO = {
+    active: true,
+    cat: 'new_year',
+    percent: 15,
+    word: { ka: 'ახალი წლისთვის', en: 'New Year', ru: 'Нового года' }
+};
+function promoOn() {
+    return SEASONAL_PROMO.active && typeof products !== 'undefined' &&
+        products.some(p => productCategory(p) === normalizeCategoryValue(SEASONAL_PROMO.cat));
+}
+function heroWords() {
+    const base = (HERO_WORDS[currentLang] || HERO_WORDS.ka).slice();
+    if (promoOn()) base.push(SEASONAL_PROMO.word[currentLang] || SEASONAL_PROMO.word.ka);
+    return base;
+}
+// ამ კატეგორიაში products.js-ის ფასი უკვე ფასდაკლებული ფასია (რაც ვიყიდით).
+// გადახაზული „ძველი ფასი“ = ფასი / (1 - percent%), დამრგვალებული მთელ ლარამდე (350 ₾ -> 412 ₾).
+// კალათა, შეკვეთა და Telegram იღებს products.js-ის ფასს.
+(function applySeasonalPromo() {
+    if (!SEASONAL_PROMO.active || typeof products === 'undefined') return;
+    const k = 1 - SEASONAL_PROMO.percent / 100;
+    const up = v => Math.round(Number(v) / k); // მრგვალ ლარამდე: 411.76 -> 412
+    products.forEach(p => {
+        if (productCategory(p) !== normalizeCategoryValue(SEASONAL_PROMO.cat) || p.oldPrice) return;
+        p.oldPrice = up(p.price);
+        ['sizes', 'brands'].forEach(key => (p[key] || []).forEach(o => {
+            if (o && typeof o === 'object' && o.price !== undefined) { o.oldPrice = up(o.price); }
+        }));
+        p.promo = SEASONAL_PROMO.percent;
+    });
+})();
+function isPromoProduct(p) { return !!(p && p.oldPrice && p.promo); }
+function priceHTML(p, cls) {
+    // ფასდაკლებისას: ახალი ფასი + გადახაზული ძველი
+    return isPromoProduct(p)
+        ? `<span class="${cls || ''} promo-price">${money(p.price)} ₾</span><s class="old-price">${money(p.oldPrice)} ₾</s>`
+        : `<span class="${cls || ''}">${money(p.price)} ₾</span>`;
+}
+
+// =====================================================================
 // ზოგადი დამხმარე ფუნქციები
 // =====================================================================
 function t(key) {
@@ -985,6 +1029,7 @@ function showPage(pageId, opts) {
     target.classList.add('active-section');
 
     document.querySelectorAll('.hnav a').forEach(a => a.classList.toggle('active', a.dataset.page === pageId));
+    updateSeasonTheme();
     const tabMap = { home: 'home', catalog: 'catalog', cart: 'cart', 'auth-section': 'profile', 'history-section': 'profile' };
     document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('active', b.dataset.tab === tabMap[pageId]));
 
@@ -1122,28 +1167,38 @@ function closeProfileModal() {
 // =====================================================================
 // 4. მთავარი გვერდი (Hero, კატეგორიები, ბრენდები)
 // =====================================================================
-let featIndex = 0;
-let featTimer = null;
+// მოძრავი ფანჯრები: 'main' — ჩვეულებრივი, 'ny' — საახალწლო
+const SHOWCASES = {
+    main: { stack: 'feat-stack', dots: 'feat-dots', marquee: 'hero-marquee', index: 0, timer: null, delay: 3200 },
+    ny: { stack: 'ny-feat-stack', dots: 'ny-feat-dots', marquee: 'ny-marquee', index: 0, timer: null, delay: 3600 }
+};
 let wordIndex = 0;
 let wordTimer = null;
 
-function renderHero() {
-    const stack = document.getElementById('feat-stack');
-    const dots = document.getElementById('feat-dots');
-    const marquee = document.getElementById('hero-marquee');
-    const featured = FEATURED_IDS.map(findProduct).filter(Boolean);
+function nyProducts() {
+    const cat = normalizeCategoryValue(SEASONAL_PROMO.cat);
+    return (typeof products !== 'undefined' ? products : []).filter(p => productCategory(p) === cat && p.inStock !== false);
+}
 
+function renderShowcase(key, featured, strip, tagText) {
+    const sc = SHOWCASES[key];
+    const stack = document.getElementById(sc.stack);
+    const dots = document.getElementById(sc.dots);
+    const marquee = document.getElementById(sc.marquee);
+    if (sc.index >= featured.length) sc.index = 0;
     if (stack) {
         stack.innerHTML = featured.map((p, i) => {
             const cat = CATEGORIES.find(c => normalizeCategoryValue(c.id) === productCategory(p));
+            const tag = tagText || (cat ? getTranslatedText(cat.name) : '');
             return `
-            <div class="feat${i === featIndex ? ' in' : ''}" data-i="${i}">
+            <div class="feat${i === sc.index ? ' in' : ''}" data-i="${i}">
                 <div class="feat-img" onclick="go(null, '${productPath(p.id)}')">
-                    ${cat ? `<span class="feat-tag">${escapeHtml(getTranslatedText(cat.name))}</span>` : ''}
+                    ${tag ? `<span class="feat-tag">${escapeHtml(tag)}</span>` : ''}
+                    ${isPromoProduct(p) ? `<span class="sale-badge">-${p.promo}%</span>` : ''}
                     <img src="${escapeHtml(productImages(p)[0])}" alt="${escapeHtml(productName(p))}" loading="lazy" decoding="async" onerror="imgFallback(this)">
                 </div>
                 <div class="feat-row">
-                    <div><div class="feat-name">${escapeHtml(productName(p))}</div><div class="feat-price">${money(p.price)} ₾</div></div>
+                    <div><div class="feat-name">${escapeHtml(productName(p))}</div><div class="feat-price">${priceHTML(p)}</div></div>
                     <button type="button" class="round-cart" onclick="quickAdd(${p.id}, this, 1)" aria-label="${escapeHtml(t('addToCart'))}">${icon('cart')}</button>
                 </div>
             </div>`;
@@ -1151,11 +1206,10 @@ function renderHero() {
     }
     if (dots) {
         dots.innerHTML = featured.map((p, i) =>
-            `<button type="button" class="${i === featIndex ? 'on' : ''}" onclick="pickFeatured(${i})" aria-label="${i + 1} / ${featured.length}"><span></span></button>`
+            `<button type="button" class="${i === sc.index ? 'on' : ''}" onclick="pickFeatured(${i}, '${key}')" aria-label="${i + 1} / ${featured.length}"><span></span></button>`
         ).join('');
     }
     if (marquee) {
-        const strip = STRIP_IDS.map(findProduct).filter(Boolean);
         const html = strip.map(p => `
             <div class="m-item" onclick="go(null, '${productPath(p.id)}')">
                 <img src="${escapeHtml(productImages(p)[0])}" alt="" loading="lazy" decoding="async" onerror="imgFallback(this)">
@@ -1163,41 +1217,69 @@ function renderHero() {
             </div>`).join('');
         marquee.innerHTML = html + html; // ორჯერ — უწყვეტი მოძრაობისთვის
     }
-    startFeatTimer();
+    startFeatTimer(key);
 }
 
-function showFeatured(i) {
-    const items = document.querySelectorAll('#feat-stack .feat');
+function renderHero() {
+    renderShowcase('main', FEATURED_IDS.map(findProduct).filter(Boolean), STRIP_IDS.map(findProduct).filter(Boolean));
+
+    const nyBox = document.getElementById('ny-showcase');
+    const show = document.getElementById('hero-show');
+    const on = promoOn();
+    if (nyBox) nyBox.hidden = !on;
+    if (show) show.classList.toggle('has-ny', on);
+    document.querySelectorAll('.nav-promo, .drawer-promo').forEach(el => { el.style.display = on ? '' : 'none'; });
+    if (on) {
+        // ფანჯარაში — თითო-თითო ყველა ქვეკატეგორიიდან, რიგრიგობით
+        const groups = {};
+        nyProducts().forEach(p => { (groups[productSubcategory(p)] = groups[productSubcategory(p)] || []).push(p); });
+        const keys = Object.keys(groups);
+        const list = [];
+        for (let k = 0; list.length < 12 && keys.some(g => groups[g][k]); k++) keys.forEach(g => { if (groups[g][k]) list.push(groups[g][k]); });
+        const tag = `${getTranslatedText(CATEGORIES.find(c => c.id === SEASONAL_PROMO.cat).name)} · -${SEASONAL_PROMO.percent}%`;
+        renderShowcase('ny', list.slice(0, 6), list.slice(0, 12), tag);
+    } else {
+        clearInterval(SHOWCASES.ny.timer);
+    }
+}
+
+function showFeatured(i, key) {
+    const sc = SHOWCASES[key || 'main'];
+    const items = document.querySelectorAll(`#${sc.stack} .feat`);
     if (!items.length) return;
-    featIndex = (i + items.length) % items.length;
+    sc.index = (i + items.length) % items.length;
     items.forEach((el, k) => {
-        el.classList.toggle('in', k === featIndex);
-        el.classList.toggle('out', k !== featIndex && k < featIndex);
+        el.classList.toggle('in', k === sc.index);
+        el.classList.toggle('out', k !== sc.index && k < sc.index);
     });
-    document.querySelectorAll('#feat-dots button').forEach((b, k) => b.classList.toggle('on', k === featIndex));
+    document.querySelectorAll(`#${sc.dots} button`).forEach((b, k) => b.classList.toggle('on', k === sc.index));
 }
-function startFeatTimer() {
-    clearInterval(featTimer);
-    featTimer = setInterval(() => showFeatured(featIndex + 1), 3200);
+function startFeatTimer(key) {
+    const sc = SHOWCASES[key || 'main'];
+    clearInterval(sc.timer);
+    sc.timer = setInterval(() => showFeatured(sc.index + 1, key), sc.delay);
 }
-function pickFeatured(i) {
-    showFeatured(i);
-    startFeatTimer();
+function pickFeatured(i, key) {
+    showFeatured(i, key);
+    startFeatTimer(key);
 }
 
 function renderRotator() {
     const box = document.getElementById('hero-rotator');
     const sizer = document.getElementById('rotator-sizer');
     if (!box) return;
-    const words = HERO_WORDS[currentLang] || HERO_WORDS.ka;
-    if (sizer) sizer.textContent = words.reduce((a, b) => (b.length > a.length ? b : a), '');
+    const words = heroWords();
+    const nyWord = promoOn() ? words[words.length - 1] : null;
+    // ზომა — ჩვეულებრივი სიტყვებით; „ახალი წლისთვის“ თავად ერგება სიგანეს (fitNyWord)
+    if (sizer) sizer.textContent = words.filter(w => w !== nyWord).reduce((a, b) => (b.length > a.length ? b : a), '');
     box.querySelectorAll('.word').forEach(w => w.remove());
     words.forEach((w, i) => {
         const span = document.createElement('span');
-        span.className = 'word' + (i === wordIndex % words.length ? ' in' : '');
-        span.textContent = w;
+        span.className = 'word' + (w === nyWord ? ' ny' : '') + (i === wordIndex % words.length ? ' in' : '');
+        span.innerHTML = w === nyWord ? `<span class="ny-word-text">${escapeHtml(w)}</span>${nyWireHTML()}` : escapeHtml(w);
         box.appendChild(span);
     });
+    fitNyWord();
     clearInterval(wordTimer);
     wordTimer = setInterval(() => {
         const list = box.querySelectorAll('.word');
@@ -1210,6 +1292,44 @@ function renderRotator() {
             else if (k === prev) el.classList.add('out');
         });
     }, 2400);
+}
+
+// ფერადი ნათურები, რომლებიც ტალღად ეხვევა სიტყვას „ახალი წლისთვის“
+function nyWireHTML() {
+    const wave = x => 50 + 34 * Math.sin(Math.PI * 2 * 2.5 * x + 0.6);
+    let d = '';
+    for (let x = 0; x <= 1.0001; x += 0.01) d += `${d ? 'L' : 'M'}${(x * 1000).toFixed(0)} ${wave(x).toFixed(1)}`;
+    const colors = ['#FF3B4E', '#FFD23F', '#22C55E', '#3B82F6', '#FF6FD8', '#FF8A1F'];
+    const n = 17;
+    const bulbs = Array.from({ length: n }, (_, i) => {
+        const x = 0.03 + (0.94 * i) / (n - 1);
+        const c = colors[i % colors.length];
+        return `<i style="left:${(x * 100).toFixed(2)}%;top:${wave(x).toFixed(1)}%;--c:${c};--d:${(i % 3) * -0.45}s"></i>`;
+    }).join('');
+    return `<span class="ny-wire" aria-hidden="true"><svg viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="${d}"/></svg>${bulbs}</span>`;
+}
+function fitNyWord() {
+    const word = document.querySelector('#hero-rotator .word.ny');
+    const title = document.querySelector('.hero-title');
+    if (!word || !title) return;
+    word.style.fontSize = '';
+    const avail = title.clientWidth - 18;
+    const w = word.scrollWidth;
+    if (w > avail && avail > 0) word.style.fontSize = (avail / w).toFixed(3) + 'em';
+}
+window.addEventListener('resize', () => fitNyWord());
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitNyWord());
+
+// „დაგვიკავშირდით“: ტელეფონზე — ზარი (როგორც იყო), კომპიუტერზე — ჩამოსქროლვა კონტაქტის ბლოკამდე
+function heroCall(event) {
+    const desktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches && window.innerWidth > 900;
+    if (!desktop) return true;
+    const box = document.getElementById('contact');
+    if (!box) return true;
+    if (event) event.preventDefault();
+    const headerH = document.getElementById('site-header')?.offsetHeight || 72;
+    window.scrollTo({ top: box.getBoundingClientRect().top + window.scrollY - headerH - 16, behavior: 'smooth' });
+    return false;
 }
 
 function countUp() {
@@ -1232,7 +1352,7 @@ function renderHomeCategories() {
     box.innerHTML = CATEGORIES.map((c, i) => ({ c, i, n: categoryCount(c.id) }))
         .filter(x => x.c.id !== 'all' && x.n > 0)
         .map(x => `
-            <a class="cat-tile" href="${catPath(x.c.id)}" onclick="return go(event, '${catPath(x.c.id)}')">
+            <a class="cat-tile${x.c.id === SEASONAL_PROMO.cat ? ' is-promo' : ''}" href="${catPath(x.c.id)}" onclick="return go(event, '${catPath(x.c.id)}')">
                 <span class="tile-ic">${icon(x.c.icon)}</span>
                 <span><strong>${escapeHtml(getTranslatedText(x.c.name))}</strong><small>${x.n} ${escapeHtml(t('productsWord'))}</small></span>
             </a>`).join('');
@@ -1344,6 +1464,84 @@ function renderCatalog(resetLimit) {
     if (crumb) crumb.textContent = title;
     const countEl = document.getElementById('catalog-count');
     if (countEl) countEl.textContent = list.length;
+    updateSeasonTheme();
+}
+
+// საახალწლო ვიზუალი — მხოლოდ „ახალი წლის“ კატეგორიაში
+let snowTimer = null;
+function updateSeasonTheme() {
+    const catalogOpen = document.getElementById('catalog')?.classList.contains('active-section');
+    const on = !!(catalogOpen && SEASONAL_PROMO.active && catalogState.cat === SEASONAL_PROMO.cat && !catalogState.query.trim());
+    document.body.classList.toggle('ny-theme', on);
+    document.querySelectorAll('.hnav a').forEach(a => {
+        if (a.dataset.page === 'promo') a.classList.toggle('active', on);
+        else if (a.dataset.page === 'catalog' && on) a.classList.remove('active');
+    });
+    const catalog = document.getElementById('catalog');
+    let deco = document.getElementById('ny-deco');
+    if (on && !deco && catalog) {
+        deco = document.createElement('div');
+        deco.id = 'ny-deco';
+        deco.setAttribute('aria-hidden', 'true');
+        const bulbs = Array.from({ length: 34 }, (_, i) => `<i style="--i:${i}"></i>`).join('');
+        const ornColors = ['#D62839', '#F5B82E', '#0F8A4B', '#2563EB', '#D62839', '#F5B82E'];
+        const orn = (side) => ornColors.map((c, i) => `<span class="ny-orn" style="--c:${c};--len:${40 + ((i * 37) % 70)}px;--x:${i * 34}px;--d:${i * -0.6}s"><b></b></span>`).join('');
+        deco.innerHTML = `<div class="ny-garland">${bulbs}</div><div class="ny-garland g2">${bulbs}</div>
+            <div class="ny-orns left">${orn()}</div><div class="ny-orns right">${orn()}</div>
+            <div class="ny-flakes"></div>
+            <div class="ny-sleigh">${NY_SLEIGH_SVG}</div>
+            <div class="ny-drift"></div>
+            <div class="ny-trees"><span>${NY_TREE_SVG}</span><span>${NY_TREE_SVG}</span><span>${NY_TREE_SVG}</span><span>${NY_TREE_SVG}</span></div>`;
+        const banner = document.createElement('div');
+        banner.className = 'ny-banner';
+        banner.id = 'ny-banner';
+        banner.innerHTML = `<span class="ny-banner-ic">${icon('gift')}</span><div><strong>${escapeHtml(getLangText('საახალწლო აქცია', 'New Year sale', 'Новогодняя акция'))} — -${SEASONAL_PROMO.percent}%</strong><small>${escapeHtml(getLangText('ფასდაკლება ვრცელდება ამ კატეგორიის ყველა პროდუქტზე', 'The discount applies to every product in this category', 'Скидка действует на все товары этой категории'))}</small></div>
+            <div class="ny-count" id="ny-count"></div>`;
+        catalog.prepend(deco);
+        const cont = catalog.querySelector('.container');
+        if (cont) cont.prepend(banner);
+        startNyCountdown();
+        startSnow(deco.querySelector('.ny-flakes'));
+    } else if (!on && deco) {
+        clearInterval(snowTimer);
+        clearInterval(nyCountTimer);
+        deco.remove();
+        document.getElementById('ny-banner')?.remove();
+    }
+}
+const NY_TREE_SVG = '<svg viewBox="0 0 100 140"><rect x="44" y="118" width="12" height="20" fill="#6B4226"/><path d="M50 4 20 50h12L12 82h14L4 120h92L74 82h14L68 50h12z" fill="#0F6B3E"/><path d="M50 4 20 50h12L12 82h14L4 120h46z" fill="#0B5A33"/><path d="M28 60q22 10 44-2M18 96q32 14 64-2" stroke="#F5B82E" stroke-width="2.5" fill="none"/><g class="tl"><circle cx="40" cy="44" r="3.5" fill="#FF3B4E"/><circle cx="62" cy="66" r="3.5" fill="#FFD23F"/><circle cx="34" cy="78" r="3.5" fill="#3B82F6"/><circle cx="66" cy="100" r="3.5" fill="#FF3B4E"/><circle cx="30" cy="106" r="3.5" fill="#22C55E"/><circle cx="52" cy="88" r="3.5" fill="#FF6FD8"/></g><path d="m50 0 3 7 8 .5-6 5 2 8-7-4-7 4 2-8-6-5 8-.5z" fill="#FFD23F"/></svg>';
+const NY_SLEIGH_SVG = '<svg viewBox="0 0 260 70"><g fill="#3A2A1A"><path d="M8 40c10-6 22-4 28 2l10-12 6 4-8 12c4 4 4 9 2 12l-8-2c-10 3-22 0-30-6z"/><path d="M62 40c10-6 22-4 28 2l10-12 6 4-8 12c4 4 4 9 2 12l-8-2c-10 3-22 0-30-6z"/></g><path d="M40 46h120M94 46h66" stroke="#B9935A" stroke-width="1.5"/><path d="M150 30h70q14 0 18 14l-10 10h-74z" fill="#D62839"/><path d="M144 62h96q8 0 12-8" stroke="#F5B82E" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="196" cy="20" r="9" fill="#F6C9A8"/><path d="M186 18q4-14 18-8l6 6-24 2z" fill="#D62839"/><circle cx="212" cy="16" r="3" fill="#fff"/><path d="M186 22q10 16 20 0" fill="#fff"/><rect x="176" y="20" width="18" height="16" rx="3" fill="#0F8A4B"/></svg>';
+let nyCountTimer = null;
+function startNyCountdown() {
+    const el = document.getElementById('ny-count');
+    if (!el) return;
+    const lbl = [getLangText('დღე', 'days', 'дн'), getLangText('სთ', 'hrs', 'ч'), getLangText('წთ', 'min', 'мин'), getLangText('წმ', 'sec', 'сек')];
+    const tick = () => {
+        const now = new Date();
+        const target = new Date(now.getFullYear() + (now.getMonth() === 0 && now.getDate() < 2 ? 0 : 1), 0, 1);
+        let s = Math.max(0, Math.floor((target - now) / 1000));
+        const parts = [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60];
+        el.innerHTML = `<small>${escapeHtml(getLangText('ახალ წლამდე', 'Until New Year', 'До Нового года'))}</small><div>${parts.map((v, i) => `<span><b>${String(v).padStart(2, '0')}</b><em>${lbl[i]}</em></span>`).join('')}</div>`;
+    };
+    tick();
+    clearInterval(nyCountTimer);
+    nyCountTimer = setInterval(tick, 1000);
+}
+function startSnow(box) {
+    if (!box || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const flakes = ['❄', '❅', '❆', '•'];
+    const add = () => {
+        if (document.hidden || box.childElementCount > 110) return;
+        const f = document.createElement('span');
+        f.textContent = flakes[Math.floor(Math.random() * flakes.length)];
+        const dur = 7 + Math.random() * 7;
+        f.style.cssText = `left:${Math.random() * 100}%;font-size:${10 + Math.random() * 20}px;animation-duration:${dur}s,${2 + Math.random() * 3}s;opacity:${0.5 + Math.random() * 0.5}`;
+        box.appendChild(f);
+        setTimeout(() => f.remove(), dur * 1000);
+    };
+    for (let i = 0; i < 30; i++) setTimeout(add, i * 90);
+    clearInterval(snowTimer);
+    snowTimer = setInterval(add, 150);
 }
 
 // პროდუქტების დახატვა (ფუნქციის სახელი იგივეა, რაც ძველ კოდში)
@@ -1377,6 +1575,7 @@ function productCardHTML(prod) {
     <article class="product-card${available ? '' : ' out-of-stock-card'}" id="card-${prod.id}">
         <div class="p-img">
             ${available ? '' : `<span class="p-badge">${escapeHtml(t('outOfStock'))}</span>`}
+            ${isPromoProduct(prod) ? `<span class="sale-badge">-${prod.promo}%</span>` : ''}
             <a class="p-img-link" href="${productPath(prod.id)}" onclick="return go(event, '${productPath(prod.id)}')" tabindex="-1" aria-hidden="true"><img id="card-img-${prod.id}" src="${escapeHtml(imgs[idx])}" alt="${escapeHtml(name)}" loading="lazy" decoding="async" onerror="imgFallback(this)"></a>
             ${imgs.length > 1 ? `
                 <button type="button" class="slide prev" onclick="event.stopPropagation(); changeImage(${prod.id}, -1)" aria-label="წინა ფოტო">${icon('back')}</button>
@@ -1390,7 +1589,7 @@ function productCardHTML(prod) {
                 <button type="button" onclick="stepQty('qty-${prod.id}', 1)" aria-label="გაზრდა" ${available ? '' : 'disabled'}>${icon('plus')}</button>
             </div>
             <div class="p-foot">
-                <span class="p-price">${money(prod.price)}<small>₾</small></span>
+                <span class="p-price-wrap"><span class="p-price">${money(prod.price)}<small>₾</small></span>${isPromoProduct(prod) ? `<s class="old-price">${money(prod.oldPrice)} ₾</s>` : ''}</span>
                 <button type="button" class="cart-icon-btn" onclick="quickAdd(${prod.id}, this)" aria-label="${escapeHtml(available ? t('addToCart') : t('outOfStock'))}" ${available ? '' : 'disabled'}>${icon('cart')}</button>
             </div>
         </div>
@@ -1438,7 +1637,7 @@ function renderSidebar() {
                 ${c.subs.map((s, j) => `<li><a href="${catPath(c.id, s[0])}" class="${isActive && catalogState.sub === s[0] ? 'active' : ''}" onclick="return linkSub(event, ${i}, ${j})">${escapeHtml(s[1])}</a></li>`).join('')}
             </ul>` : '';
         return `
-        <li class="cat-item${isActive ? ' active' : ''}${isOpen ? ' open' : ''}">
+        <li class="cat-item${isActive ? ' active' : ''}${isOpen ? ' open' : ''}${c.id === SEASONAL_PROMO.cat ? ' is-promo' : ''}">
             <button type="button" class="cat-btn" onclick="selectCategory(${i})" aria-expanded="${isOpen ? 'true' : 'false'}">
                 <span class="tile-ic">${icon(c.icon)}</span>
                 <span class="name">${escapeHtml(getTranslatedText(c.name))}</span>
@@ -1499,7 +1698,7 @@ function renderCatSheet() {
             ? `<button type="button" class="cs-cat" onclick="toggleSheetCat(${i})" aria-expanded="${open}">`
             : `<a class="cs-cat" href="${catPath(c.id)}" onclick="return sheetPick(event, ${i}, null)">`;
         const end = subs.length ? '</button>' : '</a>';
-        return `<li class="cs-item${active ? ' active' : ''}${open ? ' open' : ''}">
+        return `<li class="cs-item${active ? ' active' : ''}${open ? ' open' : ''}${c.id === SEASONAL_PROMO.cat ? ' is-promo' : ''}">
             ${head}<span class="tile-ic">${icon(c.icon)}</span><span class="name">${escapeHtml(getTranslatedText(c.name))}</span>
             <span class="count">${categoryCount(c.id)}</span>${subs.length ? icon('chev', 'chev') : ''}${end}
             ${subs.length && open ? `<ul class="cs-subs">
@@ -1640,6 +1839,8 @@ function updateModalPrice(productId) {
         el.textContent = `${money(price)} ₾`;
         el.dataset.price = price;
     }
+    const old = document.getElementById(`modal-old-${productId}`);
+    if (old && isPromoProduct(prod)) old.textContent = `${money(Math.round(price / (1 - prod.promo / 100)))} ₾`;
 }
 
 function optionSelect(kind, prod, items, withPrice) {
@@ -1704,7 +1905,7 @@ function productDetailsHTML(prod, presetQty, headingTag) {
             </div>
             <div class="m-info">
                 <${h}>${escapeHtml(name)}</${h}>
-                <div class="m-price" id="modal-price-${prod.id}" data-price="${Number(prod.price) || 0}">${money(prod.price)} ₾</div>
+                <div class="m-price-row"><div class="m-price" id="modal-price-${prod.id}" data-price="${Number(prod.price) || 0}">${money(prod.price)} ₾</div>${isPromoProduct(prod) ? `<s class="old-price" id="modal-old-${prod.id}">${money(prod.oldPrice)} ₾</s><span class="sale-badge inline">-${prod.promo}%</span>` : ''}</div>
                 <div class="m-meta">
                     <span class="chip-s ${available ? 'in' : 'out'}">${icon(available ? 'check' : 'x')}${escapeHtml(available ? t('inStock') : t('outOfStock'))}</span>
                     <span class="chip-s">${escapeHtml(t('barcodeLabel'))} ${escapeHtml(prod.barcode || '—')}</span>
@@ -2232,7 +2433,7 @@ function repeatOrder(orderId) {
 
     const add = {
         ka: {
-            navHome: 'მთავარი', navCatalog: 'პროდუქცია', navCart: 'კალათა', navLogin: 'შესვლა', navProfile: 'პროფილი',
+            navHome: 'მთავარი', navCatalog: 'პროდუქცია', navPromo: 'სეზონური აქცია', navCart: 'კალათა', navLogin: 'შესვლა', navProfile: 'პროფილი',
             navHistory: 'შეკვეთების ისტორია', loginRegister: 'შესვლა / რეგისტრაცია', myProfile: 'ჩემი პროფილი',
             drawerLoginTitle: 'შედით ანგარიშზე', drawerLoginSub: 'შეკვეთის გასაფორმებლად და ისტორიის სანახავად',
             language: 'ენა', darkMode: 'მუქი რეჟიმი', callBtn: 'დარეკვა', emailShort: 'ელ-ფოსტა', searchBtn: 'ძებნა',
@@ -2284,7 +2485,7 @@ function repeatOrder(orderId) {
             orderWord: 'შეკვეთა', totalWord: 'სულ', repeatOrder: 'შეკვეთის გამეორება', repeatDone: 'პროდუქტები დაემატა კალათაში!', orderNotFound: 'შეკვეთა ვერ მოიძებნა.'
         },
         en: {
-            navHome: 'Home', navCatalog: 'Products', navCart: 'Cart', navLogin: 'Sign in', navProfile: 'Profile',
+            navHome: 'Home', navCatalog: 'Products', navPromo: 'Seasonal sale', navCart: 'Cart', navLogin: 'Sign in', navProfile: 'Profile',
             navHistory: 'Order history', loginRegister: 'Sign in / Register', myProfile: 'My profile',
             drawerLoginTitle: 'Sign in to your account', drawerLoginSub: 'To place orders and see your history',
             language: 'Language', darkMode: 'Dark mode', callBtn: 'Call', emailShort: 'Email', searchBtn: 'Search',
@@ -2336,7 +2537,7 @@ function repeatOrder(orderId) {
             orderWord: 'Order', totalWord: 'Total', repeatOrder: 'Repeat order', repeatDone: 'Products were added to the cart!', orderNotFound: 'Order not found.'
         },
         ru: {
-            navHome: 'Главная', navCatalog: 'Продукция', navCart: 'Корзина', navLogin: 'Войти', navProfile: 'Профиль',
+            navHome: 'Главная', navCatalog: 'Продукция', navPromo: 'Сезонная акция', navCart: 'Корзина', navLogin: 'Войти', navProfile: 'Профиль',
             navHistory: 'История заказов', loginRegister: 'Вход / Регистрация', myProfile: 'Мой профиль',
             drawerLoginTitle: 'Войдите в аккаунт', drawerLoginSub: 'Чтобы оформлять заказы и видеть историю',
             language: 'Язык', darkMode: 'Тёмная тема', callBtn: 'Позвонить', emailShort: 'Эл. почта', searchBtn: 'Найти',

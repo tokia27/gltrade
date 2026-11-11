@@ -2,6 +2,12 @@
 // ქვეკატეგორია: ['id', 'სახელი']. id-ს პროდუქტის "subcategory" ველი ეთანხმება.
 const CATEGORIES = [
     { id: 'all', icon: 'grid', name: { ka: 'ყველა პროდუქტი', en: 'All products', ru: 'Все товары' }, subs: [] },
+    // სეზონური კატეგორია — ფასდაკლება და საახალწლო ვიზუალი იმართება app.js-ში (SEASONAL_PROMO)
+    { id: 'new_year', icon: 'tree', name: { ka: 'ახალი წელი', en: 'New Year', ru: 'Новый год' }, subs: [
+        ['ny_tree', 'ნაძვის ხეები'], ['ny_toys', 'ნაძვის ხის სათამაშოები'], ['ny_santa', 'თოვლის ბაბუები'],
+        ['ny_nutcracker', 'მაკნატუნები'], ['ny_lights', 'განათება'], ['ny_lamp', 'საახალწლო სანათები'],
+        ['ny_fireplace', 'ბუხრები'], ['ny_other', 'სხვადასხვა საახალწლო პროდუქცია']
+    ] },
     { id: 'paper', icon: 'file', name: { ka: 'ქაღალდის პროდუქცია', en: 'Paper products', ru: 'Бумажная продукция' }, subs: [
         ['binding_cover', 'ასაკინძი ყდა'], ['color paper', 'ფერადი ქაღალდი'], ['print_paper', 'საბეჭდი ქაღალდი'],
         ['watercolor', 'აკვარელის ქაღალდი'], ['termo_paper', 'თერმო ქაღალდი'], ['label', 'ლეიბლი'],

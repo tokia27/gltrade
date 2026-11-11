@@ -850,3 +850,212 @@ body.dark-mode .buyer-fields .input[aria-invalid="true"] { border-color: #FF8A80
 .cs-subs a.active { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
 body.sheet-open { overflow: hidden; }
 
+
+/* =========================================================
+   სეზონური აქცია — „ახალი წელი“
+   ========================================================= */
+:root { --ny-red: #D62839; --ny-red-2: #B0172A; --ny-green: #0F8A4B; --ny-green-2: #16A34A; --ny-gold: #F5B82E; }
+
+/* ჰედერის წითელი ღილაკი */
+.hnav a.nav-promo {
+  display: inline-flex; align-items: center; gap: 6px; color: #FFFFFF; background: linear-gradient(90deg, var(--ny-red), #E63946);
+  padding: 6px 14px; border-radius: 999px; border-bottom: 0; box-shadow: 0 6px 16px rgba(214, 40, 57, .35);
+  position: relative; overflow: hidden; animation: nyPulse 2.4s ease-in-out infinite;
+}
+.hnav a.nav-promo .ic { width: 16px; height: 16px; }
+.hnav a.nav-promo:hover, .hnav a.nav-promo.active { color: #FFFFFF; background: linear-gradient(90deg, var(--ny-red-2), var(--ny-red)); border-bottom: 0; }
+.hnav a.nav-promo::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); transform: skewX(-20deg); animation: nyShine 3.2s ease-in-out infinite; }
+@keyframes nyPulse { 0%, 100% { box-shadow: 0 6px 16px rgba(214, 40, 57, .30); } 50% { box-shadow: 0 6px 22px rgba(214, 40, 57, .55); } }
+@keyframes nyShine { 0%, 60% { left: -60%; } 100% { left: 130%; } }
+.drawer-nav a.drawer-promo { color: var(--ny-red); font-weight: 800; }
+.drawer-nav a.drawer-promo > span { display: inline-flex; align-items: center; gap: 8px; }
+
+/* მბრუნავი სიტყვა „ახალი წლისთვის“ — მწვანე */
+.rotator { white-space: nowrap; overflow: visible; clip-path: inset(-0.2em -100vw 0 -0.3em); }
+.rotator .word.ny { background: linear-gradient(90deg, #0B7A3E 0%, #16A34A 55%, #22C55E 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ორი ფანჯარა გვერდიგვერდ */
+.hero-show.has-ny { gap: 18px; align-items: flex-start; flex-basis: 640px; }
+.hero-show.has-ny .showcase { max-width: 330px; }
+.hero-show.has-ny .showcase:first-child { margin-top: 46px; }
+.hero-show.has-ny .feat-img { height: 210px; }
+.hero-show.has-ny .feat-stack { height: 318px; }
+@media (min-width: 1181px) {
+  .hero-inner:has(.has-ny) .hero-text { flex-basis: 470px; }
+  .hero-inner:has(.has-ny) { gap: 48px 40px; }
+  .hero-inner:has(.has-ny) .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .hero-inner:has(.has-ny) .stat { padding: 12px; }
+  .hero-inner:has(.has-ny) .stat strong { font-size: 24px; }
+  .hero-inner:has(.has-ny) .stat > span { font-size: 12px; }
+}
+
+.showcase-ny {
+  position: relative; overflow: hidden; background: linear-gradient(160deg, #0F5132 0%, #0B3D27 55%, #7A1020 140%);
+  border: 1px solid rgba(245, 184, 46, .45); color: #FFFFFF; box-shadow: 0 30px 60px rgba(11, 61, 39, .35);
+}
+.showcase-ny[hidden] { display: none; }
+.float-ny { animation: glFloat 4.6s ease-in-out .8s infinite; }
+.showcase-ny .feat-img { background: radial-gradient(circle at 50% 40%, #FFFFFF 0%, #FFF4E6 100%); }
+.showcase-ny .feat-tag { background: var(--ny-red); color: #FFFFFF; }
+.showcase-ny .feat-name { color: #FFFFFF; }
+.showcase-ny .feat-price { color: var(--ny-gold); display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.showcase-ny .old-price { color: rgba(255,255,255,.6); }
+.showcase-ny .round-cart { background: linear-gradient(135deg, var(--ny-red), #E63946); box-shadow: 0 10px 22px rgba(214, 40, 57, .45); }
+.showcase-ny .feat-dots span { background: rgba(255,255,255,.25); }
+.showcase-ny .feat-dots button.on span { background: var(--ny-gold); }
+.showcase-ny .marquee-wrap { border-top-color: rgba(255,255,255,.18); }
+.showcase-ny .m-item { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.18); color: #FFFFFF; }
+.showcase-ny .m-item b { color: var(--ny-gold); }
+.showcase-ny > *:not(.ny-lights):not(.ny-snow) { position: relative; z-index: 2; }
+/* განათება ფანჯრის თავზე */
+.ny-lights { position: absolute; left: 0; right: 0; top: 0; height: 18px; z-index: 3; pointer-events: none;
+  background:
+    radial-gradient(circle at 10px 9px, #FF4D5E 0 4px, transparent 5px) 0 0 / 40px 18px repeat-x,
+    radial-gradient(circle at 30px 9px, #FFD35C 0 4px, transparent 5px) 0 0 / 40px 18px repeat-x;
+  animation: nyBlink 1.4s steps(2) infinite; }
+.ny-lights::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20px 9px, #4ADE80 0 4px, transparent 5px) 0 0 / 40px 18px repeat-x; animation: nyBlink 1.4s steps(2) .7s infinite; }
+@keyframes nyBlink { 50% { filter: brightness(.45) saturate(.6); } }
+/* თოვლი ფანჯარაში */
+.ny-snow { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .8;
+  background-image: radial-gradient(2px 2px at 20px 30px, #FFF, transparent), radial-gradient(2px 2px at 80px 120px, #FFF, transparent),
+    radial-gradient(1.5px 1.5px at 150px 60px, #FFF, transparent), radial-gradient(2.5px 2.5px at 220px 200px, #FFF, transparent),
+    radial-gradient(1.5px 1.5px at 290px 90px, #FFF, transparent), radial-gradient(2px 2px at 120px 250px, #FFF, transparent);
+  background-size: 320px 320px; animation: nySnowBg 12s linear infinite; }
+@keyframes nySnowBg { from { background-position: 0 -320px; } to { background-position: 40px 0; } }
+
+/* ფასდაკლების ნიშანი და ძველი ფასი */
+.sale-badge { position: absolute; top: 12px; right: 12px; z-index: 2; background: var(--ny-red); color: #FFFFFF; font-weight: 800; font-size: 13px; padding: 4px 10px; border-radius: 999px; box-shadow: 0 6px 14px rgba(214, 40, 57, .35); }
+.sale-badge.inline { position: static; display: inline-block; margin-left: 8px; vertical-align: middle; }
+.old-price { color: var(--muted); font-size: 14px; font-weight: 600; text-decoration-thickness: 2px; text-decoration-color: rgba(214, 40, 57, .8); }
+.p-price-wrap { display: flex; flex-direction: column; line-height: 1.1; }
+.p-price-wrap .old-price { font-size: 13px; }
+.m-price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.promo-price { color: inherit; }
+
+/* =========== კატალოგი: საახალწლო თემა =========== */
+body.ny-theme { --accent: #C81D33; --accent-hover: #A3162A; --accent-soft: #FDE4E7; --grad: linear-gradient(90deg, #C81D33, #E63946); }
+body.ny-theme #catalog { position: relative; background:
+  radial-gradient(1200px 400px at 10% -10%, rgba(214, 40, 57, .14), transparent 60%),
+  radial-gradient(900px 400px at 100% 0%, rgba(15, 138, 75, .16), transparent 60%),
+  linear-gradient(180deg, #FFF8F2 0%, #F3FBF6 100%);
+  min-height: 100vh; overflow: hidden; }
+body.ny-theme.dark-mode #catalog { background: radial-gradient(1200px 400px at 10% -10%, rgba(214, 40, 57, .22), transparent 60%), radial-gradient(900px 400px at 100% 0%, rgba(15, 138, 75, .25), transparent 60%), #0A1712; }
+body.ny-theme #catalog .container { position: relative; z-index: 2; }
+body.ny-theme #catalog-title { background: linear-gradient(90deg, var(--ny-red), #E63946 40%, var(--ny-green-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+body.ny-theme .product-card { border-color: rgba(214, 40, 57, .18); box-shadow: 0 10px 26px rgba(214, 40, 57, .08); transition: transform .25s, box-shadow .25s; }
+body.ny-theme .product-card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(15, 138, 75, .16); }
+body.ny-theme .product-card .p-img { background: radial-gradient(circle at 50% 40%, #FFFFFF 0%, #FFF4E6 100%); }
+body.ny-theme .p-price { color: var(--ny-red); }
+body.ny-theme .cart-icon-btn { background: linear-gradient(135deg, var(--ny-green), var(--ny-green-2)); color: #FFFFFF; border-color: transparent; }
+body.ny-theme .sidebar, body.ny-theme .toolbar { border-color: rgba(15, 138, 75, .25); }
+
+#ny-deco { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.ny-garland { position: absolute; left: 0; right: 0; top: 0; height: 46px; display: flex; justify-content: space-between; padding: 0 10px;
+  background: radial-gradient(ellipse 52% 26px at 50% 0, transparent 96%, rgba(15, 81, 50, .55) 97%, rgba(15, 81, 50, .55) 100%, transparent 101%) 0 0 / 120px 40px repeat-x; }
+.ny-garland i { width: 11px; height: 15px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; margin-top: calc(14px + 8px * sin(var(--i) * 1rad));
+  background: hsl(calc(var(--i) * 97deg) 90% 58%); box-shadow: 0 0 10px 2px hsl(calc(var(--i) * 97deg) 90% 58% / .8);
+  animation: nyBulb 1.6s ease-in-out infinite; animation-delay: calc(var(--i) * -0.23s); position: relative; }
+.ny-garland i::before { content: ""; position: absolute; top: -4px; left: 3px; width: 5px; height: 5px; background: #2F4F3A; border-radius: 1px; }
+@keyframes nyBulb { 50% { opacity: .35; box-shadow: none; } }
+.ny-flakes { position: absolute; inset: 0; overflow: hidden; }
+.ny-flakes span { position: absolute; top: -24px; color: #9CC7E8; text-shadow: 0 0 6px rgba(255,255,255,.9); animation-name: nyFall, nySway; animation-timing-function: linear, ease-in-out; animation-iteration-count: 1, infinite; animation-direction: normal, alternate; }
+body.ny-theme.dark-mode .ny-flakes span { color: #FFFFFF; }
+@keyframes nyFall { to { transform: translateY(110vh); } }
+@keyframes nySway { from { margin-left: -14px; } to { margin-left: 14px; } }
+.ny-banner { position: relative; z-index: 3; margin: 34px 0 14px;
+  display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-radius: 20px; color: #FFFFFF;
+  background: linear-gradient(90deg, #B0172A, #D62839 45%, #0F8A4B); box-shadow: 0 14px 30px rgba(176, 23, 42, .25); }
+.ny-banner strong { display: block; font-size: 18px; font-weight: 900; }
+.ny-banner small { opacity: .9; }
+.ny-banner-ic { width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,.18); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; animation: nyWiggle 2.6s ease-in-out infinite; }
+@keyframes nyWiggle { 0%, 80%, 100% { transform: rotate(0); } 85% { transform: rotate(-12deg); } 90% { transform: rotate(10deg); } 95% { transform: rotate(-6deg); } }
+body.ny-theme #catalog > .container { padding-top: 6px; }
+
+@media (max-width: 900px) {
+  .hero-show.has-ny { flex-basis: 100%; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; justify-content: flex-start; padding: 4px 2px 18px; margin: 0 -16px; padding-left: 16px; }
+  .hero-show.has-ny .showcase { flex: 0 0 84%; max-width: 360px; scroll-snap-align: center; }
+  .hero-show.has-ny .showcase:first-child { margin-top: 0; order: 2; }
+  .hero-show.has-ny .showcase-ny { order: 1; }
+  .ny-banner { margin-top: 30px; }
+  .ny-banner strong { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hnav a.nav-promo, .hnav a.nav-promo::after, .ny-lights, .ny-lights::after, .ny-snow, .ny-garland i, .ny-banner-ic, .float-ny { animation: none; }
+}
+
+/* ---- ნათურები სიტყვაზე „ახალი წლისთვის“ ---- */
+.rotator .word.ny { background: none; color: inherit; }
+.rotator .word.ny .ny-word-text { background: linear-gradient(90deg, #0B7A3E 0%, #16A34A 55%, #22C55E 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ny-wire { position: absolute; left: 0; right: 0.08em; top: 0.12em; height: 0.78em; pointer-events: none; }
+.ny-wire svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ny-wire path { fill: none; stroke: #1F3D2B; stroke-width: 2.2; vector-effect: non-scaling-stroke; opacity: .85; }
+.ny-wire i { position: absolute; width: 0.17em; height: 0.23em; margin: -0.09em 0 0 -0.085em; border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%;
+  background: radial-gradient(circle at 35% 30%, #FFFFFF 0 12%, var(--c) 45%); box-shadow: 0 0 0.12em 0.04em var(--c), 0 0 0.35em var(--c);
+  animation: nyBulbWord 1.35s ease-in-out infinite; animation-delay: var(--d); }
+.ny-wire i::before { content: ""; position: absolute; left: 50%; top: -0.05em; width: 0.08em; height: 0.06em; margin-left: -0.04em; background: #2F3B33; border-radius: 1px; }
+@keyframes nyBulbWord { 0%, 100% { opacity: 1; filter: brightness(1.15); } 50% { opacity: .45; filter: brightness(.6); box-shadow: none; } }
+
+/* ---- კატალოგი: მეტი საახალწლო ---- */
+.ny-garland.g2 { top: 22px; opacity: .9; transform: scaleX(-1); background-position: 60px 0; }
+.ny-garland.g2 i { animation-delay: calc(var(--i) * -0.31s - .8s); }
+.ny-orns { position: absolute; top: 40px; display: flex; gap: 0; z-index: 2; }
+.ny-orns.left { left: 6px; } .ny-orns.right { right: 6px; flex-direction: row-reverse; }
+.ny-orn { position: relative; width: 34px; height: calc(var(--len) + 40px); transform-origin: 50% 0; animation: nySwing 3.2s ease-in-out infinite alternate; animation-delay: var(--d); }
+.ny-orn::before { content: ""; position: absolute; left: 50%; top: 0; width: 1.5px; height: var(--len); background: #B9935A; }
+.ny-orn b { position: absolute; left: 50%; top: var(--len); width: 26px; height: 26px; margin-left: -13px; border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, rgba(255,255,255,.85) 0 10%, var(--c) 40%, color-mix(in srgb, var(--c), #000 35%) 100%); box-shadow: 0 6px 12px rgba(0,0,0,.18); }
+.ny-orn b::before { content: ""; position: absolute; left: 50%; top: -5px; width: 9px; height: 6px; margin-left: -4.5px; background: #C9A227; border-radius: 2px; }
+.ny-orn:nth-child(even) b { width: 20px; height: 20px; margin-left: -10px; }
+@keyframes nySwing { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+.ny-sleigh { position: absolute; top: 222px; left: -280px; width: 240px; z-index: 2; opacity: .9; animation: nySleigh 16s linear 1s infinite; filter: drop-shadow(0 6px 8px rgba(0,0,0,.15)); }
+@keyframes nySleigh { 0% { transform: translate(0, 0); } 25% { transform: translate(calc(50vw + 140px), -40px); } 50%, 100% { transform: translate(calc(100vw + 560px), 10px); } }
+.ny-drift { position: fixed; left: 0; right: 0; bottom: 0; height: 46px; z-index: 40; pointer-events: none;
+  background: radial-gradient(60px 26px at 40px 46px, #FFFFFF 98%, transparent 100%) 0 0 / 110px 46px repeat-x, radial-gradient(80px 30px at 90px 50px, #F1F7FD 98%, transparent 100%) 0 0 / 150px 46px repeat-x;
+  filter: drop-shadow(0 -3px 6px rgba(120,160,200,.25)); }
+.ny-trees { position: absolute; top: 140px; left: 0; right: 0; height: 0; z-index: 0; }
+.ny-trees span { position: absolute; width: 90px; opacity: .22; }
+.ny-trees span:nth-child(1) { left: 1.5%; top: 380px; } .ny-trees span:nth-child(2) { right: 1.5%; top: 260px; width: 110px; }
+.ny-trees span:nth-child(3) { left: 2.5%; top: 900px; width: 70px; } .ny-trees span:nth-child(4) { right: 2%; top: 1000px; width: 80px; }
+.ny-trees .tl circle { animation: nyBulb 1.4s ease-in-out infinite; } .ny-trees .tl circle:nth-child(odd) { animation-delay: -.7s; }
+.ny-banner { overflow: hidden; flex-wrap: wrap; }
+.ny-banner > div:not(.ny-count) { flex: 1; min-width: 200px; }
+.ny-banner::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .35;
+  background-image: radial-gradient(2px 2px at 20px 20px, #FFF, transparent), radial-gradient(1.5px 1.5px at 90px 50px, #FFF, transparent), radial-gradient(2px 2px at 160px 15px, #FFF, transparent), radial-gradient(1.5px 1.5px at 230px 60px, #FFF, transparent);
+  background-size: 260px 80px; animation: nySnowBg 8s linear infinite; }
+.ny-count { position: relative; text-align: center; }
+.ny-count small { display: block; font-size: 12px; opacity: .9; margin-bottom: 4px; }
+.ny-count > div { display: flex; gap: 6px; }
+.ny-count span { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.25); border-radius: 12px; padding: 4px 8px; min-width: 52px; display: flex; flex-direction: column; align-items: center; }
+.ny-count b { font-size: 20px; font-weight: 900; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.ny-count em { font-style: normal; font-size: 11px; opacity: .85; }
+body.ny-theme .product-card { position: relative; overflow: visible; }
+body.ny-theme .product-card::before { content: ""; position: absolute; left: 10px; right: 10px; top: -9px; height: 18px; z-index: 3; pointer-events: none;
+  background: radial-gradient(12px 9px at 12px 10px, #FFFFFF 96%, transparent 100%) 0 0 / 22px 18px repeat-x, linear-gradient(#FFFFFF, #FFFFFF) 0 0 / 100% 8px no-repeat;
+  border-radius: 10px 10px 0 0; filter: drop-shadow(0 2px 2px rgba(120,160,200,.35)); }
+body.ny-theme .product-card .p-img { border-top-left-radius: inherit; border-top-right-radius: inherit; overflow: hidden; }
+body.ny-theme .sidebar::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px; background: repeating-linear-gradient(-45deg, #D62839 0 10px, #FFFFFF 10px 20px); }
+body.ny-theme .page-title h1::after { content: " 🎄"; -webkit-text-fill-color: initial; }
+@media (max-width: 900px) {
+  .ny-orns { display: none; } .ny-trees { display: none; }
+  .ny-sleigh { top: 360px; width: 150px; }
+  .ny-count { width: 100%; } .ny-count > div { justify-content: center; }
+  .ny-drift { bottom: 60px; height: 30px; }
+}
+@media (prefers-reduced-motion: reduce) { .ny-wire i, .ny-orn, .ny-sleigh, .ny-trees .tl circle, .ny-banner::before { animation: none; } .ny-sleigh { display: none; } }
+
+/* „ახალი წლის“ კატეგორია მენიუში — ყოველთვის წითელი */
+.cat-item.is-promo > .cat-btn, .cs-item.is-promo > .cs-cat { color: var(--ny-red); font-weight: 700; background: #FDE8EA; }
+.cat-item.is-promo > .cat-btn:hover, .cs-item.is-promo > .cs-cat:hover { background: #FAD3D8; }
+.cat-item.is-promo > .cat-btn .tile-ic, .cs-item.is-promo > .cs-cat .tile-ic { background: linear-gradient(135deg, var(--ny-red-2), #E63946); color: #FFFFFF; box-shadow: 0 6px 14px rgba(214, 40, 57, .3); }
+.cat-item.is-promo > .cat-btn .count, .cs-item.is-promo > .cs-cat .count { background: var(--ny-red); color: #FFFFFF; }
+.cat-item.is-promo > .cat-btn .chev, .cs-item.is-promo > .cs-cat .chev { color: var(--ny-red); }
+.cat-item.is-promo.active > .cat-btn, .cs-item.is-promo.active > .cs-cat { background: linear-gradient(90deg, var(--ny-red-2), #E63946); color: #FFFFFF; }
+.cat-item.is-promo.active > .cat-btn .tile-ic, .cs-item.is-promo.active > .cs-cat .tile-ic { background: rgba(255,255,255,.22); box-shadow: none; }
+.cat-item.is-promo.active > .cat-btn .count, .cs-item.is-promo.active > .cs-cat .count { background: rgba(255,255,255,.25); }
+.cat-item.is-promo.active > .cat-btn .chev, .cs-item.is-promo.active > .cs-cat .chev { color: #FFFFFF; }
+.cat-item.is-promo .sub-list { border-left-color: rgba(214, 40, 57, .35); }
+.cat-item.is-promo .sub-list a:hover, .cat-item.is-promo .sub-list a.active { color: var(--ny-red); }
+.cat-tile.is-promo { border-color: rgba(214, 40, 57, .35); background: #FDE8EA; }
+.cat-tile.is-promo .tile-ic { background: linear-gradient(135deg, var(--ny-red-2), #E63946); color: #FFFFFF; }
+.cat-tile.is-promo strong { color: var(--ny-red); }
+body.dark-mode .cat-item.is-promo:not(.active) > .cat-btn, body.dark-mode .cs-item.is-promo:not(.active) > .cs-cat, body.dark-mode .cat-tile.is-promo { background: rgba(214, 40, 57, .16); }
