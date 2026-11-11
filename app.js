@@ -1228,7 +1228,6 @@ function renderHero() {
     const on = promoOn();
     if (nyBox) nyBox.hidden = !on;
     if (show) show.classList.toggle('has-ny', on);
-    document.body.classList.toggle('ny-season', on); // სანტას ქუდი ლოგოზე
     document.querySelectorAll('.nav-promo, .drawer-promo').forEach(el => { el.style.display = on ? '' : 'none'; });
     if (on) {
         // ფანჯარაში — თითო-თითო ყველა ქვეკატეგორიიდან, რიგრიგობით
