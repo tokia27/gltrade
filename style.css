@@ -1059,3 +1059,11 @@ body.ny-theme .page-title h1::after { content: " 🎄"; -webkit-text-fill-color:
 .cat-tile.is-promo .tile-ic { background: linear-gradient(135deg, var(--ny-red-2), #E63946); color: #FFFFFF; }
 .cat-tile.is-promo strong { color: var(--ny-red); }
 body.dark-mode .cat-item.is-promo:not(.active) > .cat-btn, body.dark-mode .cs-item.is-promo:not(.active) > .cs-cat, body.dark-mode .cat-tile.is-promo { background: rgba(214, 40, 57, .16); }
+
+/* სანტას ქუდი ლოგოს G ასოზე (სეზონური აქციის დროს) */
+body.ny-season .logo { position: relative; display: inline-block; }
+body.ny-season .logo::before {
+  content: ""; position: absolute; left: -8px; top: -9px; width: 31px; height: 24px; pointer-events: none;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 34'><path d='M10 26C12 14 20 4 32 3c5 0 8 4 7 9-1 6-4 10-6 14z' fill='%23D62839'/><path d='M14 26C17 16 23 8 31 6' stroke='%23A3162A' stroke-width='2' fill='none' opacity='.5'/><path d='M32 3c-8-1-17 2-24 8' stroke='%23D62839' stroke-width='7' stroke-linecap='round' fill='none'/><circle cx='6' cy='13' r='5' fill='%23fff' stroke='%23E5E7EB'/><rect x='6' y='23' width='32' height='9' rx='4.5' fill='%23fff' stroke='%23E5E7EB'/></svg>") no-repeat center / contain;
+  transform: rotate(-24deg); transform-origin: 70% 90%; filter: drop-shadow(0 2px 2px rgba(0,0,0,.15));
+}
