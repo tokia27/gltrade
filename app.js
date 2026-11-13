@@ -693,11 +693,21 @@ const SEASONAL_PROMO = {
     active: true,
     cat: 'new_year',
     percent: 15,
-    word: { ka: 'ახალი წლისთვის', en: 'New Year', ru: 'Нового года' }
+    word: { ka: 'ახალი წლისთვის', en: 'New Year', ru: 'Нового года' },
+    // სხვა კატეგორიების ქვეკატეგორიები, რომლებზეც იგივე აქცია და საახალწლო ვიზუალი ვრცელდება
+    extra: [{ cat: 'Office Food', sub: 'chocolate' }]
 };
+function isPromoSub(cat, sub) {
+    return SEASONAL_PROMO.active && (SEASONAL_PROMO.extra || []).some(x =>
+        normalizeCategoryValue(x.cat) === normalizeCategoryValue(cat) && normalizeCategoryValue(x.sub) === normalizeCategoryValue(sub));
+}
+// აქცია ვრცელდება „ახალი წლის“ კატეგორიაში განთავსებულ ყველა პროდუქტზე (alsoIn-ის ჩათვლით)
+function isSeasonalItem(p) {
+    return !!p && productInCat(p, SEASONAL_PROMO.cat);
+}
 function promoOn() {
     return SEASONAL_PROMO.active && typeof products !== 'undefined' &&
-        products.some(p => productCategory(p) === normalizeCategoryValue(SEASONAL_PROMO.cat));
+        products.some(p => productInCat(p, SEASONAL_PROMO.cat));
 }
 function heroWords() {
     const base = (HERO_WORDS[currentLang] || HERO_WORDS.ka).slice();
@@ -712,7 +722,7 @@ function heroWords() {
     const k = 1 - SEASONAL_PROMO.percent / 100;
     const up = v => Math.round(Number(v) / k); // მრგვალ ლარამდე: 411.76 -> 412
     products.forEach(p => {
-        if (productCategory(p) !== normalizeCategoryValue(SEASONAL_PROMO.cat) || p.oldPrice) return;
+        if (!isSeasonalItem(p) || p.oldPrice) return;
         p.oldPrice = up(p.price);
         ['sizes', 'brands'].forEach(key => (p[key] || []).forEach(o => {
             if (o && typeof o === 'object' && o.price !== undefined) { o.oldPrice = up(o.price); }
@@ -785,6 +795,20 @@ function productCategory(p) {
 }
 function productSubcategory(p) {
     return normalizeCategoryValue(p.subcategory ?? p.subCategory ?? p.sub_category ?? p.category2 ?? p.category_2 ?? p.type);
+}
+// პროდუქტის ყველა განთავსება: მთავარი კატეგორია + დამატებითი (alsoIn), მაგ. შოკოლადი — საოფისე კვებაშიც და ახალ წელშიც
+function productPlacements(p) {
+    const list = [[productCategory(p), productSubcategory(p)]];
+    (Array.isArray(p.alsoIn) ? p.alsoIn : []).forEach(x => { if (x && x.cat) list.push([normalizeCategoryValue(x.cat), normalizeCategoryValue(x.sub)]); });
+    return list;
+}
+function productInCat(p, cat) {
+    const c = normalizeCategoryValue(cat);
+    return productPlacements(p).some(x => x[0] === c);
+}
+function productInSub(p, cat, sub) {
+    const c = normalizeCategoryValue(cat), s = normalizeCategoryValue(sub);
+    return productPlacements(p).some(x => x[0] === c && x[1] === s);
 }
 function hasOptions(prod) {
     return (prod.sizes && prod.sizes.length) || (prod.colors && prod.colors.length) || (prod.brands && prod.brands.length > 1);
@@ -1176,8 +1200,7 @@ let wordIndex = 0;
 let wordTimer = null;
 
 function nyProducts() {
-    const cat = normalizeCategoryValue(SEASONAL_PROMO.cat);
-    return (typeof products !== 'undefined' ? products : []).filter(p => productCategory(p) === cat && p.inStock !== false);
+    return (typeof products !== 'undefined' ? products : []).filter(p => isSeasonalItem(p) && p.inStock !== false);
 }
 
 function renderShowcase(key, featured, strip, tagText) {
@@ -1385,7 +1408,7 @@ const categoryCountCache = {};
 function categoryCount(catId) {
     if (catId in categoryCountCache) return categoryCountCache[catId];
     const list = typeof products !== 'undefined' ? products : [];
-    const n = catId === 'all' ? list.length : list.filter(p => productCategory(p) === normalizeCategoryValue(catId)).length;
+    const n = catId === 'all' ? list.length : list.filter(p => productInCat(p, catId)).length;
     categoryCountCache[catId] = n;
     return n;
 }
@@ -1410,12 +1433,9 @@ function getCatalogList() {
     if (q) {
         list = list.filter(p => productMatchesQuery(p, q));
     } else if (catalogState.cat !== 'all') {
-        const wantCat = normalizeCategoryValue(catalogState.cat);
-        list = list.filter(p => productCategory(p) === wantCat);
-        if (catalogState.sub !== 'all') {
-            const wantSub = normalizeCategoryValue(catalogState.sub);
-            list = list.filter(p => productSubcategory(p) === wantSub);
-        }
+        list = catalogState.sub !== 'all'
+            ? list.filter(p => productInSub(p, catalogState.cat, catalogState.sub))
+            : list.filter(p => productInCat(p, catalogState.cat));
     }
     const s = catalogState.sort;
     if (s === 'price-asc') list.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
@@ -1482,8 +1502,9 @@ function updateSeasonTheme() {
     const catalogOpen = document.getElementById('catalog')?.classList.contains('active-section');
     const prodOpen = document.getElementById('product-page')?.classList.contains('active-section');
     const pp = prodOpen && currentProductPageId != null ? findProduct(currentProductPageId) : null;
-    const onCatalog = !!(catalogOpen && catalogState.cat === SEASONAL_PROMO.cat && !catalogState.query.trim());
-    const onProduct = !!(pp && productCategory(pp) === normalizeCategoryValue(SEASONAL_PROMO.cat));
+    const onCatalog = !!(catalogOpen && !catalogState.query.trim() &&
+        (catalogState.cat === SEASONAL_PROMO.cat || isPromoSub(catalogState.cat, catalogState.sub)));
+    const onProduct = !!(pp && isSeasonalItem(pp));
     const on = SEASONAL_PROMO.active && (onCatalog || onProduct);
     const host = document.getElementById(onProduct ? 'product-page' : 'catalog');
     document.body.classList.toggle('ny-theme', on);
@@ -1653,7 +1674,7 @@ function renderSidebar() {
         const subs = c.subs.length ? `
             <ul class="sub-list">
                 <li><a href="${catPath(c.id)}" class="${isActive && catalogState.sub === 'all' ? 'active' : ''}" onclick="return linkSub(event, ${i}, -1)">${escapeHtml(t('allWord'))}</a></li>
-                ${c.subs.map((s, j) => `<li><a href="${catPath(c.id, s[0])}" class="${isActive && catalogState.sub === s[0] ? 'active' : ''}" onclick="return linkSub(event, ${i}, ${j})">${escapeHtml(s[1])}</a></li>`).join('')}
+                ${c.subs.map((s, j) => `<li><a href="${catPath(c.id, s[0])}" class="${isActive && catalogState.sub === s[0] ? 'active' : ''}${isPromoSub(c.id, s[0]) ? ' sub-promo' : ''}" onclick="return linkSub(event, ${i}, ${j})">${escapeHtml(s[1])}</a></li>`).join('')}
             </ul>` : '';
         return `
         <li class="cat-item${isActive ? ' active' : ''}${isOpen ? ' open' : ''}${c.id === SEASONAL_PROMO.cat ? ' is-promo' : ''}">
@@ -1689,7 +1710,7 @@ function renderChips() {
             subBox.style.display = '';
             subBox.innerHTML =
                 `<button type="button" class="${catalogState.sub === 'all' ? 'active' : ''}" onclick="selectSub(${ci}, -1)">${escapeHtml(t('allWord'))}</button>` +
-                cat.subs.map((s, j) => `<button type="button" class="${catalogState.sub === s[0] ? 'active' : ''}" onclick="selectSub(${ci}, ${j})">${escapeHtml(s[1])}</button>`).join('');
+                cat.subs.map((s, j) => `<button type="button" class="${catalogState.sub === s[0] ? 'active' : ''}${isPromoSub(cat.id, s[0]) ? ' sub-promo' : ''}" onclick="selectSub(${ci}, ${j})">${escapeHtml(s[1])}</button>`).join('');
         }
     }
 }
@@ -1702,7 +1723,7 @@ function subCount(catId, subId) {
     if (key in subCountCache) return subCountCache[key];
     const cid = normalizeCategoryValue(catId), sid = normalizeCategoryValue(subId);
     const list = typeof products !== 'undefined' ? products : [];
-    return (subCountCache[key] = list.filter(p => productCategory(p) === cid && productSubcategory(p) === sid).length);
+    return (subCountCache[key] = list.filter(p => productInSub(p, cid, sid)).length);
 }
 function renderCatSheet() {
     const box = document.getElementById('cat-sheet-list');
@@ -1722,7 +1743,7 @@ function renderCatSheet() {
             <span class="count">${categoryCount(c.id)}</span>${subs.length ? icon('chev', 'chev') : ''}${end}
             ${subs.length && open ? `<ul class="cs-subs">
                 <li><a href="${catPath(c.id)}" class="${active && catalogState.sub === 'all' ? 'active' : ''}" onclick="return sheetPick(event, ${i}, -1)">${escapeHtml(t('allWord'))} <small>${categoryCount(c.id)}</small></a></li>
-                ${subs.map(x => `<li><a href="${catPath(c.id, x.s[0])}" class="${active && catalogState.sub === x.s[0] ? 'active' : ''}" onclick="return sheetPick(event, ${i}, ${x.j})">${escapeHtml(x.s[1])} <small>${x.n}</small></a></li>`).join('')}
+                ${subs.map(x => `<li><a href="${catPath(c.id, x.s[0])}" class="${active && catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(c.id, x.s[0]) ? ' sub-promo' : ''}" onclick="return sheetPick(event, ${i}, ${x.j})">${escapeHtml(x.s[1])} <small>${x.n}</small></a></li>`).join('')}
             </ul>` : ''}
         </li>`;
     }).join('');
@@ -1908,7 +1929,7 @@ function productDetailsHTML(prod, presetQty, headingTag) {
     let descText = '';
     if (prod.description && typeof prod.description === 'object' && !Array.isArray(prod.description)) descText = getTranslatedText(prod.description);
     else if (Array.isArray(prod.description)) descText = prod.description.join(', ');
-    else descText = prod.description || (productCategory(prod) === normalizeCategoryValue(SEASONAL_PROMO.cat) ? getLangText('საახალწლო დეკორაცია — ფასდაკლებით.', 'New Year decoration — on sale.', 'Новогодний декор — со скидкой.') : t('defaultDesc'));
+    else descText = prod.description || (productSubcategory(prod) === 'chocolate' && /lindt/i.test(productName(prod)) ? getLangText('ორიგინალი შვეიცარიული Lindt შოკოლადი — საუკეთესო საახალწლო საჩუქარი, ფასდაკლებით.', 'Original Swiss Lindt chocolate — a perfect New Year gift, on sale.', 'Оригинальный швейцарский шоколад Lindt — лучший новогодний подарок, со скидкой.') : productCategory(prod) === normalizeCategoryValue(SEASONAL_PROMO.cat) ? getLangText('საახალწლო დეკორაცია — ფასდაკლებით.', 'New Year decoration — on sale.', 'Новогодний декор — со скидкой.') : t('defaultDesc'));
 
     const brandHTML = prod.brands && prod.brands.length ? optionSelect('brand', prod, prod.brands, true) : '';
     const sizeHTML = prod.sizes && prod.sizes.length ? optionSelect('size', prod, prod.sizes, true) : '';
@@ -2704,12 +2725,12 @@ function slugify(text) {
 // ცარიელი ქვეკატეგორიები მენიუში არ ჩანს. პროდუქტის დამატებისას თავისით გამოჩნდება.
 (function pruneEmptySubcategories() {
     if (typeof products === 'undefined') return;
-    const used = new Set(products.map(p => productCategory(p) + '|' + productSubcategory(p)));
+    const used = new Set(products.flatMap(p => productPlacements(p).map(x => x[0] + '|' + x[1])));
     CATEGORIES.forEach(c => {
         c.subs = c.subs.filter(s => used.has(normalizeCategoryValue(c.id) + '|' + normalizeCategoryValue(s[0])));
     });
     // ცარიელი კატეგორიებიც იმალება
-    const usedCats = new Set(products.map(p => productCategory(p)));
+    const usedCats = new Set(products.flatMap(p => productPlacements(p).map(x => x[0])));
     for (let i = CATEGORIES.length - 1; i >= 0; i--) {
         if (CATEGORIES[i].id !== 'all' && !usedCats.has(normalizeCategoryValue(CATEGORIES[i].id))) CATEGORIES.splice(i, 1);
     }
