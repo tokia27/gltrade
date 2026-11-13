@@ -598,7 +598,7 @@ body.dark-mode .auth-brand { background: linear-gradient(150deg, #1E3A8A 0%, #17
 .chip-s { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: var(--surface-2); color: var(--muted); }
 .chip-s.in { background: var(--ok-soft); color: var(--ok); }
 .chip-s.out { background: var(--danger-soft); color: var(--danger); }
-.m-desc { color: var(--muted); font-size: 15px; }
+.m-desc { color: var(--muted); font-size: 15px; white-space: pre-line; }
 .m-opt { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: var(--muted); }
 .m-opt select { height: 46px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); padding: 0 12px; font-size: 15px; font-weight: 500; color: var(--ink); }
 .m-buy { display: flex; gap: 10px; align-items: center; }
