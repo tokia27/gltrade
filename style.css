@@ -1092,9 +1092,28 @@ body.ny-theme #product-page .similar h2 { color: var(--ny-red); }
 .hero-text { position: relative; z-index: 3; }
 body.ny-theme .product-page-card { margin-top: 22px; }
 
-/* საახალწლო ქვეკატეგორია სხვა კატეგორიაში (მაგ. Lindt — საოფისე კვება) */
-.sub-list a.sub-promo, .cs-subs a.sub-promo { color: var(--ny-red); font-weight: 800; }
-.sub-list a.sub-promo::before, .cs-subs a.sub-promo::before { content: "🎄 "; }
-#subcat-chips button.sub-promo { color: #FFFFFF; background: linear-gradient(90deg, var(--ny-red-2), #E63946); border-color: transparent; font-weight: 800; box-shadow: 0 6px 14px rgba(214, 40, 57, .28); }
-#subcat-chips button.sub-promo::before { content: "🎄 "; }
-#subcat-chips button.sub-promo.active { box-shadow: 0 0 0 3px rgba(245, 184, 46, .75), 0 6px 14px rgba(214, 40, 57, .28); }
+/* „შოკოლადი LINDT LINDOR“ — თვალში მოსახვედრი წარწერა მენიუში, ღილაკებზე და სათაურში */
+@keyframes hotShine { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+@keyframes hotPulse { 0%, 100% { transform: scale(1); box-shadow: 0 6px 16px rgba(214, 40, 57, .35); } 50% { transform: scale(1.05); box-shadow: 0 8px 26px rgba(245, 184, 46, .65); } }
+.sub-list a.sub-promo, .cs-subs a.sub-promo {
+  display: inline-block; margin: 4px 0; padding: 6px 12px; border-radius: 14px; line-height: 1.35; font-weight: 900; letter-spacing: .2px;
+  color: #FFFFFF !important; border: 2px solid #F5B82E; text-shadow: 0 1px 2px rgba(0,0,0,.35);
+  background: linear-gradient(90deg, #B0172A, #E63946, #F5B82E, #E63946, #B0172A); background-size: 200% auto;
+  animation: hotShine 2.4s linear infinite, hotPulse 1.6s ease-in-out infinite;
+}
+.sub-list a.sub-promo::before, .cs-subs a.sub-promo::before { content: "🍫 "; }
+.sub-list a.sub-promo small, .cs-subs a.sub-promo small { color: #FFFFFF; opacity: .9; }
+#subcat-chips button.sub-promo {
+  color: #FFFFFF; font-weight: 900; border: 2px solid #F5B82E; letter-spacing: .3px;
+  background: linear-gradient(90deg, #B0172A, #E63946, #F5B82E, #E63946, #B0172A); background-size: 200% auto;
+  animation: hotShine 2.4s linear infinite, hotPulse 1.6s ease-in-out infinite; text-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+#subcat-chips button.sub-promo::before { content: "🍫 "; }
+#subcat-chips button.sub-promo.active { box-shadow: 0 0 0 3px rgba(245, 184, 46, .8), 0 8px 22px rgba(214, 40, 57, .4); }
+body.ny-theme #catalog-title.title-hot, #catalog-title.title-hot {
+  font-weight: 900;
+  background: linear-gradient(90deg, #D62839, #FF3B30, #F5B82E, #D62839, #FF3B30, #F5B82E, #D62839); background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text; color: transparent; animation: hotShine 3s linear infinite;
+  filter: drop-shadow(0 2px 6px rgba(214, 40, 57, .35));
+}
+@media (prefers-reduced-motion: reduce) { .sub-list a.sub-promo, .cs-subs a.sub-promo, #subcat-chips button.sub-promo, #catalog-title.title-hot { animation: none; } }

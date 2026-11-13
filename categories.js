@@ -7,7 +7,7 @@ const CATEGORIES = [
     { id: 'new_year', icon: 'tree', name: { ka: 'ახალი წელი', en: 'New Year', ru: 'Новый год' }, subs: [
         ['ny_tree', 'ნაძვის ხეები'], ['ny_toys', 'ნაძვის ხის სათამაშოები'], ['ny_santa', 'თოვლის ბაბუები'],
         ['ny_nutcracker', 'მაკნატუნები'], ['ny_lights', 'განათება'], ['ny_lamp', 'საახალწლო სანათები'],
-        ['ny_fireplace', 'ბუხრები'], ['chocolate', 'შოკოლადი'], ['ny_other', 'სხვადასხვა საახალწლო პროდუქცია']
+        ['ny_fireplace', 'ბუხრები'], ['chocolate', 'შოკოლადი LINDT LINDOR'], ['ny_other', 'სხვადასხვა საახალწლო პროდუქცია']
     ] },
     { id: 'paper', icon: 'file', name: { ka: 'ქაღალდის პროდუქცია', en: 'Paper products', ru: 'Бумажная продукция' }, subs: [
         ['binding_cover', 'ასაკინძი ყდა'], ['color paper', 'ფერადი ქაღალდი'], ['print_paper', 'საბეჭდი ქაღალდი'],
@@ -67,7 +67,7 @@ const CATEGORIES = [
         ['disposable_tableware', 'ერთჯერადი ჭურჭელი'], ['disposable_cups', 'ერთჯერადი ჭიქები და აქსესუარები'], ['packaging', 'შესაფუთი მასალები'], ['disposable_containers', 'ერთჯერადი კონტეინერები']
     ] },
     { id: 'Office Food', icon: 'coffee', name: { ka: 'საოფისე კვება', en: 'Office food & drinks', ru: 'Офисное питание' }, subs: [
-        ['chocolate', 'შოკოლადი'], ['tea', 'ჩაი'], ['coffe', 'ყავა'], ['disposable coffee', 'ერთჯერადი ყავა'], ['sugar', 'შაქარი და დამატკბობელი'], ['drink', 'წყალი და სასმელები'], ['Snakes', 'სნექები']
+        ['chocolate', 'შოკოლადი LINDT LINDOR'], ['tea', 'ჩაი'], ['coffe', 'ყავა'], ['disposable coffee', 'ერთჯერადი ყავა'], ['sugar', 'შაქარი და დამატკბობელი'], ['drink', 'წყალი და სასმელები'], ['Snakes', 'სნექები']
     ] },
     { id: 'fire safety', icon: 'flame', name: { ka: 'სახანძრო უსაფრთხოება', en: 'Fire safety', ru: 'Пожарная безопасность' }, subs: [
         ['medicine', 'პირველადი სამედიცინო დახმარება'], ['emergency', 'საევაკუაციო და უსაფრთხოების ნიშნები'], ['fire', 'ხანძარსაწინააღმდეგო საშუალებები']
