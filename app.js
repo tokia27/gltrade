@@ -695,7 +695,7 @@ const SEASONAL_PROMO = {
     percent: 15,
     word: { ka: 'ახალი წლისთვის', en: 'New Year', ru: 'Нового года' },
     // სხვა კატეგორიების ქვეკატეგორიები, რომლებზეც იგივე აქცია და საახალწლო ვიზუალი ვრცელდება
-    extra: [{ cat: 'Office Food', sub: 'chocolate' }, { cat: 'new_year', sub: 'chocolate' }]
+    extra: [{ cat: 'new_year', sub: 'chocolate' }]
 };
 function isPromoSub(cat, sub) {
     return SEASONAL_PROMO.active && (SEASONAL_PROMO.extra || []).some(x =>
