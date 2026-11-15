@@ -67,7 +67,7 @@ const CATEGORIES = [
         ['disposable_tableware', 'ერთჯერადი ჭურჭელი'], ['disposable_cups', 'ერთჯერადი ჭიქები და აქსესუარები'], ['packaging', 'შესაფუთი მასალები'], ['disposable_containers', 'ერთჯერადი კონტეინერები']
     ] },
     { id: 'Office Food', icon: 'coffee', name: { ka: 'საოფისე კვება', en: 'Office food & drinks', ru: 'Офисное питание' }, subs: [
-        ['chocolate', 'შოკოლადი Lindt Lindor'], ['tea', 'ჩაი'], ['coffe', 'ყავა'], ['disposable coffee', 'ერთჯერადი ყავა'], ['sugar', 'შაქარი და დამატკბობელი'], ['drink', 'წყალი და სასმელები'], ['Snakes', 'სნექები']
+        ['chocolate', 'შოკოლადი Lindt Lindor'], ['tea', 'ჩაი'], ['coffe', 'ყავა'], ['disposable coffee', 'ერთჯერადი ყავა'], ['coffee_machines', 'ყავის აპარატები'],['sugar', 'შაქარი და დამატკბობელი'], ['drink', 'წყალი და სასმელები'], ['Snakes', 'სნექები']
     ] },
     { id: 'fire safety', icon: 'flame', name: { ka: 'სახანძრო უსაფრთხოება', en: 'Fire safety', ru: 'Пожарная безопасность' }, subs: [
         ['medicine', 'პირველადი სამედიცინო დახმარება'], ['emergency', 'საევაკუაციო და უსაფრთხოების ნიშნები'], ['fire', 'ხანძარსაწინააღმდეგო საშუალებები']
