@@ -1,5 +1,7 @@
 // GLTrade — კატეგორიები და ქვეკატეგორიები.
 // ქვეკატეგორია: ['id', 'სახელი']. id-ს პროდუქტის "subcategory" ველი ეთანხმება.
+// ჯგუფი: ქვეკატეგორიის მესამე ელემენტი მშობელი ჯგუფის id-ია, მაგ. ['coffee_grinders', 'ყავის საფქვავები', 'coffee_all'] —
+// მენიუში ჯგუფზე დაჭერით ჩამოიშლება მისი ქვეკატეგორიები, ჯგუფის გვერდი კი ყველა მათგანის პროდუქციას აჩვენებს.
 // პროდუქტი რამდენიმე ადგილას რომ გამოჩნდეს: "alsoIn":[{"cat":"new_year","sub":"chocolate"}]
 const CATEGORIES = [
     { id: 'all', icon: 'grid', name: { ka: 'ყველა პროდუქტი', en: 'All products', ru: 'Все товары' }, subs: [] },
@@ -67,7 +69,12 @@ const CATEGORIES = [
         ['disposable_tableware', 'ერთჯერადი ჭურჭელი'], ['disposable_cups', 'ერთჯერადი ჭიქები და აქსესუარები'], ['packaging', 'შესაფუთი მასალები'], ['disposable_containers', 'ერთჯერადი კონტეინერები']
     ] },
     { id: 'Office Food', icon: 'coffee', name: { ka: 'საოფისე კვება', en: 'Office food & drinks', ru: 'Офисное питание' }, subs: [
-        ['chocolate', 'შოკოლადი Lindt Lindor'], ['tea', 'ჩაი'], ['coffe', 'ყავა'], ['disposable coffee', 'ერთჯერადი ყავა'], ['coffee_machines', 'ყავის აპარატები'], ['coffee_filter_machines', 'ფილტრის ყავის აპარატები'], ['coffee_grinders', 'ყავის საფქვავები'], ['milk_frothers', 'რძის ამომყვანები'], ['coffee_brewers', 'ყავის სახარშები და ფრენჩ პრესები'], ['coffee_cups', 'ყავის ჭიქები და თერმოსები'], ['coffee_filters', 'ყავის ფილტრები'], ['coffee_care', 'ყავის აპარატის მოვლის საშუალებები'], ['sugar', 'შაქარი და დამატკბობელი'], ['drink', 'წყალი და სასმელები'], ['Snakes', 'სნექები']
+        ['chocolate', 'შოკოლადი Lindt Lindor'], ['tea', 'ჩაი'], ['coffe', 'ყავა'], ['disposable coffee', 'ერთჯერადი ყავა'], ['coffee_all', 'ყავის აპარატები'],
+            ['coffee_machines', 'ესპრესოს და ავტომატური აპარატები', 'coffee_all'], ['coffee_filter_machines', 'ფილტრის ყავის აპარატები', 'coffee_all'],
+            ['coffee_grinders', 'ყავის საფქვავები', 'coffee_all'], ['milk_frothers', 'რძის ამომყვანები', 'coffee_all'],
+            ['coffee_brewers', 'ყავის სახარშები და ფრენჩ პრესები', 'coffee_all'], ['coffee_cups', 'ყავის ჭიქები და თერმოსები', 'coffee_all'],
+            ['coffee_filters', 'ყავის ფილტრები', 'coffee_all'], ['coffee_care', 'ყავის აპარატის მოვლის საშუალებები', 'coffee_all'],
+        ['sugar', 'შაქარი და დამატკბობელი'], ['drink', 'წყალი და სასმელები'], ['Snakes', 'სნექები']
     ] },
     { id: 'fire safety', icon: 'flame', name: { ka: 'სახანძრო უსაფრთხოება', en: 'Fire safety', ru: 'Пожарная безопасность' }, subs: [
         ['medicine', 'პირველადი სამედიცინო დახმარება'], ['emergency', 'საევაკუაციო და უსაფრთხოების ნიშნები'], ['fire', 'ხანძარსაწინააღმდეგო საშუალებები']

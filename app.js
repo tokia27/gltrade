@@ -808,7 +808,27 @@ function productInCat(p, cat) {
 }
 function productInSub(p, cat, sub) {
     const c = normalizeCategoryValue(cat), s = normalizeCategoryValue(sub);
-    return productPlacements(p).some(x => x[0] === c && x[1] === s);
+    const kids = subGroupKids(c, s);
+    return productPlacements(p).some(x => x[0] === c && (x[1] === s || (kids && kids.includes(x[1]))));
+}
+// ქვეკატეგორიების ჯგუფი (categories.js: ქვეკატეგორიის მე-3 ელემენტი = ჯგუფის id)
+const _groupKidsCache = {};
+function subGroupKids(cat, sub) {
+    const c = normalizeCategoryValue(cat), s = normalizeCategoryValue(sub);
+    const key = c + '|' + s;
+    if (key in _groupKidsCache) return _groupKidsCache[key];
+    const co = typeof CATEGORIES !== 'undefined' ? CATEGORIES.find(x => normalizeCategoryValue(x.id) === c) : null;
+    const kids = co ? co.subs.filter(x => x[2] && normalizeCategoryValue(x[2]) === s).map(x => normalizeCategoryValue(x[0])) : [];
+    return (_groupKidsCache[key] = kids.length ? kids : null);
+}
+// მენიუსთვის: ზედა დონის ქვეკატეგორიები, თითოეულს თავისი შვილებით ({s, j, kids:[{s, j}]})
+function subTree(c) {
+    const all = c.subs.map((s, j) => ({ s, j }));
+    return all.filter(x => !x.s[2]).map(x => ({ s: x.s, j: x.j, kids: all.filter(y => y.s[2] === x.s[0]) }));
+}
+// ჯგუფი ღიაა, როცა არჩეულია თვითონ ან მისი რომელიმე ქვეკატეგორია
+function subGroupOpen(node, sub) {
+    return node.kids.length > 0 && (sub === node.s[0] || node.kids.some(k => k.s[0] === sub));
 }
 function hasOptions(prod) {
     return (prod.sizes && prod.sizes.length) || (prod.colors && prod.colors.length) || (prod.brands && prod.brands.length > 1);
@@ -1677,7 +1697,13 @@ function renderSidebar() {
         const subs = c.subs.length ? `
             <ul class="sub-list">
                 <li><a href="${catPath(c.id)}" class="${isActive && catalogState.sub === 'all' ? 'active' : ''}" onclick="return linkSub(event, ${i}, -1)">${escapeHtml(t('allWord'))}</a></li>
-                ${c.subs.map((s, j) => `<li><a href="${catPath(c.id, s[0])}" class="${isActive && catalogState.sub === s[0] ? 'active' : ''}${isPromoSub(c.id, s[0]) ? ' sub-promo' : ''}" onclick="return linkSub(event, ${i}, ${j})">${escapeHtml(s[1])}</a></li>`).join('')}
+                ${subTree(c).map(node => {
+                    const link = (x, extra) => `<a href="${catPath(c.id, x.s[0])}" class="${isActive && catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(c.id, x.s[0]) ? ' sub-promo' : ''}${extra || ''}" onclick="return linkSub(event, ${i}, ${x.j})">${escapeHtml(x.s[1])}${extra ? icon('chev', 'chev') : ''}</a>`;
+                    if (!node.kids.length) return `<li>${link(node)}</li>`;
+                    const open = isActive && subGroupOpen(node, catalogState.sub);
+                    return `<li class="sub-group${open ? ' open' : ''}">${link(node, ' sub-group-btn')}
+                        <ul class="sub-list2">${node.kids.map(k => `<li>${link(k)}</li>`).join('')}</ul></li>`;
+                }).join('')}
             </ul>` : '';
         return `
         <li class="cat-item${isActive ? ' active' : ''}${isOpen ? ' open' : ''}${c.id === SEASONAL_PROMO.cat ? ' is-promo' : ''}">
@@ -1713,13 +1739,20 @@ function renderChips() {
             subBox.style.display = '';
             subBox.innerHTML =
                 `<button type="button" class="${catalogState.sub === 'all' ? 'active' : ''}" onclick="selectSub(${ci}, -1)">${escapeHtml(t('allWord'))}</button>` +
-                cat.subs.map((s, j) => `<button type="button" class="${catalogState.sub === s[0] ? 'active' : ''}${isPromoSub(cat.id, s[0]) ? ' sub-promo' : ''}" onclick="selectSub(${ci}, ${j})">${escapeHtml(s[1])}</button>`).join('');
+                subTree(cat).map(node => {
+                    const btn = (x, extra) => `<button type="button" class="${catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(cat.id, x.s[0]) ? ' sub-promo' : ''}${extra || ''}" onclick="selectSub(${ci}, ${x.j})">${escapeHtml(x.s[1])}</button>`;
+                    // ჯგუფის ქვეკატეგორიები ჩნდება ჯგუფზე დაჭერის შემდეგ, მის გვერდით
+                    if (!node.kids.length) return btn(node);
+                    const open = subGroupOpen(node, catalogState.sub);
+                    return btn(node, ' sub-group-btn' + (open ? ' open' : '')) + (open ? node.kids.map(k => btn(k, ' sub-kid')).join('') : '');
+                }).join('');
         }
     }
 }
 
 // ---- მობილური: კატეგორიების მენიუ (bottom sheet) ----
 let sheetOpenCat = null;
+let sheetOpenGroup = null;
 const subCountCache = {};
 function subCount(catId, subId) {
     const key = catId + '|' + subId;
@@ -1746,7 +1779,16 @@ function renderCatSheet() {
             <span class="count">${categoryCount(c.id)}</span>${subs.length ? icon('chev', 'chev') : ''}${end}
             ${subs.length && open ? `<ul class="cs-subs">
                 <li><a href="${catPath(c.id)}" class="${active && catalogState.sub === 'all' ? 'active' : ''}" onclick="return sheetPick(event, ${i}, -1)">${escapeHtml(t('allWord'))} <small>${categoryCount(c.id)}</small></a></li>
-                ${subs.map(x => `<li><a href="${catPath(c.id, x.s[0])}" class="${active && catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(c.id, x.s[0]) ? ' sub-promo' : ''}" onclick="return sheetPick(event, ${i}, ${x.j})">${escapeHtml(x.s[1])} <small>${x.n}</small></a></li>`).join('')}
+                ${subTree(c).filter(node => subCount(c.id, node.s[0]) > 0).map(node => {
+                    const link = x => `<a href="${catPath(c.id, x.s[0])}" class="${active && catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(c.id, x.s[0]) ? ' sub-promo' : ''}" onclick="return sheetPick(event, ${i}, ${x.j})">${escapeHtml(x.s[1])} <small>${subCount(c.id, x.s[0])}</small></a>`;
+                    const kids = node.kids.filter(k => subCount(c.id, k.s[0]) > 0);
+                    if (!kids.length) return `<li>${link(node)}</li>`;
+                    // ჯგუფზე დაჭერა ჩამოშლის მის ქვეკატეგორიებს (პირველი — „ყველა“ ამ ჯგუფიდან)
+                    const open = sheetOpenGroup === node.s[0];
+                    return `<li class="cs-group${open ? ' open' : ''}"><button type="button" class="cs-group-btn${active && subGroupOpen(node, catalogState.sub) ? ' active' : ''}" onclick="toggleSheetGroup('${node.s[0]}')" aria-expanded="${open}">
+                        <span>${escapeHtml(node.s[1])}</span><small>${subCount(c.id, node.s[0])}</small>${icon('chev', 'chev')}</button>
+                        ${open ? `<ul class="cs-subs2"><li><a href="${catPath(c.id, node.s[0])}" class="${active && catalogState.sub === node.s[0] ? 'active' : ''}" onclick="return sheetPick(event, ${i}, ${node.j})">${escapeHtml(t('allWord'))} <small>${subCount(c.id, node.s[0])}</small></a></li>${kids.map(k => `<li>${link(k)}</li>`).join('')}</ul>` : ''}</li>`;
+                }).join('')}
             </ul>` : ''}
         </li>`;
     }).join('');
@@ -1757,6 +1799,9 @@ function openCatSheet() {
     const el = document.getElementById('cat-sheet');
     if (!el) return;
     sheetOpenCat = catalogState.cat !== 'all' && !catalogState.query.trim() ? catalogState.cat : null;
+    const curCat = CATEGORIES.find(c => c.id === sheetOpenCat);
+    const grp = curCat ? subTree(curCat).find(n => subGroupOpen(n, catalogState.sub)) : null;
+    sheetOpenGroup = grp ? grp.s[0] : null;
     renderCatSheet();
     el.hidden = false;
     document.body.classList.add('sheet-open');
@@ -1778,6 +1823,10 @@ function toggleSheetCat(i) {
     renderCatSheet();
     const it = document.querySelector('#cat-sheet .cs-item.open');
     if (it) setTimeout(() => it.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 30);
+}
+function toggleSheetGroup(id) {
+    sheetOpenGroup = sheetOpenGroup === id ? null : id;
+    renderCatSheet();
 }
 function sheetPick(event, i, j) {
     if (event && (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button === 1)) return true;
@@ -3007,7 +3056,9 @@ function slugify(text) {
     if (typeof products === 'undefined') return;
     const used = new Set(products.flatMap(p => productPlacements(p).map(x => x[0] + '|' + x[1])));
     CATEGORIES.forEach(c => {
-        c.subs = c.subs.filter(s => used.has(normalizeCategoryValue(c.id) + '|' + normalizeCategoryValue(s[0])));
+        const has = s => used.has(normalizeCategoryValue(c.id) + '|' + normalizeCategoryValue(s[0]));
+        // ჯგუფი რჩება, თუ მის რომელიმე ქვეკატეგორიაში პროდუქტია
+        c.subs = c.subs.filter(s => has(s) || c.subs.some(k => k[2] === s[0] && has(k)));
     });
     // ცარიელი კატეგორიებიც იმალება
     const usedCats = new Set(products.flatMap(p => productPlacements(p).map(x => x[0])));

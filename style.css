@@ -1139,3 +1139,22 @@ body.ny-theme #catalog-title.title-hot, #catalog-title.title-hot {
   filter: drop-shadow(0 2px 6px rgba(214, 40, 57, .35));
 }
 @media (prefers-reduced-motion: reduce) { .sub-list a.sub-promo, .cs-subs a.sub-promo, #subcat-chips button.sub-promo, #catalog-title.title-hot { animation: none; } }
+
+/* ქვეკატეგორიების ჯგუფი (მაგ. „ყავის აპარატები“) — დაჭერით ჩამოიშლება */
+.sub-list .sub-group-btn { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.sub-list .sub-group-btn .chev { width: 14px; height: 14px; flex-shrink: 0; transition: transform .2s; }
+.sub-list .sub-group.open > .sub-group-btn .chev { transform: rotate(180deg); }
+.sub-list2 { list-style: none; display: none; margin: 2px 0 6px 10px; padding-left: 12px; border-left: 2px solid var(--line); }
+.sub-group.open > .sub-list2 { display: block; }
+.sub-list2 a { font-size: 13.5px; padding: 6px 8px; }
+.chips.sub button.sub-group-btn::after { content: ' ▾'; }
+.chips.sub button.sub-group-btn.open::after { content: ' ▴'; }
+.chips.sub button.sub-kid { background: var(--surface); border: 1px dashed var(--line); }
+.chips.sub button.sub-kid.active { background: var(--accent-soft); color: var(--accent); border-style: solid; border-color: transparent; }
+.cs-group-btn { display: flex; width: 100%; align-items: center; gap: 10px; padding: 9px 10px; border: 0; border-radius: 10px; background: transparent; color: var(--ink); font-size: 14px; font-weight: 600; text-align: left; }
+.cs-group-btn span { flex: 1; }
+.cs-group-btn small { color: var(--muted); font-size: 12px; font-weight: 400; }
+.cs-group-btn .chev { width: 16px; height: 16px; transition: transform .2s; }
+.cs-group.open > .cs-group-btn .chev { transform: rotate(180deg); }
+.cs-group-btn.active { color: var(--accent); }
+.cs-subs2 { list-style: none; margin: 0 0 4px; padding: 0 0 0 16px; border-left: 2px solid var(--line); margin-left: 10px; }
