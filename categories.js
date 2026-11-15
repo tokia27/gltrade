@@ -63,7 +63,7 @@ const CATEGORIES = [
         ['External chargers', 'გარე დამტენები'], ['Power strip', 'დენის დამაგრძელებლები'], ['Ups', 'UPS უწყვეტი ენერგია']
     ] },
     { id: 'Hotel', icon: 'bell', name: { ka: 'სასტუმროს ინვენტარი', en: 'Hotel supplies', ru: 'Гостиничный инвентарь' }, subs: [
-        ['amenities', 'ერთჯერადი სასტუმროს აქსესუარები']
+        ['amenities', 'ერთჯერადი სასტუმროს აქსესუარები'], ['steam_iron', 'ორთქლის უთო']
     ] },
     { id: 'disposables', icon: 'cup', name: { ka: 'ერთჯერადი პროდუქცია', en: 'Disposable products', ru: 'Одноразовая продукция' }, subs: [
         ['disposable_tableware', 'ერთჯერადი ჭურჭელი'], ['disposable_cups', 'ერთჯერადი ჭიქები და აქსესუარები'], ['packaging', 'შესაფუთი მასალები'], ['disposable_containers', 'ერთჯერადი კონტეინერები']
