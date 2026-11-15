@@ -815,6 +815,28 @@ a.cat-tile { color: var(--ink); text-decoration: none; }
 .f-err { color: #D92D20; font-size: 12px; font-weight: 600; }
 body.dark-mode .buyer-fields .lbl .req, body.dark-mode .f-err { color: #FF8A80; }
 body.dark-mode .buyer-fields .input[aria-invalid="true"] { border-color: #FF8A80; box-shadow: 0 0 0 4px rgba(255, 138, 128, .14); }
+.phone-group { display: flex; align-items: stretch; min-width: 0; }
+.phone-group .phone-prefix { display: inline-flex; align-items: center; padding: 0 12px; border: 1px solid var(--line); border-right: 0; border-radius: 12px 0 0 12px; background: var(--surface); color: var(--ink); font-size: 15px; font-weight: 700; white-space: nowrap; user-select: none; }
+.phone-group .input { border-radius: 0 12px 12px 0; min-width: 0; letter-spacing: .5px; }
+.buyer-fields .d-sub { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; margin: 6px 0 12px; padding-top: 14px; border-top: 1px dashed var(--line); font-size: 15px; font-weight: 800; color: var(--ink); }
+.buyer-fields .d-sub .ic { width: 18px; height: 18px; color: var(--accent); }
+.buyer-fields .full { grid-column: 1 / -1; }
+.buyer-fields select.input { appearance: auto; cursor: pointer; }
+.d-free-note { margin: -4px 0 12px; }
+@media (max-width: 560px) { .buyer-fields .d-spacer { display: none; } }
+.d-map-box { margin: -2px 0 14px; }
+.d-map-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.d-map-btn { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 700; font-size: 14px; cursor: pointer; }
+.d-map-btn .ic { width: 17px; height: 17px; color: var(--accent); }
+.d-map-btn:hover { border-color: var(--accent); }
+.d-map { height: 300px; border-radius: 14px; border: 1px solid var(--line); overflow: hidden; margin-bottom: 8px; z-index: 0; }
+.d-map[hidden] { display: none; }
+.d-map-status { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: 13px; }
+.d-map-status a { color: var(--accent); font-weight: 700; }
+.d-pin-ok { display: inline-flex; align-items: center; gap: 6px; color: var(--ok); font-weight: 700; }
+.d-pin-ok .ic { width: 16px; height: 16px; }
+.link-btn { background: none; border: 0; padding: 0; color: #D92D20; font-weight: 700; font-size: 13px; cursor: pointer; }
+@media (max-width: 560px) { .d-map { height: 260px; } .d-map-btn { flex: 1 1 auto; justify-content: center; } }
 .order-buyer { font-size: 13px; color: var(--muted); margin: 6px 0 2px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 @media (max-width: 560px) { .buyer-fields { grid-template-columns: minmax(0, 1fr); } }
 

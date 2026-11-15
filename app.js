@@ -2140,32 +2140,76 @@ function updateCart() {
 
 // ---------- მყიდველი: ფიზიკური ან იურიდიული პირი ----------
 let buyerInfo = readStore('buyer_info', null) || {};
+// ველის ტიპი (2-ე ელემენტი): 'phone' — +995 პრეფიქსით, 9 ციფრი, იწყება 5-ით
 const BUYER_FIELDS = {
     person: [
         ['name', 'text', 'name', ['სახელი და გვარი', 'Full name', 'Имя и фамилия'], true],
-        ['phone', 'tel', 'tel', ['ტელეფონის ნომერი', 'Phone number', 'Номер телефона'], true],
-        ['pid', 'text', 'off', ['პირადი ნომერი', 'Personal ID number', 'Личный номер'], true, 'full', '11 ციფრი'],
-        ['address', 'text', 'street-address', ['მიწოდების მისამართი', 'Delivery address', 'Адрес доставки'], true, 'full']
+        ['phone', 'phone', 'tel-national', ['მობილურის ნომერი', 'Mobile number', 'Номер мобильного'], true],
+        ['pid', 'text', 'off', ['პირადი ნომერი', 'Personal ID number', 'Личный номер'], true, 'full', '11 ციფრი']
     ],
     company: [
         ['tin', 'text', 'off', ['საიდენტიფიკაციო კოდი', 'Company ID (tax code)', 'Идентификационный код'], true, '', '9 ან 11 ციფრი'],
         ['company', 'text', 'organization', ['კომპანიის დასახელება', 'Company name', 'Название компании'], true, '', 'მაგ: შპს „კომპანია“'],
-        ['cphone', 'tel', 'tel', ['საკონტაქტო ტელეფონი', 'Contact phone', 'Контактный телефон'], true],
-        ['contact', 'text', 'name', ['საკონტაქტო პირი', 'Contact person', 'Контактное лицо'], false],
-        ['caddress', 'text', 'street-address', ['მიწოდების მისამართი', 'Delivery address', 'Адрес доставки'], true, 'full']
+        ['cphone', 'phone', 'tel-national', ['საკონტაქტო მობილური', 'Contact mobile', 'Контактный мобильный'], true],
+        ['contact', 'text', 'name', ['საკონტაქტო პირი', 'Contact person', 'Контактное лицо'], false]
     ]
 };
+// მიწოდების მისამართი — ცალ-ცალკე ველებით (ორივე ტიპისთვის საერთო)
+const DELIVERY_CITIES = [
+    ['თბილისი', 'Tbilisi', 'Тбилиси'], ['რუსთავი', 'Rustavi', 'Рустави'], ['მცხეთა', 'Mtskheta', 'Мцхета'],
+    ['ბათუმი', 'Batumi', 'Батуми'], ['ქუთაისი', 'Kutaisi', 'Кутаиси'], ['გორი', 'Gori', 'Гори'],
+    ['ზუგდიდი', 'Zugdidi', 'Зугдиди'], ['თელავი', 'Telavi', 'Телави'], ['ფოთი', 'Poti', 'Поти'],
+    ['ზესტაფონი', 'Zestaponi', 'Зестафони'], ['ხაშური', 'Khashuri', 'Хашури'], ['მარნეული', 'Marneuli', 'Марнеули']
+];
+const CITY_OTHER = '__other';
+// რუკის საწყისი წერტილი არჩეული ქალაქის მიხედვით
+const CITY_COORDS = {
+    'თბილისი': [41.7151, 44.8271], 'რუსთავი': [41.5495, 44.9930], 'მცხეთა': [41.8452, 44.7188], 'ბათუმი': [41.6168, 41.6367],
+    'ქუთაისი': [42.2679, 42.6946], 'გორი': [41.9842, 44.1158], 'ზუგდიდი': [42.5088, 41.8709], 'თელავი': [41.9198, 45.4731],
+    'ფოთი': [42.1462, 41.6719], 'ზესტაფონი': [42.1100, 43.0450], 'ხაშური': [41.9947, 43.5986], 'მარნეული': [41.4759, 44.8081]
+};
+const mapLink = (lat, lng) => `https://www.google.com/maps?q=${lat},${lng}`;
+
+// ტელეფონი: მხოლოდ ციფრები, 995 პრეფიქსის მოშორება, მაქს. 9 ციფრი
+function normPhone(v) {
+    let d = String(v || '').replace(/\D/g, '');
+    if (d.length > 9 && d.startsWith('995')) d = d.slice(3);
+    if (d.length > 9 && d.startsWith('0')) d = d.replace(/^0+/, '');
+    return d.slice(0, 9);
+}
+function fmtPhone(d) { // 5XX XX XX XX
+    return [d.slice(0, 3), d.slice(3, 5), d.slice(5, 7), d.slice(7, 9)].filter(Boolean).join(' ');
+}
+const phoneValid = d => /^5\d{8}$/.test(d);
+
+// ძველი ერთველიანი მისამართიდან ქალაქის მოშორება („ქ. თბილისი, ...“ -> „...“)
+function splitOldAddress(addr) {
+    let s = String(addr || '').trim();
+    let city = '';
+    for (const c of DELIVERY_CITIES) {
+        const re = new RegExp('^(ქ\\.?\\s*)?' + c[0] + '\\s*[,.\\-]?\\s*', 'i');
+        if (re.test(s)) { city = c[0]; s = s.replace(re, ''); break; }
+    }
+    return { city, street: s };
+}
+
 function buyerDefaults() {
     const u = currentUser || {};
     const b = buyerInfo;
     if (!b.type) b.type = 'person';
     if (b.name === undefined) b.name = u.username || '';
     if (b.phone === undefined) b.phone = u.phone || '';
-    if (b.address === undefined) b.address = u.address || '';
     if (b.contact === undefined) b.contact = u.username || '';
     if (b.cphone === undefined) b.cphone = u.phone || '';
-    if (b.caddress === undefined) b.caddress = u.address || '';
-    ['pid', 'tin', 'company'].forEach(k => { if (b[k] === undefined) b[k] = ''; });
+    b.phone = normPhone(b.phone);
+    b.cphone = normPhone(b.cphone);
+    if (b.d_street === undefined) {
+        const old = splitOldAddress(b.type === 'company' ? (b.caddress || b.address || u.address) : (b.address || u.address));
+        b.d_city = old.city || 'თბილისი';
+        b.d_street = old.street;
+    }
+    ['pid', 'tin', 'company', 'd_city_other', 'd_apt', 'd_note'].forEach(k => { if (b[k] === undefined) b[k] = ''; });
+    if (!b.d_city) b.d_city = 'თბილისი';
     return b;
 }
 function saveBuyer() { writeStore('buyer_info', buyerInfo); }
@@ -2182,29 +2226,91 @@ function setBuyerField(input) {
         if (clean !== v) input.value = clean;
         v = clean;
     }
+    if (input.dataset.kind === 'phone') {
+        const d = normPhone(v);
+        const shown = fmtPhone(d);
+        if (shown !== v) input.value = shown;
+        v = d;
+        buyerInfo[key] = v;
+        saveBuyer();
+        // პირველივე ციფრზე ვამოწმებთ, რომ 5-ით იწყებოდეს
+        if (d && d[0] !== '5') setFieldError(input, getLangText('მობილურის ნომერი უნდა იწყებოდეს 5-ით', 'Mobile number must start with 5', 'Номер должен начинаться с 5'));
+        else clearFieldError(input);
+        return;
+    }
     buyerInfo[key] = v;
     saveBuyer();
     clearFieldError(input);
+    if (key === 'd_city') renderDeliveryPanel();
 }
+function fieldWrap(input) { return input.closest('.lbl') || input.parentNode; }
 function clearFieldError(input) {
     input.removeAttribute('aria-invalid');
-    const err = input.parentNode.querySelector('.f-err');
+    const err = fieldWrap(input).querySelector('.f-err');
     if (err) err.remove();
 }
 function setFieldError(input, msg) {
     input.setAttribute('aria-invalid', 'true');
-    let err = input.parentNode.querySelector('.f-err');
-    if (!err) { err = document.createElement('small'); err.className = 'f-err'; input.parentNode.appendChild(err); }
+    const wrap = fieldWrap(input);
+    let err = wrap.querySelector('.f-err');
+    if (!err) { err = document.createElement('small'); err.className = 'f-err'; wrap.appendChild(err); }
     err.textContent = msg;
+}
+function fieldLabelHTML(label, req) {
+    return `<span>${escapeHtml(getLangText(...label))}${req ? ' <i class="req">*</i>' : ` <i class="opt">(${escapeHtml(getLangText('არასავალდებულო', 'optional', 'необязательно'))})</i>`}</span>`;
 }
 function buyerFieldHTML(f, b) {
     const [key, type, ac, label, req, cls, ph] = f;
+    if (type === 'phone') {
+        return `
+        <label class="lbl${cls ? ' ' + cls : ''}" for="buyer-${key}">
+            ${fieldLabelHTML(label, req)}
+            <span class="phone-group">
+                <span class="phone-prefix" aria-hidden="true">🇬🇪 +995</span>
+                <input class="input" id="buyer-${key}" data-key="${key}" data-kind="phone" type="tel" inputmode="numeric" autocomplete="${ac}" maxlength="12" placeholder="5XX XX XX XX" value="${escapeHtml(fmtPhone(b[key] || ''))}" oninput="setBuyerField(this)">
+            </span>
+        </label>`;
+    }
     const numeric = key === 'pid' || key === 'tin';
     return `
         <label class="lbl${cls ? ' ' + cls : ''}" for="buyer-${key}">
-            <span>${escapeHtml(getLangText(...label))}${req ? ' <i class="req">*</i>' : ` <i class="opt">(${escapeHtml(getLangText('არასავალდებულო', 'optional', 'необязательно'))})</i>`}</span>
+            ${fieldLabelHTML(label, req)}
             <input class="input" id="buyer-${key}" data-key="${key}" type="${type}" autocomplete="${ac}" ${numeric ? 'inputmode="numeric" maxlength="11"' : ''} ${ph ? `placeholder="${escapeHtml(ph)}"` : ''} value="${escapeHtml(b[key] || '')}" oninput="setBuyerField(this)">
         </label>`;
+}
+function deliveryFieldsHTML(b) {
+    const L = getLangText;
+    const isOther = b.d_city === CITY_OTHER;
+    const opts = DELIVERY_CITIES.map(c => `<option value="${escapeHtml(c[0])}"${b.d_city === c[0] ? ' selected' : ''}>${escapeHtml(L(...c))}</option>`).join('')
+        + `<option value="${CITY_OTHER}"${isOther ? ' selected' : ''}>${escapeHtml(L('სხვა ქალაქი / სოფელი', 'Other city / village', 'Другой город / село'))}</option>`;
+    const freeNote = b.d_city === 'თბილისი'
+        ? ''
+        : `<p class="muted small d-free-note">${escapeHtml(L('უფასო მიწოდება მოქმედებს მხოლოდ თბილისში — მიწოდების პირობებს ოპერატორი დაგიზუსტებთ.', 'Free delivery applies within Tbilisi only — our operator will confirm delivery terms.', 'Бесплатная доставка действует только по Тбилиси — условия уточнит оператор.'))}</p>`;
+    return `
+        <div class="d-sub full">${icon('pin')}<span>${escapeHtml(L('მიწოდების მისამართი', 'Delivery address', 'Адрес доставки'))}</span></div>
+        <label class="lbl" for="buyer-d_city">
+            ${fieldLabelHTML(['ქალაქი', 'City', 'Город'], true)}
+            <select class="input" id="buyer-d_city" data-key="d_city" onchange="setBuyerField(this)">${opts}</select>
+        </label>
+        ${isOther ? `
+        <label class="lbl" for="buyer-d_city_other">
+            ${fieldLabelHTML(['ქალაქის / სოფლის დასახელება', 'City / village name', 'Название города / села'], true)}
+            <input class="input" id="buyer-d_city_other" data-key="d_city_other" type="text" autocomplete="address-level2" value="${escapeHtml(b.d_city_other || '')}" oninput="setBuyerField(this)">
+        </label>` : '<span class="d-spacer" aria-hidden="true"></span>'}
+        <label class="lbl full" for="buyer-d_street">
+            ${fieldLabelHTML(['ქუჩა და შენობის ნომერი', 'Street and building number', 'Улица и номер дома'], true)}
+            <input class="input" id="buyer-d_street" data-key="d_street" type="text" autocomplete="address-line1" placeholder="${escapeHtml(L('მაგ: ვაჟა-ფშაველას გამზ. 12', 'e.g. Vazha-Pshavela Ave. 12', 'напр.: пр. Важа-Пшавела 12'))}" value="${escapeHtml(b.d_street || '')}" oninput="setBuyerField(this)">
+        </label>
+        ${deliveryMapHTML(b)}
+        <label class="lbl full" for="buyer-d_apt">
+            ${fieldLabelHTML(['სადარბაზო, სართული, ბინა / ოფისი', 'Entrance, floor, apartment / office', 'Подъезд, этаж, квартира / офис'], false)}
+            <input class="input" id="buyer-d_apt" data-key="d_apt" type="text" autocomplete="address-line2" placeholder="${escapeHtml(L('მაგ: II სადარბაზო, მე-5 სართ., ბ. 21', 'e.g. Entrance 2, 5th floor, apt 21', 'напр.: подъезд 2, 5 этаж, кв. 21'))}" value="${escapeHtml(b.d_apt || '')}" oninput="setBuyerField(this)">
+        </label>
+        <label class="lbl full" for="buyer-d_note">
+            ${fieldLabelHTML(['კომენტარი კურიერისთვის', 'Note for the courier', 'Комментарий для курьера'], false)}
+            <input class="input" id="buyer-d_note" data-key="d_note" type="text" placeholder="${escapeHtml(L('მაგ: ორიენტირი, მიწოდების სასურველი დრო', 'e.g. landmark, preferred delivery time', 'напр.: ориентир, удобное время доставки'))}" value="${escapeHtml(b.d_note || '')}" oninput="setBuyerField(this)">
+        </label>
+        ${freeNote ? `<div class="full">${freeNote}</div>` : ''}`;
 }
 function renderDeliveryPanel() {
     const box = document.getElementById('delivery-panel');
@@ -2228,45 +2334,216 @@ function renderDeliveryPanel() {
         </div>
         <div class="buyer-fields" role="tabpanel">
             ${BUYER_FIELDS[b.type].map(f => buyerFieldHTML(f, b)).join('')}
+            ${deliveryFieldsHTML(b)}
         </div>
         <p class="muted small" style="margin-top:4px">${escapeHtml(t('termsImportantText'))}</p>`;
+    if (deliveryMap) { try { deliveryMap.remove(); } catch (e) {} deliveryMap = null; deliveryMarker = null; }
+    if (deliveryMapOpen) openDeliveryMap();
+}
+// ---------- რუკაზე პინის დასმა (Leaflet + OpenStreetMap, ჩაიტვირთება მხოლოდ საჭიროებისას) ----------
+let deliveryMap = null, deliveryMarker = null, deliveryMapOpen = false, leafletPromise = null, geocodeSeq = 0;
+const hasPin = b => Number.isFinite(b.d_lat) && Number.isFinite(b.d_lng);
+function loadLeaflet() {
+    if (window.L && window.L.map) return Promise.resolve();
+    if (leafletPromise) return leafletPromise;
+    leafletPromise = new Promise((resolve, reject) => {
+        const css = document.createElement('link');
+        css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        document.head.appendChild(css);
+        const js = document.createElement('script');
+        js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        js.onload = resolve;
+        js.onerror = () => { leafletPromise = null; reject(new Error('leaflet')); };
+        document.head.appendChild(js);
+    });
+    return leafletPromise;
+}
+function deliveryMapStatusHTML(b) {
+    const L = getLangText;
+    if (!hasPin(b)) return `<span class="muted small">${escapeHtml(L('დააჭირეთ რუკას ან გადაათრიეთ პინი — მისამართი თავისით შეივსება.', 'Tap the map or drag the pin — the address fills in automatically.', 'Нажмите на карту или перетащите метку — адрес заполнится сам.'))}</span>`;
+    return `<span class="d-pin-ok">${icon('check')}<span>${escapeHtml(L('ლოკაცია მონიშნულია', 'Location pinned', 'Местоположение отмечено'))}</span></span>
+        <a href="${mapLink(b.d_lat.toFixed(6), b.d_lng.toFixed(6))}" target="_blank" rel="noopener">${escapeHtml(L('ნახვა Google Maps-ზე', 'View on Google Maps', 'Открыть в Google Maps'))}</a>
+        <button type="button" class="link-btn" onclick="clearDeliveryPin()">${escapeHtml(L('წაშლა', 'Remove', 'Удалить'))}</button>`;
+}
+function deliveryMapHTML(b) {
+    const L = getLangText;
+    return `
+        <div class="full d-map-box">
+            <div class="d-map-actions">
+                <button type="button" class="btn btn-soft d-map-btn" onclick="toggleDeliveryMap()">${icon('pin')}<span>${escapeHtml(deliveryMapOpen ? L('რუკის დამალვა', 'Hide map', 'Скрыть карту') : L('მონიშნეთ რუკაზე', 'Pin on the map', 'Отметить на карте'))}</span></button>
+                <button type="button" class="btn btn-soft d-map-btn" onclick="locateDeliveryPin()">${icon('zap')}<span>${escapeHtml(L('ჩემი მდებარეობა', 'My location', 'Моё местоположение'))}</span></button>
+            </div>
+            <div id="d-map" class="d-map"${deliveryMapOpen ? '' : ' hidden'}></div>
+            <div id="d-map-status" class="d-map-status">${deliveryMapStatusHTML(b)}</div>
+        </div>`;
+}
+function refreshMapStatus() {
+    const el = document.getElementById('d-map-status');
+    if (el) el.innerHTML = deliveryMapStatusHTML(buyerDefaults());
+}
+function toggleDeliveryMap() {
+    deliveryMapOpen = !deliveryMapOpen;
+    renderDeliveryPanel();
+}
+async function openDeliveryMap(center) {
+    deliveryMapOpen = true;
+    const el = document.getElementById('d-map');
+    if (!el) return;
+    el.hidden = false;
+    try { await loadLeaflet(); } catch (e) {
+        el.hidden = true;
+        toast(getLangText('რუკა ვერ ჩაიტვირთა, სცადეთ თავიდან', 'The map could not load, please try again', 'Не удалось загрузить карту'), 'error');
+        return;
+    }
+    const b = buyerDefaults();
+    const start = center || (hasPin(b) ? [b.d_lat, b.d_lng] : (CITY_COORDS[b.d_city] || CITY_COORDS['თბილისი']));
+    if (!deliveryMap || deliveryMap.getContainer() !== el) {
+        if (deliveryMap) { try { deliveryMap.remove(); } catch (e) {} }
+        deliveryMap = window.L.map(el, { scrollWheelZoom: false }).setView(start, hasPin(b) || center ? 17 : 13);
+        window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19, attribution: '&copy; OpenStreetMap'
+        }).addTo(deliveryMap);
+        deliveryMarker = null;
+        deliveryMap.on('click', e => setDeliveryPin(e.latlng.lat, e.latlng.lng));
+    } else {
+        deliveryMap.setView(start, 17);
+    }
+    if (hasPin(b)) placeMarker(b.d_lat, b.d_lng);
+    setTimeout(() => deliveryMap && deliveryMap.invalidateSize(), 60);
+}
+function placeMarker(lat, lng) {
+    if (!deliveryMap) return;
+    if (!deliveryMarker) {
+        deliveryMarker = window.L.marker([lat, lng], { draggable: true }).addTo(deliveryMap);
+        deliveryMarker.on('dragend', () => { const p = deliveryMarker.getLatLng(); setDeliveryPin(p.lat, p.lng); });
+    } else deliveryMarker.setLatLng([lat, lng]);
+}
+function setDeliveryPin(lat, lng) {
+    const b = buyerDefaults();
+    b.d_lat = lat; b.d_lng = lng;
+    saveBuyer();
+    placeMarker(lat, lng);
+    refreshMapStatus();
+    const st = document.getElementById('buyer-d_street');
+    if (st) clearFieldError(st);
+    reverseGeocode(lat, lng);
+}
+function clearDeliveryPin() {
+    const b = buyerDefaults();
+    delete b.d_lat; delete b.d_lng;
+    saveBuyer();
+    if (deliveryMarker && deliveryMap) { deliveryMap.removeLayer(deliveryMarker); deliveryMarker = null; }
+    refreshMapStatus();
+}
+function locateDeliveryPin() {
+    const L = getLangText;
+    if (!navigator.geolocation) { toast(L('თქვენი ბრაუზერი მდებარეობას ვერ განსაზღვრავს', 'Your browser cannot detect location', 'Браузер не может определить местоположение'), 'error'); return; }
+    navigator.geolocation.getCurrentPosition(async pos => {
+        const { latitude: lat, longitude: lng } = pos.coords;
+        if (!deliveryMapOpen) { deliveryMapOpen = true; renderDeliveryPanel(); }
+        await openDeliveryMap([lat, lng]);
+        setDeliveryPin(lat, lng);
+    }, () => toast(L('მდებარეობის განსაზღვრა ვერ მოხერხდა — მონიშნეთ რუკაზე ხელით', 'Could not get your location — pin it on the map', 'Не удалось определить — отметьте на карте'), 'error'),
+    { enableHighAccuracy: true, timeout: 12000 });
+}
+// პინიდან მისამართის შევსება (OpenStreetMap Nominatim)
+async function reverseGeocode(lat, lng) {
+    const seq = ++geocodeSeq;
+    try {
+        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1&accept-language=ka`;
+        const r = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        if (!r.ok || seq !== geocodeSeq) return;
+        const a = ((await r.json()) || {}).address || {};
+        if (seq !== geocodeSeq) return;
+        const b = buyerDefaults();
+        const road = a.road || a.pedestrian || a.residential || a.neighbourhood || a.suburb || a.quarter || '';
+        const street = [road, a.house_number].filter(Boolean).join(' ').trim();
+        if (street) {
+            b.d_street = street;
+            const st = document.getElementById('buyer-d_street');
+            if (st) { st.value = street; clearFieldError(st); }
+        }
+        const city = (a.city || a.town || a.village || a.municipality || '').replace(/^ქ\.\s*/, '').trim();
+        if (city) {
+            const known = DELIVERY_CITIES.find(c => c[0] === city);
+            const newCity = known ? known[0] : CITY_OTHER;
+            const changed = newCity !== b.d_city || (!known && b.d_city_other !== city);
+            b.d_city = newCity;
+            if (!known) b.d_city_other = city;
+            saveBuyer();
+            if (changed) { renderDeliveryPanel(); return; }
+        }
+        saveBuyer();
+    } catch (e) { /* მისამართს მომხმარებელი ხელითაც ჩაწერს */ }
+}
+
+// ქუჩა: მინ. 6 სიმბოლო, ასოები + შენობის ნომერი, და არა მხოლოდ ქალაქის სახელი
+function streetProblem(v) {
+    const L = getLangText;
+    const s = v.trim();
+    const bare = s.replace(/[\s.,\-]/g, '').toLowerCase();
+    const isCityOnly = DELIVERY_CITIES.some(c => c.some(n => bare === n.toLowerCase() || bare === ('ქ' + n).toLowerCase()));
+    if (!s || isCityOnly) return L('მიუთითეთ ქუჩა და შენობის ნომერი', 'Enter the street and building number', 'Укажите улицу и номер дома');
+    if (!/[\p{L}]{3,}/u.test(s)) return L('მიუთითეთ ქუჩის / უბნის დასახელება', 'Enter the street / area name', 'Укажите название улицы / района');
+    if (!/\d/.test(s)) return L('მიუთითეთ შენობის ნომერიც (მაგ: 12)', 'Add the building number too (e.g. 12)', 'Укажите и номер дома (напр. 12)');
+    if (s.length < 6) return L('მისამართი ძალიან მოკლეა', 'The address is too short', 'Адрес слишком короткий');
+    return '';
+}
+function deliveryCity(b) {
+    if (b.d_city === CITY_OTHER) return (b.d_city_other || '').trim();
+    return b.d_city || 'თბილისი';
+}
+function composeAddress(b) {
+    const city = deliveryCity(b);
+    const parts = [city.startsWith('ქ.') || b.d_city === CITY_OTHER ? city : 'ქ. ' + city, b.d_street.trim()];
+    if ((b.d_apt || '').trim()) parts.push(b.d_apt.trim());
+    let s = parts.join(', ');
+    if ((b.d_note || '').trim()) s += ` (კომენტარი: ${b.d_note.trim()})`;
+    return s;
 }
 function validateBuyer() {
     const b = buyerDefaults();
     let first = null;
-    const check = (key, ok, msg) => {
+    const fail = (key, msg) => {
         const el = document.getElementById(`buyer-${key}`);
         if (!el) return;
-        if (!ok(String(b[key] || '').trim())) { setFieldError(el, msg); first = first || el; }
+        if (msg) { setFieldError(el, msg); first = first || el; }
         else clearFieldError(el);
     };
-    const phoneOk = v => v.replace(/\D/g, '').length >= 9;
-    const addrOk = v => v.length >= 5;
+    const check = (key, ok, msg) => fail(key, ok(String(b[key] || '').trim()) ? '' : msg);
     const L = getLangText;
+    const phoneMsg = v => !v ? L('შეიყვანეთ მობილურის ნომერი', 'Enter your mobile number', 'Введите номер мобильного')
+        : v[0] !== '5' ? L('მობილურის ნომერი უნდა იწყებოდეს 5-ით', 'Mobile number must start with 5', 'Номер должен начинаться с 5')
+        : v.length !== 9 ? L('ნომერი უნდა შედგებოდეს 9 ციფრისგან (5XX XX XX XX)', 'The number must have 9 digits (5XX XX XX XX)', 'Номер должен содержать 9 цифр (5XX XX XX XX)') : '';
     if (b.type === 'company') {
         check('tin', v => /^(\d{9}|\d{11})$/.test(v), L('საიდენტიფიკაციო კოდი უნდა იყოს 9 ან 11 ციფრი', 'Company ID must be 9 or 11 digits', 'Код должен содержать 9 или 11 цифр'));
         check('company', v => v.length >= 2, L('შეიყვანეთ კომპანიის დასახელება', 'Enter the company name', 'Введите название компании'));
-        check('cphone', phoneOk, L('შეიყვანეთ სწორი ტელეფონის ნომერი', 'Enter a valid phone number', 'Введите правильный номер телефона'));
-        check('caddress', addrOk, L('შეიყვანეთ მიწოდების მისამართი', 'Enter the delivery address', 'Введите адрес доставки'));
+        fail('cphone', phoneMsg(b.cphone));
     } else {
         check('name', v => v.length >= 3, L('შეიყვანეთ სახელი და გვარი', 'Enter your full name', 'Введите имя и фамилию'));
-        check('phone', phoneOk, L('შეიყვანეთ სწორი ტელეფონის ნომერი', 'Enter a valid phone number', 'Введите правильный номер телефона'));
+        fail('phone', phoneMsg(b.phone));
         check('pid', v => /^\d{11}$/.test(v), L('პირადი ნომერი უნდა იყოს 11 ციფრი', 'Personal ID must be 11 digits', 'Личный номер должен содержать 11 цифр'));
-        check('address', addrOk, L('შეიყვანეთ მიწოდების მისამართი', 'Enter the delivery address', 'Введите адрес доставки'));
     }
+    if (b.d_city === CITY_OTHER) check('d_city_other', v => /[\p{L}]{3,}/u.test(v), L('მიუთითეთ ქალაქის ან სოფლის დასახელება', 'Enter the city or village name', 'Укажите название города или села'));
+    const pinned = hasPin(b);
+    fail('d_street', pinned
+        ? (/[\p{L}]{3,}/u.test(String(b.d_street || '')) ? '' : L('მიუთითეთ ქუჩა ან უბანი', 'Enter the street or area', 'Укажите улицу или район'))
+        : streetProblem(String(b.d_street || '')));
     if (first) {
         toast(L('შეავსეთ წითლად მონიშნული ველები', 'Please fill in the highlighted fields', 'Заполните отмеченные поля'), 'error');
         first.focus();
         first.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return null;
     }
+    const address = composeAddress(b);
+    const loc = pinned ? { lat: +b.d_lat.toFixed(6), lng: +b.d_lng.toFixed(6), mapLink: mapLink(b.d_lat.toFixed(6), b.d_lng.toFixed(6)) } : {};
     if (b.type === 'company') {
         return {
             buyerType: 'company', companyId: b.tin.trim(), companyName: b.company.trim(),
-            contactName: (b.contact || '').trim(), phone: b.cphone.trim(), address: b.caddress.trim()
+            contactName: (b.contact || '').trim(), phone: '+995 ' + fmtPhone(b.cphone), address, ...loc
         };
     }
-    return { buyerType: 'person', name: b.name.trim(), phone: b.phone.trim(), personalId: b.pid.trim(), address: b.address.trim() };
+    return { buyerType: 'person', name: b.name.trim(), phone: '+995 ' + fmtPhone(b.phone), personalId: b.pid.trim(), address, ...loc };
 }
 function buyerSummary(buyer) {
     if (!buyer) return '';
