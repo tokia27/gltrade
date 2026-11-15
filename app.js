@@ -2148,7 +2148,7 @@ const BUYER_FIELDS = {
         ['pid', 'text', 'off', ['პირადი ნომერი', 'Personal ID number', 'Личный номер'], true, 'full', '11 ციფრი']
     ],
     company: [
-        ['tin', 'text', 'off', ['საიდენტიფიკაციო კოდი', 'Company ID (tax code)', 'Идентификационный код'], true, '', '9 ან 11 ციფრი'],
+        ['tin', 'text', 'off', ['საიდენტიფიკაციო კოდი', 'Company ID (tax code)', 'Идентификационный код'], true, '', '9 ციფრი'],
         ['company', 'text', 'organization', ['კომპანიის დასახელება', 'Company name', 'Название компании'], true, '', 'მაგ: შპს „კომპანია“'],
         ['cphone', 'phone', 'tel-national', ['საკონტაქტო მობილური', 'Contact mobile', 'Контактный мобильный'], true],
         ['contact', 'text', 'name', ['საკონტაქტო პირი', 'Contact person', 'Контактное лицо'], false]
@@ -2222,7 +2222,7 @@ function setBuyerField(input) {
     const key = input.dataset.key;
     let v = input.value;
     if (key === 'pid' || key === 'tin') {
-        const clean = v.replace(/\D/g, '').slice(0, 11);
+        const clean = v.replace(/\D/g, '').slice(0, key === 'tin' ? 9 : 11);
         if (clean !== v) input.value = clean;
         v = clean;
     }
@@ -2275,7 +2275,7 @@ function buyerFieldHTML(f, b) {
     return `
         <label class="lbl${cls ? ' ' + cls : ''}" for="buyer-${key}">
             ${fieldLabelHTML(label, req)}
-            <input class="input" id="buyer-${key}" data-key="${key}" type="${type}" autocomplete="${ac}" ${numeric ? 'inputmode="numeric" maxlength="11"' : ''} ${ph ? `placeholder="${escapeHtml(ph)}"` : ''} value="${escapeHtml(b[key] || '')}" oninput="setBuyerField(this)">
+            <input class="input" id="buyer-${key}" data-key="${key}" type="${type}" autocomplete="${ac}" ${numeric ? `inputmode="numeric" maxlength="${key === 'tin' ? 9 : 11}"` : ''} ${ph ? `placeholder="${escapeHtml(ph)}"` : ''} value="${escapeHtml(b[key] || '')}" oninput="setBuyerField(this)">
         </label>`;
 }
 function deliveryFieldsHTML(b) {
@@ -2516,7 +2516,7 @@ function validateBuyer() {
         : v[0] !== '5' ? L('მობილურის ნომერი უნდა იწყებოდეს 5-ით', 'Mobile number must start with 5', 'Номер должен начинаться с 5')
         : v.length !== 9 ? L('ნომერი უნდა შედგებოდეს 9 ციფრისგან (5XX XX XX XX)', 'The number must have 9 digits (5XX XX XX XX)', 'Номер должен содержать 9 цифр (5XX XX XX XX)') : '';
     if (b.type === 'company') {
-        check('tin', v => /^(\d{9}|\d{11})$/.test(v), L('საიდენტიფიკაციო კოდი უნდა იყოს 9 ან 11 ციფრი', 'Company ID must be 9 or 11 digits', 'Код должен содержать 9 или 11 цифр'));
+        check('tin', v => /^\d{9}$/.test(v), L('საიდენტიფიკაციო კოდი უნდა იყოს ზუსტად 9 ციფრი', 'Company ID must be exactly 9 digits', 'Код должен содержать ровно 9 цифр'));
         check('company', v => v.length >= 2, L('შეიყვანეთ კომპანიის დასახელება', 'Enter the company name', 'Введите название компании'));
         fail('cphone', phoneMsg(b.cphone));
     } else {
