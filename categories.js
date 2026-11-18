@@ -52,7 +52,7 @@ const CATEGORIES = [
     { id: 'Computers', icon: 'laptop', name: { ka: 'კომპიუტერული და საოფისე ტექნიკა', en: 'Computers & office equipment', ru: 'Компьютерная и офисная техника' }, subs: [
         ['mouse', 'მაუსი'], ['keyboard', 'კლავიატურა'], ['mouse and keyboard', 'მაუსი და კლავიატურა'], ['mouse pad', 'მაუსის პადი'],
         ['disc', 'CD და DVD დისკები'], ['remote', 'პრეზენტაციის პულტი'], ['Leptops', 'ლეპტოპები'], ['Begs', 'ჩანთები'],
-        ['Monitors', 'მონიტორები'], ['Projectors', 'პროექტორები'], ['Printers', 'პრინტერები'], ['Flesh cards', 'ფლეშ ბარათები'],
+        ['Monitors', 'მონიტორები'], ['Projectors', 'პროექტორები'], ['Printers', 'პრინტერები'], ['Flesh cards', 'ფლეშ ბარათები'], ['hdd', 'მყარი დისკები (HDD)'],
         ['Cabels', 'კაბელები'], ['Binding machine', 'ამკინძავი მანქანა'], ['Laminating machine', 'ლამინირების აპარატი'],
         ['destroy', 'ქაღალდის გამანადგურებელი'], ['Money inventory', 'ფულის ინვენტარი'], ['Cartridge', 'კარტრიჯი']
     ] },
@@ -60,6 +60,9 @@ const CATEGORIES = [
         ['net_routers', 'Wi-Fi როუტერები'], ['net_mesh', 'Mesh Wi-Fi სისტემები'], ['net_extenders', 'Wi-Fi სიგნალის გამაძლიერებლები'],
         ['net_access_points', 'წვდომის წერტილები (Access Point)'], ['net_adapters', 'Wi-Fi ადაპტერები'], ['net_switches', 'სვიჩები'],
         ['net_ip_phones', 'IP ტელეფონები']
+    ] },
+    { id: 'smart_home', icon: 'home', name: { ka: 'ჭკვიანი სახლი', en: 'Smart home', ru: 'Умный дом' }, subs: [
+        ['smart_cameras', 'Wi-Fi კამერები'], ['robot_vacuums', 'რობოტი მტვერსასრუტები'], ['robot_vacuum_acc', 'რობოტი მტვერსასრუტის აქსესუარები']
     ] },
     { id: 'Electrical energy', icon: 'zap', name: { ka: 'ელ. ენერგია', en: 'Power & batteries', ru: 'Электропитание' }, subs: [
         ['External chargers', 'გარე დამტენები'], ['Power strip', 'დენის დამაგრძელებლები'], ['Ups', 'UPS უწყვეტი ენერგია']
