@@ -57,7 +57,9 @@ const CATEGORIES = [
         ['destroy', 'ქაღალდის გამანადგურებელი'], ['Money inventory', 'ფულის ინვენტარი'], ['Cartridge', 'კარტრიჯი']
     ] },
     { id: 'Network equipment', icon: 'wifi', name: { ka: 'ქსელური ტექნიკა', en: 'Network equipment', ru: 'Сетевое оборудование' }, subs: [
-        ['Routers', 'როუტერები'], ['Switches', 'სვიჩები'], ['Adapters', 'WIFI ადაპტერები'], ['Signals', 'WIFI სიგნალის გამაძლიერებლები'], ['Racks', 'რეკები / აქსესუარები']
+        ['net_routers', 'Wi-Fi როუტერები'], ['net_mesh', 'Mesh Wi-Fi სისტემები'], ['net_extenders', 'Wi-Fi სიგნალის გამაძლიერებლები'],
+        ['net_access_points', 'წვდომის წერტილები (Access Point)'], ['net_adapters', 'Wi-Fi ადაპტერები'], ['net_switches', 'სვიჩები'],
+        ['net_ip_phones', 'IP ტელეფონები']
     ] },
     { id: 'Electrical energy', icon: 'zap', name: { ka: 'ელ. ენერგია', en: 'Power & batteries', ru: 'Электропитание' }, subs: [
         ['External chargers', 'გარე დამტენები'], ['Power strip', 'დენის დამაგრძელებლები'], ['Ups', 'UPS უწყვეტი ენერგია']
