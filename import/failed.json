@@ -3,30 +3,5 @@
   "path": "images/alc-3763-1.jpg",
   "url": "https://ktwgroup.ge/wp-content/uploads/2026/06/%E1%83%A1%E1%83%90%E1%83%A4%E1%83%94%E1%83%A0%E1%83%90%E1%83%95%E1%83%98-1-e1738575345819.webp",
   "error": "HTTP Error 429: Too Many Requests"
- },
- {
-  "path": "images/alc-3775-1.jpg",
-  "url": "https://ktwgroup.ge/wp-content/uploads/2026/06/2-e1738577127174.webp",
-  "error": "HTTP Error 429: Too Many Requests"
- },
- {
-  "path": "images/alc-3776-1.jpg",
-  "url": "https://ktwgroup.ge/wp-content/uploads/2026/06/%E1%83%AE%E1%83%95%E1%83%90%E1%83%9C%E1%83%AD%E1%83%99%E1%83%90%E1%83%A0%E1%83%90-1-e1738581397851.webp",
-  "error": "HTTP Error 429: Too Many Requests"
- },
- {
-  "path": "images/alc-3777-1.jpg",
-  "url": "https://ktwgroup.ge/wp-content/uploads/2026/06/%E1%83%A5%E1%83%98%E1%83%9C%E1%83%AB%E1%83%9B%E1%83%90%E1%83%A0%E1%83%90%E1%83%A3%E1%83%9A%E1%83%98-1-e1738581993409.webp",
-  "error": "HTTP Error 429: Too Many Requests"
- },
- {
-  "path": "images/alc-3778-1.jpg",
-  "url": "https://ktwgroup.ge/wp-content/uploads/2026/06/%E1%83%A1%E1%83%90%E1%83%A4%E1%83%94%E1%83%A0%E1%83%90%E1%83%95%E1%83%98-%E1%83%A0%E1%83%9D%E1%83%96%E1%83%94-1-e1738589424716.webp",
-  "error": "HTTP Error 429: Too Many Requests"
- },
- {
-  "path": "images/alc-3798-1.jpg",
-  "url": "https://ktwgroup.ge/wp-content/uploads/2026/06/500%E1%83%98%E1%83%90%E1%83%9C%E1%83%98-%E1%83%AD%E1%83%90%E1%83%AD%E1%83%90-1-e1738656092314.webp",
-  "error": "HTTP Error 429: Too Many Requests"
  }
 ]
