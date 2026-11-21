@@ -1622,7 +1622,10 @@ function renderProducts(productList) {
     if (more) more.style.display = list.length > shown.length ? '' : 'none';
 
     if (list.length === 0) {
-        grid.innerHTML = `<div class="empty-state">${icon('search')}<p>${escapeHtml(t('noProducts'))}</p></div>`;
+        const soon = !catalogState.query.trim() && KEEP_EMPTY_CATS.includes(catalogState.cat);
+        grid.innerHTML = soon
+            ? `<div class="empty-state">${icon('box')}<p>${escapeHtml(getLangText('პროდუქცია მალე დაემატება.', 'Products coming soon.', 'Товары скоро появятся.'))}</p></div>`
+            : `<div class="empty-state">${icon('search')}<p>${escapeHtml(t('noProducts'))}</p></div>`;
         return;
     }
     grid.innerHTML = shown.map(productCardHTML).join('');
@@ -1849,6 +1852,7 @@ function selectCategory(i, fromChip) {
     if (!c) return;
     clearSearch();
     const wasActive = catalogState.cat === c.id;
+    const prevKey = catalogState.cat + '|' + catalogState.sub;
     catalogState.cat = c.id;
     catalogState.sub = 'all';
     if (c.subs.length) {
@@ -1858,17 +1862,20 @@ function selectCategory(i, fromChip) {
     }
     renderCatalog(true);
     syncCatalogUrl();
+    checkAgeGate(prevKey);
 }
 
 function selectSub(i, j) {
     const c = CATEGORIES[i];
     if (!c) return;
+    const prevKey = catalogState.cat + '|' + catalogState.sub;
     clearSearch();
     catalogState.cat = c.id;
     catalogState.sub = j < 0 ? 'all' : c.subs[j][0];
     catalogState.openCat = c.id;
     renderCatalog(true);
     syncCatalogUrl();
+    checkAgeGate(prevKey);
 }
 
 function openCatalog(catId, subId, opts) {
@@ -1881,6 +1888,47 @@ function openCatalog(catId, subId, opts) {
     showPage('catalog', { noHead: true, instant: opts.instant });
     if (!opts.noUrl) syncCatalogUrl(opts.replace);
     else updateHead(catalogMeta(catalogState.cat, catalogState.sub));
+    checkAgeGate(null);
+}
+
+// ---------- 18+ შემოწმება ----------
+// კითხვა ჩნდება ამ კატეგორიების მხოლოდ მთავარ გვერდზე, ყოველ შესვლაზე.
+// ქვეკატეგორიებზე, „ყველა პროდუქტში“, ძებნაში და პროდუქტის გვერდზე — არა.
+const AGE_GATE_CATS = ['alcohol'];
+function checkAgeGate(prevKey) {
+    if (catalogState.query.trim() || catalogState.sub !== 'all' || !AGE_GATE_CATS.includes(catalogState.cat)) return;
+    if (prevKey === catalogState.cat + '|all') return; // იმავე გვერდზე დარჩა (მაგ. მენიუს გახსნა/დახურვა)
+    showAgeGate();
+}
+function showAgeGate() {
+    if (!document.body || typeof document.body.appendChild !== 'function') return;
+    document.getElementById('age-gate')?.remove();
+    const el = document.createElement('div');
+    el.id = 'age-gate';
+    el.className = 'age-gate';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-modal', 'true');
+    el.setAttribute('aria-labelledby', 'age-gate-title');
+    el.innerHTML = `
+        <div class="age-gate-card">
+            <div class="age-gate-badge">18+</div>
+            <h2 id="age-gate-title">${escapeHtml(getLangText('ხართ თუ არა სრულწლოვანი?', 'Are you 18 or older?', 'Вам исполнилось 18 лет?'))}</h2>
+            <p>${escapeHtml(getLangText('ამ კატეგორიაში წარმოდგენილია ალკოჰოლური სასმელი. გვერდის სანახავად უნდა იყოთ 18 წლის ან უფროსი.',
+                'This category contains alcoholic beverages. You must be 18 or older to view it.',
+                'В этой категории представлены алкогольные напитки. Для просмотра вам должно быть 18 лет или больше.'))}</p>
+            <div class="age-gate-actions">
+                <button type="button" class="btn btn-primary btn-lg" onclick="ageGateAnswer(true)">${escapeHtml(getLangText('დიახ, 18+ ვარ', 'Yes, I am 18+', 'Да, мне есть 18'))}</button>
+                <button type="button" class="btn btn-ghost btn-lg" onclick="ageGateAnswer(false)">${escapeHtml(getLangText('არა', 'No', 'Нет'))}</button>
+            </div>
+        </div>`;
+    document.body.appendChild(el);
+    document.body.classList.add('age-gate-open');
+    setTimeout(() => el.querySelector('.btn-primary')?.focus(), 30);
+}
+function ageGateAnswer(isAdult) {
+    document.getElementById('age-gate')?.remove();
+    document.body.classList.remove('age-gate-open');
+    if (!isAdult) navigate('/');
 }
 function openCatalogIndex(i) {
     const c = CATEGORIES[i];
@@ -3052,16 +3100,22 @@ function slugify(text) {
 }
 
 // ცარიელი ქვეკატეგორიები მენიუში არ ჩანს. პროდუქტის დამატებისას თავისით გამოჩნდება.
+// გამონაკლისი: KEEP_EMPTY_CATS — ეს კატეგორიები და მათი ქვეკატეგორიები ცარიელიც ჩანს.
+var KEEP_EMPTY_CATS = ['alcohol'];
 (function pruneEmptySubcategories() {
     if (typeof products === 'undefined') return;
     const used = new Set(products.flatMap(p => productPlacements(p).map(x => x[0] + '|' + x[1])));
+    KEEP_EMPTY_CATS.forEach(id => {
+        const c = CATEGORIES.find(x => x.id === id);
+        if (c) { used.add(normalizeCategoryValue(id)); c.subs.forEach(s => used.add(normalizeCategoryValue(id) + '|' + normalizeCategoryValue(s[0]))); }
+    });
     CATEGORIES.forEach(c => {
         const has = s => used.has(normalizeCategoryValue(c.id) + '|' + normalizeCategoryValue(s[0]));
         // ჯგუფი რჩება, თუ მის რომელიმე ქვეკატეგორიაში პროდუქტია
         c.subs = c.subs.filter(s => has(s) || c.subs.some(k => k[2] === s[0] && has(k)));
     });
     // ცარიელი კატეგორიებიც იმალება
-    const usedCats = new Set(products.flatMap(p => productPlacements(p).map(x => x[0])));
+    const usedCats = new Set(products.flatMap(p => productPlacements(p).map(x => x[0])).concat(KEEP_EMPTY_CATS.map(normalizeCategoryValue)));
     for (let i = CATEGORIES.length - 1; i >= 0; i--) {
         if (CATEGORIES[i].id !== 'all' && !usedCats.has(normalizeCategoryValue(CATEGORIES[i].id))) CATEGORIES.splice(i, 1);
     }
