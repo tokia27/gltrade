@@ -17,13 +17,14 @@ for it in items:
         'Referer': it.get('referer', ''), 'Accept': 'image/avif,image/webp,image/*,*/*;q=0.8'})
     data = None
     err = 'ცარიელი პასუხი'
-    for attempt in range(3):
+    time.sleep(1.5)  # ზოგი საიტი სწრაფ მოთხოვნებს ბლოკავს (429)
+    for attempt in range(5):
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
                 data = r.read()
             break
         except Exception as e:
-            err = str(e); time.sleep(2)
+            err = str(e); time.sleep(20 * (attempt + 1) if '429' in err else 2)
     if not data:
         failed.append({'path': path, 'url': it['url'], 'error': err}); continue
     try:
