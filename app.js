@@ -695,7 +695,7 @@ const SEASONAL_PROMO = {
     percent: 15,
     word: { ka: 'ახალი წლისთვის', en: 'New Year', ru: 'Нового года' },
     // სხვა კატეგორიების ქვეკატეგორიები, რომლებზეც იგივე აქცია და საახალწლო ვიზუალი ვრცელდება
-    extra: [{ cat: 'new_year', sub: 'chocolate' }]
+    extra: [{ cat: 'new_year', sub: 'chocolate' }, { cat: 'new_year', sub: 'ny_baskets' }]
 };
 function isPromoSub(cat, sub) {
     return SEASONAL_PROMO.active && (SEASONAL_PROMO.extra || []).some(x =>
@@ -1492,6 +1492,458 @@ const SUB_ORDER = {
     }
 };
 
+// =====================================================================
+// საახალწლო სასაჩუქრე კალათები (ახალი წელი › საახალწლო კალათები)
+// ---------------------------------------------------------------------
+//  • GIFT.ready — მზა კალათები: სახელი, ტიპი, ფოტო და შიგთავსი [პროდუქტის id, რაოდენობა]
+//  • GIFT.containers — ჩანთა / პატარა კალათი / დიდი კალათი: ფასი და მინიმუმ რამდენი ნივთი
+//  • GIFT.wrapPrice — ბადე + ლენტი ერთად (ჩანთაზე სურვილისამებრ, კალათებზე სავალდებულო)
+//  • GIFT.groups — რომელი კატეგორიებიდან შეუძლია მომხმარებელს პროდუქციის ჩალაგება
+// კალათა შეკვეთაში ერთ ხაზად იგზავნება — შეფუთვით და სრული შიგთავსით (შტრიხკოდებით).
+// =====================================================================
+const GIFT = {
+    cat: 'new_year',
+    sub: 'ny_baskets',
+    wrapPrice: 5,
+    listShow: 3,
+    pageSize: 40,
+    containers: {
+        bag:   { name: { ka: 'ჩანთა', en: 'Gift bag', ru: 'Пакет' }, price: 5, min: 2 },
+        small: { name: { ka: 'პატარა კალათი', en: 'Small basket', ru: 'Малая корзина' }, price: 20, min: 4 },
+        large: { name: { ka: 'დიდი კალათი', en: 'Large basket', ru: 'Большая корзина' }, price: 25, min: 6 }
+    },
+    colors: {
+        red:   { name: { ka: 'წითელი', en: 'Red', ru: 'Красный' }, c: '#C8102E' },
+        green: { name: { ka: 'მწვანე', en: 'Green', ru: 'Зелёный' }, c: '#1E7B4A' },
+        white: { name: { ka: 'თეთრი', en: 'White', ru: 'Белый' }, c: '#F6F3EC' }
+    },
+    bagColors: {
+        red:   { name: { ka: 'წითელი', en: 'Red', ru: 'Красный' }, c: '#C8102E', d: '#A20C24' },
+        black: { name: { ka: 'შავი', en: 'Black', ru: 'Чёрный' }, c: '#1E1F24', d: '#0B0B0E' },
+        white: { name: { ka: 'თეთრი', en: 'White', ru: 'Белый' }, c: '#F7F4EE', d: '#D9D2C3' }
+    },
+    groups: [
+        { id: 'chocolate', name: { ka: 'შოკოლადი Lindt', en: 'Lindt chocolate', ru: 'Шоколад Lindt' }, has: p => productInSub(p, 'new_year', 'chocolate') },
+        { id: 'wine', name: { ka: 'ღვინო', en: 'Wine', ru: 'Вино' }, has: p => productInSub(p, 'alcohol', 'wine') },
+        { id: 'sparkling', name: { ka: 'ცქრიალა ღვინო', en: 'Sparkling wine', ru: 'Игристое вино' }, has: p => productInSub(p, 'alcohol', 'sparkling_wine') },
+        { id: 'brandy', name: { ka: 'ბრენდი', en: 'Brandy', ru: 'Бренди' }, has: p => productInSub(p, 'alcohol', 'brandy') },
+        { id: 'chacha', name: { ka: 'ჭაჭა', en: 'Chacha', ru: 'Чача' }, has: p => productInSub(p, 'alcohol', 'chacha') },
+        { id: 'nutcracker', name: { ka: 'მაკნატუნები', en: 'Nutcrackers', ru: 'Щелкунчики' }, has: p => productInSub(p, 'new_year', 'ny_nutcracker') },
+        { id: 'santa', name: { ka: 'თოვლის ბაბუები', en: 'Santa figures', ru: 'Деды Морозы' }, has: p => productInSub(p, 'new_year', 'ny_santa') },
+        { id: 'toys', name: { ka: 'ნაძვის ხის სათამაშოები', en: 'Tree ornaments', ru: 'Ёлочные игрушки' }, has: p => productInSub(p, 'new_year', 'ny_toys') },
+        { id: 'notebook', name: { ka: 'ბლოკნოტები', en: 'Notebooks', ru: 'Блокноты' }, has: p => productInSub(p, 'paper', 'notebook') },
+        { id: 'stationery', name: { ka: 'საკანცელარიო', en: 'Stationery', ru: 'Канцелярия' }, has: p => productInCat(p, 'stationery') },
+        { id: 'writing', name: { ka: 'საწერი და სახატავი ნივთები', en: 'Writing & drawing', ru: 'Письмо и рисование' }, has: p => productInCat(p, 'writing') },
+        { id: 'coffee', name: { ka: 'ყავა / ჩაი', en: 'Coffee / tea', ru: 'Кофе / чай' }, has: p => productInSub(p, 'Office Food', 'coffe') || productInSub(p, 'Office Food', 'tea') }
+    ],
+    ready: [
+        { id: 'r1', name: { ka: 'საჩუქრის ჩანთა „კლასიკი“', en: 'Gift bag “Classic”', ru: 'Подарочный пакет «Классика»' }, cont: 'bag', bag: 'red', wrapOn: false, img: 'images/baskets/basket1.jpg', items: [[808, 1], [3817, 1], [1761, 1], [3112, 1], [3111, 1]] },
+        { id: 'r2', name: { ka: 'დიდი კალათა „ზეიმი“', en: 'Large basket “Celebration”', ru: 'Большая корзина «Праздник»' }, cont: 'large', wrapOn: true, wrap: 'red', rib: 'red', img: 'images/baskets/basket2.jpg', items: [[3740, 1], [3107, 1], [808, 1], [3818, 1], [3112, 1], [3101, 1], [3817, 1]] },
+        { id: 'r3', name: { ka: 'პატარა კალათა „სანტა“', en: 'Small basket “Santa”', ru: 'Малая корзина «Санта»' }, cont: 'small', wrapOn: true, wrap: 'white', rib: 'red', img: 'images/baskets/basket3.jpg', items: [[3101, 1], [3110, 1], [808, 1], [1761, 1], [3740, 1]] },
+        { id: 'r4', name: { ka: 'პატარა კალათა „დათუნია“', en: 'Small basket “Teddy”', ru: 'Малая корзина «Мишка»' }, cont: 'small', wrapOn: true, wrap: 'green', rib: 'red', img: 'images/baskets/basket4.jpg', items: [[3101, 1], [3111, 1], [808, 1], [1761, 1], [3817, 1]] },
+        { id: 'r5', name: { ka: 'საჩუქრის ჩანთა „Lindor“', en: 'Gift bag “Lindor”', ru: 'Подарочный пакет «Lindor»' }, cont: 'bag', bag: 'red', wrapOn: false, img: 'images/baskets/basket5.jpg', items: [[808, 1], [1761, 1], [3101, 1], [3112, 1], [3740, 1]] },
+        { id: 'r6', name: { ka: 'დიდი კალათა „პრემიუმი“', en: 'Large basket “Premium”', ru: 'Большая корзина «Премиум»' }, cont: 'large', wrapOn: true, wrap: 'green', rib: 'red', img: 'images/baskets/basket6.jpg', items: [[3740, 1], [3111, 1], [808, 1], [3818, 1], [3112, 1], [3101, 1], [3817, 1]] }
+    ]
+};
+const giftL = (ka, en, ru) => getLangText(ka, en, ru);
+const giftName = v => getTranslatedText(v);
+const giftIsPage = () => !catalogState.query.trim() && catalogState.cat === GIFT.cat && catalogState.sub === GIFT.sub;
+let _giftPool = null;
+// ბილდერის პროდუქცია: მარაგშია, ფასი აქვს, ზომის/ფერის არჩევანი (1-ზე მეტი) არ სჭირდება
+function giftPool() {
+    if (_giftPool) return _giftPool;
+    const list = typeof products !== 'undefined' ? products : [];
+    const multi = p => (p.sizes || []).length > 1 || (p.colors || []).length > 1 || (p.brands || []).length > 1;
+    const seen = new Set();
+    _giftPool = [];
+    GIFT.groups.forEach(g => list.forEach(p => {
+        if (seen.has(p.id) || p.inStock === false || !(Number(p.price) > 0) || multi(p) || !g.has(p)) return;
+        seen.add(p.id);
+        _giftPool.push({ p, g: g.id });
+    }));
+    return _giftPool;
+}
+const giftProd = id => findProduct(id);
+const giftCount = items => items.reduce((s, x) => s + x[1], 0);
+const giftItemsSum = items => items.reduce((s, [id, q]) => s + (Number((giftProd(id) || {}).price) || 0) * q, 0);
+const giftItemsOld = items => items.reduce((s, [id, q]) => { const p = giftProd(id) || {}; return s + (Number(p.oldPrice || p.price) || 0) * q; }, 0);
+const giftPackPrice = b => GIFT.containers[b.cont].price + (b.wrapOn ? GIFT.wrapPrice : 0);
+const giftUnit = b => giftPackPrice(b) + giftItemsSum(b.items);
+const giftIsAlc = id => { const p = giftProd(id); return !!p && productInCat(p, 'alcohol'); };
+const giftHasAlc = items => items.some(([id]) => giftIsAlc(id));
+const giftValid = b => b.items.every(([id]) => giftProd(id));
+function giftPackText(b, lang) {
+    const nm = v => (lang ? (v[lang] || v.ka) : giftName(v));
+    const lc = s => (lang || currentLang) === 'en' ? s.toLowerCase() : s;
+    let s = b.cont === 'bag'
+        ? `${nm(GIFT.containers.bag.name)} (${lc(nm(GIFT.bagColors[b.bag || 'red'].name))})`
+        : nm(GIFT.containers[b.cont].name);
+    if (b.wrapOn) s += ` + ${giftL('ბადე', 'mesh', 'сетка')} (${lc(nm(GIFT.colors[b.wrap].name))}), ${giftL('ლენტი', 'ribbon', 'лента')} (${lc(nm(GIFT.colors[b.rib].name))})`;
+    return s;
+}
+
+// ---------- ილუსტრაცია (ჩანთა / კალათი, ბადე და ლენტი არჩეული ფერით) ----------
+let giftSvgN = 0;
+function giftSVG(type, o) {
+    o = o || {};
+    const w = o.wrapOn && o.wrap ? GIFT.colors[o.wrap].c : null, r = o.wrapOn && o.rib ? GIFT.colors[o.rib].c : null;
+    const pid = 'gbm' + (++giftSvgN), wl = o.wrap === 'white' ? '#CFC8B8' : w;
+    const wrapLayer = w ? `<defs><pattern id="${pid}" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="${w}" opacity=".3"/><path d="M0 0V6M0 0H6" stroke="${wl}" stroke-width="1.5"/></pattern></defs><path d="M16 84 Q20 30 60 8 Q100 30 104 84Z" fill="url(#${pid})" stroke="${wl}" stroke-width="1.2" opacity=".92"/>` : '';
+    const by = type === 'bag' ? 30 : 44;
+    const bow = r ? `<g transform="translate(60,${by})"><path d="M0 0 C-15 -13 -24 -2 -15 6 C-9 10 -2 4 0 0Z" fill="${r}" stroke="rgba(0,0,0,.18)"/><path d="M0 0 C15 -13 24 -2 15 6 C9 10 2 4 0 0Z" fill="${r}" stroke="rgba(0,0,0,.18)"/><path d="M-2 2 L-9 17 M2 2 L9 17" stroke="${r}" stroke-width="3"/><circle r="3.6" fill="${r}" stroke="rgba(0,0,0,.2)"/></g>` : '';
+    const gy = type === 'bag' ? 0 : 10;
+    const goodies = o.items ? `<rect x="40" y="${22 + gy}" width="10" height="30" rx="3" fill="#2B3A2E"/><rect x="42.5" y="${16 + gy}" width="5" height="8" fill="#1E7B4A"/><circle cx="64" cy="${38 + gy}" r="8" fill="#D4AF37"/><rect x="73" y="${28 + gy}" width="13" height="20" rx="2" fill="#B3122E"/>` : '';
+    if (type === 'bag') {
+        const b = GIFT.bagColors[o.bag || 'red'];
+        return `<svg viewBox="0 0 120 100" aria-hidden="true">${wrapLayer}${goodies}<path d="M45 34 Q45 16 60 16 Q75 16 75 34" fill="none" stroke="#C9A227" stroke-width="3"/><rect x="30" y="34" width="60" height="60" rx="4" fill="${b.c}" stroke="${b.d}" stroke-width="1.2"/><rect x="30" y="34" width="60" height="8" fill="${b.d}"/>${bow}</svg>`;
+    }
+    const big = type === 'large', x = big ? 12 : 24, wd = big ? 96 : 72, y = big ? 52 : 56;
+    return `<svg viewBox="0 0 120 100" aria-hidden="true">${wrapLayer}${goodies}<path d="M${x + 8} ${y} Q60 ${big ? 6 : 14} ${x + wd - 8} ${y}" fill="none" stroke="#B8862F" stroke-width="5"/><path d="M${x} ${y} L${x + wd} ${y} L${x + wd - 8} 92 L${x + 8} 92Z" fill="#D9A55A"/>${[0, 1, 2, 3].map(i => `<path d="M${x + 3 + i * 2} ${y + 8 + i * 9} L${x + wd - 3 - i * 2} ${y + 8 + i * 9}" stroke="#B8862F" stroke-width="2"/>`).join('')}<path d="M${x - 2} ${y} L${x + wd + 2} ${y}" stroke="#B8862F" stroke-width="6" stroke-linecap="round"/>${bow}</svg>`;
+}
+
+// ---------- „ახალი წლის“ გვერდზე: ბანერი კალათებისკენ ----------
+function giftBannerHTML() {
+    return `<a class="gb-promo" href="${catPath(GIFT.cat, GIFT.sub)}" onclick="return go(event, '${catPath(GIFT.cat, GIFT.sub)}')">
+        <span class="gb-promo-ic">${giftSVG('large', { wrapOn: true, wrap: 'white', rib: 'red', items: 1 })}</span>
+        <span class="gb-promo-tx"><b>${escapeHtml(giftL('საახალწლო სასაჩუქრე კალათები', 'New Year gift baskets', 'Новогодние подарочные корзины'))}</b>
+        <small>${escapeHtml(giftL('აირჩიე მზა კალათა ან ააწყვე საკუთარი', 'Pick a ready basket or build your own', 'Выберите готовую корзину или соберите свою'))}</small></span>
+        <span class="gb-btn gb-gold gb-pulse">🧺 ${escapeHtml(giftL('ნახვა', 'View', 'Смотреть'))} →</span></a>`;
+}
+
+// ---------- კალათების გვერდი ----------
+function renderGiftPage() {
+    const view = document.getElementById('gift-view');
+    const banner = document.getElementById('gift-banner');
+    const on = giftIsPage();
+    const showBanner = !on && !catalogState.query.trim() && catalogState.cat === GIFT.cat && catalogState.sub === 'all';
+    if (banner) { banner.innerHTML = showBanner ? giftBannerHTML() : ''; banner.style.display = showBanner ? '' : 'none'; }
+    ['products-grid', 'catalog-toolbar', 'load-more-wrap'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = on ? 'none' : ''; });
+    if (!view) return;
+    view.style.display = on ? '' : 'none';
+    if (!on) { view.innerHTML = ''; return; }
+    view.innerHTML = `
+    <div class="gb-hero">
+      <div class="gb-snow" aria-hidden="true">${Array.from({ length: 18 }, (_, i) => `<i style="left:${(i * 37) % 100}%;animation-delay:-${(i * 1.7) % 9}s;animation-duration:${7 + (i % 5)}s;font-size:${9 + (i % 4) * 3}px">❄</i>`).join('')}</div>
+      <div class="gb-hero-tx">
+        <h2>🎁 ${escapeHtml(giftL('საახალწლო სასაჩუქრე კალათები', 'New Year gift baskets', 'Новогодние подарочные корзины'))}</h2>
+        <p>${escapeHtml(giftL('აირჩიე მზა კალათა, შეცვალე მასში ნებისმიერი პროდუქტი — ან ააწყვე საკუთარი, ზუსტად ისე, როგორც გინდა.', 'Pick a ready basket and swap any product — or build your own exactly the way you like.', 'Выберите готовую корзину и замените любой товар — или соберите свою.'))}</p>
+        <div class="gb-hero-act"><a class="gb-btn gb-gold gb-pulse" href="#gb-builder" onclick="return giftScroll(event)">✨ ${escapeHtml(giftL('ააწყვე საკუთარი კალათა', 'Build your own basket', 'Собрать свою корзину'))}</a></div>
+      </div>
+      <div class="gb-hero-art"><img src="${assetUrl(GIFT.ready[1].img)}" alt="" loading="lazy"><img src="${assetUrl(GIFT.ready[0].img)}" alt="" loading="lazy"></div>
+    </div>
+    <div class="gb-sec-h"><h2>${escapeHtml(giftL('მზა სასაჩუქრე კალათები', 'Ready gift baskets', 'Готовые подарочные корзины'))}</h2>
+      <p>${escapeHtml(giftL('იყიდე პირდაპირ, ან დააჭირე „შიგთავსის შეცვლა“-ს და ჩაანაცვლე პროდუქტები სასურველით.', 'Buy as is, or tap “Change contents” to swap products.', 'Купите сразу или нажмите «Изменить состав», чтобы заменить товары.'))}</p></div>
+    <div class="gb-grid">${GIFT.ready.filter(giftValid).map(giftReadyCard).join('')}</div>
+    <div class="gb-builder" id="gb-builder">
+      <div class="gb-builder-h"><span class="gb-ic">🧺</span><div><h2>${escapeHtml(giftL('ააწყვე შენთვის სასურველი სასაჩუქრე კალათა', 'Build your own gift basket', 'Соберите свою подарочную корзину'))}</h2>
+        <p>${escapeHtml(giftL('აირჩიე კალათა, შეფუთვა და ჩაალაგე პროდუქცია — ფასი ავტომატურად დაითვლება.', 'Choose a basket, wrapping and products — the price is calculated automatically.', 'Выберите корзину, упаковку и товары — цена посчитается автоматически.'))}</p></div></div>
+      <div class="gb-builder-m">
+        <div class="gb-steps">
+          <div class="gb-step" id="gb-step1"><div class="gb-step-t"><span class="gb-n">1</span>${escapeHtml(giftL('აირჩიე კალათა', 'Choose a basket', 'Выберите корзину'))}</div><div class="gb-opts" id="gb-conts"></div></div>
+          <div class="gb-step gb-locked" id="gb-step2"><div class="gb-step-t"><span class="gb-n">2</span><span id="gb-s2t"></span> <span class="gb-note" id="gb-s2n"></span></div><div id="gb-s2"></div></div>
+          <div class="gb-step gb-locked" id="gb-step3"><div class="gb-step-t"><span class="gb-n">3</span>${escapeHtml(giftL('ჩაალაგე პროდუქცია', 'Add products', 'Добавьте товары'))} <span class="gb-note" id="gb-min"></span></div>
+            <div class="gb-tools"><div class="gb-tabs" id="gb-tabs"></div><input class="gb-search" id="gb-search" type="search" placeholder="🔍 ${escapeHtml(giftL('მოძებნე პროდუქტი…', 'Search products…', 'Поиск товара…'))}" oninput="giftSearch(this.value)"></div>
+            <div class="gb-pgrid" id="gb-pgrid"></div></div>
+        </div>
+        <aside class="gb-sum"><div class="gb-sum-in" id="gb-sum"></div></aside>
+      </div>
+    </div>
+    <a class="gb-btn gb-gold gb-pulse gb-fab" id="gb-fab" href="#gb-builder" onclick="return giftScroll(event)">🧺 ${escapeHtml(giftL('ააწყვე კალათა', 'Build a basket', 'Собрать корзину'))}</a>`;
+    giftRenderBuilder();
+    giftWatchFab();
+}
+function giftScroll(e) {
+    if (e) e.preventDefault();
+    const el = document.getElementById('gb-builder');
+    if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return false;
+}
+function giftWatchFab() {
+    if (typeof IntersectionObserver === 'undefined') return;
+    const fab = document.getElementById('gb-fab'), b = document.getElementById('gb-builder');
+    if (!fab || !b || !fab.classList) return;
+    if (giftWatchFab.io) giftWatchFab.io.disconnect();
+    giftWatchFab.io = new IntersectionObserver(es => es.forEach(e => fab.classList.toggle('gb-hide', e.isIntersecting)), { threshold: 0.08 });
+    giftWatchFab.io.observe(b);
+}
+function giftReadyCard(b) {
+    const c = GIFT.containers[b.cont], tot = giftUnit(b), old = giftPackPrice(b) + giftItemsOld(b.items);
+    const li = b.items.map(([id, q]) => `<li>${escapeHtml(productName(giftProd(id)))}${q > 1 ? ' ×' + q : ''}</li>`);
+    li.push(`<li class="gb-pack">${escapeHtml(giftPackText(b))}</li>`);
+    const rest = li.slice(GIFT.listShow);
+    return `<article class="gb-card">
+      <div class="gb-card-img"><img src="${assetUrl(b.img)}" alt="${escapeHtml(giftName(b.name))}" loading="lazy" onerror="imgFallback(this)"><span class="gb-tag">🎄 ${escapeHtml(giftL('ახალი წელი', 'New Year', 'Новый год'))}</span><span class="gb-type">${escapeHtml(giftName(c.name))} · ${giftCount(b.items)} ${escapeHtml(giftL('ნივთი', 'items', 'шт.'))}</span></div>
+      <div class="gb-card-b">
+        <h3>${escapeHtml(giftName(b.name))}</h3>
+        <ul class="gb-list">${li.slice(0, GIFT.listShow).join('')}</ul>
+        ${rest.length ? `<ul class="gb-list" id="gb-more-${b.id}" hidden>${rest.join('')}</ul>
+        <button type="button" class="gb-more" onclick="giftMore('${b.id}', this, ${rest.length})"><span class="gb-lbl">${escapeHtml(giftL('იხილეთ მეტი', 'See more', 'Показать ещё'))} (+${rest.length})</span> <span class="gb-ar">▾</span></button>` : ''}
+        <div class="gb-card-f"><div class="gb-price">${money(tot)} ₾${old > tot + 0.01 ? `<s>${money(old)} ₾</s>` : ''}</div></div>
+        <div class="gb-card-btns">
+          <button type="button" class="gb-btn gb-outline" onclick="giftOpenEdit('${b.id}')">✏️ ${escapeHtml(giftL('შიგთავსის შეცვლა', 'Change contents', 'Изменить состав'))}</button>
+          <button type="button" class="gb-btn gb-red" onclick="giftAddReady('${b.id}')">${icon('cart')} ${escapeHtml(giftL('ყიდვა', 'Buy', 'Купить'))}</button>
+        </div>
+      </div></article>`;
+}
+function giftMore(id, btn, n) {
+    const el = document.getElementById('gb-more-' + id);
+    if (!el) return;
+    const open = el.hidden;
+    el.hidden = !open;
+    btn.classList.toggle('open', open);
+    btn.querySelector('.gb-lbl').textContent = open ? giftL('ნაკლების ჩვენება', 'Show less', 'Свернуть') : `${giftL('იხილეთ მეტი', 'See more', 'Показать ещё')} (+${n})`;
+}
+
+// ---------- კალათაში დამატება ----------
+const giftCfg = b => ({ cont: b.cont, bag: b.cont === 'bag' ? (b.bag || 'red') : null, wrapOn: b.cont === 'bag' ? !!b.wrapOn : true, wrap: b.wrapOn || b.cont !== 'bag' ? b.wrap : null, rib: b.wrapOn || b.cont !== 'bag' ? b.rib : null, items: b.items.map(x => [x[0], x[1]]) });
+let giftCustomN = 0;
+function giftPushCart(name, cfg, qty, img) {
+    const first = giftProd(cfg.items[0] && cfg.items[0][0]);
+    const images = img ? [img] : (first ? productImages(first).slice(0, 1) : []);
+    const price = Math.round(giftUnit(cfg) * 100) / 100;
+    cart.push({
+        id: 'gift-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
+        gift: { ...cfg, name },
+        displayName: name, title: name,
+        price, quantity: qty, images, barcode: '',
+        category: GIFT.cat, subcategory: GIFT.sub,
+        selectedSize: null, selectedColor: null
+    });
+    updateCart();
+    toast(`${giftName(name)}${qty > 1 ? ' × ' + qty : ''} — ${t('addedToCart')}`);
+}
+function giftAddReady(id) {
+    const b = GIFT.ready.find(x => x.id === id);
+    if (b) giftPushCart(b.name, giftCfg(b), 1, b.img);
+}
+// კალათის (cart) გვერდზე: შიგთავსის ჩამონათვალი
+function giftCartDetails(item) {
+    const g = item.gift;
+    if (!g) return '';
+    return `<details class="gb-ci"><summary>${escapeHtml(giftL('შიგთავსი', 'Contents', 'Состав'))} (${giftCount(g.items)})</summary><ul>
+        <li>${escapeHtml(giftPackText(g))} — ${money(giftPackPrice(g))} ₾</li>
+        ${g.items.map(([id, q]) => { const p = giftProd(id); return `<li>${escapeHtml(p ? productName(p) : '#' + id)} ×${q}${p ? ` — ${money(p.price * q)} ₾` : ''}</li>`; }).join('')}</ul></details>`;
+}
+// შეკვეთაში (Telegram / PDF): ერთ ხაზად, ქართულად, შტრიხკოდებით
+function giftOrderName(item) {
+    const g = item.gift;
+    const nm = typeof g.name === 'object' ? (g.name.ka || Object.values(g.name)[0]) : g.name;
+    const lines = g.items.map(([id, q], i) => {
+        const p = giftProd(id);
+        const title = p ? (p.title && p.title.ka) || productName(p) : '#' + id;
+        return `${i + 1}) ${title}${p && p.barcode ? ' [' + p.barcode + ']' : ''} ×${q}`;
+    });
+    return `სასაჩუქრე კალათა: ${nm} | შეფუთვა: ${giftPackText(g, 'ka')} | შიგთავსი: ${lines.join('; ')}`;
+}
+
+// ---------- „ააწყვე საკუთარი“ ----------
+const GB = { cont: null, bag: null, wrapOn: false, wrap: null, rib: null, items: [], qty: 1, tab: 'all', q: '', limit: GIFT.pageSize };
+const giftPackReady = b => !!b.cont && (b.cont === 'bag' ? !!(b.bag && (!b.wrapOn || (b.wrap && b.rib))) : !!(b.wrap && b.rib));
+function giftSwatches(pal, cur, fn) {
+    return Object.keys(pal).map(k => `<button type="button" class="gb-sw${cur === k ? ' sel' : ''}" onclick="${fn}('${k}')"><i style="background:${pal[k].c}"></i>${escapeHtml(giftName(pal[k].name))}</button>`).join('');
+}
+function giftDots(pal, cur, fn) {
+    return Object.keys(pal).map(k => `<button type="button" class="gb-dot${cur === k ? ' sel' : ''}" title="${escapeHtml(giftName(pal[k].name))}" style="background:${pal[k].c}" onclick="${fn}('${k}')"></button>`).join('');
+}
+function giftRenderBuilder() {
+    const box = document.getElementById('gb-conts');
+    if (!box) return;
+    box.innerHTML = Object.keys(GIFT.containers).map(k => { const c = GIFT.containers[k]; return `
+        <button type="button" class="gb-opt${GB.cont === k ? ' sel' : ''}" onclick="giftSetCont('${k}')">${giftSVG(k, { bag: GB.bag || 'red' })}<b>${escapeHtml(giftName(c.name))}</b><span class="gb-p">${c.price} ₾</span><span class="gb-mn">${escapeHtml(giftL('მინიმუმ', 'min.', 'мин.'))} ${c.min} ${escapeHtml(giftL('ნივთი', 'items', 'шт.'))}</span></button>`; }).join('');
+    const isBag = GB.cont === 'bag';
+    const setTx = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    setTx('gb-s2t', isBag ? giftL('ჩანთის ფერი და შეფუთვა', 'Bag colour & wrapping', 'Цвет пакета и упаковка') : giftL('შესაფუთი ბადე და ლენტი', 'Wrapping mesh & ribbon', 'Упаковочная сетка и лента'));
+    setTx('gb-s2n', !GB.cont ? '' : isBag ? '· ' + giftL('ბადე და ლენტი — სურვილისამებრ', 'mesh & ribbon optional', 'сетка и лента по желанию') : `· ${giftL('ორივე ერთად', 'both together', 'вместе')} ${GIFT.wrapPrice} ₾`);
+    const wrapBoxes = `<div class="gb-colors">
+        <div class="gb-cbox"><h4>${escapeHtml(giftL('შესაფუთი ბადის ფერი', 'Mesh colour', 'Цвет сетки'))}</h4><div class="gb-sws">${giftSwatches(GIFT.colors, GB.wrap, 'giftSetWrap')}</div></div>
+        <div class="gb-cbox"><h4>${escapeHtml(giftL('ლენტის ფერი', 'Ribbon colour', 'Цвет ленты'))}</h4><div class="gb-sws">${giftSwatches(GIFT.colors, GB.rib, 'giftSetRib')}</div></div></div>`;
+    const s2 = document.getElementById('gb-s2');
+    if (s2) s2.innerHTML = isBag ? `
+        <div class="gb-cbox" style="margin-bottom:14px"><h4>${escapeHtml(giftL('ჩანთის ფერი', 'Bag colour', 'Цвет пакета'))} <small>${escapeHtml(giftL('ფასი არ იცვლება', 'same price', 'цена та же'))}</small></h4><div class="gb-sws">${giftSwatches(GIFT.bagColors, GB.bag, 'giftSetBag')}</div></div>
+        <button type="button" class="gb-toggle${GB.wrapOn ? ' on' : ''}" onclick="giftToggleWrap()"><span class="gb-sl"></span>${escapeHtml(giftL('დაამატე შესაფუთი ბადე და ლენტი', 'Add wrapping mesh & ribbon', 'Добавить сетку и ленту'))}<small>+${GIFT.wrapPrice} ₾</small></button>
+        ${GB.wrapOn ? wrapBoxes : ''}` : wrapBoxes;
+    const c = GB.cont && GIFT.containers[GB.cont], ready = giftPackReady(GB);
+    const cls = (id, k, on) => { const el = document.getElementById(id); if (el) el.classList.toggle(k, on); };
+    cls('gb-step1', 'gb-done', !!GB.cont);
+    cls('gb-step2', 'gb-locked', !GB.cont); cls('gb-step2', 'gb-done', ready);
+    cls('gb-step3', 'gb-locked', !ready); cls('gb-step3', 'gb-done', !!(c && giftCount(GB.items) >= c.min));
+    setTx('gb-min', c ? `· ${giftL('მინიმუმ', 'min.', 'мин.')} ${c.min} ${giftL('ნივთი', 'items', 'шт.')}` : '');
+    giftRenderPicker();
+    giftRenderSum();
+}
+function giftFilter(tab, q) {
+    q = (q || '').trim().toLowerCase();
+    return giftPool().filter(x => (tab === 'all' || x.g === tab) && (!q || productMatchesQuery(x.p, q)));
+}
+function giftTabs(cur, fn) {
+    const pool = giftPool();
+    return [['all', { ka: 'ყველა', en: 'All', ru: 'Все' }]].concat(GIFT.groups.map(g => [g.id, g.name]))
+        .map(([k, n]) => { const cnt = k === 'all' ? pool.length : pool.filter(x => x.g === k).length; return cnt ? `<button type="button" class="gb-tab${k === cur ? ' on' : ''}" onclick="${fn}('${k}')">${escapeHtml(giftName(n))}<small>${cnt}</small></button>` : ''; }).join('');
+}
+function giftProdCard(p, qty, mode) {
+    const img = productImages(p)[0];
+    const pct = isPromoProduct(p) ? p.promo : 0;
+    const act = mode === 'swap' ? `<button type="button" class="gb-add" onclick="giftDoSwap(${p.id})">↔ ${escapeHtml(giftL('ამით შეცვლა', 'Swap in', 'Заменить'))}</button>`
+        : qty ? `<div class="gb-q"><button type="button" onclick="${mode}Qty(${p.id},-1)">−</button><span>${qty}</span><button type="button" onclick="${mode}Qty(${p.id},1)">+</button></div>`
+            : `<button type="button" class="gb-add" onclick="${mode}Qty(${p.id},1)">+ ${escapeHtml(giftL('ჩადება', 'Add', 'Добавить'))}</button>`;
+    return `<div class="gb-pc${qty ? ' in' : ''}">${pct ? `<span class="gb-off">-${pct}%</span>` : ''}
+        <img src="${escapeHtml(img ? assetUrl(img) : PLACEHOLDER_IMG)}" alt="" loading="lazy" onerror="imgFallback(this)">
+        <div class="gb-t">${escapeHtml(productName(p))}${productInCat(p, 'alcohol') ? '<span class="gb-age">18+</span>' : ''}</div>
+        <div class="gb-pr">${money(p.price)} ₾${p.oldPrice ? `<s>${money(p.oldPrice)} ₾</s>` : ''}</div>${act}</div>`;
+}
+function giftRenderPicker() {
+    const tabs = document.getElementById('gb-tabs'), grid = document.getElementById('gb-pgrid');
+    if (tabs) tabs.innerHTML = giftTabs(GB.tab, 'giftTab');
+    if (!grid) return;
+    const list = giftFilter(GB.tab, GB.q), shown = list.slice(0, GB.limit);
+    grid.innerHTML = (shown.map(x => giftProdCard(x.p, (GB.items.find(i => i[0] === x.p.id) || [])[1] || 0, 'giftB')).join('') ||
+        `<div class="gb-empty">${escapeHtml(t('noProducts'))}</div>`) +
+        (list.length > shown.length ? `<div class="gb-morewrap"><button type="button" class="gb-btn gb-outline" onclick="giftMoreProducts()">${escapeHtml(t('loadMore'))} (${list.length - shown.length})</button></div>` : '');
+}
+function giftRenderSum() {
+    const box = document.getElementById('gb-sum');
+    if (!box) return;
+    const c = GB.cont && GIFT.containers[GB.cont], n = giftCount(GB.items), ready = giftPackReady(GB);
+    const ok = !!(c && n >= c.min), pct = c ? Math.min(100, n / c.min * 100) : 0;
+    const unit = (c ? c.price : 0) + (GB.wrapOn && GB.wrap && GB.rib ? GIFT.wrapPrice : 0) + giftItemsSum(GB.items);
+    const wrapTx = !c ? '—' : GB.wrapOn ? ((GB.wrap && GB.rib) ? `${giftName(GIFT.colors[GB.wrap].name)} / ${giftName(GIFT.colors[GB.rib].name)} · ${GIFT.wrapPrice} ₾` : giftL('აირჩიე ფერები', 'choose colours', 'выберите цвета')) : giftL('გარეშე', 'none', 'без');
+    box.innerHTML = `<h3>${escapeHtml(giftL('შენი კალათა', 'Your basket', 'Ваша корзина'))}</h3>
+      <div class="gb-prev">${GB.cont ? giftSVG(GB.cont, { ...GB, items: GB.items.length }) : `<span class="gb-empty">${escapeHtml(giftL('აირჩიე კალათის ტიპი', 'Choose a basket type', 'Выберите тип корзины'))}</span>`}</div>
+      <div class="gb-row"><span>${escapeHtml(giftL('კალათა', 'Basket', 'Корзина'))}</span><b>${c ? escapeHtml(giftName(c.name) + (GB.cont === 'bag' && GB.bag ? ' (' + giftName(GIFT.bagColors[GB.bag].name) + ')' : '')) + ' · ' + c.price + ' ₾' : '—'}</b></div>
+      <div class="gb-row"><span>${escapeHtml(giftL('შეფუთვა', 'Wrapping', 'Упаковка'))}</span><b>${escapeHtml(wrapTx)}</b></div>
+      <div><div class="gb-row"><span>${escapeHtml(giftL('ნივთები', 'Items', 'Товары'))}</span><b>${c ? `${n} / ${giftL('მინ.', 'min.', 'мин.')} ${c.min}` : n}</b></div>
+        <div class="gb-prog${ok ? ' ok' : ''}"><i style="width:${pct}%"></i></div>
+        ${c ? `<div class="gb-req ${ok ? 'ok' : 'bad'}">${ok ? '✓ ' + escapeHtml(giftL('კალათა მზადაა', 'Basket is ready', 'Корзина готова')) + (giftHasAlc(GB.items) ? ' · 18+' : '') : escapeHtml(giftL('დაამატე კიდევ', 'Add', 'Добавьте ещё')) + ' ' + (c.min - n) + ' ' + escapeHtml(giftL('ნივთი', 'more items', 'шт.'))}</div>` : ''}</div>
+      <div class="gb-items">${GB.items.length ? GB.items.map(([id, q]) => { const p = giftProd(id); return p ? `<div><span>${escapeHtml(productName(p))} ×${q}</span><b>${money(p.price * q)} ₾</b></div>` : ''; }).join('') : `<span class="gb-empty">${escapeHtml(giftL('ჯერ არაფერია ჩალაგებული', 'Nothing added yet', 'Пока ничего не добавлено'))}</span>`}</div>
+      <div class="gb-qrow"><span>${escapeHtml(giftL('რაოდენობა', 'Quantity', 'Количество'))}<small>${escapeHtml(giftL('ასეთი კალათების რაოდენობა', 'number of such baskets', 'сколько таких корзин'))}</small></span>
+        <div class="gb-stepper"><button type="button" onclick="giftQtyB(-1)" ${GB.qty <= 1 ? 'disabled' : ''}>−</button><b>${GB.qty}</b><button type="button" onclick="giftQtyB(1)">+</button></div></div>
+      <div class="gb-total"><span>${escapeHtml(giftL('ჯამი', 'Total', 'Итого'))}${GB.qty > 1 ? `<small>${money(unit)} ₾ × ${GB.qty}</small>` : ''}</span><b>${money(unit * GB.qty)} ₾</b></div>
+      <button type="button" class="gb-btn gb-red gb-wide" ${ok && ready ? '' : 'disabled'} onclick="giftAddCustom()">${icon('cart')} ${escapeHtml(giftL('კალათაში დამატება', 'Add to cart', 'В корзину'))}${GB.qty > 1 ? ` (${GB.qty} ${escapeHtml(t('pcs'))})` : ''}</button>
+      <button type="button" class="gb-btn gb-outline gb-wide gb-sm" onclick="giftReset()">${escapeHtml(giftL('თავიდან დაწყება', 'Start over', 'Начать заново'))}</button>`;
+}
+function giftSetCont(k) { if (GB.cont !== k) { GB.cont = k; GB.wrapOn = k !== 'bag'; } giftRenderBuilder(); }
+function giftSetBag(k) { GB.bag = k; giftRenderBuilder(); }
+function giftToggleWrap() { GB.wrapOn = !GB.wrapOn; giftRenderBuilder(); }
+function giftSetWrap(k) { GB.wrap = k; giftRenderBuilder(); }
+function giftSetRib(k) { GB.rib = k; giftRenderBuilder(); }
+function giftTab(k) { GB.tab = k; GB.limit = GIFT.pageSize; giftRenderPicker(); }
+let giftSearchTimer = null;
+function giftSearch(v) { clearTimeout(giftSearchTimer); giftSearchTimer = setTimeout(() => { GB.q = v; GB.limit = GIFT.pageSize; giftRenderPicker(); }, 180); }
+function giftMoreProducts() { GB.limit += GIFT.pageSize; giftRenderPicker(); }
+function giftQtyB(d) { GB.qty = Math.max(1, GB.qty + d); giftRenderSum(); }
+function giftChange(items, id, d) {
+    const it = items.find(i => i[0] === id);
+    if (it) { it[1] += d; if (it[1] <= 0) items.splice(items.indexOf(it), 1); } else if (d > 0) items.push([id, 1]);
+}
+function giftBQty(id, d) { giftChange(GB.items, id, d); giftRenderBuilder(); }
+function giftAddCustom() {
+    const c = GIFT.containers[GB.cont];
+    if (!c || giftCount(GB.items) < c.min || !giftPackReady(GB)) return;
+    giftCustomN++;
+    const name = { ka: `ჩემი სასაჩუქრე კალათა (${c.name.ka})`, en: `My gift basket (${c.name.en})`, ru: `Моя подарочная корзина (${c.name.ru})` };
+    giftPushCart(name, giftCfg(GB), GB.qty, null);
+}
+function giftReset() { Object.assign(GB, { cont: null, bag: null, wrapOn: false, wrap: null, rib: null, items: [], qty: 1, tab: 'all', q: '', limit: GIFT.pageSize }); const s = document.getElementById('gb-search'); if (s) s.value = ''; giftRenderBuilder(); }
+
+// ---------- მზა კალათის შიგთავსის შეცვლა (ფანჯარა) ----------
+const GE = { base: null, cfg: null, qty: 1, mode: 'list', swapIdx: null, tab: 'all', q: '', limit: GIFT.pageSize };
+function giftModalEl() {
+    let m = document.getElementById('gb-modal');
+    if (!m) {
+        m = document.createElement('div');
+        m.id = 'gb-modal';
+        m.className = 'gb-modal-bg';
+        m.innerHTML = `<div class="gb-modal" role="dialog" aria-modal="true"><div class="gb-mh"><img id="gb-mimg" alt=""><h3 id="gb-mtitle"></h3><button type="button" class="gb-x" onclick="giftCloseEdit()" aria-label="close">×</button></div>
+            <div class="gb-mb" id="gb-mbody"></div>
+            <div class="gb-mf"><div><div class="gb-mreq" id="gb-mreq"></div><div class="gb-price" id="gb-mtotal"></div></div>
+            <div class="gb-mf-act"><div class="gb-stepper" id="gb-mqty"></div><button type="button" class="gb-btn gb-red" id="gb-madd" onclick="giftAddEdited()"></button></div></div></div>`;
+        m.addEventListener('click', e => { if (e.target === m) giftCloseEdit(); });
+        document.body.appendChild(m);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') giftCloseEdit(); });
+    }
+    return m;
+}
+function giftOpenEdit(id) {
+    const b = GIFT.ready.find(x => x.id === id);
+    if (!b) return;
+    const cfg = giftCfg(b);
+    if (!cfg.wrap) { cfg.wrap = 'red'; cfg.rib = 'white'; }
+    Object.assign(GE, { base: b, cfg, qty: 1, mode: 'list', swapIdx: null, tab: 'all', q: '', limit: GIFT.pageSize });
+    const m = giftModalEl();
+    document.getElementById('gb-mimg').src = assetUrl(b.img);
+    document.getElementById('gb-mtitle').textContent = giftName(b.name);
+    m.classList.add('open');
+    document.body.classList.add('gb-noscroll');
+    giftRenderEdit();
+}
+function giftCloseEdit() {
+    const m = document.getElementById('gb-modal');
+    if (m) m.classList.remove('open');
+    document.body.classList.remove('gb-noscroll');
+}
+function giftRenderEdit() {
+    const f = GE.cfg, c = GIFT.containers[f.cont], n = giftCount(f.items), body = document.getElementById('gb-mbody'), isBag = f.cont === 'bag';
+    if (!body) return;
+    if (GE.mode === 'list') {
+        body.innerHTML = `
+        <div class="gb-packbox"><b>${escapeHtml(giftName(c.name))} — ${c.price} ₾</b>
+          ${isBag ? `<span class="gb-dots">${escapeHtml(giftL('ჩანთის ფერი', 'Bag', 'Пакет'))}: ${giftDots(GIFT.bagColors, f.bag, 'giftEBag')}</span><button type="button" class="gb-toggle gb-toggle-sm${f.wrapOn ? ' on' : ''}" onclick="giftEToggle()"><span class="gb-sl"></span>${escapeHtml(giftL('ბადე და ლენტი', 'Mesh & ribbon', 'Сетка и лента'))}<small>+${GIFT.wrapPrice} ₾</small></button>`
+                : `<span>${escapeHtml(giftL('ბადე და ლენტი', 'Mesh & ribbon', 'Сетка и лента'))} — ${GIFT.wrapPrice} ₾</span>`}
+          ${f.wrapOn ? `<span class="gb-dots">${escapeHtml(giftL('ბადე', 'Mesh', 'Сетка'))}: ${giftDots(GIFT.colors, f.wrap, 'giftEWrap')}</span><span class="gb-dots">${escapeHtml(giftL('ლენტი', 'Ribbon', 'Лента'))}: ${giftDots(GIFT.colors, f.rib, 'giftERib')}</span>` : ''}</div>
+        ${f.items.map(([id, q], i) => { const p = giftProd(id); if (!p) return ''; const img = productImages(p)[0]; return `<div class="gb-line"><img src="${escapeHtml(img ? assetUrl(img) : PLACEHOLDER_IMG)}" alt="" loading="lazy" onerror="imgFallback(this)">
+            <div><div class="gb-lt">${escapeHtml(productName(p))}${productInCat(p, 'alcohol') ? '<span class="gb-age">18+</span>' : ''}</div><div class="gb-lp">${money(p.price)} ₾${p.oldPrice ? ` <s>${money(p.oldPrice)} ₾</s>` : ''}</div></div>
+            <div class="gb-mq"><button type="button" onclick="giftEQtyIdx(${i},-1)" ${n <= c.min ? 'disabled' : ''}>−</button><span>${q}</span><button type="button" onclick="giftEQtyIdx(${i},1)">+</button></div>
+            <div class="gb-acts"><button type="button" class="gb-sbtn gb-swap" onclick="giftStartSwap(${i})">↔ ${escapeHtml(giftL('შეცვლა', 'Swap', 'Заменить'))}</button><button type="button" class="gb-sbtn" title="${escapeHtml(t('remove'))}" onclick="giftERemove(${i})" ${n - q < c.min ? 'disabled' : ''}>✕</button></div></div>`; }).join('')}
+        <button type="button" class="gb-sbtn gb-addline" onclick="giftEAddMode()">+ ${escapeHtml(giftL('ნივთის დამატება', 'Add an item', 'Добавить товар'))}</button>`;
+    } else {
+        const swapping = GE.mode === 'swap', cur = swapping ? giftProd(f.items[GE.swapIdx][0]) : null;
+        const list = giftFilter(GE.tab, GE.q).filter(x => !swapping || x.p.id !== cur.id), shown = list.slice(0, GE.limit);
+        body.innerHTML = `<div class="gb-pick-h"><button type="button" class="gb-sbtn" onclick="GE.mode='list';giftRenderEdit()">← ${escapeHtml(giftL('უკან', 'Back', 'Назад'))}</button><h4>${swapping ? escapeHtml(giftL('რით შევცვალოთ', 'Replace', 'Заменить')) + `: „${escapeHtml(productName(cur))}“?` : escapeHtml(giftL('აირჩიე დასამატებელი ნივთი', 'Choose an item to add', 'Выберите товар'))}</h4></div>
+          <div class="gb-tools"><div class="gb-tabs">${giftTabs(GE.tab, 'giftETab')}</div><input class="gb-search" id="gb-esearch" type="search" placeholder="🔍 ${escapeHtml(giftL('ძებნა…', 'Search…', 'Поиск…'))}" value="${escapeHtml(GE.q)}"></div>
+          <div class="gb-pgrid gb-pgrid-m">${shown.map(x => giftProdCard(x.p, (f.items.find(i => i[0] === x.p.id) || [])[1] || 0, swapping ? 'swap' : 'giftE')).join('') || `<div class="gb-empty">${escapeHtml(t('noProducts'))}</div>`}
+          ${list.length > shown.length ? `<div class="gb-morewrap"><button type="button" class="gb-btn gb-outline" onclick="GE.limit+=GIFT.pageSize;giftRenderEdit()">${escapeHtml(t('loadMore'))} (${list.length - shown.length})</button></div>` : ''}</div>`;
+        const s = document.getElementById('gb-esearch');
+        if (s) s.oninput = e => { clearTimeout(giftSearchTimer); const v = e.target.value; giftSearchTimer = setTimeout(() => { GE.q = v; GE.limit = GIFT.pageSize; giftRenderEdit(); const s2 = document.getElementById('gb-esearch'); if (s2) { s2.focus(); s2.setSelectionRange(s2.value.length, s2.value.length); } }, 220); };
+    }
+    const unit = giftUnit(f), diff = unit - giftUnit(giftCfg(GE.base));
+    document.getElementById('gb-mtotal').innerHTML = `${money(unit * GE.qty)} ₾` + (GE.qty > 1 ? ` <small>(${money(unit)} ₾ × ${GE.qty})</small>` : '') +
+        (Math.abs(diff) > 0.004 ? ` <small class="${diff > 0 ? 'up' : 'down'}">${diff > 0 ? '+' : ''}${money(diff)} ₾</small>` : '');
+    document.getElementById('gb-mreq').textContent = `${n} ${giftL('ნივთი', 'items', 'шт.')} · ${giftL('მინიმუმ', 'min.', 'мин.')} ${c.min}` + (giftHasAlc(f.items) ? ' · 18+' : '');
+    document.getElementById('gb-mqty').innerHTML = `<button type="button" onclick="giftEQtyM(-1)" ${GE.qty <= 1 ? 'disabled' : ''}>−</button><b>${GE.qty}</b><button type="button" onclick="giftEQtyM(1)">+</button>`;
+    const add = document.getElementById('gb-madd');
+    add.disabled = n < c.min;
+    add.innerHTML = `${icon('cart')} ${escapeHtml(giftL('კალათაში დამატება', 'Add to cart', 'В корзину'))}`;
+}
+function giftEBag(k) { GE.cfg.bag = k; giftRenderEdit(); }
+function giftEToggle() { GE.cfg.wrapOn = !GE.cfg.wrapOn; giftRenderEdit(); }
+function giftEWrap(k) { GE.cfg.wrap = k; giftRenderEdit(); }
+function giftERib(k) { GE.cfg.rib = k; giftRenderEdit(); }
+function giftEQtyM(d) { GE.qty = Math.max(1, GE.qty + d); giftRenderEdit(); }
+function giftETab(k) { GE.tab = k; GE.limit = GIFT.pageSize; giftRenderEdit(); }
+function giftEAddMode() { Object.assign(GE, { mode: 'add', tab: 'all', q: '', limit: GIFT.pageSize }); giftRenderEdit(); }
+function giftStartSwap(i) {
+    const x = giftPool().find(y => y.p.id === GE.cfg.items[i][0]);
+    Object.assign(GE, { mode: 'swap', swapIdx: i, tab: x ? x.g : 'all', q: '', limit: GIFT.pageSize });
+    giftRenderEdit();
+}
+function giftDoSwap(id) {
+    const it = GE.cfg.items, ex = it.findIndex(x => x[0] === id), q = it[GE.swapIdx][1];
+    if (ex >= 0 && ex !== GE.swapIdx) { it[ex][1] += q; it.splice(GE.swapIdx, 1); } else it[GE.swapIdx] = [id, q];
+    GE.mode = 'list';
+    giftRenderEdit();
+}
+function giftEQtyIdx(i, d) { const it = GE.cfg.items; it[i][1] += d; if (it[i][1] <= 0) it.splice(i, 1); giftRenderEdit(); }
+function giftERemove(i) { GE.cfg.items.splice(i, 1); giftRenderEdit(); }
+function giftEQty(id, d) { giftChange(GE.cfg.items, id, d); GE.mode = 'list'; giftRenderEdit(); }
+function giftAddEdited() {
+    const b = GE.base, f = GE.cfg, orig = giftCfg(b);
+    if (giftCount(f.items) < GIFT.containers[f.cont].min) return;
+    const changed = JSON.stringify(f.items) !== JSON.stringify(orig.items) || f.bag !== orig.bag || f.wrapOn !== orig.wrapOn || (f.wrapOn && (f.wrap !== orig.wrap || f.rib !== orig.rib));
+    const name = changed ? { ka: b.name.ka + ' (შეცვლილი)', en: b.name.en + ' (customised)', ru: b.name.ru + ' (изменённый)' } : b.name;
+    giftPushCart(name, giftCfg(f), GE.qty, b.img);
+    giftCloseEdit();
+}
+
 function renderCatalog(resetLimit) {
     if (resetLimit) catalogState.limit = PAGE_SIZE;
     const list = getCatalogList();
@@ -1515,7 +1967,8 @@ function renderCatalog(resetLimit) {
     }
     if (crumb) crumb.textContent = title;
     const countEl = document.getElementById('catalog-count');
-    if (countEl) countEl.textContent = list.length;
+    if (countEl) countEl.textContent = giftIsPage() ? GIFT.ready.length : list.length;
+    renderGiftPage();
     updateSeasonTheme();
 }
 
@@ -1758,6 +2211,7 @@ let sheetOpenCat = null;
 let sheetOpenGroup = null;
 const subCountCache = {};
 function subCount(catId, subId) {
+    if (normalizeCategoryValue(catId) === GIFT.cat && normalizeCategoryValue(subId) === GIFT.sub) return GIFT.ready.length;
     const key = catId + '|' + subId;
     if (key in subCountCache) return subCountCache[key];
     const cid = normalizeCategoryValue(catId), sid = normalizeCategoryValue(subId);
@@ -2196,6 +2650,7 @@ function updateCart() {
             <div class="ci-info">
                 <strong>${escapeHtml(name)}</strong>
                 ${opts ? `<small>${escapeHtml(opts)}</small><br>` : ''}
+                ${item.gift ? giftCartDetails(item) : ''}
                 <small>${money(item.price)} ₾ / ${escapeHtml(t('pcs'))}</small>
             </div>
             <div class="qty">
@@ -2720,6 +3175,7 @@ async function checkout() {
         cart: cart.map(item => {
             let itemName = item.displayName || item.title || item.name || 'უცნობი პროდუქტი';
             if (typeof itemName === 'object') itemName = itemName[lang] || itemName.ka || Object.values(itemName)[0];
+            if (item.gift) itemName = giftOrderName(item);
             const rawImages = Array.isArray(item.images) ? item.images : (item.images ? [item.images] : []);
             const fullUrlImages = rawImages.map(img => {
                 if (typeof img === 'string' && img.startsWith('http')) return img;
@@ -3105,6 +3561,7 @@ var KEEP_EMPTY_CATS = ['alcohol'];
 (function pruneEmptySubcategories() {
     if (typeof products === 'undefined') return;
     const used = new Set(products.flatMap(p => productPlacements(p).map(x => x[0] + '|' + x[1])));
+    used.add('new_year|ny_baskets'); // საახალწლო კალათები — პროდუქტი არ სჭირდება
     KEEP_EMPTY_CATS.forEach(id => {
         const c = CATEGORIES.find(x => x.id === id);
         if (c) { used.add(normalizeCategoryValue(id)); c.subs.forEach(s => used.add(normalizeCategoryValue(id) + '|' + normalizeCategoryValue(s[0]))); }

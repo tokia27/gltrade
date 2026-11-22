@@ -313,7 +313,9 @@
       </aside>
 
       <div class="products-col">
-        <div class="toolbar">
+        <div id="gift-banner" style="display:none"></div>
+        <div id="gift-view" style="display:none"></div>
+        <div class="toolbar" id="catalog-toolbar">
           <span class="muted"><span data-i18n="shown">ნაჩვენებია</span> <strong id="shown-count">0</strong> / <span id="total-count">0</span></span>
           <label class="sort"><span data-i18n="sortLabel">დალაგება</span>
             <select id="sort-select" onchange="setSort(this.value)">
@@ -325,7 +327,7 @@
           </label>
         </div>
         <div class="products-grid" id="products-grid"></div>
-        <div class="load-more-wrap"><button class="btn btn-ghost btn-lg" id="load-more" type="button" onclick="loadMore()" data-i18n="loadMore">მეტის ჩვენება</button></div>
+        <div class="load-more-wrap" id="load-more-wrap"><button class="btn btn-ghost btn-lg" id="load-more" type="button" onclick="loadMore()" data-i18n="loadMore">მეტის ჩვენება</button></div>
       </div>
     </div>
   </div>
