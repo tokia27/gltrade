@@ -1537,11 +1537,11 @@ const GIFT = {
         { id: 'coffee', name: { ka: 'ყავა / ჩაი', en: 'Coffee / tea', ru: 'Кофе / чай' }, has: p => productInSub(p, 'Office Food', 'coffe') || productInSub(p, 'Office Food', 'tea') }
     ],
     ready: [
-        { id: 'r1', name: { ka: 'საჩუქრის ჩანთა „კლასიკი“', en: 'Gift bag “Classic”', ru: 'Подарочный пакет «Классика»' }, cont: 'bag', bag: 'red', wrapOn: false, img: 'images/baskets/basket1.jpg', items: [[808, 1], [3817, 1], [1761, 1], [3112, 1], [3111, 1]] },
+        { id: 'r1', name: { ka: 'საჩუქრის ჩანთა „კლასიკი“', en: 'Gift bag “Classic”', ru: 'Подарочный пакет «Классика»' }, cont: 'bag', bag: 'red', wrapOn: false, img: 'images/baskets/basket1-n139g.jpg', items: [[808, 1], [3817, 1], [1761, 1], [3112, 1], [3111, 1]] },
         { id: 'r2', name: { ka: 'დიდი კალათა „ზეიმი“', en: 'Large basket “Celebration”', ru: 'Большая корзина «Праздник»' }, cont: 'large', wrapOn: true, wrap: 'red', rib: 'red', img: 'images/baskets/basket2.jpg', items: [[3740, 1], [3107, 1], [808, 1], [3818, 1], [3112, 1], [3101, 1], [3817, 1]] },
         { id: 'r3', name: { ka: 'პატარა კალათა „სანტა“', en: 'Small basket “Santa”', ru: 'Малая корзина «Санта»' }, cont: 'small', wrapOn: true, wrap: 'white', rib: 'red', img: 'images/baskets/basket3.jpg', items: [[3101, 1], [3110, 1], [808, 1], [1761, 1], [3740, 1]] },
         { id: 'r4', name: { ka: 'პატარა კალათა „დათუნია“', en: 'Small basket “Teddy”', ru: 'Малая корзина «Мишка»' }, cont: 'small', wrapOn: true, wrap: 'green', rib: 'red', img: 'images/baskets/basket4.jpg', items: [[3101, 1], [3111, 1], [808, 1], [1761, 1], [3817, 1]] },
-        { id: 'r5', name: { ka: 'საჩუქრის ჩანთა „Lindor“', en: 'Gift bag “Lindor”', ru: 'Подарочный пакет «Lindor»' }, cont: 'bag', bag: 'red', wrapOn: false, img: 'images/baskets/basket5.jpg', items: [[808, 1], [1761, 1], [3101, 1], [3112, 1], [3740, 1]] },
+        { id: 'r5', name: { ka: 'საჩუქრის ჩანთა „Lindor“', en: 'Gift bag “Lindor”', ru: 'Подарочный пакет «Lindor»' }, cont: 'bag', bag: 'red', wrapOn: false, img: 'images/baskets/basket5-n139g.jpg', items: [[808, 1], [1761, 1], [3101, 1], [3112, 1], [3740, 1]] },
         { id: 'r6', name: { ka: 'დიდი კალათა „პრემიუმი“', en: 'Large basket “Premium”', ru: 'Большая корзина «Премиум»' }, cont: 'large', wrapOn: true, wrap: 'green', rib: 'red', img: 'images/baskets/basket6.jpg', items: [[3740, 1], [3111, 1], [808, 1], [3818, 1], [3112, 1], [3101, 1], [3817, 1]] }
     ]
 };
