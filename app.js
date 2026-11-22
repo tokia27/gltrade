@@ -1737,7 +1737,8 @@ function giftOrderLines(item, n) {
         displayName: `${tag}: ${nm} — ${giftPackText(g, 'ka')} (${bq} ც., თითოში ${giftCount(g.items)} ნივთი)`,
         price: giftPackPrice(g),
         quantity: bq,
-        images: item.images || [],
+        // ფოტო — შესაფუთი, რაშიც იდება (ჩანთა/კალათი არჩეული ფერებით): images/baskets/pack/<ტიპი>-<ჩანთის ფერი>-<ბადე>-<ლენტი>.jpg
+        images: [`images/baskets/pack/${g.cont}-${g.cont === 'bag' ? (g.bag || 'red') : 'x'}-${g.wrapOn && g.wrap ? g.wrap : 'none'}-${g.wrapOn && g.rib ? g.rib : 'none'}.jpg`],
         barcode: ''
     };
     const lines = g.items.map(([id, q]) => {
