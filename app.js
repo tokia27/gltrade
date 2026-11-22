@@ -1699,7 +1699,7 @@ const giftCfg = b => ({ cont: b.cont, bag: b.cont === 'bag' ? (b.bag || 'red') :
 let giftCustomN = 0;
 function giftPushCart(name, cfg, qty, img) {
     const first = giftProd(cfg.items[0] && cfg.items[0][0]);
-    const images = img ? [img] : (first ? productImages(first).slice(0, 1) : []);
+    const images = [giftPackImg(cfg)];
     const price = Math.round(giftUnit(cfg) * 100) / 100;
     cart.push({
         id: 'gift-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
@@ -1728,6 +1728,8 @@ function giftCartDetails(item) {
 //  1) „კალათა N“ — ჩანთა/კალათი და შეფუთვა (ფასი = ჩანთა/კალათი + ბადე და ლენტი)
 //  2) თითოეული პროდუქტი ცალკე: ფოტო, შტრიხკოდი, ფასი; რაოდენობა = კალათაში რაოდენობა × კალათების რაოდენობა
 // ჯამი იგივე რჩება, რაც კალათის გვერდზე.
+// შესაფუთის ფოტო (ჩანთა/კალათი არჩეული ფერებით): images/baskets/pack/<ტიპი>-<ჩანთის ფერი>-<ბადე>-<ლენტი>.jpg
+const giftPackImg = g => `images/baskets/pack/${g.cont}-${g.cont === 'bag' ? (g.bag || 'red') : 'x'}-${g.wrapOn && g.wrap ? g.wrap : 'none'}-${g.wrapOn && g.rib ? g.rib : 'none'}.jpg`;
 function giftOrderLines(item, n) {
     const g = item.gift, bq = Number(item.quantity) || 1;
     const nm = typeof g.name === 'object' ? (g.name.ka || Object.values(g.name)[0]) : g.name;
@@ -1737,8 +1739,7 @@ function giftOrderLines(item, n) {
         displayName: `${tag}: ${nm} — ${giftPackText(g, 'ka')} (${bq} ც., თითოში ${giftCount(g.items)} ნივთი)`,
         price: giftPackPrice(g),
         quantity: bq,
-        // ფოტო — შესაფუთი, რაშიც იდება (ჩანთა/კალათი არჩეული ფერებით): images/baskets/pack/<ტიპი>-<ჩანთის ფერი>-<ბადე>-<ლენტი>.jpg
-        images: [`images/baskets/pack/${g.cont}-${g.cont === 'bag' ? (g.bag || 'red') : 'x'}-${g.wrapOn && g.wrap ? g.wrap : 'none'}-${g.wrapOn && g.rib ? g.rib : 'none'}.jpg`],
+        images: [giftPackImg(g)],
         barcode: ''
     };
     const lines = g.items.map(([id, q]) => {
@@ -2662,7 +2663,7 @@ function updateCart() {
             item.selectedSize ? `${t('lblSize')}: ${item.selectedSize}` : '',
             item.selectedColor ? `${t('lblColor')}: ${item.selectedColor}` : ''
         ].filter(Boolean).join(', ');
-        const img = (Array.isArray(item.images) && item.images.length) ? assetUrl(item.images[0]) : PLACEHOLDER_IMG;
+        const img = item.gift ? assetUrl(giftPackImg(item.gift)) : (Array.isArray(item.images) && item.images.length) ? assetUrl(item.images[0]) : PLACEHOLDER_IMG;
         return `
         <div class="cart-item">
             <div class="ci-img"><img src="${escapeHtml(img)}" alt="" loading="lazy" onerror="imgFallback(this)"></div>
