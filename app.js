@@ -2154,7 +2154,7 @@ function renderSidebar() {
             <ul class="sub-list">
                 <li><a href="${catPath(c.id)}" class="${isActive && catalogState.sub === 'all' ? 'active' : ''}" onclick="return linkSub(event, ${i}, -1)">${escapeHtml(t('allWord'))}</a></li>
                 ${subTree(c).map(node => {
-                    const link = (x, extra) => `<a href="${catPath(c.id, x.s[0])}" class="${isActive && catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(c.id, x.s[0]) ? ' sub-promo' : ''}${extra || ''}" onclick="return linkSub(event, ${i}, ${x.j})">${escapeHtml(x.s[1])}${extra ? icon('chev', 'chev') : ''}</a>`;
+                    const link = (x, extra) => `<a href="${catPath(c.id, x.s[0])}" class="${isActive && catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(c.id, x.s[0]) ? ' sub-promo' + (x.s[0] === GIFT.sub ? ' sub-gift' : '') : ''}${extra || ''}" onclick="return linkSub(event, ${i}, ${x.j})">${escapeHtml(x.s[1])}${extra ? icon('chev', 'chev') : ''}</a>`;
                     if (!node.kids.length) return `<li>${link(node)}</li>`;
                     const open = isActive && subGroupOpen(node, catalogState.sub);
                     return `<li class="sub-group${open ? ' open' : ''}">${link(node, ' sub-group-btn')}
@@ -2196,7 +2196,7 @@ function renderChips() {
             subBox.innerHTML =
                 `<button type="button" class="${catalogState.sub === 'all' ? 'active' : ''}" onclick="selectSub(${ci}, -1)">${escapeHtml(t('allWord'))}</button>` +
                 subTree(cat).map(node => {
-                    const btn = (x, extra) => `<button type="button" class="${catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(cat.id, x.s[0]) ? ' sub-promo' : ''}${extra || ''}" onclick="selectSub(${ci}, ${x.j})">${escapeHtml(x.s[1])}</button>`;
+                    const btn = (x, extra) => `<button type="button" class="${catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(cat.id, x.s[0]) ? ' sub-promo' + (x.s[0] === GIFT.sub ? ' sub-gift' : '') : ''}${extra || ''}" onclick="selectSub(${ci}, ${x.j})">${escapeHtml(x.s[1])}</button>`;
                     // ჯგუფის ქვეკატეგორიები ჩნდება ჯგუფზე დაჭერის შემდეგ, მის გვერდით
                     if (!node.kids.length) return btn(node);
                     const open = subGroupOpen(node, catalogState.sub);
@@ -2237,7 +2237,7 @@ function renderCatSheet() {
             ${subs.length && open ? `<ul class="cs-subs">
                 <li><a href="${catPath(c.id)}" class="${active && catalogState.sub === 'all' ? 'active' : ''}" onclick="return sheetPick(event, ${i}, -1)">${escapeHtml(t('allWord'))} <small>${categoryCount(c.id)}</small></a></li>
                 ${subTree(c).filter(node => subCount(c.id, node.s[0]) > 0).map(node => {
-                    const link = x => `<a href="${catPath(c.id, x.s[0])}" class="${active && catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(c.id, x.s[0]) ? ' sub-promo' : ''}" onclick="return sheetPick(event, ${i}, ${x.j})">${escapeHtml(x.s[1])} <small>${subCount(c.id, x.s[0])}</small></a>`;
+                    const link = x => `<a href="${catPath(c.id, x.s[0])}" class="${active && catalogState.sub === x.s[0] ? 'active' : ''}${isPromoSub(c.id, x.s[0]) ? ' sub-promo' + (x.s[0] === GIFT.sub ? ' sub-gift' : '') : ''}" onclick="return sheetPick(event, ${i}, ${x.j})">${escapeHtml(x.s[1])} <small>${subCount(c.id, x.s[0])}</small></a>`;
                     const kids = node.kids.filter(k => subCount(c.id, k.s[0]) > 0);
                     if (!kids.length) return `<li>${link(node)}</li>`;
                     // ჯგუფზე დაჭერა ჩამოშლის მის ქვეკატეგორიებს (პირველი — „ყველა“ ამ ჯგუფიდან)
