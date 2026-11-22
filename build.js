@@ -24,7 +24,10 @@ const OUT = path.join(ROOT, '_site');
 const SITE = 'https://gltrade.ge';
 const SKIP = new Set(['.git', '.github', '_site', 'node_modules', 'build.js', 'package.json', 'package-lock.json', '.DS_Store', 'README.md']);
 
-const template = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+// ყოველ ატვირთვაზე ახალი ვერსია (?v=...) — რომ ბრაუზერმა ძველი app.js / style.css არ გამოიყენოს
+const BUILD_V = Date.now().toString(36);
+const template = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')
+    .replace(/(src|href)="\/(app\.js|products\.js|categories\.js|style\.css)"/g, `$1="/$2?v=${BUILD_V}"`);
 // პროდუქტები, კატეგორიები და საიტის კოდი — იმავე თანმიმდევრობით, როგორც index.html-ში
 const appCode = ['products.js', 'categories.js', 'app.js']
     .map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n;\n');
