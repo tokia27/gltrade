@@ -1273,17 +1273,63 @@ function renderHero() {
     if (show) show.classList.toggle('has-ny', on);
     document.querySelectorAll('.nav-promo, .drawer-promo').forEach(el => { el.style.display = on ? '' : 'none'; });
     if (on) {
-        // ფანჯარაში — თითო-თითო ყველა ქვეკატეგორიიდან, რიგრიგობით
-        const groups = {};
-        nyProducts().forEach(p => { (groups[productSubcategory(p)] = groups[productSubcategory(p)] || []).push(p); });
-        const keys = Object.keys(groups);
-        const list = [];
-        for (let k = 0; list.length < 12 && keys.some(g => groups[g][k]); k++) keys.forEach(g => { if (groups[g][k]) list.push(groups[g][k]); });
-        const tag = `${getTranslatedText(CATEGORIES.find(c => c.id === SEASONAL_PROMO.cat).name)} · -${SEASONAL_PROMO.percent}%`;
-        renderShowcase('ny', list.slice(0, 6), list.slice(0, 12), tag);
+        // ფანჯარაში — საახალწლო სასაჩუქრე კალათები (მზა კალათები + „ააწყვე საკუთარი“)
+        renderGiftShowcase();
     } else {
         clearInterval(SHOWCASES.ny.timer);
     }
+}
+
+// მთავარი გვერდის საახალწლო ფანჯარა: მზა კალათები რიგრიგობით და ღილაკი „ააწყვე შენი კალათა“
+function renderGiftShowcase() {
+    const sc = SHOWCASES.ny;
+    const stack = document.getElementById(sc.stack);
+    const dots = document.getElementById(sc.dots);
+    const foot = document.getElementById('ny-gift-cta');
+    const list = GIFT.ready.filter(giftValid);
+    const path = catPath(GIFT.cat, GIFT.sub);
+    if (sc.index >= list.length) sc.index = 0;
+    if (stack) {
+        stack.innerHTML = list.map((b, i) => {
+            const tot = giftUnit(b), old = giftPackPrice(b) + giftItemsOld(b.items);
+            return `
+            <div class="feat${i === sc.index ? ' in' : ''}" data-i="${i}">
+                <div class="feat-img gb-sc-img" onclick="go(null, '${path}')">
+                    <span class="feat-tag">🎁 ${escapeHtml(giftL('სასაჩუქრე კალათა', 'Gift basket', 'Подарочная корзина'))}</span>
+                    <span class="gb-sc-cnt">${escapeHtml(giftName(GIFT.containers[b.cont].name))} · ${giftCount(b.items)} ${escapeHtml(giftL('ნივთი', 'items', 'шт.'))}</span>
+                    <img src="${escapeHtml(assetUrl(b.img))}" alt="${escapeHtml(giftName(b.name))}" loading="lazy" decoding="async" onerror="imgFallback(this)">
+                </div>
+                <div class="feat-row">
+                    <div><div class="feat-name">${escapeHtml(giftName(b.name))}</div>
+                    <div class="feat-price"><span>${money(tot)} ₾</span>${old > tot + 0.01 ? `<span class="old-price">${money(old)} ₾</span>` : ''}</div></div>
+                    <button type="button" class="round-cart" onclick="giftAddReady('${b.id}')" aria-label="${escapeHtml(t('addToCart'))}">${icon('cart')}</button>
+                </div>
+            </div>`;
+        }).join('');
+    }
+    if (dots) {
+        dots.innerHTML = list.map((b, i) =>
+            `<button type="button" class="${i === sc.index ? 'on' : ''}" onclick="pickFeatured(${i}, 'ny')" aria-label="${i + 1} / ${list.length}"><span></span></button>`).join('');
+    }
+    if (foot) {
+        foot.innerHTML = `
+            <a class="gb-sc-build" href="${path}" onclick="return giftGoBuilder(event)">
+                <span class="gb-sc-ic">${giftSVG('large', { wrapOn: true, wrap: 'white', rib: 'red', items: 1 })}</span>
+                <span class="gb-sc-tx"><b>${escapeHtml(giftL('ააწყვე შენი კალათა', 'Build your own basket', 'Соберите свою корзину'))}</b>
+                <small>${escapeHtml(giftL('ჩანთა ან კალათა, შენი პროდუქციით', 'A bag or basket with your picks', 'Пакет или корзина с вашими товарами'))}</small></span>
+                <span class="gb-sc-arrow">${icon('arrow')}</span>
+            </a>`;
+    }
+    startFeatTimer('ny');
+}
+// „ააწყვე“ — გადადის კალათების გვერდზე და ჩამოდის ამწყობამდე
+let giftWantBuilder = false;
+function giftGoBuilder(event) {
+    if (event && (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button === 1)) return true;
+    if (event) event.preventDefault();
+    giftWantBuilder = true;
+    navigate(catPath(GIFT.cat, GIFT.sub));
+    return false;
 }
 
 function showFeatured(i, key) {
@@ -1651,6 +1697,10 @@ function renderGiftPage() {
     <a class="gb-btn gb-gold gb-pulse gb-fab" id="gb-fab" href="#gb-builder" onclick="return giftScroll(event)">🧺 ${escapeHtml(giftL('ააწყვე კალათა', 'Build a basket', 'Собрать корзину'))}</a>`;
     giftRenderBuilder();
     giftWatchFab();
+    if (typeof giftWantBuilder !== 'undefined' && giftWantBuilder) {
+        giftWantBuilder = false;
+        setTimeout(() => giftScroll(), 120);
+    }
 }
 function giftScroll(e) {
     if (e) e.preventDefault();

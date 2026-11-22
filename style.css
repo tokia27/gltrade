@@ -1397,3 +1397,22 @@ body.gb-noscroll { overflow: hidden; }
 .gb-ci ul { margin: 4px 0 0; padding-left: 18px; }
 /* საახალწლო კალათები — ხატულა შოკოლადის ნაცვლად */
 .sub-list a.sub-promo.sub-gift::before, .cs-subs a.sub-promo.sub-gift::before, #subcat-chips button.sub-promo.sub-gift::before { content: "🧺 "; }
+
+/* მთავარი გვერდი: საახალწლო ფანჯარა — სასაჩუქრე კალათები */
+.showcase-ny .gb-sc-img { background: #F7EEE2; }
+.showcase-ny .gb-sc-img img { object-fit: cover; padding: 0; transition: transform 6s ease; }
+.showcase-ny .feat.in .gb-sc-img img { transform: scale(1.06); }
+.gb-sc-cnt { position: absolute; right: 12px; bottom: 12px; z-index: 1; background: rgba(255,255,255,.94); color: #121826; font-size: 12px; font-weight: 800; padding: 5px 10px; border-radius: 999px; }
+.showcase-ny .gb-sc-img .feat-tag { z-index: 1; }
+.gb-sc-foot { border-top: 1px solid rgba(255,255,255,.18); padding-top: 12px; }
+.gb-sc-build { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #3B2A00; border-radius: 18px; padding: 10px 14px 10px 10px;
+  background: linear-gradient(180deg, #FBE08A, #D9AE2E); box-shadow: 0 10px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.6); animation: gbPulse 2.2s infinite; transition: transform .18s; }
+.gb-sc-build:hover { transform: translateY(-2px); }
+.gb-sc-ic { width: 52px; height: 46px; border-radius: 12px; background: rgba(255,255,255,.55); display: grid; place-items: center; flex: none; }
+.gb-sc-ic svg { width: 46px; height: 40px; }
+.gb-sc-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+.gb-sc-tx b { font-size: 16px; font-weight: 900; }
+.gb-sc-tx small { font-size: 11.5px; font-weight: 700; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gb-sc-arrow { width: 34px; height: 34px; border-radius: 50%; background: #3B2A00; color: #FBE08A; display: grid; place-items: center; flex: none; }
+.gb-sc-arrow .ic { width: 18px; height: 18px; }
+@media (prefers-reduced-motion: reduce) { .gb-sc-build { animation: none; } }
