@@ -1724,16 +1724,34 @@ function giftCartDetails(item) {
         <li>${escapeHtml(giftPackText(g))} — ${money(giftPackPrice(g))} ₾</li>
         ${g.items.map(([id, q]) => { const p = giftProd(id); return `<li>${escapeHtml(p ? productName(p) : '#' + id)} ×${q}${p ? ` — ${money(p.price * q)} ₾` : ''}</li>`; }).join('')}</ul></details>`;
 }
-// შეკვეთაში (Telegram / PDF): ერთ ხაზად, ქართულად, შტრიხკოდებით
-function giftOrderName(item) {
-    const g = item.gift;
+// შეკვეთაში (Telegram / PDF): კალათა იშლება ცალკე ხაზებად, ქართულად.
+//  1) „კალათა N“ — ჩანთა/კალათი და შეფუთვა (ფასი = ჩანთა/კალათი + ბადე და ლენტი)
+//  2) თითოეული პროდუქტი ცალკე: ფოტო, შტრიხკოდი, ფასი; რაოდენობა = კალათაში რაოდენობა × კალათების რაოდენობა
+// ჯამი იგივე რჩება, რაც კალათის გვერდზე.
+function giftOrderLines(item, n) {
+    const g = item.gift, bq = Number(item.quantity) || 1;
     const nm = typeof g.name === 'object' ? (g.name.ka || Object.values(g.name)[0]) : g.name;
-    const lines = g.items.map(([id, q], i) => {
+    const tag = `კალათა ${n}`;
+    const head = {
+        id: item.id,
+        displayName: `${tag}: ${nm} — ${giftPackText(g, 'ka')} (${bq} ც., თითოში ${giftCount(g.items)} ნივთი)`,
+        price: giftPackPrice(g),
+        quantity: bq,
+        images: item.images || [],
+        barcode: ''
+    };
+    const lines = g.items.map(([id, q]) => {
         const p = giftProd(id);
-        const title = p ? (p.title && p.title.ka) || productName(p) : '#' + id;
-        return `${i + 1}) ${title}${p && p.barcode ? ' [' + p.barcode + ']' : ''} ×${q}`;
+        return {
+            id: p ? p.id : id,
+            displayName: `↳ ${tag} · ${p ? (p.title && p.title.ka) || productName(p) : '#' + id}`,
+            price: p ? Number(p.price) || 0 : 0,
+            quantity: q * bq,
+            images: p ? productImages(p).filter(s => !String(s).startsWith('data:')).slice(0, 1) : [],
+            barcode: p && p.barcode ? p.barcode : ''
+        };
     });
-    return `სასაჩუქრე კალათა: ${nm} | შეფუთვა: ${giftPackText(g, 'ka')} | შიგთავსი: ${lines.join('; ')}`;
+    return [head].concat(lines);
 }
 
 // ---------- „ააწყვე საკუთარი“ ----------
@@ -3172,10 +3190,10 @@ async function checkout() {
         orderId,
         userInfo,
         address,
-        cart: cart.map(item => {
+        // სასაჩუქრე კალათა იშლება ხაზებად: ჯერ კალათა/შეფუთვა, მერე თითოეული პროდუქტი ცალკე (ფოტოთი და შტრიხკოდით)
+        cart: cart.flatMap(item => item.gift ? giftOrderLines(item, cart.filter(x => x.gift).indexOf(item) + 1) : [item]).map(item => {
             let itemName = item.displayName || item.title || item.name || 'უცნობი პროდუქტი';
             if (typeof itemName === 'object') itemName = itemName[lang] || itemName.ka || Object.values(itemName)[0];
-            if (item.gift) itemName = giftOrderName(item);
             const rawImages = Array.isArray(item.images) ? item.images : (item.images ? [item.images] : []);
             const fullUrlImages = rawImages.map(img => {
                 if (typeof img === 'string' && img.startsWith('http')) return img;
